@@ -63,7 +63,7 @@ const Bulk = () => {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-0 w-90 h-90"
+            className="absolute right-0 w-76 h-76"
             >
             <Image src={assets.bulk} alt="bulk" fill className="object-contain"/>
             </motion.div>

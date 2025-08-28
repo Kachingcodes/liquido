@@ -14,7 +14,7 @@ const grad = Graduate({
 
 const Hero = () => {
   return (
-    <section className="w-full min-h-screen flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-4 py-20">
+    <section className="w-full min-h-screen p-4 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-4 py-20">
       <div className="flex w-full p-8 items-center justify-between">
         
         {/* Left Section */}
