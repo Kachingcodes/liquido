@@ -23,7 +23,7 @@ const Bulk = () => {
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="relative w-96 h-96 flex-shrink-0"
+            className="relative w-76 h-76 flex-shrink-0"
             >
             <Image src={assets.jugs} alt="jugs" fill className="object-contain" />
             </motion.div>
