@@ -6,6 +6,7 @@ import foot1 from './foot1.png';
 import foot2 from './foot2.png';
 import foot3 from './foot3.png';
 import jugs from './jugs.png';
+import juice from './juice.png';
 import location from './location.png';
 import logo from './logo.png';
 import nylon from './nylon.png';
@@ -13,6 +14,7 @@ import shield from './shield.png';
 import van from './van.png';
 import water1 from './water1.png';
 import water2 from './water2.png';
+
 
 
 
@@ -24,6 +26,7 @@ export const assets = {
     foot2,
     foot3,  
     jugs,
+    juice,
     location,
     logo,
     nylon,
@@ -57,26 +60,80 @@ export const steps = [
   },
 ];
 
-// export const products = [
-//   {
-//     id: 1,
-//     video: '/honey1.mp4',
-//     images: [
-//       '/cooking1.png',
-//       '/cooking2.png',
-//       '/oil1.png',
-//       '/paint2.png',
-//     ],
-//   },
-//   {
-//     id: 2,
-//     video: '/honey2.mp4',
-//     images: [
-//       '/juice1.jpg',
-//       '/juice2.jpg',
-//       '/palm4.png',
-//       '/wine2.png',
-//     ],
-//   },
-  // Add more products as needed
-//];
+export const slides = [
+  {
+    title: "Drinking & Hydration",
+    items: [
+      {
+        img: "/water1.png",
+        text: "Water – purified, mineral, spring, or distilled."
+      },
+      {
+        img: "/juice.png",
+        text: "Juices – orange, apple, mixed fruit, etc."
+      },
+      {
+        img: "/wine.png",
+        text: "Wine – Red, White, Rosé and Sparkling."
+      }
+    ]
+  },
+  {
+    title: "Beverages & Refreshments",
+    items: [
+      {
+        img: "/soda.png",
+        text: "Soft drinks / sodas."
+      },
+      {
+        img: "/icetea.png",
+        text: "Iced teas / Lemonades."
+      },
+      {
+        img: "/coffee.png",
+        text: "Coffee / Cold brew / Tea concentrates."
+      }
+    ]
+  },
+  {
+    title: "Cooking & Culinary Liquids",
+    items: [
+      {
+        img: "/cooking.png",
+        text: "Cooking oils – vegetable, olive, coconut, etc."
+      },
+      {
+        img: "/syrup.png",
+        text: "Syrups – maple, chocolate, flavored syrups."
+      },
+      {
+        img: "/vinegar.png",
+        text: "Vinegars & condiments."
+      }
+    ]
+  },
+  {
+    title: "Specialty & Industrial",
+    items: [
+      {
+        img: "/dettol.png",
+        text: "Cleaning solutions – detergents, disinfectants."
+      },
+      {
+        img: "/fluid.png",
+        text: "Automotive liquids – coolant, windshield fluid."
+      },
+      {
+        img: "/plant.png",
+        text: "Other specialty liquids – like plant fertilizers."
+      }
+    ]
+  }
+];
+
+
+
+
+
+
+

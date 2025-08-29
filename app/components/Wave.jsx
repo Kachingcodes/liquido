@@ -1,11 +1,5 @@
 'use client';
 import React from 'react';
-import Image from 'next/image';
-import { motion } from 'framer-motion';
-import { assets } from '@/public/assets';
-import { Quicksand } from "next/font/google";
-//import {  } from 'lucide-react';
-
 
 const Wave = () => {
   return (

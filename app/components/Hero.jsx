@@ -15,15 +15,19 @@ const grad = Graduate({
 const Hero = () => {
   return (
     <section className="w-full min-h-screen p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-4 py-20">
-      <div className="flex w-full p-8 items-center justify-between">
-        
+      <div className="flex w-full p-4 md:p-8 items-center justify-between">
+        <div
+          className="absolute top-0 left-0 w-full h-[50%] md:w-full md:h-full bg-no-repeat bg-cover"
+          style={{ backgroundImage: "url('/heroside.svg')" }}>
+        </div>
+
         {/* Left Section */}
-        <div className="relative w-1/2 flex flex-col gap-4">
-          <h1 className={`${grad.className} text-4xl`}>
+        <div className="relative w-full md:w-1/2 flex flex-col gap-4">
+          <h1 className={`${grad.className} text-2xl md:text-4xl`}>
             Sustainable Delivery for Every Sip
           </h1>
 
-          <span className="text-lg">
+          <span className="text-md md:text-lg">
             From crystal-clear water to premium beverages, 
             we bring freshness, quality, and convenience 
             right to your doorstep — every time, without compromise
@@ -54,7 +58,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-10 mb-10 w-80 h-80 
+            className="absolute right-10 mb-10 w-40 h-40 md:w-80 md:h-80 
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center">
             <Image src={assets.water1} alt="Water1" fill className="object-contain" />

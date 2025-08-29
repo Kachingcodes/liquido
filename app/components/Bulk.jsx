@@ -15,25 +15,25 @@ const quick = Quicksand({
 const Bulk = () => {
 
   return (
-    <section className="w-full flex justify-center items-center bg-[#1C4672] text-black relative overflow-hidden py-6">
-        <div className="flex w-full p-8 items-center justify-start gap-12">
+    <section className="w-full flex justify-center items-center bg-[#1C4672] text-black relative overflow-hidden py-2 md:py-6">
+        <div className="flex w-full p-4 md:p-8 items-center justify-start gap-4 md:gap-12 md:mb0 mb-10">
             
             {/* Left image */}
             <motion.div 
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="relative w-76 h-76 flex-shrink-0"
+            className="hidden md:flex relative w-76 h-76 flex-shrink-0"
             >
             <Image src={assets.jugs} alt="jugs" fill className="object-contain" />
             </motion.div>
 
             {/* Text box */}
             <div className="max-w-xl">
-                <h1 className={`${quick.className} py-12 px-10 text-4xl text-white`}>
+                <h1 className={`${quick.className} py-2 md:py-12 px-4 md:px-10 text-3xl md:text-4xl text-white`}>
                     Bulk Orders
                 </h1>
-                <div className="bg-white p-6 rounded-lg shadow-lg">
+                <div className="bg-white p-3 md:p-6 rounded-lg shadow-lg">
                     <ul className="text-black text-md list-none space-y-2">
                     <li className="before:content-['➜'] before:mr-2 before:text-[#04182e]">
                         From estates to factories, no order is too big.
@@ -46,13 +46,13 @@ const Bulk = () => {
                     </li>
                     </ul>
 
-                    <div className="flex flex-row items-center justify-between mt-6">
-                        <button className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
-                            Book Rep <MessageSquareText className="text-lg" />
+                    <div className="flex flex-row items-center justify-between mt-4 md:mt-6">
+                        <button className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
+                            Book Rep <MessageSquareText className="text-sm" />
                         </button>
 
-                        <button className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
-                            Fill Form <NotebookPen className="text-lg" />
+                        <button className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
+                            Fill Form <NotebookPen className="text-sm md:text-lg" />
                         </button>
                     </div>
                 </div>
@@ -63,9 +63,9 @@ const Bulk = () => {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-0 w-76 h-76"
+            className="absolute right-0 bottom-0 md:bottom-20 w-40 h-40 md:w-76 md:h-76"
             >
-            <Image src={assets.bulk} alt="bulk" fill className="object-contain"/>
+                <Image src={assets.bulk} alt="bulk" fill className="object-contain"/>
             </motion.div>
 
         </div>
