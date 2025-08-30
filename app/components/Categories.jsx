@@ -4,6 +4,7 @@ import { assets } from '@/public/assets';
 import { slides } from '@/public/assets';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Quicksand } from "next/font/google";
+import{ motion, AnimatePresence } from 'framer-motion';
 
 
 const quick = Quicksand({
@@ -33,22 +34,32 @@ export default function CategoriesCarousel() {
       </h3>
 
       {/* Cards */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-        {slides[current].items.map((item, idx) => (
-          <div key={idx} className="flex flex-col items-center">
-            {/* Card Image */}
-            <div className="bg-[#8FC0F4] rounded-2xl shadow-lg shadow-[#000000]/30 p-6 flex items-center justify-center">
-              <div className="relative w-32 h-32">
-                <Image src={item.img} alt={item.text} fill className="object-contain" />
-              </div>
-            </div>
-            {/* Bullet text */}
-            <ul className="list-disc list-inside text-left mt-4">
-              <li>{item.text}</li>
-            </ul>
-          </div>
+      <AnimatePresence mode="wait">
+        <div
+
+          className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
+              {slides[current].items.map((item, idx) => (
+                <div key={idx} className="flex flex-col items-center">
+                  {/* Card Image */}
+                  <div className="bg-[#8FC0F4] rounded-2xl shadow-lg shadow-[#000000]/30 p-6 flex items-center justify-center">
+                    <motion.div 
+                     key={current} // key forces re-render on slide change
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.5 }}
+                    className="relative w-32 h-32">
+                      <Image src={item.img} alt={item.text} fill className="object-contain" />
+                    </motion.div>
+                  </div>
+                  {/* Bullet text */}
+                  <ul className="list-disc list-inside text-left mt-4">
+                    <li>{item.text}</li>
+                  </ul>
+                </div>
         ))}
-      </div>
+        </div>
+      </AnimatePresence>
 
       {/* Carousel Controls */}
       <div className="flex justify-between w-full max-w-6xl mt-8">

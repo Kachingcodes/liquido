@@ -3,19 +3,19 @@ import React from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { assets } from '@/public/assets';
-import { Graduate, Lato } from "next/font/google";
+import { Quicksand } from "next/font/google";
 import { ShoppingCartIcon } from 'lucide-react';
 
-const grad = Graduate({
+const quick = Quicksand({
    subsets: ["latin"],
-  weight: ["400"]
+  weight: ["600"]
 });
 
 
 const Hero = () => {
   return (
     <section className="w-full min-h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-2 md:px-4 py-2 md:py-20">
-      <div className="flex flex-col md:flex-row w-full p-2 md:p-8 items-center justify-between">
+      <div className="flex flex-col md:flex-row w-full p-2 md:p-8 items-center justify-evenly">
         
         {/* Desktop / Tablet Background */}
         <div
@@ -30,8 +30,8 @@ const Hero = () => {
         ></div>
 
           {/* Left Section */}
-          <div className="relative w-full md:w-1/2 flex flex-col gap-4 mb-8 md:mb-0">
-            <h1 className={`${grad.className} text-2xl md:text-4xl`}>
+          <div className="relative w-full md:w-1/2 flex flex-col gap-4 ">
+            <h1 className={`${quick.className} text-2xl md:text-4xl`}>
               Sustainable Delivery for Every Sip
             </h1>
 
