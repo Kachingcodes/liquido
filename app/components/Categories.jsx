@@ -43,11 +43,11 @@ export default function CategoriesCarousel() {
                   {/* Card Image */}
                   <div className="bg-[#8FC0F4] rounded-2xl shadow-lg shadow-[#000000]/30 p-6 flex items-center justify-center">
                     <motion.div 
-                     key={current} // key forces re-render on slide change
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
+                     key={current} 
+                      initial={{ opacity: 0 }}
+                      animate={{ opacity: 1 }}
+                      exit={{ opacity: 0 }}
+                      transition={{ duration: 0.5 }}
                     className="relative w-32 h-32">
                       <Image src={item.img} alt={item.text} fill className="object-contain" />
                     </motion.div>

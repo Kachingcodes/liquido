@@ -11,6 +11,7 @@ import location from './location.png';
 import logo from './logo.png';
 import nylon from './nylon.png';
 import shield from './shield.png';
+import tiller from './tiller.png';
 import van from './van.png';
 import water1 from './water1.png';
 import water2 from './water2.png';
@@ -31,6 +32,7 @@ export const assets = {
     logo,
     nylon,
     shield,
+    tiller,
     van,
     water1,
     water2
@@ -131,8 +133,47 @@ export const slides = [
   }
 ];
 
+export const adverts = [
+    { id: 1, image: "/img1.jpg", text: "Pure Drinking Water" },
+    { id: 2, image: "/img2.jpg", text: "Refreshing Juices" },
+    { id: 3, image: "/img3.jpg", text: "Cooking Oils" },
+    { id: 4, image: "/img4.jpg", text: "Industrial Liquids" },
+    { id: 5, image: "/img5.jpg", text: "Premium Beverages" },
+    { id: 6, image: "/img6.jpg", text: "Specialty Liquids" },
+  ];
 
-
+export const products = [
+    {
+      id: 1,
+      image: "/img1.jpg",
+      text: "Pure Drinking Water",
+    },
+    {
+      id: 2,
+      image: "/img2.jpg",
+      text: "Refreshing Juices",
+    },
+    {
+      id: 3,
+      image: "/img3.jpg",
+      text: "Cooking Oils",
+    },
+    {
+      id: 4,
+      image: "/img4.jpg",
+      text: "Industrial Liquids",
+    },
+    {
+      id: 5,
+      image: "/img5.jpg",
+      text: "Premium Beverages",
+    },
+    {
+      id: 6,
+      image: "/img6.jpg",
+      text: "Specialty Liquids",
+    },
+  ];
 
 
 

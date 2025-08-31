@@ -2,15 +2,15 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Link as ScrollLink } from "react-scroll";
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, HomeIcon, ShoppingCartIcon } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from "@/public/assets";
 import { motion, AnimatePresence } from 'framer-motion';
 
-const Navbar = () => {
+const AboutNav = () => {
   const [isOpen, setIsOpen] = useState(false);
 
-  const liquidSections = ['Home', 'Categories', 'Order', 'Why Choose Us', 'Bulk', 'Testimonials'];
+  const liquidSections = ['Home'];
 
   useEffect(() => {
     if (isOpen) {
@@ -37,29 +37,24 @@ const Navbar = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex space-x-6 items-center">
-          {liquidSections.map((section) => (
-            <li key={section}>
-              <ScrollLink
-                to={section}
-                spy={true}
-                smooth={true}
-                offset={-100}
-                duration={500}
-                className="text-white hover:text-[#1C4672] transition list-none cursor-pointer"
-              >
-                {section}
-              </ScrollLink>
+        <ul className="hidden md:flex items-center gap-6">
+            <li>
+                <Link 
+                href="/"
+                className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+                >
+                Home <HomeIcon className="text-md" />
+                </Link>  
             </li>
-          ))}
-          <li>
-            <Link 
-              href="/contact"
-              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
-            >
-              Contact <Phone className="text-md" />
-            </Link>               
-          </li>
+
+            <li>
+                <Link 
+                href="/shop"
+                className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+                >
+                Shop <ShoppingCartIcon className="text-md" />
+                </Link>  
+            </li>
         </ul>
 
         {/* Mobile Toggle */}
@@ -82,28 +77,22 @@ const Navbar = () => {
             className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#3A699A] shadow-md z-50 flex flex-col"
           >
             <div className="flex-1 flex flex-col justify-between px-6 py-4 space-y-4">
-              {liquidSections.map((section) => (
-                <ScrollLink
-                  key={section}
-                  to={section}
-                  spy={true}
-                  smooth={true}
-                  offset={-100}
-                  duration={500}
-                  className="block text-md font-medium text-white hover:text-[#8FC0F4] transition cursor-pointer"
-                  onClick={() => setIsOpen(false)}
-                >
-                  {section}
-                </ScrollLink>
-              ))}
-
               <Link 
-                href="/contact"
+                href="/"
                 className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl hover:bg-[#8FC0F4]/40 transition"
                 onClick={() => setIsOpen(false)}
               >
-                <span>Contact</span>
-                <Phone className="w-5 h-5" />
+                <span>Home</span>
+                <HomeIcon className="w-5 h-5" />
+              </Link>
+              
+              <Link 
+                href="/shop"
+                className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl hover:bg-[#8FC0F4]/40 transition"
+                onClick={() => setIsOpen(false)}
+              >
+                <span>Shop</span>
+                <ShoppingCartIcon className="w-5 h-5" />
               </Link>
             </div>
           </motion.div>
@@ -113,4 +102,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default AboutNav;

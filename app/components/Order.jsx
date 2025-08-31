@@ -17,7 +17,7 @@ const Order = () => {
   const MotionImage = motion(Image);
 
   return (
-    <section className="w-full flex flex-col min-h-screen justify-start items-center bg-[#77B3F4] text-white relative overflow-hidden px-4 py-2 md:py-8">
+    <section className="w-full flex flex-col justify-start items-center bg-[#77B3F4] text-white relative overflow-hidden px-4 py-6 md:py-12">
   
   {/* Top Heading (mobile: H1 + bus side by side) */}
   <div className="flex items-center justify-center gap-1 md:hidden">

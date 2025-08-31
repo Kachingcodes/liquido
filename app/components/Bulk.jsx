@@ -15,7 +15,7 @@ const quick = Quicksand({
 const Bulk = () => {
 
   return (
-    <section className="w-full flex justify-center items-center bg-[#1C4672] text-black relative overflow-hidden py-2 md:py-6">
+    <section className="w-full flex  justify-center items-center bg-[#1C4672] text-black relative overflow-hidden py-6 md:py-12">
         <div className="flex w-full p-4 md:p-8 items-center justify-start gap-4 md:gap-12 md:mb0 mb-10">
             
             {/* Left image */}
@@ -29,7 +29,7 @@ const Bulk = () => {
             </motion.div>
 
             {/* Text box */}
-            <div className="max-w-xl">
+            <div className="max-w-xl mb-20 md:mb-0">
                 <h1 className={`${quick.className} py-2 md:py-12 px-4 md:px-10 text-3xl md:text-4xl text-white`}>
                     Bulk Orders
                 </h1>

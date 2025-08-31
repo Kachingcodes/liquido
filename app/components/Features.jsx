@@ -22,8 +22,8 @@ const Hero = () => {
           </svg>
           <Truck className="absolute w-6 h-6 md:w-8 md:h-8" />
         </div>
-        <h3 className="font-semibold mt-2 text-sm md:text-lg">Reliable Delivery</h3>
-        <p className="text-xs md:text-md">Timely water supply for homes, businesses, estates and more</p>
+        <h3 className="font-semibold mt-2 text-md md:text-lg">Reliable Delivery</h3>
+        <p className="text-sm md:text-md">Timely water supply for homes, businesses, estates and more</p>
       </div>
 
       {/* Bulk & Custom Orders */}
@@ -39,8 +39,8 @@ const Hero = () => {
           </svg>
           <Package className="absolute w-6 h-6 md:w-8 md:h-8" />
         </div>
-        <h3 className="font-semibold mt-2 text-sm md:text-lg">Bulk & Custom Orders</h3>
-        <p className="text-xs md:text-md">Flexible plans tailored to your specific needs</p>
+        <h3 className="font-semibold mt-2 text-md md:text-lg">Bulk & Custom Orders</h3>
+        <p className="text-sm md:text-md">Flexible plans tailored to your specific needs</p>
       </div>
 
       {/* Quality You Can Trust */}
@@ -56,8 +56,8 @@ const Hero = () => {
           </svg>
           <Droplet className="absolute w-6 h-6 md:w-8 md:h-8" />
         </div>
-        <h3 className="font-semibold mt-2 text-sm md:text-lg">Quality You Can Trust</h3>
-        <p className="text-xs md:text-md">Clean, certified water with strict safety standards.</p>
+        <h3 className="font-semibold mt-2 text-md md:text-lg">Quality You Can Trust</h3>
+        <p className="text-sm md:text-md">Clean, certified water with strict safety standards.</p>
       </div>
 
       {/* Simple Ordering */}
@@ -73,8 +73,8 @@ const Hero = () => {
           </svg>
           <Smartphone className="absolute w-6 h-6 md:w-8 md:h-8" />
         </div>
-        <h3 className="font-semibold mt-2 text-sm md:text-lg">Simple Ordering</h3>
-        <p className="text-xs md:text-md">Order and manage deliveries easily online or by phone</p>
+        <h3 className="font-semibold mt-2 text-md md:text-lg">Simple Ordering</h3>
+        <p className="text-sm md:text-md">Order and manage deliveries easily online or by phone</p>
       </div>
 
     </div>

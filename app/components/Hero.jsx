@@ -5,6 +5,8 @@ import { motion } from 'framer-motion';
 import { assets } from '@/public/assets';
 import { Quicksand } from "next/font/google";
 import { ShoppingCartIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation'; 
+
 
 const quick = Quicksand({
    subsets: ["latin"],
@@ -13,8 +15,14 @@ const quick = Quicksand({
 
 
 const Hero = () => {
+    const router = useRouter(); 
+
+  const handlePlaceOrder = () => {
+    router.push("/shop"); 
+  };
+
   return (
-    <section className="w-full min-h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-2 md:px-4 py-2 md:py-20">
+    <section className="w-full h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-2 md:px-4 py-2 md:py-20">
       <div className="flex flex-col md:flex-row w-full p-2 md:p-8 items-center justify-evenly">
         
         {/* Desktop / Tablet Background */}
@@ -30,7 +38,7 @@ const Hero = () => {
         ></div>
 
           {/* Left Section */}
-          <div className="relative w-full md:w-1/2 flex flex-col gap-4 ">
+          <div className="relative w-full md:w-1/2 flex flex-col gap-4">
             <h1 className={`${quick.className} text-2xl md:text-4xl`}>
               Sustainable Delivery for Every Sip
             </h1>
@@ -41,7 +49,9 @@ const Hero = () => {
               right to your doorstep — every time, without compromise
             </span>
 
-            <button className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition">
+            <button 
+            onClick={handlePlaceOrder}
+            className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition">
               Place Order <ShoppingCartIcon className='text-lg'/>
             </button>
 
