@@ -35,7 +35,7 @@ const ShopNav = () => {
         </Link>
 
         {/* Desktop Nav */}
-        <ul className="hidden md:flex items-center gap-6">
+        <ul className="hidden md:flex items-center gap-16">
             <li>
                 <Link 
                 href="/"
