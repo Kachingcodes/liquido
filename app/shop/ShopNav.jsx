@@ -9,6 +9,23 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const ShopNav = () => {
   const [isOpen, setIsOpen] = useState(false);
+    const [drops, setDrops] = useState([]);
+
+    const handleDrop = (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+
+  const newDrop = {
+    id: Date.now(), 
+    x: rect.left + rect.width / 2,
+    y: rect.top + window.scrollY,
+  };
+  setDrops((prev) => [...prev, newDrop]);
+
+  setTimeout(() => {
+    setDrops((prev) => prev.filter((drop) => drop.id !== newDrop.id));
+  }, 2000);
+
+};
 
   useEffect(() => {
     if (isOpen) {
@@ -39,6 +56,10 @@ const ShopNav = () => {
             <li>
                 <Link 
                 href="/"
+                onClick ={(e) => {
+                  handleDrop(e);
+                  setIsOpen(false);
+                }}
                 className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
                 >
                 Home <HomeIcon className="text-md" />
@@ -48,6 +69,10 @@ const ShopNav = () => {
             <li>
                 <Link 
                 href="/contact"
+                onClick={(e) => {
+                  handleDrop(e);
+                  setIsOpen(false);
+                }}
                 className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
                 >
                 Contact <Phone className="text-md" />
@@ -95,6 +120,22 @@ const ShopNav = () => {
             </div>
           </motion.div>
         )}
+      </AnimatePresence>
+
+      {/* DROPS */}
+      <AnimatePresence>
+        {drops.map((drop) => (
+          <motion.img
+            key={drop.id}
+            src="/drop.png"
+            alt="drop"
+            initial={{ top: drop.y, left: drop.x, opacity: 1, position: "absolute" }}
+            animate={{ top: drop.y + 100, opacity: 0 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 1.5, ease: "easeIn" }}
+            className="w-10 h-10 pointer-events-none"
+          />
+        ))}
       </AnimatePresence>
     </header>
   );

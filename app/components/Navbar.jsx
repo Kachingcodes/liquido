@@ -9,6 +9,19 @@ import { motion, AnimatePresence } from 'framer-motion';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
+  const [drops, setDrops] = useState([]);
+
+   const handleDrop = () => {
+  const newDrop = {
+    id: Date.now(), // unique id
+  };
+  setDrops((prev) => [...prev, newDrop]);
+
+  // Remove drop after animation finishes
+  setTimeout(() => {
+    setDrops((prev) => prev.filter((drop) => drop.id !== newDrop.id));
+  }, 1500);
+};
 
   const liquidSections = ['Home', 'Categories', 'Order', 'Why Choose Us', 'Bulk', 'Testimonials'];
 
@@ -55,7 +68,11 @@ const Navbar = () => {
           <li>
             <Link 
               href="/contact"
-              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+              onClick ={() => {
+                  handleDrop();
+                  setIsOpen(false);
+                }}
+              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
             >
               Contact <Phone className="text-md" />
             </Link>               
@@ -109,6 +126,21 @@ const Navbar = () => {
           </motion.div>
         )}
       </AnimatePresence>
+
+       <AnimatePresence>
+                 {drops.map((drop) => (
+                   <motion.img
+                     key={drop.id}
+                     src="/drop.png"
+                     alt="drop"
+                     initial={{ y: 0, opacity: 1 }}
+                     animate={{ y: 100, opacity: 0.8 }}
+                     exit={{ opacity: 0 }}
+                     transition={{ duration: 1.5, ease: "easeIn" }}
+                     className="absolute right-50 w-10 top-12 -translate-x-1/2"
+                   />
+                   ))}
+               </AnimatePresence>
     </header>
   );
 };

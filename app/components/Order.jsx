@@ -28,7 +28,7 @@ const Order = () => {
   </div>
 
   {/* Top Heading (tablet/desktop: H1 alone) */}
-  <h1 className={` ${quick.className} hidden md:block text-3xl md:text-5xl font-bold text-center`}>
+  <h1 className={` ${quick.className} hidden md:block text-3xl md:text-4xl font-bold text-center`}>
     How to Order
   </h1>
 

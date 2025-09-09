@@ -5,6 +5,9 @@ import { slides } from '@/public/assets';
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Quicksand } from "next/font/google";
 import{ motion, AnimatePresence } from 'framer-motion';
+import { ShoppingCartIcon } from 'lucide-react';
+import { useRouter } from 'next/navigation'; 
+
 
 
 const quick = Quicksand({
@@ -12,7 +15,7 @@ const quick = Quicksand({
   weight: ["700"]
 });
 
-export default function CategoriesCarousel() {
+const Categories = () => {
   const [current, setCurrent] = useState(0);
 
   const nextSlide = () => {
@@ -23,12 +26,18 @@ export default function CategoriesCarousel() {
     setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
   };
 
+      const router = useRouter(); 
+
+    const handlePlaceOrder = () => {
+    router.push("/shop"); 
+  };
+
+
   return (
-    <section className="w-full bg-[#4C86C4] text-white relative overflow-hidden px-4 py-20 flex flex-col items-center">
-      {/* Main Heading */}
+    <section className="w-full bg-[#4C86C4] text-white relative overflow-hidden px-4 py-16 flex flex-col items-center">
+      
       <h1 className={` ${quick.className} text-4xl text-center mb-6`}>CATEGORIES</h1>
 
-      {/* Subheading */}
       <h3 className={` ${quick.className} text-2xl font-semibold text-left w-full max-w-6xl mb-8`}>
         {slides[current].title}
       </h3>
@@ -52,7 +61,7 @@ export default function CategoriesCarousel() {
                       <Image src={item.img} alt={item.text} fill className="object-contain" />
                     </motion.div>
                   </div>
-                  {/* Bullet text */}
+
                   <ul className="list-disc list-inside text-left mt-4">
                     <li>{item.text}</li>
                   </ul>
@@ -70,6 +79,16 @@ export default function CategoriesCarousel() {
           <ChevronRight size={24} />
         </button>
       </div>
+
+      <div className="md:mt-8">
+        <button 
+          onClick={handlePlaceOrder}
+          className="bg-[#8FC0F4]/60 px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
+          Place Order <ShoppingCartIcon className='text-lg'/>
+        </button>
+      </div>
     </section>
   );
 }
+
+export default Categories;
