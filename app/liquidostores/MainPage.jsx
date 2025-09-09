@@ -8,7 +8,7 @@ const MainPage = () => {
   return (
     <section className="w-full min-h-screen flex bg-[#4C86C4] text-white relative overflow-hidden">
       {/* Left side */}
-      <div className="w-[16%] bg-[#1C4672] fixed top-0 left-0 h-screen z-50">
+      <div className="w-[16%] bg-[#1C4672] fixed top-0 left-0 h-screen z-50 overflow-y-auto">
         <LeftSide />
       </div>
 
