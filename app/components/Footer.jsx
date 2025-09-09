@@ -12,10 +12,10 @@ const Footer = () => {
    <section className="w-full bg-[#1C4672] text-white relative overflow-hidden px-8 py-10">
   
   {/* Main footer content */}
-  <div className="relative flex flex-col gap-12">
+  <div className="relative flex flex-col gap-10">
     
     {/* Top Content */}
-    <div className="flex flex-col md:flex-row w-full justify-between gap-10">
+    <div className="flex flex-col md:flex-row w-full justify-between">
       {/* Column 1 */}
       <div className="flex flex-col gap-3">
         <div className="relative w-20 h-20">

@@ -133,6 +133,41 @@ export const slides = [
   }
 ];
 
+export const products = [
+    {
+      id: 1,
+      image: "/water1.png",
+      text: "Pure Drinking Water",
+    },
+    {
+      id: 2,
+      image: "/juice.png",
+      text: "Refreshing Juices",
+    },
+    {
+      id: 3,
+      image: "/cooking.png",
+      text: "Cooking Oils",
+    },
+    {
+      id: 4,
+      image: "/fluid.png",
+      text: "Industrial Liquids",
+    },
+    {
+      id: 5,
+      image: "/soda.png",
+      text: "Premium Beverages",
+    },
+    {
+      id: 6,
+      image: "/plant.png",
+      text: "Specialty Liquids",
+    },
+  ];
+
+
+
 export const adverts = [
     { id: 1, image: "/img1.jpg", text: "Pure Drinking Water" },
     { id: 2, image: "/img2.jpg", text: "Refreshing Juices" },
@@ -141,40 +176,3 @@ export const adverts = [
     { id: 5, image: "/img5.jpg", text: "Premium Beverages" },
     { id: 6, image: "/img6.jpg", text: "Specialty Liquids" },
   ];
-
-export const products = [
-    {
-      id: 1,
-      image: "/img1.jpg",
-      text: "Pure Drinking Water",
-    },
-    {
-      id: 2,
-      image: "/img2.jpg",
-      text: "Refreshing Juices",
-    },
-    {
-      id: 3,
-      image: "/img3.jpg",
-      text: "Cooking Oils",
-    },
-    {
-      id: 4,
-      image: "/img4.jpg",
-      text: "Industrial Liquids",
-    },
-    {
-      id: 5,
-      image: "/img5.jpg",
-      text: "Premium Beverages",
-    },
-    {
-      id: 6,
-      image: "/img6.jpg",
-      text: "Specialty Liquids",
-    },
-  ];
-
-
-
-
