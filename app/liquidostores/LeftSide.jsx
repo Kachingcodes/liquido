@@ -20,7 +20,7 @@ const LeftSide = () => {
             <Image src={assets.logo} alt="logo" fill className="object-contain" />
         </div>
         
-        <h1 className={`${quick.className} text-[#c4e0f9] text-2xl font-semibold`}>
+        <h1 className={`${quick.className} text-[#c4e0f9] text-xl text-center font-semibold`}>
             LIQUIDO STORES
         </h1>
             
@@ -59,7 +59,7 @@ const LeftSide = () => {
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Clock size={16}/> Delivery Hours</div>
         </div>
     </div>
-              );
+    );
 };
 
 export default LeftSide;
