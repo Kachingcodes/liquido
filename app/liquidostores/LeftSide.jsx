@@ -26,7 +26,7 @@ const LeftSide = () => {
             
         {/* Quick Actions */}
         <div className="w-full px-4 text-white text-sm space-y-3 cursor-pointer">
-            <h2 className="text-lg font-semibold border-b border-white/30 pb-1">Quick Actions</h2>
+            <h2 className="text-md font-semibold border-b border-white/30 pb-1">Quick Actions</h2>
             <Link href= "/">
                 <div className="flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
             </Link>
@@ -36,14 +36,14 @@ const LeftSide = () => {
 
         {/* Delivery Info */}
         <div className="w-full px-4 text-white text-sm space-y-3 cursor-pointer">
-            <h2 className="text-lg font-semibold border-b border-white/30 pb-1">Delivery & Info</h2>
+            <h2 className="text-md font-semibold border-b border-white/30 pb-1">Delivery & Info</h2>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Truck size={16}/> Delivery Options</div>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Recycle size={16}/> Refill & Recycling Info</div>
         </div>
 
         {/* Promotions / Offers */}
         <div className="w-full px-4 text-white text-sm space-y-3 cursor-pointer">
-            <h2 className="text-lg font-semibold border-b border-white/30 pb-1">Promotions / Offers</h2>
+            <h2 className="text-md font-semibold border-b border-white/30 pb-1">Promotions / Offers</h2>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><PartyPopper size={16}/> “Buy 2, Get 1 Free”</div>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><DollarSign size={16}/> Discounts for bulk orders</div>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Bell size={16}/> Seasonal offers</div>
@@ -51,7 +51,7 @@ const LeftSide = () => {
 
         {/* Help / Support */}
         <div className="w-full px-4 text-white text-sm space-y-3 cursor-pointer">
-            <h2 className="text-lg font-semibold border-b border-white/30 pb-1">Help / Support</h2>
+            <h2 className="text-md font-semibold border-b border-white/30 pb-1">Help / Support</h2>
             <Link href="/contact">
                 <div className="flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Phone size={16}/> Contact Support</div>
             </Link>
