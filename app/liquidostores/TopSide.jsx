@@ -3,44 +3,19 @@ import React, { useState } from "react";
 import { Search, Droplets, Sparkles, CookingPot, User, Gem, Car, ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { categories } from '@/public/assets';
 
-const categories = [
-  {
-    name: "Water & Drinks",
-    icon: <Droplets size={20} />,
-    options: ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"],
-  },
-  {
-    name: "Hygiene & Cleaning",
-    icon: <Sparkles size={20} />,
-    options: ["Detergents", "Disinfectants", "Soaps", "Sanitizers"],
-  },
-  {
-    name: "Cooking & Edible Liquids",
-    icon: <CookingPot size={20} />,
-    options: ["Vegetable Oil", "Palm Oil", "Vinegar", "Cooking Wine"],
-  },
-  {
-    name: "Personal Care",
-    icon: <User size={20} />,
-    options: ["Shampoos", "Conditioners", "Body Oils", "Lotions"],
-  },
-  {
-    name: "Luxury & Lifestyle",
-    icon: <Gem size={20} />,
-    options: ["Perfumes", "Essential Oils", "Fragrance Diffusers"],
-  },
-  {
-    name: "Automobile",
-    icon: <Car size={20} />,
-    options: ["Engine Oil", "Transmission Fluid", "Coolant", "Gear Oil"],
-  },
-];
 
 const TopSide = () => {
   const [activeCategory, setActiveCategory] = useState(null);
-  const [drops, setDrops] = useState([]); // ✅ FIXED: drops state added
+  const [selectedOption, setSelectedOption] = useState(null);
 
+  const [drops, setDrops] = useState([]); 
+
+  const toggleOption = (optionName) => {
+    setSelectedOption((prev) => (prev === optionName ? null : optionName));
+  };
+  
   const toggleCategory = (categoryName) => {
     setActiveCategory((prev) => (prev === categoryName ? null : categoryName));
   };
@@ -64,7 +39,7 @@ const TopSide = () => {
   };
 
   return (
-    <div className="w-full flex flex-col items-center p-6 space-y-6 relative">
+    <div className="w-full flex flex-col items-center p-6 space-y-6 bg-white">
       {/* Top Search + Back */}
       <div className="flex items-center justify-evenly w-full gap-12">
         <div className="flex items-center w-full rounded-lg bg-white shadow-md px-3 py-2">
@@ -105,23 +80,41 @@ const TopSide = () => {
         ))}
       </div>
 
-      {/* Second Row (Options) */}
       {activeCategory && (
-        <div className="w-full overflow-x-auto">
-          <div className="flex justify-center gap-2 min-w-max px-1 py-2">
-            {categories
-              .find((c) => c.name === activeCategory)
-              .options.map((option) => (
-                <div
-                  key={option}
-                  className="px-4 py-2 bg-blue-50 border rounded-md text-sm text-gray-700 hover:bg-blue-100 cursor-pointer whitespace-nowrap"
-                >
-                  {option}
-                </div>
-              ))}
-          </div>
+      <div className="w-full overflow-x-auto bg-white">
+        <div className="flex justify-center gap-2 min-w-max px-1 py-2">
+          {categories.find(c => c.name === activeCategory).options.map((option) => (
+            <div
+              key={option.name}
+              onClick={() => toggleOption(option)}
+              className="px-4 py-2 bg-blue-50 border rounded-md text-sm text-gray-700 hover:bg-blue-100 cursor-pointer whitespace-nowrap"
+            >
+              {option.name}
+            </div>
+          ))}
+        </div>
+      </div>
+      )}
+
+      {selectedOption && (
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 w-full">
+          {selectedOption.products.map((product) => (
+            <div
+              key={product.id}
+              className="p-4 border rounded-lg shadow-sm hover:shadow-md bg-white"
+            >
+              <img
+              src={product.image}
+              alt={product.name}
+              className="w-5 md:w-full h-10 md:h-40 p-2 object-contain"
+              />
+              <h3 className="font-semibold text-gray-800">{product.name}</h3>
+              <p className="text-gray-600">{product.price}</p>
+            </div>
+          ))}
         </div>
       )}
+
 
       {/* Drops animation */}
       <AnimatePresence>

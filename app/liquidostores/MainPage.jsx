@@ -1,39 +1,30 @@
 'use client';
-import React, { useState } from 'react';
-import Image from 'next/image';
-import { assets } from '@/public/assets';
-import Link from 'next/link';
-import { motion, AnimatePresence } from 'framer-motion';
+import React from 'react';
 import LeftSide from './LeftSide';
 import TopSide from './TopSide';
 import Store from './Store';
 
-
 const MainPage = () => {
-
   return (
     <section className="w-full min-h-screen flex bg-[#4C86C4] text-white relative overflow-hidden">
+      {/* Left side */}
+      <div className="w-[16%] bg-[#1C4672] fixed top-0 left-0 h-screen z-50">
+        <LeftSide />
+      </div>
 
-        {/* Left side */}
-        <div className="w-[16%] bg-[#1C4672]">
-            <LeftSide/>
+      {/* Right side */}
+      <div className="ml-[16%] w-[84%] flex flex-col relative">
+        {/* Top part */}
+        <div className="fixed top-0 left-[16%] w-[84%] h-[30%] z-40">
+          <TopSide />
         </div>
 
-
-        {/* Right side */}
-        <div className="w-[84%] flex flex-col">
-            {/* Top part */}
-            <div className="h-[30%] bg-white">
-                <TopSide/>
-            </div>
-
-            {/* Bottom part */}
-            <div className="flex-1 bg-blue-500 flex items-center justify-center">
-                <Store/>
-            </div>
+        {/* Bottom part (Store under TopSide) */}
+        <div className="flex-1 flex items-center justify-center pt-[18%]">
+          <p>Select An Option</p>
         </div>
-</section>
-
+      </div>
+    </section>
   );
 };
 
