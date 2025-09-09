@@ -14,7 +14,7 @@ const quick = Quicksand({
 const LeftSide = () => {
 
   return (    
-    <div className='flex flex-col items-center justify-start py-6 space-y-6'>
+    <div className='flex flex-col items-center justify-start py-2 space-y-6'>
         {/* Logo + Title */}
         <div className="relative w-24 h-16">
             <Image src={assets.logo} alt="logo" fill className="object-contain" />
