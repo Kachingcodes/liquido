@@ -357,7 +357,7 @@ export const categories = [
         ]
       }
     ]
-  }
+  } //Continue from here
 ];
 
 export const adverts = [

@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { assets } from '@/public/assets';
-import { ShoppingCartIcon } from 'lucide-react';
+import { ShoppingCartIcon, StoreIcon, Truck, TruckIcon } from 'lucide-react';
 import Link from 'next/link';
 
 const Intro = () => {
@@ -38,12 +38,39 @@ const Intro = () => {
         style={{ backgroundImage: "url('/phonehero.svg')" }}
       />
 
-      {/* Circle with Water1 */}
+      {/* Centered Content (Logo + Buttons) */}
+      <div className="relative flex flex-col items-center justify-center gap-6 z-20">
+        <div className="relative w-60 h-20 md:w-80 md:h-40 md:ml-9 ml-4">
+          <Image src={assets.logo} alt="logo" fill className="object-contain" />
+        </div>
+
+        <div className="flex gap-6 flex-col md:flex-row">
+            <Link href="/liquidostores"
+                onClick = {(e) => {
+                handleDrop(e); 
+            }}
+            className="bg-[#1C4672] px-6 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 transition relative z-30"
+            >
+                LIQUIDO STORES <StoreIcon className="text-md md:text-lg"/>  
+            </Link>
+
+            <Link href="/liquidoexpress"
+                onClick = {(e) => {
+                handleDrop(e); 
+            }} 
+            className="bg-[#1C4672] px-6 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 transition relative z-30"
+            >
+                LIQUIDO EXPRESS <TruckIcon className="text-lg"/>
+          </Link>
+        </div>
+      </div>
+   
+ {/* Bigger Circle */}
         <motion.div 
-            initial={{ opacity: 0, x: 100 }}
+            initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-4 md:right-10 mb-10 w-40 h-40 md:w-60 md:h-60 
+            className="absolute right-4 md:left-16 top-10 md:top-20 w-40 h-40 md:w-60 md:h-60 
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
         >
@@ -51,44 +78,29 @@ const Intro = () => {
         </motion.div>
   
 
-      {/* Centered Content (Logo + Buttons) */}
-      <div className="relative flex flex-col items-center justify-center gap-6 z-20">
-        <div className="relative w-80 h-40 ml-9">
-          <Image src={assets.logo} alt="logo" fill className="object-contain" />
-        </div>
-
-        <div className="flex gap-6">
-            <Link href="/liquidostores"
-                onClick = {(e) => {
-                handleDrop(e); 
-            }}
-            className="bg-[#1C4672] px-6 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/50 hover:bg-[#8FC0F4]/40 transition relative z-30"
-            >
-                LIQUIDO STORES <ShoppingCartIcon className="text-lg"/>  
-            </Link>
-
-            <Link href="/liquidoexpress"
-                onClick = {(e) => {
-                handleDrop(e); 
-            }} 
-            className="bg-[#1C4672] px-6 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/50 hover:bg-[#8FC0F4]/40 transition relative z-30"
-            >
-                LIQUIDO EXPRESS <ShoppingCartIcon className="text-lg"/>
-          </Link>
-        </div>
-      </div>
-   
-        {/* Circle with Water2 */}
+       {/* Smaller Circle */}
         <motion.div 
-            initial={{ opacity: 0, y: 100 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute left-11 md:left-10 top-20 w-30 h-30 md:w-50 md:h-50 animate-bounce
+            className="absolute md:right-26 right-50 md:top-48 bottom-20 w-30 h-30 md:w-50 md:h-50 
+            bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
+            rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
+                >
+              <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
+        </motion.div>
+
+        {/* <motion.div 
+            initial={{ opacity: 0, x: 100 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2 }}
+            className="absolute left-11  md:top-38 w-30 h-30 md:w-50 md:h-50 
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full flex items-center justify-center"
                 >
                   <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
-                </motion.div>
+                </motion.div> */}
+     
 
       {/* Van */}
       <Link href="/">

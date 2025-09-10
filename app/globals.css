@@ -14,18 +14,15 @@
   -ms-overflow-style: none;  /* IE/Edge --font-ovo: "Ovo", "serif";*/
   scrollbar-width: none;     /* Firefox */
 }
-/* 
-        @keyframes scrollLine {
-          0% { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
 
-        .animate-scroll-line {
-          animation: scrollLine 30s linear infinite;
-        } */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
 
-/* .html{
-  scroll-behavior: smooth;
-} */
+.no-scrollbar {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;     /* Firefox */
+}
+
 
 

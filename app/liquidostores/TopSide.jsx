@@ -9,6 +9,7 @@ import { categories } from '@/public/assets';
 const TopSide = () => {
   const [activeCategory, setActiveCategory] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
+  const [showSearch, setShowSearch] = useState(false);
 
   const [drops, setDrops] = useState([]); 
 
@@ -40,8 +41,8 @@ const TopSide = () => {
 
   return (
     <div className="w-full flex flex-col items-center p-6 space-y-6 bg-white">
-      {/* Top Search + Back */}
-      <div className="flex items-center justify-evenly w-full gap-12">
+      {/* Top Search + Back - Desktop*/}
+      <div className="hidden md:flex items-center justify-evenly w-full md:gap-12 gap-4">
         <div className="flex items-center w-full rounded-lg bg-white shadow-md px-3 py-2">
           <Search size={18} className="text-gray-500 mr-2" />
           <input
@@ -54,15 +55,63 @@ const TopSide = () => {
         <div className="relative inline-block">
           <button
             onClick={handleBackIntro}
-            className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#1C4672]/80 transition relative z-30"
+            className="bg-[#1C4672] px-4 md:py-3 py-2 flex items-center gap-2 text-white md:text-lg text-md rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#1C4672]/80 transition relative z-30"
           >
-            Back <ArrowLeftIcon className="text-lg" />
+            Back <ArrowLeftIcon className="md:text-lg text-md" />
           </button>
         </div>
       </div>
 
+      {/* Top Search + Back - Mobile */}
+      <div className="md:hidden flex items-end justify-evenly w-auto ml-auto relative">
+        {/* Back button fixed on right */}
+        <div className="absolute right-2 top-0">
+          <button
+            onClick={handleBackIntro}
+            className="bg-[#1C4672] px-3 py-2 flex items-center gap-2 text-white text-sm rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#1C4672]/80 transition"
+          >
+            Back <ArrowLeftIcon className="text-sm" />
+          </button>
+        </div>
+
+        {/* Search button */}
+        <div className="flex items-center mt-14"> 
+          {!showSearch ? (
+            // Show only the icon at first
+            <button
+              onClick={() => setShowSearch(true)}
+              className="p-2 rounded-full hover:bg-gray-100"
+            >
+              <Search size={20} className="text-gray-600" />
+            </button>
+          ) : (
+            // Expand into input when clicked
+            <motion.div
+              initial={{ width: 0, opacity: 0 }}
+              animate={{ width: 220, opacity: 1 }}
+              exit={{ width: 0, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="flex items-center bg-white rounded-lg shadow px-2 py-1 w-[220px]"
+            >
+              <input
+                type="text"
+                placeholder="Search liquids..."
+                autoFocus
+                className="flex-1 outline-none text-sm text-gray-700 bg-transparent"
+              />
+              <button
+                onClick={() => setShowSearch(false)}
+                className="ml-2 text-gray-500 hover:text-gray-700"
+              >
+                ✕
+              </button>
+            </motion.div>
+          )}
+        </div>
+      </div>
+
       {/* First Row of Buttons */}
-      <div className="grid grid-cols-6 gap-3 w-full">
+      <div className="grid grid-cols-3 gap-3 w-full">
         {categories.map((cat) => (
           <button
             key={cat.name}
