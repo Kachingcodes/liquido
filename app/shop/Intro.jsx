@@ -96,7 +96,7 @@ const Intro = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2 }}
           
-          className="absolute bottom-0 right-2 md:right-20 w-32 h-32 md:w-64 md:h-64"
+          className="absolute bottom-4 right-2 md:right-20 w-32 h-32 md:w-64 md:h-64"
         >
           <Image src={assets.van} alt="van" fill className="object-contain" />
         </motion.div>
