@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { ShoppingCart, Star, Home, Truck, Recycle, PartyPopper, DollarSign, Bell, Phone, HelpCircle, Clock } from "lucide-react";
+import { ShoppingCart, Star, Home, Truck, Recycle, PartyPopper, DollarSign, Bell, Phone, HelpCircle, Clock, StarOff } from "lucide-react";
 import Link from 'next/link';
 
 const quick = Quicksand({
@@ -11,7 +11,7 @@ const quick = Quicksand({
   weight: ["600"]
 });
 
-const LeftSide = () => {
+const LeftSide = ({showFavorites, setShowFavorites}) => {
 
   return (    
     <div className='flex flex-col items-center justify-start py-2 space-y-6'>
@@ -31,7 +31,16 @@ const LeftSide = () => {
                 <div className="flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
             </Link>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><ShoppingCart size={16}/> View Cart</div>
-            <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Star size={16}/> Favorites / Wishlist</div>
+            <div
+                onClick={() => setShowFavorites(!showFavorites)}
+                className="flex items-center gap-2 cursor-pointer text-white hover:text-[#c4e0f9]"
+                >
+                {showFavorites ? (
+                    <> <StarOff size={16} /> Hide Favorites </>
+                ) : (
+                    <> <Star size={16} /> Favorites / Wishlist </>
+                )}
+                </div>
         </div>
 
         {/* Delivery Info */}
@@ -55,8 +64,12 @@ const LeftSide = () => {
             <Link href="/contact">
                 <div className="flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Phone size={16}/> Contact Support</div>
             </Link>
-            <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><HelpCircle size={16}/> FAQ</div>
-            <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Clock size={16}/> Delivery Hours</div>
+            <Link href="/contact">
+                <div className="flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><HelpCircle size={16}/> FAQ</div>
+            </Link>
+            <Link href="/contact">
+                <div className="flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Clock size={16}/> Delivery Hours</div>
+            </Link>
         </div>
     </div>
     );

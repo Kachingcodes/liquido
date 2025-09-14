@@ -39,7 +39,7 @@ const Intro = () => {
       />
 
       {/* Centered Content (Logo + Buttons) */}
-      <div className="relative flex flex-col items-center justify-center gap-6 z-20">
+      <div className="relative flex flex-col items-center justify-center gap-6 z-20 bg-[white]/8 shadow-md shadow-[#000000]/30 p-8 rounded-2xl">
         <div className="relative w-60 h-20 md:w-80 md:h-40 md:ml-9 ml-4">
           <Image src={assets.logo} alt="logo" fill className="object-contain" />
         </div>
@@ -65,7 +65,7 @@ const Intro = () => {
         </div>
       </div>
    
- {/* Bigger Circle */}
+       {/* Bigger Circle */}
         <motion.div 
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -77,9 +77,8 @@ const Intro = () => {
             <Image src={assets.water1} alt="Water1" fill className="object-contain" />
         </motion.div>
   
-
        {/* Smaller Circle */}
-        <motion.div 
+        {/* <motion.div 
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
@@ -88,19 +87,7 @@ const Intro = () => {
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
                 >
               <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
-        </motion.div>
-
-        {/* <motion.div 
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2 }}
-            className="absolute left-11  md:top-38 w-30 h-30 md:w-50 md:h-50 
-            bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
-            rounded-full flex items-center justify-center"
-                >
-                  <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
-                </motion.div> */}
-     
+        </motion.div>      */}
 
       {/* Van */}
       <Link href="/">

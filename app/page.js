@@ -1,6 +1,7 @@
 'use client'
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
+// import SignIn from './components/SignIn';
 import Features from './components/Features';
 import Categories from './components/Categories';
 import Order from './components/Order';
@@ -18,6 +19,7 @@ export default function Home() {
     <>
       <Navbar/>
       <Hero/>
+      {/* <SignIn/> */}
       <Features/>
       <Categories/>
       <Order/>

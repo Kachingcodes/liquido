@@ -1,21 +1,20 @@
 "use client";
 import React, { useState } from "react";
-import { Search, Droplets, Sparkles, CookingPot, User, Gem, Car, ArrowLeftIcon } from "lucide-react";
+import { Search, ArrowLeftIcon } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories } from '@/public/assets';
+import Image from "next/image";
 
 
-const TopSide = () => {
-  const [activeCategory, setActiveCategory] = useState(null);
-  const [selectedOption, setSelectedOption] = useState(null);
+const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelectedOption, searchTerm, setSearchTerm}) => {
+  
   const [showSearch, setShowSearch] = useState(false);
-
   const [drops, setDrops] = useState([]); 
 
-  const toggleOption = (optionName) => {
-    setSelectedOption((prev) => (prev === optionName ? null : optionName));
-  };
+  const toggleOption = (option) => {
+  setSelectedOption((prev) => (prev === option ? null : option));
+};
   
   const toggleCategory = (categoryName) => {
     setActiveCategory((prev) => (prev === categoryName ? null : categoryName));
@@ -39,8 +38,17 @@ const TopSide = () => {
     }, 600);
   };
 
+const handleAddToCart = (id) => {
+  setCart((prev) => ({
+    ...prev,
+    [id]: 1,
+  }));
+};
+
+
   return (
     <div className="w-full flex flex-col items-center p-6 space-y-6 bg-white">
+
       {/* Top Search + Back - Desktop*/}
       <div className="hidden md:flex items-center justify-evenly w-full md:gap-12 gap-4">
         <div className="flex items-center w-full rounded-lg bg-white shadow-md px-3 py-2">
@@ -48,6 +56,8 @@ const TopSide = () => {
           <input
             type="text"
             placeholder="Search liquids..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
             className="flex-1 outline-none text-sm text-gray-700 bg-transparent"
           />
         </div>
@@ -111,7 +121,7 @@ const TopSide = () => {
       </div>
 
       {/* First Row of Buttons */}
-      <div className="grid grid-cols-3 gap-3 w-full">
+      <div className="grid grid-cols-6 gap-3 w-full">
         {categories.map((cat) => (
           <button
             key={cat.name}
@@ -130,40 +140,23 @@ const TopSide = () => {
       </div>
 
       {activeCategory && (
-      <div className="w-full overflow-x-auto bg-white">
-        <div className="flex justify-center gap-2 min-w-max px-1 py-2">
-          {categories.find(c => c.name === activeCategory).options.map((option) => (
-            <div
-              key={option.name}
-              onClick={() => toggleOption(option)}
-              className="px-4 py-2 bg-blue-50 border rounded-md text-sm text-gray-700 hover:bg-blue-100 cursor-pointer whitespace-nowrap"
-            >
-              {option.name}
-            </div>
-          ))}
-        </div>
-      </div>
-      )}
-
-      {selectedOption && (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6 w-full">
-          {selectedOption.products.map((product) => (
-            <div
-              key={product.id}
-              className="p-4 border rounded-lg shadow-sm hover:shadow-md bg-white"
-            >
-              <img
-              src={product.image}
-              alt={product.name}
-              className="w-5 md:w-full h-10 md:h-40 p-2 object-contain"
-              />
-              <h3 className="font-semibold text-gray-800">{product.name}</h3>
-              <p className="text-gray-600">{product.price}</p>
-            </div>
-          ))}
+        <div className="w-full overflow-x-auto">
+          <div className="flex justify-center gap-2 min-w-max px-1 py-2">
+            {categories.find(c => c.name === activeCategory).options.map((option) => (
+              <div
+                key={option}
+                onClick={() => toggleOption(option)}
+                className={`px-4 py-2 border rounded-md text-sm cursor-pointer whitespace-nowrap
+                  ${selectedOption === option 
+                    ? "bg-[#3d72ab] text-white border-0" 
+                    : "bg-gray-100 text-gray-700 hover:bg-[#8FC0F4]/40"}`}
+              >
+                {option}
+              </div>
+            ))}
+          </div>
         </div>
       )}
-
 
       {/* Drops animation */}
       <AnimatePresence>
