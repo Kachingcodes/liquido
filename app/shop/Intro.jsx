@@ -26,7 +26,7 @@ const Intro = () => {
   };
 
   return (
-    <section className="w-full h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden">
+    <section className="w-full min-h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden">
       
       {/* Backgrounds */}
       <div
@@ -78,7 +78,7 @@ const Intro = () => {
         </motion.div>
   
        {/* Smaller Circle */}
-        {/* <motion.div 
+        <motion.div 
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
@@ -87,7 +87,7 @@ const Intro = () => {
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
                 >
               <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
-        </motion.div>      */}
+        </motion.div>     
 
       {/* Van */}
       <Link href="/">
