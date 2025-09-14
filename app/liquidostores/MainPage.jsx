@@ -55,7 +55,7 @@ const MainPage = () => {
       {/* Right side */}
       <div className="md:ml-[16%] flex-1 flex flex-col relative">
         {/* Top part */}
-        <div className="fixed top-0 left-0 md:left-[16%] w-full md:w-[84%] h-[30%] z-40">
+        <div className="w-full h-[30%] z-40">
           <TopSide 
           favorites={favorites} setFavorites={setFavorites}
           activeCategory={activeCategory}
@@ -67,7 +67,7 @@ const MainPage = () => {
         </div>
 
         {/* Bottom part (Store under TopSide) */}
-        <div className="bg-gray-100 flex-1 flex items-center justify-center mt-8">
+        <div className="bg-gray-100 flex-1 flex items-center justify-center pt-[20%] md:pt-[4%]">
           {selectedOption ? (
             <Store 
             activeCategory={activeCategory} 
@@ -112,7 +112,7 @@ const MainPage = () => {
                       className="w-full h-32 object-contain"
                     />
                     <h3 className="font-semibold text-gray-800">{product.name}</h3>
-                    <p className="text-gray-600">₦{product.price}</p>
+                    <p className="text-gray-600">{product.price}</p>
                   </div>
                 ))}
               </div>

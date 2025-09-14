@@ -5,7 +5,8 @@ import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { categories } from '@/public/assets';
 import Image from "next/image";
-
+import DeskAdvert from '../shop/DeskAdvert';
+import PhoneAdvert from '../shop/PhoneAdvert';
 
 const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelectedOption, searchTerm, setSearchTerm}) => {
   
@@ -47,10 +48,10 @@ const handleAddToCart = (id) => {
 
 
   return (
-    <div className="w-full flex flex-col items-center p-6 space-y-6 bg-white">
+    <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white">
 
       {/* Top Search + Back - Desktop*/}
-      <div className="hidden md:flex items-center justify-evenly w-full md:gap-12 gap-4">
+      <div className="hidden md:flex items-center justify-evenly w-full md:gap-12 gap-4">       
         <div className="flex items-center w-full rounded-lg bg-white shadow-md px-3 py-2">
           <Search size={18} className="text-gray-500 mr-2" />
           <input
@@ -65,11 +66,15 @@ const handleAddToCart = (id) => {
         <div className="relative inline-block">
           <button
             onClick={handleBackIntro}
-            className="bg-[#1C4672] px-4 md:py-3 py-2 flex items-center gap-2 text-white md:text-lg text-md rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#1C4672]/80 transition relative z-30"
+            className="bg-[#1C4672] p-2 flex items-center gap-2 text-white md:text-md text-md rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#1C4672]/80 transition relative z-30"
           >
-            Back <ArrowLeftIcon className="md:text-lg text-md" />
+            Back <ArrowLeftIcon size={20}/>
           </button>
         </div>
+      </div>
+
+      <div className="w-full max-w-5xl hidden md:flex">
+        <DeskAdvert/>
       </div>
 
       {/* Top Search + Back - Mobile */}
@@ -80,7 +85,7 @@ const handleAddToCart = (id) => {
             onClick={handleBackIntro}
             className="bg-[#1C4672] px-3 py-2 flex items-center gap-2 text-white text-sm rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#1C4672]/80 transition"
           >
-            Back <ArrowLeftIcon className="text-sm" />
+            Back <ArrowLeftIcon size={20}/>
           </button>
         </div>
 
@@ -120,8 +125,12 @@ const handleAddToCart = (id) => {
         </div>
       </div>
 
+      <div className="w-full max-w-4xl md:hidden flex">
+        <PhoneAdvert/>
+      </div>
+
       {/* First Row of Buttons */}
-      <div className="grid grid-cols-6 gap-3 w-full">
+      <div className="grid grid-cols-3 md:grid-cols-6 gap-3 w-full">
         {categories.map((cat) => (
           <button
             key={cat.name}

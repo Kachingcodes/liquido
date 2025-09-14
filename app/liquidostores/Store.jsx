@@ -62,7 +62,7 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
 
 
   return (
-    <section className="w-full py-10 mt-[10%]">
+    <section className="w-full py-10">
       {/* Loader */}
       {loading && (
         <p className="text-center text-gray-400">Loading products...</p>
@@ -71,12 +71,12 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
     <Toaster position="top-center" />
 
       {/* Products */}
-      <div className="grid grid-cols-1 md:grid-cols-5 gap-4 p-4 scrollbar-hide">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 scrollbar-hide relative">
         {!loading && filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div
               key={product.id}
-              className="min-w-[100px] md:min-w-[220px] bg-white shadow-md hover:shadow-[#000000]/20 rounded-full md:rounded-xl overflow-hidden"
+              className=" bg-white shadow-md hover:shadow-[#000000]/20 rounded-xl overflow-hidden"
             >
               <div className="p-2 flex justify-end">
                 <StarIcon size={20} 
