@@ -62,7 +62,7 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
 
 
   return (
-    <section className="w-full py-10">
+    <section className="w-full py-10 overflow-hidden">
       {/* Loader */}
       {loading && (
         <p className="text-center text-gray-400">Loading products...</p>
@@ -71,7 +71,7 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
     <Toaster position="top-center" />
 
       {/* Products */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-4 p-4 scrollbar-hide relative">
+      <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4 p-4 scrollbar-hide">
         {!loading && filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div
@@ -115,7 +115,7 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
         ) : (
           !loading &&
           selectedOption && (
-            <p className="col-span-full text-center text-gray-400">
+            <p className="col-span-full text-center text-gray-400 mt-10 p-8">
               No products found for this option.
             </p>
           )

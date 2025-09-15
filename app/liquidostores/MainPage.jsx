@@ -6,6 +6,7 @@ import Store from './Store';
 import { Menu, X } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
+
 const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
@@ -67,7 +68,7 @@ const MainPage = () => {
         </div>
 
         {/* Bottom part (Store under TopSide) */}
-        <div className="bg-gray-100 flex-1 flex items-center justify-center pt-[20%] md:pt-[4%]">
+        <div className="w-full bg-gray-100 flex-1 flex items-center justify-center pt-[12%] md:pt-[4%] overflow-hidden">
           {selectedOption ? (
             <Store 
             activeCategory={activeCategory} 
