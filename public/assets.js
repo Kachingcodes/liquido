@@ -63,7 +63,7 @@ export const steps = [
 
 export const slides = [
   {
-    title: "Drinking & Hydration",
+    title: "Water & Drinks",
     items: [
       {
         img: "/water1.png",
@@ -80,7 +80,7 @@ export const slides = [
     ]
   },
   {
-    title: "Beverages & Refreshments",
+    title: "Hygiene & Cleaning",
     items: [
       {
         img: "/soda.png",
@@ -97,7 +97,7 @@ export const slides = [
     ]
   },
   {
-    title: "Cooking & Culinary Liquids",
+    title: "Cooking & Edible Liquids",
     items: [
       {
         img: "/cooking.png",
@@ -114,7 +114,41 @@ export const slides = [
     ]
   },
   {
-    title: "Specialty & Industrial",
+    title: "Personal Care",
+    items: [
+      {
+        img: "/dettol.png",
+        text: "Cleaning solutions – detergents, disinfectants."
+      },
+      {
+        img: "/fluid.png",
+        text: "Automotive liquids – coolant, windshield fluid."
+      },
+      {
+        img: "/plant.png",
+        text: "Other specialty liquids – like plant fertilizers."
+      }
+    ]
+  },
+  {
+    title: "Luxury & Lifestyle",
+    items: [
+      {
+        img: "/dettol.png",
+        text: "Cleaning solutions – detergents, disinfectants."
+      },
+      {
+        img: "/fluid.png",
+        text: "Automotive liquids – coolant, windshield fluid."
+      },
+      {
+        img: "/plant.png",
+        text: "Other specialty liquids – like plant fertilizers."
+      }
+    ]
+  },
+  {
+    title: "Automobile",
     items: [
       {
         img: "/dettol.png",

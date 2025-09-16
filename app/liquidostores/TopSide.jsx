@@ -71,10 +71,10 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
           ) : (
             <motion.div
               initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 220, opacity: 1 }}
+              animate={{ width: 320, opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="flex items-center bg-white rounded-lg shadow px-2 w-[220px]"
+              className="flex items-center bg-white rounded-lg shadow px-2 w-full"
             >
               <input
                 type="text"

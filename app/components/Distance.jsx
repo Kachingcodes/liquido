@@ -28,7 +28,7 @@ const Distance = () => {
 
            <div className={` ${quick.className} py-6 md:py-12 px-8 text-2xl md:text-4xl`}>
                 <h1>No Distance Too Far</h1>
-                <h1>No Job Too Heavy</h1>
+                <h1>No Liquid Too Heavy</h1>
                 <h1> — We Dey for You.</h1>
            </div>
 

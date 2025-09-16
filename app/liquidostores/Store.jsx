@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
-import { StarIcon } from "lucide-react";
+import { StarIcon, Loader2 } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
 
@@ -65,10 +65,13 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
     <section className="w-full py-10 overflow-hidden">
       {/* Loader */}
       {loading && (
+      <div className="flex flex-col items-center justify-center mt-16 space-y-2">
+        <Loader2 className="h-6 w-6 animate-spin text-gray-400" />
         <p className="text-center text-gray-400">Loading products...</p>
+      </div>
       )}
 
-    <Toaster position="top-center" />
+      <Toaster position="top-center" />
 
       {/* Products */}
       <div className="grid grid-cols-2 md:grid-cols-5 gap-2 md:gap-4 p-4 scrollbar-hide">
@@ -92,19 +95,19 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
               <img
                 src={product.image}
                 alt={product.name}
-                className="w-5 md:w-full h-10 md:h-40 p-2 object-contain"
+                className="w-full h-30 md:h-40 p-2 object-contain"
               />
-              <div className="p-4">
-                <h3 className="text-center text-black text-2xl font-medium">
+              <div className="p-3 md:p-4">
+                <h3 className="text-center text-black text-lg md:text-2xl font-medium">
                   {product.name}
                 </h3>
-                <p className="text-center text-black font-medium">
+                <p className="text-center text-black text-sm md:font-medium">
                   ₦{product.price}
                 </p>
 
                 <div className="flex items-center justify-center">
                   <button 
-                    className="bg-[#1C4672] px-4 py-2 flex items-center gap-2 text-white text-md mt-2 rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
+                    className="bg-[#1C4672] px-4 py-2 flex items-center gap-2 text-white text-sm md:text-md mt-2 rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
                   >
                     Add to Cart
                   </button>

@@ -47,7 +47,7 @@ const Hero = () => {
 
         {/* Left Section */}
         <div className="relative w-full md:w-1/2 flex flex-col gap-4 z-20">
-          <h1 className={`${quick.className} text-2xl md:text-4xl`}>
+          <h1 className={`${quick.className} text-2xl md:text-5xl tracking-wide`}>
             Everything Liquid delivered to you with ease
           </h1>
           <span className="text-md md:text-lg">

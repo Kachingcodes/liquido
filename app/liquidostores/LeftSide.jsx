@@ -11,10 +11,10 @@ const quick = Quicksand({
   weight: ["600"]
 });
 
-const LeftSide = ({showFavorites, setShowFavorites}) => {
+const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen}) => {
 
   return (    
-    <div className='flex flex-col items-center justify-start py-2 space-y-6'>
+    <div className='flex flex-col items-center justify-start py-2 space-y-6 z-100'>
         {/* Logo + Title */}
         <div className="relative w-24 h-16">
             <Image src={assets.logo} alt="logo" fill className="object-contain" />
@@ -32,9 +32,9 @@ const LeftSide = ({showFavorites, setShowFavorites}) => {
             </Link>
             <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><ShoppingCart size={16}/> View Cart</div>
             <div
-                onClick={() => setShowFavorites(!showFavorites)}
+                onClick={() => { setShowFavorites(!showFavorites); setIsOpen(false); }}
                 className="flex items-center gap-2 cursor-pointer text-white hover:text-[#c4e0f9]"
-                >
+                >       
                 {showFavorites ? (
                     <> <StarOff size={16} /> Hide Favorites </>
                 ) : (
