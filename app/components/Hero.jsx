@@ -47,7 +47,7 @@ const Hero = () => {
 
         {/* Left Section */}
         <div className="relative w-full md:w-1/2 flex flex-col gap-4 z-20">
-          <h1 className={`${quick.className} text-2xl md:text-5xl tracking-wide`}>
+          <h1 className={`${quick.className} text-2xl md:text-4xl tracking-wide`}>
             Everything Liquid delivered to you with ease
           </h1>
           <span className="text-md md:text-lg">
@@ -59,7 +59,7 @@ const Hero = () => {
           <div className='relative inline-block'>
             <button 
               onClick={handlePlaceOrder}
-              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
+              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md md:text-lg rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
             >
               Place Order <ShoppingCartIcon className="text-lg"/>
             </button>
@@ -86,7 +86,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-4 md:right-10 mb-10 w-40 h-40 md:w-80 md:h-80 
+            className="absolute right-4 md:right-10 mb-10 w-40 h-40 md:w-76 md:h-76 
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
           >
@@ -98,7 +98,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute left-11 md:left-10 top-20 w-30 h-30 md:w-60 md:h-60
+            className="absolute left-11 md:left-10 top-20 w-30 h-30 md:w-56 md:h-56
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full flex items-center justify-center"
           >
@@ -111,7 +111,7 @@ const Hero = () => {
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2 }}
-          className="absolute bottom-0 right-2 md:right-20 w-32 h-32 md:w-64 md:h-64"
+          className="absolute bottom-0 right-2 md:right-20 w-32 h-32 md:w-60 md:h-60"
         >
           <Image src={assets.van} alt="van" fill className="object-contain" />
         </motion.div>
