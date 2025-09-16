@@ -67,15 +67,15 @@ export const slides = [
     items: [
       {
         img: "/water1.png",
-        text: "Water – purified, mineral, spring, or distilled."
+        text: "Water – purified, mineral, spring, or distilled"
       },
       {
         img: "/juice.png",
-        text: "Juices – orange, apple, mixed fruit, etc."
+        text: "Juices – orange, apple, mixed fruit, etc"
       },
       {
         img: "/wine.png",
-        text: "Wine – Red, White, Rosé and Sparkling."
+        text: "Wine – Red, White, Rosé and Sparkling"
       }
     ]
   },
@@ -84,15 +84,15 @@ export const slides = [
     items: [
       {
         img: "/soda.png",
-        text: "Soft drinks / sodas."
+        text: "Detergents"
       },
       {
         img: "/icetea.png",
-        text: "Iced teas / Lemonades."
+        text: "Disinfectants"
       },
       {
         img: "/coffee.png",
-        text: "Coffee / Cold brew / Tea concentrates."
+        text: "Soaps"
       }
     ]
   },
@@ -101,7 +101,7 @@ export const slides = [
     items: [
       {
         img: "/cooking.png",
-        text: "Cooking oils – vegetable, olive, coconut, etc."
+        text: "Vegetable Oil."
       },
       {
         img: "/syrup.png",
@@ -109,7 +109,7 @@ export const slides = [
       },
       {
         img: "/vinegar.png",
-        text: "Vinegars & condiments."
+        text: "Vinegars & Condiments"
       }
     ]
   },
@@ -118,15 +118,15 @@ export const slides = [
     items: [
       {
         img: "/dettol.png",
-        text: "Cleaning solutions – detergents, disinfectants."
+        text: "Hair Care"
       },
       {
         img: "/fluid.png",
-        text: "Automotive liquids – coolant, windshield fluid."
+        text: "Body Oils"
       },
       {
         img: "/plant.png",
-        text: "Other specialty liquids – like plant fertilizers."
+        text: "Lotions"
       }
     ]
   },
@@ -135,15 +135,15 @@ export const slides = [
     items: [
       {
         img: "/dettol.png",
-        text: "Cleaning solutions – detergents, disinfectants."
+        text: "Perfumes"
       },
       {
         img: "/fluid.png",
-        text: "Automotive liquids – coolant, windshield fluid."
+        text: "Essential Oils"
       },
       {
         img: "/plant.png",
-        text: "Other specialty liquids – like plant fertilizers."
+        text: "Fragrance Diffusers"
       }
     ]
   },
@@ -152,15 +152,15 @@ export const slides = [
     items: [
       {
         img: "/dettol.png",
-        text: "Cleaning solutions – detergents, disinfectants."
+        text: "Engine Oil"
       },
       {
         img: "/fluid.png",
-        text: "Automotive liquids – coolant, windshield fluid."
+        text: "Automotive Liquids"
       },
       {
         img: "/plant.png",
-        text: "Other specialty liquids – like plant fertilizers."
+        text: "Windshield Fluid"
       }
     ]
   }
