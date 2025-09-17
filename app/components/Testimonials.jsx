@@ -45,8 +45,8 @@ const Testimonials = () => {
 
   return (
     <section id='Testimonials'
-    className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden px-4 md:px-8 py-10 md:py-18">
-        <div className="flex w-full max-w-7xl flex-col md:flex-row items-start justify-between gap-6 md:gap-12">
+    className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden px-8 py-6 md:py-12">
+        <div className="flex w-full max-w-7xl flex-col md:flex-row items-start justify-between gap-6 md:gap-10">
             
             {/* Left Section */}
             <div className="w-full md:w-1/4 flex flex-col gap-3 md:gap-6">
@@ -54,24 +54,24 @@ const Testimonials = () => {
                 initial={{ opacity: 0, y: -100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 transition={{ duration: 1.2 }}
-                className={`${quick.className} text-3xl md:text-4xl`}>
+                className={`${quick.className} text-3xl md:text-4xl text-center`}>
                     What Our Customers Are Saying
                 </motion.h1>  
 
-                <div className='flex flex-row gap-1 md:gap-3 text-black'>
+                <div className='hidden md:flex flex-row gap-3 text-black items-center justify-center'>
                     <ArrowBigLeft onClick={prevReview}
-                    className="cursor-pointer hover:scale-110 transition"/>
+                    className="cursor-pointer hover:scale-110 transition hover:text-[#1C4672]"/>
                     <MessageCircle/>
                     <MessageCircle/>
                     <MessageCircle/>
                     <ArrowBigRight onClick={nextReview} 
-                    className="cursor-pointer hover:scale-110 transition"/>
+                    className="cursor-pointer hover:scale-110 transition hover:text-[#1C4672]"/>
                 </div>     
             </div>
 
             {/* Testimonials Grid */}
             <motion.div
-            className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-8 flex-1"
+            className="grid grid-cols-1 md:grid-cols-3 gap-5 md:gap-8 flex-1"
             variants={containerVariants}
             initial="hidden"
             animate="visible"
@@ -84,20 +84,30 @@ const Testimonials = () => {
                 variants={itemVariants}
                 exit={{ opacity: 0, x: -80 }}
 
-                className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[280px] md:min-h-[280px]'> 
-                    <div className='text-[#1C4672] p-4 md:p-6 text-center flex-grow'>
+                className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[150px] md:min-h-[250px]'> 
+                    <div className='text-black p-4 md:p-4 text-center flex-grow text-sm md:text-md'>
                         <p>{test.review}</p>
                     </div>
-                    <div className='bg-[#1C4672] text-white flex flex-row items-center gap-4 p-4 md:p-6'>
+                    <div className='bg-[#4C86C4] text-black flex flex-row items-center gap-4 p-2 md:p-4'>
                         <div className='relative w-8 h-8 md:w-16 md:h-16'>
-                            <Image src={assets.foot1} alt="Customer 1" fill className="rounded-full object-cover"/>
+                            <Image src={test.img} alt="Customer 1" fill className="rounded-full object-cover"/>
                         </div>
-                        <p className='font-semibold'>{test.name}</p>
+                        <p className='font-semibold text-md'>{test.name}</p>
                     </div>
                 </motion.div>
                 ))}
             </AnimatePresence>
             </motion.div>
+
+            <div className='md:hidden flex flex-row w-full text-black items-center justify-evenly'>
+              <ArrowBigLeft onClick={prevReview}
+                className="cursor-pointer hover:scale-110 transition hover:text-[#1C4672]"/>
+              <MessageCircle/>
+              <MessageCircle/>
+              <MessageCircle/>
+              <ArrowBigRight onClick={nextReview} 
+                className="cursor-pointer hover:scale-110 transition hover:text-[#1C4672]"/>
+            </div>
         </div>
     </section>
 

@@ -217,46 +217,55 @@ export const testimonials =[
   {
     id:1,
     name: "Amina Yusuf",
-    review: "I love how fast and reliable this service is. I never run out of my essential liquids anymore. Highly recommend to everyone!"
+    review: "I love how fast and reliable this service is. I never run out of my essential liquids anymore. Highly recommend to everyone!",
+    img:"/anime.jpeg"
   },
   {
     id:2,
     name: "David Okeke",
-    review: "The app is super easy to use, and the delivery is always on time. The quality of the products is top-notch."
+    review: "The app is super easy to use, and the delivery is always on time. The quality of the products is top-notch.",
+    img:"/girl.jpg"
   },
   {
     id:3,
     name: "Chinwe Eze",
-    review: "Finally, a service that actually cares about its customers. Friendly support and smooth deliveries every time."
+    review: "Finally, a service that actually cares about its customers. Friendly support and smooth deliveries every time.",
+    img:"/girl.jpg"
   },
   {
     id:4,
     name: "Emeka Nwosu",
-    review: "I’ve tried a few liquid delivery services, but this one is by far the best. Affordable, fast, and dependable."
+    review: "I’ve tried a few liquid delivery services, but this one is by far the best. Affordable, fast, and dependable.",
+    img:"/girl.jpg"
   },
   {
     id:5,
     name: "Fatima Bello",
-    review: "I was worried about ordering liquids online, but everything arrived safely and well-packaged. I’m definitely a loyal customer now!"
+    review: "I was worried about ordering liquids online, but everything arrived safely and well-packaged. I’m definitely a loyal customer now!",
+    img:"/girl.jpg"
   },
   {
     id:6,
     name: "Tunde Adeyemi",
-    review: "Convenient, quick, and professional. I can’t imagine going back to buying from stores when I have this service at my fingertips."
+    review: "Convenient, quick, and professional. I can’t imagine going back to buying from stores when I have this service at my fingertips.",
+    img:"/girl.jpg"
   },
   {
     id:7,
     name: "Deji Adeola",
-    review: "I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers."
+    review: "I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers.",
+    img:"/girl.jpg"
   },
   {
     id:8,
     name: "Blessing Chukwu",
-    review: "I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed."
+    review: "I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed.",
+    img:"/girl.jpg"
   },
   {
     id:9,
     name: "Zainab Ahmed",
-    review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!"
+    review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!",
+    img:"/girl.jpg"
   }
 ];

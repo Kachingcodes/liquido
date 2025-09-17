@@ -15,7 +15,7 @@ const quick = Quicksand({
 const Distance = () => {
 
   return (
-    <section className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden py-8 md:py-8">
+    <section className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden">
       <div className="flex w-full flex-col md:flex-row p-4 md:p-8 items-center justify-evenly">
            
         <motion.div 

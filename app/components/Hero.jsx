@@ -6,6 +6,9 @@ import { assets } from '@/public/assets';
 import { Quicksand } from "next/font/google";
 import { ShoppingCartIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { FaXTwitter, FaWhatsapp, FaInstagram } from "react-icons/fa6";
+
+
 
 const quick = Quicksand({
   subsets: ["latin"],
@@ -51,34 +54,30 @@ const Hero = () => {
           <h1 className={`${quick.className} text-2xl md:text-4xl tracking-wide text-[#1C4672]`}>
             Everything Liquid delivered to you with ease
           </h1>
-          <span className="sm:text-sm md:text-md text-black">
+
+          <span className="text-sm md:text-lg text-black">
             From crystal-clear water to premium beverages, 
             we bring freshness, quality, and convenience 
             right to your doorstep — every time, without compromise
           </span>
 
-          <div className='relative inline-block mt-2'>
+          <div className="relative inline-block mt-2">
             <button 
               onClick={handlePlaceOrder}
-              className="bg-[#1C4672] px-2 py-3 flex items-center gap-2 text-white lg:text-md rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
+              className="bg-[#1C4672] px-2 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg shadow-md shadow-[#000000]/36 w-fit hover:bg-[#4C86C4] transition relative z-30"
             >
-              Place Order <ShoppingCartIcon className="text-md"/>
+              Place Order <ShoppingCartIcon size={20}/>
             </button>
           </div>
 
           {/* Socials */}
-          <div className="flex flex-row gap-4 mt-2 text-amber-200">
-            <div className="relative w-10 h-10">
-              <Image src={assets.foot1} alt="whatsapp" fill className="object-contain" />
-            </div>
-            <div className="relative w-10 h-10">
-              <Image src={assets.foot2} alt="instagram" fill className="object-contain" />
-            </div>
-            <div className="relative w-10 h-10">
-              <Image src={assets.foot3} alt="tiktok" fill className="object-contain" />
-            </div>
+          <div className="flex flex-row gap-8 mt-4 text-[#1C4672]">
+            <FaXTwitter size={20} />    
+            <FaWhatsapp size={20}/>
+            <FaInstagram size={20}/>
           </div>
         </div>
+
 
         {/* Right Section */}
         <div className="relative w-full md:w-1/2 h-full flex items-center justify-center">
@@ -87,7 +86,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-4 md:right-10 mb-10 w-40 h-40 md:w-60 md:h-60 
+            className="absolute right-0 md:right-10 mb-0 md:mb-8 w-30 h-30 md:w-60 md:h-60 
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
           >
@@ -99,7 +98,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute left-11 md:left-10 top-20 w-30 h-30 md:w-44 md:h-44
+            className="absolute left-19 md:left-10 top-20 mt-6 md:mt-0 w-24 h-24 md:w-44 md:h-44
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full flex items-center justify-center"
           >

@@ -39,7 +39,7 @@ const Navbar = () => {
 
   return (
     <header className="w-full fixed top-0 left-0 bg-[#4C86C4] shadow z-50">
-      <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <div className="max-w-7xl mx-auto px-8 py-3 md:py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
           <Image
@@ -59,7 +59,7 @@ const Navbar = () => {
                 smooth={true}
                 offset={-100}
                 duration={500}
-                className="text-white hover:text-[#1C4672] transition list-none cursor-pointer"
+                className="text-white hover:text-[#1C4672] text-sm transition list-none cursor-pointer"
               >
                 {section}
               </ScrollLink>
@@ -72,9 +72,9 @@ const Navbar = () => {
                   handleDrop();
                   setIsOpen(false);
                 }}
-              className="bg-[white] px-4 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+              className="bg-[white] px-3 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
             >
-              Contact <Phone className="text-md" />
+              Contact <Phone size={20} />
             </Link>               
           </li>
         </ul>
@@ -96,9 +96,12 @@ const Navbar = () => {
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#3A699A] shadow-md z-50 flex flex-col"
+            className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#4C86C4] shadow-md z-50 flex flex-col"
           >
+            <hr className='text-white'/>
+
             <div className="flex-1 flex flex-col justify-between px-6 py-4 space-y-4">
+             
               {liquidSections.map((section) => (
                 <ScrollLink
                   key={section}
@@ -107,7 +110,7 @@ const Navbar = () => {
                   smooth={true}
                   offset={-100}
                   duration={500}
-                  className="block text-md font-medium text-white hover:text-[#8FC0F4] transition cursor-pointer"
+                  className="block font-medium text-white text-sm cursor-pointer"
                   onClick={() => setIsOpen(false)}
                 >
                   {section}
@@ -116,7 +119,7 @@ const Navbar = () => {
 
               <Link 
                 href="/contact"
-                className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl hover:bg-[#8FC0F4]/40 transition"
+                className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl text-sm"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Contact</span>

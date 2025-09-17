@@ -15,7 +15,7 @@ const ChooseUs = () => {
 
   return (
     <section id='Choose Us'
-    className="w-full flex justify-center items-center text-white bg-[#4C86C4] relative overflow-hidden py-10 md:py-12 p-2 md:p-6 bg-[url('/Desk2.svg')] bg-no-repeat bg-cover bg-center">
+    className="w-full flex justify-center items-center text-white bg-[#4C86C4] relative overflow-hidden py-10 md:py-8 p-2 md:p-6 bg-[url('/Desk2.svg')] bg-no-repeat bg-cover bg-center">
         
       <div className="flex w-full md:flex-row flex-col p-4 md:p-12 items-center justify-evenly">
            
@@ -27,7 +27,7 @@ const ChooseUs = () => {
                 className={` ${quick.className} text-3xl md:text-4xl font-bold mb-4 text-center`}>
                   Why Choose Us</motion.h2>
                 
-                <ul className="text-md md:text-lg space-y-2 md:space-y-3">
+                <ul className="text-sm md:text-lg space-y-2 md:space-y-3">
                     <li className="flex items-center gap-2">
                         <Droplet size={16} className="text-[#04182e]" />
                         Direct From the Source

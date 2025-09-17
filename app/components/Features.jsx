@@ -16,7 +16,7 @@ const Hero = () => {
             <path 
               d="M32 2 Q40 10 58 12 V30 C58 46 45 56 32 62 C19 56 6 46 6 30 V12 Q24 10 32 2 Z" 
               fill="white" 
-              stroke="#1C4672" 
+              stroke="#4C86C4" 
               strokeWidth="2"
             />
           </svg>
@@ -33,7 +33,7 @@ const Hero = () => {
             <path 
               d="M32 2 Q40 10 58 12 V30 C58 46 45 56 32 62 C19 56 6 46 6 30 V12 Q24 10 32 2 Z" 
               fill="white" 
-              stroke="#1C4672" 
+              stroke="#4C86C4" 
               strokeWidth="2"
             />
           </svg>
@@ -50,7 +50,7 @@ const Hero = () => {
             <path 
               d="M32 2 Q40 10 58 12 V30 C58 46 45 56 32 62 C19 56 6 46 6 30 V12 Q24 10 32 2 Z" 
               fill="white" 
-              stroke="#1C4672" 
+              stroke="#4C86C4" 
               strokeWidth="2"
             />
           </svg>
@@ -67,7 +67,7 @@ const Hero = () => {
             <path 
               d="M32 2 Q40 10 58 12 V30 C58 46 45 56 32 62 C19 56 6 46 6 30 V12 Q24 10 32 2 Z" 
               fill="white" 
-              stroke="#1C4672" 
+              stroke="#4C86C4" 
               strokeWidth="2"
             />
           </svg>

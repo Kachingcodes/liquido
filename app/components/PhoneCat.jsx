@@ -24,10 +24,6 @@ const PhoneCat = () => {
         setMainText(categories[newCategory].name);
     };
 
-//     const handleSwap = (item) => {
-//     setMainText(item.img); // swap with item.top
-//   };
-
     const radius = 150;
     const positions = currentGroup.items.map((_, i) => {
         const angle = -Math.PI / 1.2 + i * (Math.PI / 3); // spread across top arc
@@ -47,7 +43,7 @@ const PhoneCat = () => {
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.35 }}
-            className="w-40 h-40 rounded-full bg-[#4C86C4] mt-10 flex items-center justify-center text-white font-bold text-center p-4"
+            className="w-40 h-40 rounded-full bg-[#4C86C4] mt-12 flex items-center justify-center text-white font-bold text-center p-4"
             >
             <span className="break-words">{mainText}</span>
             </motion.div>
@@ -62,20 +58,14 @@ const PhoneCat = () => {
                         transition={{ duration: 0.5, delay: i * 0.2 }}
                         className="absolute"
                         style={{
-                        top: `calc(62% + ${y}px - 40px)`,
+                        top: `calc(66% + ${y}px - 30px)`,
                         left: `calc(50% + ${x}px - 40px)`,
                         transform: "translate(-80%, -80%)",
                         }}>
                             <div
-                                // onClick={() => handleSwap(item)}
                                 className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-white cursor-pointer group"
                                 >
-                                <Image src={item.img} alt={item.top} fill className="object-cover" />
-
-                                {/* Hover text */}
-                                <div className="absolute bottom-0 left-0 w-full z-50 bg-black/60 text-white text-xs text-center opacity-0 group-hover:opacity-100 transition-opacity">
-                                    <p>{item.top}</p>
-                                </div>
+                                <Image src={item.img} alt={item.top} fill className="object-contain" />
                             </div>
 
                     </motion.div>

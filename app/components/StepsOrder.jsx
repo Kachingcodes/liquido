@@ -13,20 +13,19 @@ export default function StepsOrder() {
           key={step.id}
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.3 }} // stagger effec [#4C86C4][#3A699A]/40 t
-          className="bg-[#4C86C4] hover:bg-[#1C4672]  p-4 rounded-lg flex items-center gap-2 md:gap-4 shadow-md shadow[#000000]/50 relative"
+          transition={{ duration: 0.6, delay: index * 0.3 }} 
+          className="bg-[#4C86C4] hover:bg-[#1C4672] p-2 rounded-lg flex items-center gap-2 shadow-md shadow[#000000]/50 relative"
         >
           {/* Drop image with number */}
           <div className="relative w-18 h-18 flex-shrink-0">
             <Image src={assets.drop} alt="drop" fill className="object-contain"/>
-            <h2 className="absolute inset-0 flex items-center justify-center text-md md:text-xl font-bold text-[#1C4672] mt-2">
+            <h2 className="absolute inset-0 flex items-center justify-center text-md md:text-lg font-bold text-[#1C4672] mt-2">
               {step.id}
             </h2>
           </div>
 
-          {/* Text */}
           <div className="flex flex-col">
-            <span className="font-semibold text-gray-200 text-md md:text-lg">{step.title}</span>
+            <span className="font-semibold text-gray-200 text-sm md:text-lg">{step.title}</span>
             <p className="text-sm md:text-md text-white">{step.desc}</p>
           </div>
         </motion.div>
