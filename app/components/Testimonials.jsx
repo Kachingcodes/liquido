@@ -45,7 +45,7 @@ const Testimonials = () => {
 
   return (
     <section id='Testimonials'
-    className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden px-8 py-6 md:py-12">
+    className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden px-8 py-8 md:py-12">
         <div className="flex w-full max-w-7xl flex-col md:flex-row items-start justify-between gap-6 md:gap-10">
             
             {/* Left Section */}
