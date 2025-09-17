@@ -99,7 +99,7 @@ const Testimonials = () => {
             </AnimatePresence>
             </motion.div>
 
-            <div className='md:hidden flex flex-row w-full text-black items-center justify-evenly'>
+            <div className='md:hidden flex flex-row w-full text-black items-center justify-evenly mb-10'>
               <ArrowBigLeft onClick={prevReview}
                 className="cursor-pointer hover:scale-110 transition hover:text-[#1C4672]"/>
               <MessageCircle/>
