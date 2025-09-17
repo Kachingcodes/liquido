@@ -23,7 +23,7 @@ const Navbar = () => {
   }, 1500);
 };
 
-  const liquidSections = ['Home', 'Categories', 'Order', 'Why Choose Us', 'Bulk', 'Testimonials'];
+  const liquidSections = ['Home', 'Categories', 'Order', 'Choose Us', 'Bulk', 'Testimonials'];
 
   useEffect(() => {
     if (isOpen) {
@@ -38,7 +38,7 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <header className="w-full fixed top-0 left-0 bg-[#3A699A] shadow z-50">
+    <header className="w-full fixed top-0 left-0 bg-[#4C86C4] shadow z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
@@ -72,7 +72,7 @@ const Navbar = () => {
                   handleDrop();
                   setIsOpen(false);
                 }}
-              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+              className="bg-[white] px-4 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
             >
               Contact <Phone className="text-md" />
             </Link>               

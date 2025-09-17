@@ -1,13 +1,9 @@
-import { useState } from "react";
-import Image from "next/image";
-import { assets } from '@/public/assets';
-import { slides } from '@/public/assets';
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React from "react";
 import { Quicksand } from "next/font/google";
-import{ motion, AnimatePresence } from 'framer-motion';
 import { ShoppingCartIcon } from 'lucide-react';
 import { useRouter } from 'next/navigation'; 
-
+import DesktopCat from './DesktopCat';
+import PhoneCat from './PhoneCat';
 
 
 const quick = Quicksand({
@@ -16,17 +12,7 @@ const quick = Quicksand({
 });
 
 const Categories = () => {
-  const [current, setCurrent] = useState(0);
-
-  const nextSlide = () => {
-    setCurrent((prev) => (prev + 1) % slides.length);
-  };
-
-  const prevSlide = () => {
-    setCurrent((prev) => (prev - 1 + slides.length) % slides.length);
-  };
-
-      const router = useRouter(); 
+    const router = useRouter(); 
 
     const handlePlaceOrder = () => {
     router.push("/shop"); 
@@ -34,56 +20,23 @@ const Categories = () => {
 
 
   return (
-    <section className="w-full bg-[#4C86C4] text-white relative overflow-hidden px-4 py-16 flex flex-col items-center">
+    <section id="Categories"
+    className="w-full bg-gray-100 text-black relative overflow-hidden px-2 py-8 md:py-12 gap-8 md:gap-16 flex flex-col items-center">
       
-      <h1 className={` ${quick.className} text-4xl text-center mb-6`}>CATEGORIES</h1>
+      <h1 className={` ${quick.className} text-3xl md:text-4xl text-center mb-10 md:mb-6 font-extrabold text-[#1C4672]`}>CATEGORIES</h1>
 
-      <h3 className={` ${quick.className} text-2xl font-semibold text-left w-full max-w-6xl mb-8`}>
-        {slides[current].title}
-      </h3>
+    <div className="md:flex hidden w-full">
+      <DesktopCat/>
+    </div>
 
-      {/* Cards */}
-      <AnimatePresence mode="wait">
-        <div
+    <div className="flex md:hidden w-full ">
+      <PhoneCat/>
+    </div>
 
-          className="grid grid-cols-1 md:grid-cols-3 gap-8 w-full max-w-6xl">
-              {slides[current].items.map((item, idx) => (
-                <div key={idx} className="flex flex-col items-center">
-                  {/* Card Image */}
-                  <div className="bg-[#8FC0F4] rounded-2xl shadow-lg shadow-[#000000]/30 p-6 flex items-center justify-center">
-                    <motion.div 
-                     key={current} 
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{ duration: 0.5 }}
-                    className="relative w-32 h-32">
-                      <Image src={item.img} alt={item.text} fill className="object-contain" />
-                    </motion.div>
-                  </div>
-
-                  <ul className="list-disc list-inside text-left mt-4">
-                    <li>{item.text}</li>
-                  </ul>
-                </div>
-        ))}
-        </div>
-      </AnimatePresence>
-
-      {/* Carousel Controls */}
-      <div className="flex justify-between w-full max-w-6xl mt-8">
-        <button onClick={prevSlide} className="p-3 bg-white text-black rounded-full shadow-md hover:bg-gray-200">
-          <ChevronLeft size={24} />
-        </button>
-        <button onClick={nextSlide} className="p-3 bg-white text-black rounded-full shadow-md hover:bg-gray-200">
-          <ChevronRight size={24} />
-        </button>
-      </div>
-
-      <div className="md:mt-8">
+      <div className="">
         <button 
           onClick={handlePlaceOrder}
-          className="bg-[#8FC0F4]/60 px-4 py-3 flex items-center gap-2 text-white text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
+          className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md md:text-lg rounded-lg w-fit hover:bg-[#8FC0F4] transition">
           Place Order <ShoppingCartIcon className='text-lg'/>
         </button>
       </div>

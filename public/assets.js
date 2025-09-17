@@ -61,237 +61,145 @@ export const steps = [
   },
 ];
 
-export const slides = [
-  {
-    title: "Water & Drinks",
-    items: [
-      {
-        img: "/water1.png",
-        text: "Water – purified, mineral, spring, or distilled"
-      },
-      {
-        img: "/juice.png",
-        text: "Juices – orange, apple, mixed fruit, etc"
-      },
-      {
-        img: "/wine.png",
-        text: "Wine – Red, White, Rosé and Sparkling"
-      }
-    ]
-  },
-  {
-    title: "Hygiene & Cleaning",
-    items: [
-      {
-        img: "/soda.png",
-        text: "Detergents"
-      },
-      {
-        img: "/icetea.png",
-        text: "Disinfectants"
-      },
-      {
-        img: "/coffee.png",
-        text: "Soaps"
-      }
-    ]
-  },
-  {
-    title: "Cooking & Edible Liquids",
-    items: [
-      {
-        img: "/cooking.png",
-        text: "Vegetable Oil."
-      },
-      {
-        img: "/syrup.png",
-        text: "Syrups – maple, chocolate, flavored syrups."
-      },
-      {
-        img: "/vinegar.png",
-        text: "Vinegars & Condiments"
-      }
-    ]
-  },
-  {
-    title: "Personal Care",
-    items: [
-      {
-        img: "/dettol.png",
-        text: "Hair Care"
-      },
-      {
-        img: "/fluid.png",
-        text: "Body Oils"
-      },
-      {
-        img: "/plant.png",
-        text: "Lotions"
-      }
-    ]
-  },
-  {
-    title: "Luxury & Lifestyle",
-    items: [
-      {
-        img: "/dettol.png",
-        text: "Perfumes"
-      },
-      {
-        img: "/fluid.png",
-        text: "Essential Oils"
-      },
-      {
-        img: "/plant.png",
-        text: "Fragrance Diffusers"
-      }
-    ]
-  },
-  {
-    title: "Automobile",
-    items: [
-      {
-        img: "/dettol.png",
-        text: "Engine Oil"
-      },
-      {
-        img: "/fluid.png",
-        text: "Automotive Liquids"
-      },
-      {
-        img: "/plant.png",
-        text: "Windshield Fluid"
-      }
-    ]
-  }
-];
-
-export const products = [
-    {
-      id: 1,
-      image: "/water1.png",
-      text: "Pure Drinking Water",
-    },
-    {
-      id: 2,
-      image: "/juice.png",
-      text: "Refreshing Juices",
-    },
-    {
-      id: 3,
-      image: "/cooking.png",
-      text: "Cooking Oils",
-    },
-    {
-      id: 4,
-      image: "/fluid.png",
-      text: "Industrial Liquids",
-    },
-    {
-      id: 5,
-      image: "/soda.png",
-      text: "Premium Beverages",
-    },
-    {
-      id: 6,
-      image: "/plant.png",
-      text: "Specialty Liquids",
-    },
-    {
-      id: 7,
-      image: "/water1.png",
-      text: "Pure Drinking Water",
-    },
-    {
-      id: 8,
-      image: "/juice.png",
-      text: "Refreshing Juices",
-    },
-    {
-      id: 9,
-      image: "/cooking.png",
-      text: "Cooking Oils",
-    },
-    {
-      id: 10,
-      image: "/fluid.png",
-      text: "Industrial Liquids",
-    },
-    {
-      id: 11,
-      image: "/soda.png",
-      text: "Premium Beverages",
-    },
-    {
-      id: 12,
-      image: "/plant.png",
-      text: "Specialty Liquids",
-    },
-    {
-      id: 13,
-      image: "/water1.png",
-      text: "Pure Drinking Water",
-    },
-    {
-      id: 14,
-      image: "/juice.png",
-      text: "Refreshing Juices",
-    },
-    {
-      id: 15,
-      image: "/cooking.png",
-      text: "Cooking Oils",
-    },
-    {
-      id: 16,
-      image: "/fluid.png",
-      text: "Industrial Liquids",
-    },
-    {
-      id: 17,
-      image: "/soda.png",
-      text: "Premium Beverages",
-    },
-    {
-      id: 18,
-      image: "/plant.png",
-      text: "Specialty Liquids",
-    }
-  ];
-
 export const categories = [
   {
     name: "Water & Drinks",
     icon: <Droplets size={20}/>,
-    options: ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"]
+    options: ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"],   
+      items: [
+      {
+        img: "/water1.png",
+        top: "Water",
+        text: "Purified, mineral, spring, or distilled"
+      }
+      ,
+      {
+        img: "/juice.png",
+        top: "Juices",
+        text: "Orange, apple, mixed fruit, etc"
+      }
+      ,
+      {
+        img: "/wine.png",
+        top: "Wine",
+        text: "Red, White, Rosé and Sparkling"
+      }
+    ]
   },
 //HYGIENE
   {
     name: "Hygiene & Cleaning",
     icon: <Sparkles size={20}/>,
-    options: ["Detergents",  "Disinfectants", "Soaps"]
+    options: ["Detergents",  "Disinfectants", "Soaps"],
+    items: [
+      {
+        img: "/soda.png",
+        top: "Detergents",
+        text: "Detergents"
+      },
+      {
+        img: "/icetea.png",
+        top: "Disinfectants",
+        text: "Disinfectants"
+      },
+      {
+        img: "/coffee.png",
+        top: "Soaps",
+        text: "Soaps"
+      }
+    ]
   },
 //COOKING & EDIBLE LIQUIDS
   {
     name: "Cooking & Edible Liquids",
     icon: <CookingPot size={20} />,
-    options: ["Cooking Oil", "Vinegar", "Liquid Seasoning", "Syrup"]
+    options: ["Cooking Oil", "Vinegar", "Liquid Seasoning", "Syrup"],
+    items: [
+      {
+        img: "/cooking.png",
+        top: "Cooking oils",
+        text: "Vegetable Oil."
+      },
+      {
+        img: "/syrup.png",
+        top: "Syrups",
+        text: "Syrups – maple, chocolate, flavored syrups."
+      },
+      {
+        img: "/vinegar.png",
+        top: "Vinegars",
+        text: "Vinegars & Condiments"
+      }
+    ]
   },
-//Continue from here
+//PERSONAL CARE
 {
   name: "Personal Care",
   icon: <User size={20} />,
-    options: ["Shampoos", "Conditioners", "Body Oils", "Lotions"]
+  options: ["Shampoos", "Conditioners", "Body Oils", "Lotions"],
+  items: [
+      {
+        img: "/dettol.png",
+        top: "Hair Care",
+        text: "Hair Care"
+      },
+      {
+        img: "/fluid.png",
+        top: "Body Oils",
+        text: "Body Oils"
+      },
+      {
+        img: "/plant.png",
+        top: "Lotions",
+        text: "Lotions"
+      }
+    ]
 },
+//LUXURY & LIFESTYLE
   {
     name: "Luxury & Lifestyle",
     icon: <Gem size={20} />,
     options: ["Perfumes", "Essential Oils", "Fragrance Diffusers"],
+    items: [
+      {
+        img: "/dettol.png",
+        top: "Perfumes",
+        text: "Perfumes"
+      },
+      {
+        img: "/fluid.png",
+        top: "Essential Oils",
+        text: "Essential Oils"
+      },
+      {
+        img: "/plant.png",
+        top: "Fragrance Diffusers",
+        text: "Fragrance Diffusers"
+      }
+    ]
   },
+//AUTOMOBILE
   {
     name: "Automobile",
     icon: <Car size={20} />,
     options: ["Engine Oil", "Transmission Fluid", "Coolant", "Gear Oil"],
+    items: [
+      {
+        img: "/dettol.png",
+        top: "Engine Oil",
+        text: "Engine Oil"
+      },
+      {
+        img: "/fluid.png",
+        top: "Automotive Liquids",
+        text: "Automotive Liquids"
+      },
+      {
+        img: "/plant.png",
+        top: "Windshield Fluid",
+        text: "Windshield Fluid"
+      }
+    ]
   }
 ];
 
@@ -303,3 +211,52 @@ export const adverts = [
     { id: 5, image: "/img5.jpg", text: "Premium Beverages" },
     { id: 6, image: "/img6.jpg", text: "Specialty Liquids" },
   ];
+
+
+export const testimonials =[
+  {
+    id:1,
+    name: "Amina Yusuf",
+    review: "I love how fast and reliable this service is. I never run out of my essential liquids anymore. Highly recommend to everyone!"
+  },
+  {
+    id:2,
+    name: "David Okeke",
+    review: "The app is super easy to use, and the delivery is always on time. The quality of the products is top-notch."
+  },
+  {
+    id:3,
+    name: "Chinwe Eze",
+    review: "Finally, a service that actually cares about its customers. Friendly support and smooth deliveries every time."
+  },
+  {
+    id:4,
+    name: "Emeka Nwosu",
+    review: "I’ve tried a few liquid delivery services, but this one is by far the best. Affordable, fast, and dependable."
+  },
+  {
+    id:5,
+    name: "Fatima Bello",
+    review: "I was worried about ordering liquids online, but everything arrived safely and well-packaged. I’m definitely a loyal customer now!"
+  },
+  {
+    id:6,
+    name: "Tunde Adeyemi",
+    review: "Convenient, quick, and professional. I can’t imagine going back to buying from stores when I have this service at my fingertips."
+  },
+  {
+    id:7,
+    name: "Deji Adeola",
+    review: "I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers."
+  },
+  {
+    id:8,
+    name: "Blessing Chukwu",
+    review: "I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed."
+  },
+  {
+    id:9,
+    name: "Zainab Ahmed",
+    review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!"
+  }
+];

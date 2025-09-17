@@ -13,8 +13,8 @@ export default function StepsOrder() {
           key={step.id}
           initial={{ x: 100, opacity: 0 }}
           whileInView={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.6, delay: index * 0.3 }} // stagger effect
-          className="bg-[#3A699A]/40 hover:bg-[#1C4672] p-4 rounded-lg flex items-center gap-2 md:gap-4 shadow-md shadow[#000000]/50 relative"
+          transition={{ duration: 0.6, delay: index * 0.3 }} // stagger effec [#4C86C4][#3A699A]/40 t
+          className="bg-[#4C86C4] hover:bg-[#1C4672]  p-4 rounded-lg flex items-center gap-2 md:gap-4 shadow-md shadow[#000000]/50 relative"
         >
           {/* Drop image with number */}
           <div className="relative w-18 h-18 flex-shrink-0">

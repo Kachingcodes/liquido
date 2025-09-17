@@ -32,13 +32,14 @@ const Hero = () => {
   };
 
   return (
-    <section className="w-full h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-2 md:px-4 py-2 md:py-20">
+    <section id='Home'
+    className="w-full h-screen p-2 md:p-8 flex justify-center items-center bg-[#4C86C4] text-white relative overflow-hidden px-2 md:px-4 py-2 md:py-20">
       <div className="flex flex-col md:flex-row w-full p-2 md:p-8 items-center justify-evenly">
         
         {/* Backgrounds */}
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover hidden md:block"
-          style={{ backgroundImage: "url('/heroside.svg')" }}
+          style={{ backgroundImage: "url('/Desk.svg')" }}
         />
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover block md:hidden"
@@ -47,10 +48,10 @@ const Hero = () => {
 
         {/* Left Section */}
         <div className="relative w-full md:w-1/2 flex flex-col gap-4 z-20">
-          <h1 className={`${quick.className} text-2xl md:text-4xl tracking-wide`}>
+          <h1 className={`${quick.className} text-2xl md:text-4xl tracking-wide text-[#1C4672]`}>
             Everything Liquid delivered to you with ease
           </h1>
-          <span className="text-md md:text-lg">
+          <span className="text-md md:text-lg text-black">
             From crystal-clear water to premium beverages, 
             we bring freshness, quality, and convenience 
             right to your doorstep — every time, without compromise
