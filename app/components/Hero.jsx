@@ -43,7 +43,7 @@ const Hero = () => {
         />
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover block md:hidden"
-          style={{ backgroundImage: "url('/phonehero.svg')" }}
+          style={{ backgroundImage: "url('/phone.svg')" }}
         />
 
         {/* Left Section */}
@@ -51,23 +51,23 @@ const Hero = () => {
           <h1 className={`${quick.className} text-2xl md:text-4xl tracking-wide text-[#1C4672]`}>
             Everything Liquid delivered to you with ease
           </h1>
-          <span className="text-md md:text-lg text-black">
+          <span className="sm:text-sm md:text-md text-black">
             From crystal-clear water to premium beverages, 
             we bring freshness, quality, and convenience 
             right to your doorstep — every time, without compromise
           </span>
 
-          <div className='relative inline-block'>
+          <div className='relative inline-block mt-2'>
             <button 
               onClick={handlePlaceOrder}
-              className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md md:text-lg rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
+              className="bg-[#1C4672] px-2 py-3 flex items-center gap-2 text-white lg:text-md rounded-lg shadow-md shadow-[#000000]/50 w-fit hover:bg-[#8FC0F4]/40 transition relative z-30"
             >
-              Place Order <ShoppingCartIcon className="text-lg"/>
+              Place Order <ShoppingCartIcon className="text-md"/>
             </button>
           </div>
 
           {/* Socials */}
-          <div className="flex flex-row gap-4 mt-2">
+          <div className="flex flex-row gap-4 mt-2 text-amber-200">
             <div className="relative w-10 h-10">
               <Image src={assets.foot1} alt="whatsapp" fill className="object-contain" />
             </div>
@@ -87,7 +87,7 @@ const Hero = () => {
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute right-4 md:right-10 mb-10 w-40 h-40 md:w-76 md:h-76 
+            className="absolute right-4 md:right-10 mb-10 w-40 h-40 md:w-60 md:h-60 
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
           >
@@ -99,7 +99,7 @@ const Hero = () => {
             initial={{ opacity: 0, y: 100 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 1.2 }}
-            className="absolute left-11 md:left-10 top-20 w-30 h-30 md:w-56 md:h-56
+            className="absolute left-11 md:left-10 top-20 w-30 h-30 md:w-44 md:h-44
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full flex items-center justify-center"
           >
