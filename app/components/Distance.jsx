@@ -25,7 +25,7 @@ const Distance = () => {
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 1.2 }}
           className="relative w-60 h-60 md:w-90 md:h-90">
-          <Image src={assets.location} alt="location" fill className="object-contain" />
+          <Image src={assets.location} alt="location" fill className="object-contain"/>
         </motion.div>
 
            <div className={` ${quick.className} py-6 md:py-12 px-8 text-2xl md:text-4xl`}>
@@ -41,7 +41,7 @@ const Distance = () => {
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 1.2 }}
           className="relative w-60 h-60 md:w-90 md:h-90">
-          <Image src={assets.nylon} alt="nylon" fill className="object-contain" />
+          <Image src={assets.nylon} alt="nylon" fill className="object-contain"/>
         </motion.div>
 
       </div>

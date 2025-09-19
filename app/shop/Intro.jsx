@@ -39,34 +39,35 @@ const Intro = () => {
       />
 
       {/* Centered Content (Logo + Buttons) */}
-      <div className="relative flex flex-col items-center justify-center gap-6 z-20 bg-[white]/8 shadow-md shadow-[#000000]/30 p-8 rounded-2xl">
-        <div className="relative w-60 h-20 md:w-80 md:h-40 md:ml-9 ml-4">
+      <div className="relative flex flex-col items-center justify-center gap-4 z-20 bg-[white]/8 shadow-md shadow-[#000000]/30 p-6 md:p-8 rounded-2xl">
+        
+        <div className="relative w-50 h-20 md:w-70 md:h-30 md:ml-9 ml-2">
           <Image src={assets.logo} alt="logo" fill className="object-contain" />
         </div>
 
-        <div className="flex gap-6 flex-col md:flex-row">
+        <div className="flex gap-4 md:gap-6 flex-col md:flex-row">
             <Link href="/liquidostores"
                 onClick = {(e) => {
                 handleDrop(e); 
             }}
-            className="bg-[#1C4672] px-6 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 transition relative z-30"
+            className="bg-gray-100 px-4 py-3 flex items-center gap-2 text-[#1C4672] text-md rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 hover:text-white transition relative z-30"
             >
-                LIQUIDO STORES <StoreIcon className="text-md md:text-lg"/>  
+                LIQUIDO STORES <StoreIcon size={20}/>  
             </Link>
 
             <Link href="/liquidoexpress"
                 onClick = {(e) => {
                 handleDrop(e); 
             }} 
-            className="bg-[#1C4672] px-6 py-3 flex items-center gap-2 text-white text-lg rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 transition relative z-30"
+            className="bg-gray-100 px-4 py-3 flex items-center gap-2 text-[#1C4672] text-md rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 hover:text-white transition relative z-30"
             >
-                LIQUIDO EXPRESS <TruckIcon className="text-lg"/>
+                LIQUIDO EXPRESS <TruckIcon size={20}/>
           </Link>
         </div>
       </div>
    
        {/* Bigger Circle */}
-        <motion.div 
+        {/* <motion.div 
             initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
@@ -75,10 +76,10 @@ const Intro = () => {
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
         >
             <Image src={assets.water1} alt="Water1" fill className="object-contain" />
-        </motion.div>
+        </motion.div> */}
   
        {/* Smaller Circle */}
-        <motion.div 
+        {/* <motion.div 
             initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
@@ -87,7 +88,7 @@ const Intro = () => {
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
                 >
               <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
-        </motion.div>     
+        </motion.div>      */}
 
       {/* Van */}
       <Link href="/">
@@ -96,7 +97,7 @@ const Intro = () => {
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2 }}
           
-          className="absolute bottom-8 right-2 md:right-20 w-32 h-32 md:w-64 md:h-64"
+          className="absolute bottom-10 right-2 md:right-20 w-36 h-36 md:w-64 md:h-64"
         >
           <Image src={assets.van} alt="van" fill className="object-contain" />
         </motion.div>

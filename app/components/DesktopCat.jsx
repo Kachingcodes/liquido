@@ -45,7 +45,7 @@ const [current, setCurrent] = useState(0);
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
                         className="relative w-32 h-32">
-                        <Image src={item.img} alt={item.text} fill className="object-contain" />
+                        <Image src={item.img} alt={item.text} fill className="object-contain"/>
                         </motion.div>
                     </div>
 

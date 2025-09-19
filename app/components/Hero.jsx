@@ -90,7 +90,7 @@ const Hero = () => {
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
           >
-            <Image src={assets.water1} alt="Water1" fill className="object-contain" />
+            <Image src={assets.water1} alt="Water1" fill className="object-contain" placeholder="blur"/>
           </motion.div>
 
           {/* Circle with Water2 */}
@@ -102,7 +102,7 @@ const Hero = () => {
             bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
             rounded-full flex items-center justify-center"
           >
-            <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
+            <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" placeholder="blur"/>
           </motion.div>
         </div>
 
@@ -113,7 +113,7 @@ const Hero = () => {
           transition={{ duration: 1.2 }}
           className="absolute bottom-0 right-2 md:right-20 w-32 h-32 md:w-60 md:h-60"
         >
-          <Image src={assets.van} alt="van" fill className="object-contain" />
+          <Image src={assets.van} alt="van" fill className="object-contain" placeholder="blur"/>
         </motion.div>
 
         {/* Drops */}

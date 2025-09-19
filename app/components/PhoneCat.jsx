@@ -65,7 +65,7 @@ const PhoneCat = () => {
                             <div
                                 className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-white cursor-pointer group"
                                 >
-                                <Image src={item.img} alt={item.top} fill className="object-contain" />
+                                <Image src={item.img} alt={item.top} fill className="object-contain"/>
                             </div>
 
                     </motion.div>

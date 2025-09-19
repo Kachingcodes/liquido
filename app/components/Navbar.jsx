@@ -72,9 +72,9 @@ const Navbar = () => {
                   handleDrop();
                   setIsOpen(false);
                 }}
-              className="bg-[white] px-3 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
+              className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
             >
-              Contact <Phone size={20} />
+              Contact <Phone size={18} />
             </Link>               
           </li>
         </ul>

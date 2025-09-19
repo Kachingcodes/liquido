@@ -37,6 +37,9 @@ const Footer = () => {
         <Link href= "/contact">
         <span className='text-sm'>Contact</span>
         </Link>
+        <Link href= "/shop">
+        <span className='text-sm'>Shop</span>
+        </Link>
       </div>
 
       {/* Column 3 */}

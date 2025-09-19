@@ -1,17 +1,13 @@
 'use client';
-import { Search, Droplets, Sparkles, CookingPot, User, Gem, Car, ArrowLeftIcon } from "lucide-react";
+import { Droplets, Sparkles, CookingPot, User, Gem, Car } from "lucide-react";
 import bulk from './bulk.png';
 import delivery from './delivery.png';
 import drop from './drop.png';
-import foot1 from './foot1.png';
-import foot2 from './foot2.png';
-import foot3 from './foot3.png';
 import jugs from './jugs.png';
 import juice from './juice.png';
 import location from './location.png';
 import logo from './logo.png';
 import nylon from './nylon.png';
-import shield from './shield.png';
 import tiller from './tiller.png';
 import van from './van.png';
 import water1 from './water1.png';
@@ -22,16 +18,12 @@ import water2 from './water2.png';
 export const assets = {
   bulk,
   delivery,
-    drop,
-    foot1,
-    foot2,
-    foot3,  
+    drop,  
     jugs,
     juice,
     location,
     logo,
     nylon,
-    shield,
     tiller,
     van,
     water1,
@@ -203,16 +195,6 @@ export const categories = [
   }
 ];
 
-export const adverts = [
-    { id: 1, image: "/img1.jpg", text: "Pure Drinking Water" },
-    { id: 2, image: "/img2.jpg", text: "Refreshing Juices" },
-    { id: 3, image: "/img3.jpg", text: "Cooking Oils" },
-    { id: 4, image: "/img4.jpg", text: "Industrial Liquids" },
-    { id: 5, image: "/img5.jpg", text: "Premium Beverages" },
-    { id: 6, image: "/img6.jpg", text: "Specialty Liquids" },
-  ];
-
-
 export const testimonials =[
   {
     id:1,
@@ -268,4 +250,11 @@ export const testimonials =[
     review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!",
     img:"/girl.jpg"
   }
+];
+
+export const adverts = [
+  { img: "/wine.png", text: "🔥 Big Discount – 20% Off All Items!" },
+  { img: "/smoothie.png", text: "🎉 Buy 1 Get 1 Free This Week!" },
+  { img: "/wine.png", text: "🚚 Free Shipping on Orders Over ₦20,000!" },
+  { img: "/wine.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
 ];

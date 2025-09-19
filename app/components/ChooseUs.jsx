@@ -64,7 +64,7 @@ const ChooseUs = () => {
             transition={{ duration: 1.2 }}
             className="relative w-60 h-60 md:w-92 md:h-92"
           >
-            <Image src={assets.delivery} alt="delivery" fill className="object-contain" />
+            <Image src={assets.delivery} alt="delivery" fill className="object-contain"/>
           </motion.div>
 
 

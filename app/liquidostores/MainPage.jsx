@@ -81,7 +81,7 @@ const MainPage = () => {
         </div>
 
         {/* Bottom part (Store under TopSide) */}
-        <div className="w-full bg-gray-100 flex-1 flex items-center justify-center pt-[8%] md:pt-[4%] overflow-hidden">
+        <div className="w-full flex-1 flex items-center justify-center pt-[8%] md:pt-[4%] overflow-hidden">
           {selectedOption ? (
             <Store 
             activeCategory={activeCategory} 

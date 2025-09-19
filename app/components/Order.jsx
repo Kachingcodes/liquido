@@ -24,7 +24,7 @@ const Order = () => {
       <div className="flex items-center justify-center gap-1 md:hidden">
         <h1 className={` ${quick.className} text-3xl font-bold text-center text-black`}>How to Order</h1>
         <div className="relative w-30 h-20">
-          <Image src={assets.van} alt="van" fill className="object-contain" />
+          <Image src={assets.van} alt="van" fill className="object-contain"/>
         </div>
       </div>
 
@@ -57,8 +57,6 @@ const Order = () => {
 
       </div>
   </section>
-
-
   );
 };
 
