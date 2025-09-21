@@ -35,7 +35,7 @@ const Contact = () => {
   };
 
   return (
-    <div className="px-6 pb-10 flex flex-col items-center">
+    <div className="px-6 pb-10 flex flex-col items-center bg-white">
 
       {/* Get in Touch + Grid bg-[#4C86C4] initial={{ opacity: 0, y: 40 }}
       animate={{ opacity: 1, y: 0 }}
@@ -43,7 +43,7 @@ const Contact = () => {
       transition={{ duration: 0.3 }}*/}
       <div className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
         {/* Left: GET IN TOUCH */}
-        <h1 className={`${quick.className} text-3xl md:text-4xl text-white`}>
+        <h1 className={`${quick.className} text-3xl md:text-4xl text-black`}>
           GET IN TOUCH
         </h1>
 
@@ -52,22 +52,22 @@ const Contact = () => {
           {/* Card 1 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
             <MapPin className="mx-auto mb-2" size={20}/>
-            <h1 className='text-xl'>LOCATION</h1>
-            <p>Welcome to Agraba</p>
+            <h1 className='text-lg'>LOCATION</h1>
+            <p className='text-black text-sm'>Welcome to Agraba</p>
           </div>
 
           {/* Card 2 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40  hover:text-white hover:bg-[#4C86C4]">
             <Clock className="mx-auto mb-2" size={20}/>
-            <h1>WORK HOURS</h1>
-            <p>Welcome to Agraba</p>
+            <h1 className='text-lg'>WORK HOURS</h1>
+            <p className='text-black text-sm'>Welcome to Agraba</p>
           </div>
 
           {/* Card 3 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
             <FaEnvelopeOpenText className="mx-auto mb-2" size={20}/>
-            <h1>Email</h1>
-            <p>Welcome to Agraba</p>
+            <h1 className='text-lg'>Email</h1>
+            <p className='text-black text-sm'>Welcome to Agraba</p>
           </div>
         </div>
       </div>
@@ -76,11 +76,11 @@ const Contact = () => {
       <div className="w-full max-w-5xl flex flex-col md:flex-row items-start p-1 md:p-20 justify-between gap-8">
         {/* Left: Contact Us heading + Image */}
         <div className="flex flex-col md:items-start w-full md:w-[50%] items-center py-12 md:py-4">
-          <div className='flex gap-4'>
-            <h2 className="text-2xl md:text-3xl font-bold text-white">
+          <div className='flex gap-4 text-black'>
+            <h2 className="text-2xl md:text-3xl font-bold">
             Contact Us   
             </h2>
-            <ArrowBigRight size={30} className='text-white mt-1'/>
+            <ArrowBigRight size={30} className='mt-1'/>
           </div>
           
           <div className="relative w-60 h-60">
@@ -94,51 +94,51 @@ const Contact = () => {
         </div>
 
         {/* Right: Contact Form */}
-        <div className="w-full md:w-[60%] flex justify-center bg-white p-4 md:p-8 rounded-2xl">
+        <div className="w-full md:w-[60%] flex justify-center bg-[#4C86C4] p-4 md:p-8 rounded-2xl text-white">
           <form onSubmit={handleSubmit} className="w-full space-y-5">
             {/* Name */}
             <div>
-              <label className="block text-sm text-[#1C4672] mb-2">Name</label>
+              <label className="block text-sm mb-2">Name</label>
               <input
                 type="text"
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg px-4 py-3 bg-[white]/10 text-black border border-gray-900 focus:border-[#1C4672] focus:outline-none"
+                className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-900 focus:border-[#1C4672] focus:outline-none"
               />
             </div>
 
             {/* Email */}
             <div>
-              <label className="block text-sm text-[#1C4672] mb-2">Email</label>
+              <label className="block text-sm mb-2">Email</label>
               <input
                 type="email"
                 name="email"
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-lg px-4 py-3 bg-[white]/20 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
+                className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
               />
             </div>
 
             {/* Message */}
             <div>
-              <label className="block text-sm text-[#1C4672] mb-2">Message</label>
+              <label className="block text-sm mb-2">Message</label>
               <textarea
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
                 rows="5"
                 required
-                className="w-full rounded-lg px-4 py-3 bg-[white]/20 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none resize-none"
+                className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none resize-none"
               ></textarea>
             </div>
 
             {/* Submit */}
             <button
               type="submit"
-              className="w-full flex items-center justify-center gap-2 py-3 px-4 bg-[#1C4672] text-white rounded-xl hover:bg-[#4C86C4] transition"
+              className="bg-gray-200 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/40 transition"
             >
               <Send className="w-4 h-4" />
               Send Message

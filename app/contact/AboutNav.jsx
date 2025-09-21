@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Link as ScrollLink } from "react-scroll";
-import { Menu, X, Phone, HomeIcon, ShoppingCartIcon } from 'lucide-react';
+import { Menu, X, Phone, HomeIcon, ShoppingBasket } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from "@/public/assets";
 import { motion, AnimatePresence } from 'framer-motion';
@@ -42,7 +42,7 @@ const AboutNav = () => {
   }, [isOpen]);
 
   return (
-    <header className="w-full fixed top-0 left-0 bg-[#3A699A] shadow z-50">
+    <header className="w-full fixed top-0 left-0 bg-[#4C86C4] z-50">
       <div className="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
@@ -62,9 +62,9 @@ const AboutNav = () => {
                   handleDrop(e);
                   setIsOpen(false)
                 }}
-                className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+                className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
                 >
-                Home <HomeIcon className="text-md" />
+                Home <HomeIcon size={20}/>
                 </Link>  
             </li>
 
@@ -75,9 +75,9 @@ const AboutNav = () => {
                 handleDrop(e);
                 setIsOpen(false)
               }}
-                className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-md rounded-lg w-fit hover:bg-[#8FC0F4]/40 transition"
+                className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
                 >
-                Shop <ShoppingCartIcon className="text-md" />
+                Shop <ShoppingBasket size={20}/>
                 </Link>  
             </li>
         </ul>
@@ -99,12 +99,12 @@ const AboutNav = () => {
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#3A699A] shadow-md z-50 flex flex-col"
+            className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#4C86C4] shadow-md z-50 flex flex-col"
           >
-            <div className="flex-1 flex flex-col justify-between px-6 py-4 space-y-4">
+            <div className="flex-1 flex flex-col justify-between px-6 py-6 space-y-4">
               <Link 
                 href="/"
-                className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl hover:bg-[#8FC0F4]/40 transition"
+                className="flex items-center justify-center gap-2 py-2 px-2 bg-white text-[#1C4672] rounded-2xl"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Home</span>
@@ -113,11 +113,11 @@ const AboutNav = () => {
               
               <Link 
                 href="/shop"
-                className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl hover:bg-[#8FC0F4]/40 transition"
+                className="flex items-center justify-center gap-2 py-2 px-2 bg-white text-[#1C4672] rounded-2xl"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Shop</span>
-                <ShoppingCartIcon className="w-5 h-5" />
+                <ShoppingBasket className="w-5 h-5" />
               </Link>
             </div>
           </motion.div>
