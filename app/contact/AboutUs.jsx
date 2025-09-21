@@ -1,24 +1,40 @@
 import React from "react";
+import Contact from './Contact';
+import { Quicksand } from 'next/font/google';
 
-export default function About() {
+
+const quick = Quicksand({
+   subsets: ["latin"],
+  weight: ["600"]
+});
+
+
+const About = () => {
   return (
     <section className="relative bg-[#4C86C4] text-white py-20 px-6 overflow-hidden">
       
-      {/* Desktop / Tablet Background */}
+      {/* Background with fixed image */}
       <div
-        className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover hidden md:block"
-        style={{ backgroundImage: "url('/heroside.svg')" }}
-      ></div>
+        className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover bg-fixed"
+        style={{
+          backgroundImage: "url('/water2.png')"
+        }}
+      >
+        {/* Dark overlay */}
+        <div className="absolute top-0 left-0 w-full h-full bg-black/50"></div>
+      </div>
+
+
 
       {/* Mobile Background */}
-      <div
+      {/* <div
         className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover block md:hidden"
         style={{ backgroundImage: "url('/phonehero.svg')" }}
-      ></div>
+      ></div> */}
 
       {/* Content */}
-      <div className="relative z-10 max-w-3xl mx-auto">
-        <h2 className="text-3xl font-semibold mb-4">About Us</h2>
+      <div className="relative z-10 max-w-3xl mx-auto p-10 space-y-10">
+        <h2 className="text-3xl md:text-4xl font-semibold mb-4">About Us</h2>
         <p className="mb-4">
           At <span className="font-semibold">[Company Name]</span>, we believe every drop matters. 
           We provide high-quality liquid products—from clean, refreshing water to specialty liquids 
@@ -33,6 +49,13 @@ export default function About() {
           <span className="font-semibold"> [Company Name]</span> is here to serve you—one drop at a time.
         </p>
       </div>
+
+      <div className="relative z-10">
+        <Contact/>
+      </div>
+      
     </section>
   );
-}
+};
+
+export default About;

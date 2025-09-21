@@ -11,6 +11,8 @@ import Bulk from './components/Bulk';
 import Testimonials from './components/Testimonials';
 import Wave from './components/Wave';
 import Footer from './components/Footer';
+import { Analytics } from "@vercel/analytics/next"
+
 
 
 export default function Home() {

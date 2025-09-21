@@ -1,7 +1,7 @@
 'use client'
 import AboutNav from './AboutNav';
 import AboutUs from './AboutUs';
-import Contact from './Contact';
+// import Contact from './Contact';
 import Wave from '../components/Wave';
 import Footer from '../components/Footer';
 
@@ -12,9 +12,9 @@ export default function About() {
     <>
       <AboutNav/>
       <AboutUs/>
-      <Contact/>
-      <Wave/>
-      <Footer/>
+      {/* <Contact/> */}
+      {/* <Wave/>
+      <Footer/> */}
     </>  
     );
 }

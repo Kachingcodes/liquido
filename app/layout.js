@@ -1,6 +1,6 @@
 import { Lato } from "next/font/google";
 import "./globals.css";
-
+import { Analytics } from "@vercel/analytics/react"; 
 
 
 const lato = Lato({
@@ -21,6 +21,7 @@ export default function RootLayout({ children }) {
         className={`${lato.className} antialiased`}
       >
           {children}
+          <Analytics/>
       </body>
     </html>
   );
