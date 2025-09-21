@@ -84,7 +84,7 @@ const Testimonials = () => {
                 variants={itemVariants}
                 exit={{ opacity: 0, x: -80 }}
 
-                className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[150px] md:min-h-[260px]'> 
+                className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[180px] md:min-h-[260px]'> 
                     <div className='text-black p-4 md:p-4 text-center flex-grow text-md'>
                         <p>{test.review}</p>
                     </div>
