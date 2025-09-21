@@ -55,42 +55,25 @@ const Intro = () => {
                 LIQUIDO STORES <StoreIcon size={20}/>  
             </Link>
 
-            <Link href="/liquidoexpress"
+            <button
+              disabled
+            className=" px-4 py-3 flex items-center gap-2 text-md rounded-lg shadow-md shadow-[#000000]/40 transition relative z-30 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            > 
+              COMING SOON <TruckIcon size={20}/>
+          </button>
+
+            {/* <Link href="/liquidoexpress"
                 onClick = {(e) => {
                 handleDrop(e); 
             }} 
-            className="bg-gray-100 px-4 py-3 flex items-center gap-2 text-[#1C4672] text-md rounded-lg shadow-md shadow-[#000000]/40 hover:bg-[#8FC0F4]/40 hover:text-white transition relative z-30"
-            >
+            className=" px-4 py-3 flex items-center gap-2 text-md rounded-lg shadow-md shadow-[#000000]/40  transition relative z-30 disabled:bg-gray-400 disabled:cursor-not-allowed"
+            > 
                 LIQUIDO EXPRESS <TruckIcon size={20}/>
-          </Link>
+          </Link> */}
         </div>
       </div>
-   
-       {/* Bigger Circle */}
-        {/* <motion.div 
-            initial={{ opacity: 0, x: -100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2 }}
-            className="absolute right-4 md:left-16 top-10 md:top-20 w-40 h-40 md:w-60 md:h-60 
-            bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
-            rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
-        >
-            <Image src={assets.water1} alt="Water1" fill className="object-contain" />
-        </motion.div> */}
-  
-       {/* Smaller Circle */}
-        {/* <motion.div 
-            initial={{ opacity: 0, x: 100 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1.2 }}
-            className="absolute md:right-26 right-50 md:top-48 bottom-20 w-30 h-30 md:w-50 md:h-50 
-            bg-[linear-gradient(to_bottom,#8FC0F4_0%,rgba(143,192,244,0.6)_50%,#1C4672_100%)] 
-            rounded-full shadow-md shadow-[#000000]/20 flex items-center justify-center"
-                >
-              <Image src={assets.water2} alt="Water2" className="w-[80%] object-contain" />
-        </motion.div>      */}
 
-      {/* Van */}
+      {/* Van bg-gray-100 text-[#1C4672] hover:bg-[#8FC0F4]/40 hover:text-white*/}
       <Link href="/">
         <motion.div 
           initial={{ opacity: 0, x: -100 }}

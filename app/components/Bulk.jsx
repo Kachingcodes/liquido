@@ -47,7 +47,7 @@ const TextTiller = () => {
                         viewport={{ once: false, amount: 0.3 }} 
                         exit={{ opacity: 0, x: 100 }}
                         transition={{ duration: 1.2 }}
-                        className="relative w-40 h-20 mb-4"
+                        className="relative w-40 h-20 mb-8"
                     >
                         <Image src={assets.bulk} alt="bulk" className="object-contain"/>
                     </motion.div>

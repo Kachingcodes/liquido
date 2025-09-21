@@ -200,13 +200,13 @@ export const testimonials =[
     id:1,
     name: "Amina Yusuf",
     review: "I love how fast and reliable this service is. I never run out of my essential liquids anymore. Highly recommend to everyone!",
-    img:"/anime.jpeg"
+    img:"/girl.jpg"
   },
   {
     id:2,
     name: "David Okeke",
     review: "The app is super easy to use, and the delivery is always on time. The quality of the products is top-notch.",
-    img:"/girl.jpg"
+    img:"/david.jpg"
   },
   {
     id:3,
@@ -224,13 +224,13 @@ export const testimonials =[
     id:5,
     name: "Fatima Bello",
     review: "I was worried about ordering liquids online, but everything arrived safely and well-packaged. I’m definitely a loyal customer now!",
-    img:"/girl.jpg"
+    img:"/fatima.jpg"
   },
   {
     id:6,
     name: "Tunde Adeyemi",
     review: "Convenient, quick, and professional. I can’t imagine going back to buying from stores when I have this service at my fingertips.",
-    img:"/girl.jpg"
+    img:"/tunde.jpg"
   },
   {
     id:7,
@@ -242,19 +242,19 @@ export const testimonials =[
     id:8,
     name: "Blessing Chukwu",
     review: "I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed.",
-    img:"/girl.jpg"
+    img:"/blessing.jpg"
   },
   {
     id:9,
     name: "Zainab Ahmed",
     review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!",
-    img:"/girl.jpg"
+    img:"/zainab.jpg"
   }
 ];
 
 export const adverts = [
-  { img: "/wine.png", text: "🔥 Big Discount – 20% Off All Items!" },
-  { img: "/smoothie.png", text: "🎉 Buy 1 Get 1 Free This Week!" },
+  { img: "/smoothie.png", text: "🔥 Big Discount – 20% Off All Items!" },
+  { img: "/coffee.png", text: "🎉 Buy 1 Get 1 Free This Week!" },
   { img: "/wine.png", text: "🚚 Free Shipping on Orders Over ₦20,000!" },
-  { img: "/wine.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
+  { img: "/icetea.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
 ];
