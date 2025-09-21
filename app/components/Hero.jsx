@@ -61,7 +61,7 @@ const Hero = () => {
           <span className="text-sm md:text-lg text-black">
             From crystal-clear water to premium beverages, 
             we bring freshness, quality, and convenience 
-            right to your doorstep — every time, without compromise
+            right to your doorstep every time, without compromise
           </span>
 
           <div className="relative inline-block mt-2">
