@@ -63,14 +63,12 @@ export const categories = [
         img: "/water1.png",
         top: "Water",
         text: "Satchet, Bottled, Dispenser, Specialty"
-      }
-      ,
+      },
       {
         img: "/juice.png",
         top: "Juices",
         text: "Orange, Apple, Mixed fruit, Mango"
-      }
-      ,
+      },
       {
         img: "/wine.png",
         top: "Wine",
@@ -92,7 +90,7 @@ export const categories = [
       {
         img: "/dettol.png",
         top: "Disinfectants",
-        text: "Jik, Dettol, Harpic, LysolDisinfectants"
+        text: "Jik, Dettol, Harpic, Lysol"
       },
       {
         img: "/soap.png",
