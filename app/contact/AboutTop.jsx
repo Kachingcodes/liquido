@@ -12,7 +12,7 @@ const quick = Quicksand({
 const AboutTop = () => {
   return (
     <section
-    className="relative w-full bg-[#1C4672] h-[60vh] mt-8 bg-no-repeat bg-contain flex items-center justify-center"
+    className="relative w-full bg-[#1C4672] h-[46vh] md:h-[60vh] mt-8 bg-no-repeat bg-contain flex items-center justify-center"
     style={{ backgroundImage: "url('/van.png')" }}
     >
     {/* Dark overlay (optional) */}

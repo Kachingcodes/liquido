@@ -1,11 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Clock, ArrowBigRight, MessageCircle } from 'lucide-react';
+import { Send, MapPin, Clock, ArrowBigRight, ArrowBigDown } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { FaEnvelope, FaEnvelopeOpenText } from 'react-icons/fa6';
+import { FaEnvelopeOpenText } from 'react-icons/fa6';
 
 
 const quick = Quicksand({
@@ -37,11 +37,12 @@ const Contact = () => {
   return (
     <div className="px-6 pb-10 flex flex-col items-center bg-white">
 
-      {/* Get in Touch + Grid bg-[#4C86C4] initial={{ opacity: 0, y: 40 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: 40 }}
-      transition={{ duration: 0.3 }}*/}
-      <div className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
+      {/* Get in Touch + Grid */}
+      <motion.div 
+        initial={{ opacity: 0, y: -70 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 1.2 }}
+      className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
         {/* Left: GET IN TOUCH */}
         <h1 className={`${quick.className} text-3xl md:text-4xl text-black`}>
           GET IN TOUCH
@@ -70,18 +71,23 @@ const Contact = () => {
             <p className='text-black text-sm'>Welcome to Agraba</p>
           </div>
         </div>
-      </div>
+      </motion.div>
 
         {/* BELOW - Contact Us + Form */}
-      <div className="w-full max-w-5xl flex flex-col md:flex-row items-start p-1 md:p-20 justify-between gap-8">
+      <div className="w-full max-w-5xl flex flex-col md:flex-row items-start p-1 md:p-20 justify-evenly">
         {/* Left: Contact Us heading + Image */}
-        <div className="flex flex-col md:items-start w-full md:w-[50%] items-center py-12 md:py-4">
-          <div className='flex gap-4 text-black'>
-            <h2 className="text-2xl md:text-3xl font-bold">
-            Contact Us   
-            </h2>
-            <ArrowBigRight size={30} className='mt-1'/>
-          </div>
+        <motion.div 
+          initial={{ opacity: 0, x: -28 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ duration: 1.2 }}
+          className="flex flex-col md:items-start w-full md:w-[50%] items-center py-12 md:py-4">
+            <div className='flex gap-4 text-black'>
+              <h2 className="text-2xl md:text-3xl font-bold">
+              Contact Us   
+              </h2>
+              <ArrowBigDown size={30} className='mt-1 md:hidden flex'/>
+              <ArrowBigRight size={30} className='mt-1 hidden md:flex'/>
+            </div>
           
           <div className="relative w-60 h-60">
             <Image 
@@ -91,10 +97,14 @@ const Contact = () => {
               className="object-contain"
             />
           </div>
-        </div>
+        </motion.div>
 
         {/* Right: Contact Form */}
-        <div className="w-full md:w-[60%] flex justify-center bg-[#4C86C4] p-4 md:p-8 rounded-2xl text-white">
+        <motion.div
+            initial={{ opacity: 0, x: 28 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            transition={{ duration: 1.2 }}
+            className="w-full md:w-[60%] flex justify-center bg-[#4C86C4] p-4 md:p-8 rounded-2xl text-white">
           <form onSubmit={handleSubmit} className="w-full space-y-5">
             {/* Name */}
             <div>
@@ -138,13 +148,13 @@ const Contact = () => {
             {/* Submit */}
             <button
               type="submit"
-              className="bg-gray-200 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/40 transition"
+              className="bg-gray-100 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
             >
               <Send className="w-4 h-4" />
               Send Message
             </button>
           </form>
-        </div>
+        </motion.div>
       </div>
 
     </div>
