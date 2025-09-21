@@ -49,7 +49,7 @@ const Testimonials = () => {
         <div className="flex w-full max-w-7xl flex-col md:flex-row items-start justify-between gap-6 md:gap-10">
             
             {/* Left Section */}
-            <div className="w-full md:w-1/4 flex flex-col gap-3 md:gap-6 lg:gap-8">
+            <div className="w-full md:w-1/4 flex flex-col gap-4">
                 <motion.h1 
                 initial={{ opacity: 0, y: -100 }}
                 whileInView={{ opacity: 1, y: 0 }}
@@ -84,8 +84,8 @@ const Testimonials = () => {
                 variants={itemVariants}
                 exit={{ opacity: 0, x: -80 }}
 
-                className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[180px] md:min-h-[260px]'> 
-                    <div className='text-black p-4 md:p-4 text-center flex-grow text-md'>
+                className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[170px] md:min-h-[240px]'> 
+                    <div className='text-black p-4 md:p-4 text-center flex-grow text-sm md:text-md'>
                         <p>{test.review}</p>
                     </div>
                     <div className='bg-[#4C86C4] text-black flex flex-row items-center gap-4 p-2 md:p-4'>
