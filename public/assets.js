@@ -85,17 +85,17 @@ export const categories = [
     options: ["Detergents",  "Disinfectants", "Soaps"],
     items: [
       {
-        img: "/soda.png",
+        img: "/detergent.png",
         top: "Detergents",
         text: "Detergents"
       },
       {
-        img: "/icetea.png",
+        img: "/dettol.png",
         top: "Disinfectants",
         text: "Disinfectants"
       },
       {
-        img: "/coffee.png",
+        img: "/soap.png",
         top: "Soaps",
         text: "Soaps"
       }
@@ -131,17 +131,17 @@ export const categories = [
   options: ["Shampoos", "Conditioners", "Body Oils", "Lotions"],
   items: [
       {
-        img: "/dettol.png",
+        img: "/cantu.png",
         top: "Hair Care",
         text: "Hair Care"
       },
       {
-        img: "/fluid.png",
+        img: "/bodyoil.png",
         top: "Body Oils",
         text: "Body Oils"
       },
       {
-        img: "/plant.png",
+        img: "/nivea.png",
         top: "Lotions",
         text: "Lotions"
       }
@@ -154,17 +154,17 @@ export const categories = [
     options: ["Perfumes", "Essential Oils", "Fragrance Diffusers"],
     items: [
       {
-        img: "/dettol.png",
+        img: "/perfume.png",
         top: "Perfumes",
         text: "Perfumes"
       },
       {
-        img: "/fluid.png",
+        img: "/essential.png",
         top: "Essential Oils",
         text: "Essential Oils"
       },
       {
-        img: "/plant.png",
+        img: "/diffuser.png",
         top: "Fragrance Diffusers",
         text: "Fragrance Diffusers"
       }
@@ -177,17 +177,17 @@ export const categories = [
     options: ["Engine Oil", "Transmission Fluid", "Coolant", "Gear Oil"],
     items: [
       {
-        img: "/dettol.png",
+        img: "/engine.png",
         top: "Engine Oil",
         text: "Engine Oil"
       },
       {
-        img: "/fluid.png",
+        img: "/mobil.png",
         top: "Automotive Liquids",
         text: "Automotive Liquids"
       },
       {
-        img: "/plant.png",
+        img: "/fluid.png",
         top: "Windshield Fluid",
         text: "Windshield Fluid"
       }
