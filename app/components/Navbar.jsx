@@ -163,6 +163,15 @@ const Navbar = () => {
                    />
                    ))}
                </AnimatePresence>
+
+              <Link 
+                href="/shop"
+                className="fixed right-2 bottom-2 p-3 bg-black text-[#4C86C4] rounded-full text-sm"
+                onClick={() => setIsOpen(false)}
+              >
+                {/* <span>Shop</span> */}
+                <ShoppingBasketIcon className="w-5 h-5" />
+              </Link>
     </header>
   );
 };

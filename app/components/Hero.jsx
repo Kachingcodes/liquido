@@ -59,9 +59,7 @@ const Hero = () => {
           </h1>
 
           <span className="text-sm md:text-lg text-black">
-            From crystal-clear water to premium beverages, 
-            we bring freshness, quality, and convenience 
-            right to your doorstep every time, without compromise
+           Stay refreshed with our fast and reliable water delivery service, plus quality liquid products like soaps and beverages - all brought straight to you with ease.
           </span>
 
           <div className="relative inline-block mt-2">

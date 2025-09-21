@@ -19,9 +19,9 @@ const AboutTop = () => {
     <div className="absolute inset-0 bg-black/20"></div>
 
         {/* Centered text */}
-        <h1 className="relative z-10 text-white text-4xl font-bold text-center">
+        {/* <h1 className="relative z-10 text-white text-4xl font-bold text-center">
             Welcome to Liquido 💧
-        </h1>
+        </h1> */}
     </section>
 
   );
