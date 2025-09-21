@@ -210,15 +210,15 @@ export const testimonials =[
   },
   {
     id:3,
-    name: "Chinwe Eze",
+    name: "Adaobi Eze",
     review: "Finally, a service that actually cares about its customers. Friendly support and smooth deliveries every time.",
-    img:"/girl.jpg"
+    img:"/ada.jpg"
   },
   {
     id:4,
     name: "Emeka Nwosu",
     review: "I’ve tried a few liquid delivery services, but this one is by far the best. Affordable, fast, and dependable.",
-    img:"/girl.jpg"
+    img:"/emeka.jpg"
   },
   {
     id:5,
@@ -234,9 +234,9 @@ export const testimonials =[
   },
   {
     id:7,
-    name: "Deji Adeola",
+    name: "Ebun Adeola",
     review: "I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers.",
-    img:"/girl.jpg"
+    img:"/ebun.jpg"
   },
   {
     id:8,

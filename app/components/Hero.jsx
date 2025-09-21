@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { assets } from '@/public/assets';
 import { Quicksand } from "next/font/google";
-import { ShoppingCartIcon } from 'lucide-react';
+import { Compass } from 'lucide-react';
 import { useRouter } from 'next/navigation';
 import { FaXTwitter, FaWhatsapp, FaInstagram } from "react-icons/fa6";
 
@@ -33,6 +33,9 @@ const Hero = () => {
       router.push("/shop");
     }, 600); 
   };
+
+  const phoneNumber = "2347062757706"; 
+  const message = "Hello Liquido 💧. I would like to make some inquiries.";
 
   return (
     <section id='Home'
@@ -66,15 +69,24 @@ const Hero = () => {
               onClick={handlePlaceOrder}
               className="bg-[#1C4672] px-2 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg shadow-md shadow-[#000000]/36 w-fit hover:bg-[#4C86C4] transition relative z-30"
             >
-              Place Order <ShoppingCartIcon size={20}/>
+              Discover Liquido <Compass size={20}/>
             </button>
           </div>
 
           {/* Socials */}
           <div className="flex flex-row gap-8 mt-4 text-[#1C4672]">
-            <FaXTwitter size={20} />    
-            <FaWhatsapp size={20}/>
-            <FaInstagram size={20}/>
+            <a href="https://twitter.com/liquido_ng" target="_blank" rel="noopener noreferrer">
+              <FaXTwitter size={20}/>    
+            </a>
+            <a
+            href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`}
+            target="_blank"
+            rel="noopener noreferrer">
+              <FaWhatsapp size={20}/>
+            </a>
+            <a href="https://instagram.com/liquido.ng" target="_blank" rel="noopener noreferrer">
+              <FaInstagram size={20}/>
+            </a>
           </div>
         </div>
 

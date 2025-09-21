@@ -14,9 +14,15 @@ const quick = Quicksand({
 
 const Bulk = () => {
 
-    const TextTiller = () => {
-    let message = "Hello and good day! Please I would like to order some items in bulk:\n\n";
-    const url = `https://wa.me/2347067259151?text=${encodeURIComponent(message)}`;
+const TextTiller = () => {
+   let message = `Kindly fill out the blanks befor hitting send: \n\n
+    Hello Liquido 💧, I’d like to make a bulk order / event booking.\n
+    My name is: ______\n
+    Event type (Owambe, Birthday, Wedding, Party, Supermarket, Estate, Bulk Stocking): ______\n
+    Quantity needed: ______\n
+    Event date / delivery schedule: ______\n
+    Location: ______`;
+    const url = `https://wa.me/2347062757706?text=${encodeURIComponent(message)}`;
     window.open(url, "_blank");
   };
 
@@ -50,10 +56,10 @@ const Bulk = () => {
                 <div className="mt-8 md:mt-4">
                     <ul className="text-sm md:text-lg list-none space-y-2">
                     <li className="before:content-['➜'] before:mr-2 before:text-[#04182e]">
-                        From estates to factories, no order is too big.
+                        From estates to supermarkets, events to parties — no order is too big.
                     </li>
                     <li className="before:content-['➜'] before:mr-2 before:text-[#04182e]">
-                        Get reliable bulk water delivery, flexible schedules, and cost-effective pricing — all tailored for your business.
+                        Whether it’s owambe, birthdays, weddings, or bulk stocking, get reliable bulk water delivery, flexible schedules, and cost-effective pricing — all tailored for your needs.
                     </li>
                     <li className="before:content-['➜'] before:mr-2 before:text-[#04182e]">
                         Connect with our sales rep or book directly through our B2B form.

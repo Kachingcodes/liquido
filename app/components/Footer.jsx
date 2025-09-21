@@ -9,6 +9,9 @@ import Link from 'next/link';
 
 
 const Footer = () => {
+  const phoneNumber = "2347062757706"; 
+  const message = "Hello Liquido 💧. I would like to make some inquiries.";
+
   return (
    <section className="w-full bg-[#1C4672] text-white relative overflow-hidden px-8 p-4">
   
@@ -61,9 +64,18 @@ const Footer = () => {
       <div>
         <span className="block font-semibold text-center">Follow Us</span>
         <div className="flex flex-row gap-8 mt-4 text-white">
-            <FaXTwitter size={16} />    
+          <a href="https://twitter.com/liquido_ng" target="_blank" rel="noopener noreferrer">
+            <FaXTwitter size={16}/>
+          </a>
+          <a
+            href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`}
+            target="_blank"
+            rel="noopener noreferrer">
             <FaWhatsapp size={16}/>
+          </a>
+          <a href="https://instagram.com/liquido.ng" target="_blank" rel="noopener noreferrer">
             <FaInstagram size={16}/>
+          </a>
           </div>
       </div>
     </div>
@@ -74,3 +86,4 @@ const Footer = () => {
 };
 
 export default Footer;
+

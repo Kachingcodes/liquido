@@ -1,6 +1,6 @@
 import React from "react";
 import { Quicksand } from "next/font/google";
-import { ShoppingCartIcon } from 'lucide-react';
+import { ArrowRight } from 'lucide-react';
 import { useRouter } from 'next/navigation'; 
 import DesktopCat from './DesktopCat';
 import PhoneCat from './PhoneCat';
@@ -37,7 +37,7 @@ const Categories = () => {
         <button 
           onClick={handlePlaceOrder}
           className="bg-[#1C4672] px-3 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg shadow-md shadow-[#000000]/36 w-fit hover:bg-[#4C86C4] transition">
-          Place Order <ShoppingCartIcon size={20}/>
+          View More <ArrowRight size={20}/>
         </button>
       </div>
     </section>

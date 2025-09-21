@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Link as ScrollLink } from "react-scroll";
-import { Menu, X, Phone } from 'lucide-react';
+import { Menu, X, Phone, ShoppingBasketIcon } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from "@/public/assets";
 import { motion, AnimatePresence } from 'framer-motion';
@@ -67,6 +67,18 @@ const Navbar = () => {
           ))}
           <li>
             <Link 
+              href="/shop"
+              onClick ={() => {
+                  handleDrop();
+                  setIsOpen(false);
+                }}
+              className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
+            >
+              Shop <ShoppingBasketIcon size={18} />
+            </Link>               
+          </li>
+          <li>
+            <Link 
               href="/contact"
               onClick ={() => {
                   handleDrop();
@@ -116,10 +128,17 @@ const Navbar = () => {
                   {section}
                 </ScrollLink>
               ))}
-
+              <Link 
+                href="/shop"
+                className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm"
+                onClick={() => setIsOpen(false)}
+              >
+                <span>Shop</span>
+                <ShoppingBasketIcon className="w-5 h-5" />
+              </Link>
               <Link 
                 href="/contact"
-                className="flex items-center justify-center gap-3 py-3 px-4 bg-[#1C4672] text-white rounded-2xl text-sm"
+                className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Contact</span>

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
-import { StarIcon, Loader2 } from "lucide-react";
+import { StarIcon, Loader2, Minus, Plus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
 
 
@@ -90,7 +90,7 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
       <Toaster position="top-center" />
 
       {/* Products */}
-      <div className="grid grid-cols-2 md:grid-cols-5 gap-3 md:gap-5 p-4 scrollbar-hide">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 p-4 scrollbar-hide">
         {!loading && filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div
@@ -117,27 +117,42 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
               <div className="p-2 flex flex-col">
                 <div className="flex flex-row items-center justify-between px-3"> 
                   <div className="flex flex-col items-start justify-start">
-                    <h3 className="text-center text-black text-md font-medium">
+                    <h3 className="text-center text-black text-sm md:text-md font-medium">
                     {product.name}
                     </h3>
-                    <span className="text-center text-black text-sm font-medium">{product.volume}</span>
+                    <span className="text-center text-black text-xs md:text-sm font-medium">{product.volume}</span>
                   </div>
 
                   <div> 
-                    <p className="text-center text-black text-sm font-semibold">
+                    <p className="text-center text-black text-xs md:text-sm font-semibold">
                     ₦{product.price}
                 </p>
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center w-full">
-                  {/* {quantity === 0 ? ( */}
-                    <button 
-                      // onClick={handleAdd}
-                      className="bg-[#1C4672] text-center w-full px-3 py-2  gap-2 text-white text-sm md:text-md mt-2 rounded-lg shadow-md shadow-[#000000]/50  hover:bg-[#4C86C4] transition relative z-30"
+                <div className="flex items-center justify-between w-full mt-2 md:flex-row flex-col gap-2">
+                  <div className="flex items-center justify-evenly px-4 border border-black bg-gray-100 rounded-lg text-sm md:text-md"> 
+                    <button
+                   
+                      className="hover:bg-[#4C86C4] p-2 rounded-lg text-gray-500 hover:text-white"
                     >
-                      Add to Cart
+                      <Minus size={18}/>
                     </button>
+                      <span className="min-w-[24px] text-center font-semibold text-gray-900">1</span>
+                    <button
+                     
+                      className=" hover:bg-[#4C86C4] p-2 rounded-lg text-gray-500 hover:text-white"
+                    >
+                      <Plus size={18}/>
+                    </button>
+                  </div>
+                  <div>
+                    <button 
+                        className="bg-[#1C4672] text-center w-full px-8 md:px-4 py-2 text-white text-sm md:text-md rounded-lg hover:shadow-md hover:shadow-[#000000]/20 hover:bg-[#4C86C4] transition"
+                      >
+                        Add to Cart
+                      </button>
+                    </div>
                   {/* ) : (
                     <div className="flex items-center gap-2"> 
                       <button

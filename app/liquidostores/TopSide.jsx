@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Search, ArrowLeftIcon, X } from "lucide-react";
+import { Search, ArrowLeftIcon, X, ArrowRight } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { categories } from '@/public/assets';
@@ -112,15 +112,15 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
         ))}
       </div>
 
-      <div className="w-full relative h-16"> 
-        
+      <div className="w-full relative h-16">
         {/* absolutely-positioned, horizontally-scrollable content inside the reserved strip */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
           animate={activeCategory ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
           transition={{ duration: 0.18 }}
-          className={`absolute inset-0 flex items-center px-2 ${activeCategory ? "pointer-events-auto" : "pointer-events-none"}`}
+          className={`absolute inset-0 flex flex-col px-2 ${activeCategory ? "pointer-events-auto" : "pointer-events-none"}`}
         >
+          {/* Row of buttons */}
           <div className="flex gap-2 w-full overflow-x-auto no-scrollbar">
             {options.map((option) => (
               <div
@@ -136,9 +136,16 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
               </div>
             ))}
           </div>
+
+          {options.length > 1 && (
+            <div className="flex justify-end w-full mt-1">
+              <span className="flex items-center gap-1 text-gray-700 text-xs md:text-sm">
+                Scroll For More <ArrowRight size={16} />
+              </span>
+            </div>
+          )}
         </motion.div>
       </div>
-
     </div>
   );
 };
