@@ -62,19 +62,19 @@ export const categories = [
       {
         img: "/water1.png",
         top: "Water",
-        text: "Purified, mineral, spring, or distilled"
+        text: "Satchet, Bottled, Dispenser, Specialty"
       }
       ,
       {
         img: "/juice.png",
         top: "Juices",
-        text: "Orange, apple, mixed fruit, etc"
+        text: "Orange, Apple, Mixed fruit, Mango"
       }
       ,
       {
         img: "/wine.png",
         top: "Wine",
-        text: "Red, White, Rosé and Sparkling"
+        text: "Red, White, Rosé, Sparkling"
       }
     ]
   },
@@ -87,17 +87,17 @@ export const categories = [
       {
         img: "/detergent.png",
         top: "Detergents",
-        text: "Detergents"
+        text: "Morning Fresh, Mama Lemon, Ariel liquid"
       },
       {
         img: "/dettol.png",
         top: "Disinfectants",
-        text: "Disinfectants"
+        text: "Jik, Dettol, Harpic, LysolDisinfectants"
       },
       {
         img: "/soap.png",
         top: "Soaps",
-        text: "Soaps"
+        text: "Dettol liquid soap, Lifebuoy, Kleanmate"
       }
     ]
   },
@@ -110,17 +110,17 @@ export const categories = [
       {
         img: "/cooking.png",
         top: "Cooking oils",
-        text: "Vegetable Oil."
+        text: "Vegetable Oil, Palm oil, Soyabean oil."
       },
       {
         img: "/syrup.png",
         top: "Syrups",
-        text: "Syrups – maple, chocolate, flavored syrups."
+        text: "Maple, Chocolate, Flavored syrups, Honey."
       },
       {
         img: "/vinegar.png",
         top: "Vinegars",
-        text: "Vinegars & Condiments"
+        text: "Apple cider, Malt, White, Coconut"
       }
     ]
   },
@@ -133,17 +133,17 @@ export const categories = [
       {
         img: "/cantu.png",
         top: "Hair Care",
-        text: "Hair Care"
+        text: "Shampoos, Conditioners, Hair oils"
       },
       {
         img: "/bodyoil.png",
         top: "Body Oils",
-        text: "Body Oils"
+        text: "Coconut oil, Shea oil, Almond oil, Olive oil, Baby oils"
       },
       {
         img: "/nivea.png",
         top: "Lotions",
-        text: "Lotions"
+        text: "Sunscreen, Baby lotion, Moisturizers, Hand & Foot lotions"
       }
     ]
 },
@@ -156,17 +156,17 @@ export const categories = [
       {
         img: "/perfume.png",
         top: "Perfumes",
-        text: "Perfumes"
+        text: "Eau de parfum, Eau de toilette, Body mists,"
       },
       {
         img: "/essential.png",
         top: "Essential Oils",
-        text: "Essential Oils"
+        text: "Floral, Citrus, Herbal, Spice, Woodsy"
       },
       {
         img: "/diffuser.png",
         top: "Fragrance Diffusers",
-        text: "Fragrance Diffusers"
+        text: "Reed diffusers, Oil burners, Electric plug-in"
       }
     ]
   },
@@ -179,12 +179,12 @@ export const categories = [
       {
         img: "/engine.png",
         top: "Engine Oil",
-        text: "Engine Oil"
+        text: "Total, Mobil, Castrol, Shell Helix, Oando"
       },
       {
         img: "/mobil.png",
         top: "Automotive Liquids",
-        text: "Automotive Liquids"
+        text: "ATF (Dexron II/III), DOT brake fluids, gear oil, coolant"
       },
       {
         img: "/fluid.png",
