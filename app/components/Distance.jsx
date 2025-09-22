@@ -41,7 +41,7 @@ const Distance = () => {
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 1.2 }}
           className="relative w-40 h-40 md:w-80 md:h-80">
-          <Image src={assets.nylon} alt="nylon" fill className="object-contain"/>
+          <Image src={assets.jugs} alt="nylon" fill className="object-contain"/>
         </motion.div>
 
       </div>

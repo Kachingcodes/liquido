@@ -45,11 +45,11 @@ const Hero = () => {
         {/* Backgrounds */}
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover hidden md:block"
-          style={{ backgroundImage: "url('/Desk.svg')" }}
+          style={{ backgroundImage: "url('/backgrounds/Desk.svg')" }}
         />
         <div
           className="absolute top-0 left-0 w-full h-full bg-no-repeat bg-cover block md:hidden"
-          style={{ backgroundImage: "url('/phone.svg')" }}
+          style={{ backgroundImage: "url('/backgrounds/phone.svg')" }}
         />
 
         {/* Left Section */}
