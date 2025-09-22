@@ -17,8 +17,8 @@ export default function About() {
       <AboutUs/>
       <AboutTop/>
       <Contact/>
-      {/* <Wave/> */}
-      {/* <Footer/> */}
+      <Wave/>
+      <Footer/>
     </>  
     );
 }

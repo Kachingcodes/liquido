@@ -7,6 +7,8 @@ import { categories } from '@/public/assets';
 import DeskAdvert from '../shop/DeskAdvert';
 import PhoneAdvert from '../shop/PhoneAdvert';
 
+
+
 const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelectedOption, searchTerm, setSearchTerm }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [drops, setDrops] = useState([]);
@@ -128,8 +130,8 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
                 onClick={() => toggleOption(option)}
                 className={`flex-shrink-0 min-w-max px-4 py-2 rounded-md text-sm cursor-pointer select-none transition
                   ${selectedOption === option
-                    ? "bg-[#67a1e3] text-white"
-                    : "bg-[#1C4672] text-gray-100 hover:bg-[#8FC0F4]/40"
+                    ? "bg-[#4C86C4] text-white"
+                    : "bg-[#1C4672] text-gray-100 hover:bg-[#67a1e3] hover:text-gray-800"
                   }`}
               >
                 {option}

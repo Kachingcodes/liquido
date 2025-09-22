@@ -24,7 +24,7 @@ const Distance = () => {
           viewport={{ once: false, amount: 0.3 }} 
           exit={{ opacity: 0, x: 100 }}
           transition={{ duration: 1.2 }}
-          className="relative w-60 h-60 md:w-86 md:h-86">
+          className="relative w-40 h-40 md:w-80 md:h-80">
           <Image src={assets.location} alt="location" fill className="object-contain"/>
         </motion.div>
 
@@ -40,7 +40,7 @@ const Distance = () => {
           viewport={{ once: false, amount: 0.3 }} 
           exit={{ opacity: 0, x: -100 }}
           transition={{ duration: 1.2 }}
-          className="relative w-60 h-60 md:w-86 md:h-86">
+          className="relative w-40 h-40 md:w-80 md:h-80">
           <Image src={assets.nylon} alt="nylon" fill className="object-contain"/>
         </motion.div>
 

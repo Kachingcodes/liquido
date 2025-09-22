@@ -62,7 +62,7 @@ const ChooseUs = () => {
             viewport={{ once: false, amount: 0.3 }} 
             exit={{ opacity: 0, x: 100 }}
             transition={{ duration: 1.2 }}
-            className="relative w-60 h-60 md:w-92 md:h-92"
+            className="relative w-40 h-40 md:w-80 md:h-80"
           >
             <Image src={assets.delivery} alt="delivery" fill className="object-contain"/>
           </motion.div>

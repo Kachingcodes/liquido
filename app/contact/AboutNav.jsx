@@ -6,6 +6,9 @@ import { Menu, X, Phone, HomeIcon, ShoppingBasket } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from "@/public/assets";
 import { motion, AnimatePresence } from 'framer-motion';
+import { GiShoppingCart } from "react-icons/gi";
+              
+
 
 const AboutNav = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -77,7 +80,7 @@ const AboutNav = () => {
               }}
                 className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
                 >
-                Shop <ShoppingBasket size={20}/>
+                Shop <GiShoppingCart size={20}/>
                 </Link>  
             </li>
         </ul>
@@ -117,7 +120,7 @@ const AboutNav = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <span>Shop</span>
-                <ShoppingBasket className="w-5 h-5" />
+                <GiShoppingCart className="w-5 h-5" />
               </Link>
             </div>
           </motion.div>
@@ -125,20 +128,28 @@ const AboutNav = () => {
       </AnimatePresence>
 
        {/* DROPS */}
-            <AnimatePresence>
-              {drops.map((drop) => (
-                <motion.img
-                  key={drop.id}
-                  src="/drop.png"
-                  alt="drop"
-                  initial={{ top: drop.y, left: drop.x, opacity: 1, position: "absolute" }}
-                  animate={{ top: drop.y + 100, opacity: 0 }}
-                  exit={{ opacity: 0 }}
-                  transition={{ duration: 1.5, ease: "easeIn" }}
-                  className="w-10 h-10 pointer-events-none"
-                />
-              ))}
-            </AnimatePresence>
+        <AnimatePresence>
+        {drops.map((drop) => (
+          <motion.img
+          key={drop.id}
+          src="/drop.png"
+          alt="drop"
+          initial={{ top: drop.y, left: drop.x, opacity: 1, position: "absolute" }}
+          animate={{ top: drop.y + 100, opacity: 0 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeIn" }}
+          className="w-10 h-10 pointer-events-none"
+        />
+        ))}
+        </AnimatePresence>
+
+        <Link 
+        href="/shop"
+        className="fixed right-2 bottom-2 p-3 bg-black text-[#E0F2FE] rounded-full text-sm"
+        onClick={() => setIsOpen(false)}
+        >
+          <GiShoppingCart size={22}/>
+        </Link>
     </header>
   );
 };

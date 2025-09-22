@@ -39,9 +39,9 @@ const About = () => {
           custom={1}
           variants={textVariants}
           className="mb-4">
-          At <span className="font-semibold">Liquido</span>, we believe every drop matters. 
-          We provide high-quality liquid products—from clean, refreshing water to specialty liquids 
-          for homes, businesses, and industries.
+          At <span className="font-semibold">Liquido</span>, we deliver everyday essentials from drinking water to 
+          liquid soaps, quality wines, beverages, and perfumes, we specialize in delivering liquid-based products 
+          that keep you refreshed, clean, and confident. 
         </motion.p>
 
         <motion.p 
@@ -51,8 +51,9 @@ const About = () => {
           custom={2}
           variants={textVariants}
           className="mb-4">
-          Our mission is simple: to make access to essential and premium liquids easy, reliable, and affordable. 
-          With a commitment to quality and customer satisfaction, we ensure every product we deliver adds value to your life.
+          Our mission is to bring hydration, hygiene, and household necessities right to your doorstep with ease. 
+          Whether you are ordering a single pack or placing a bulk request, we ensure fast delivery, 
+          unbeatable prices, and consistent quality backed by trusted supplier partnerships.
         </motion.p>
 
         <motion.p
@@ -62,8 +63,10 @@ const About = () => {
           custom={3}
           variants={textVariants}
         >
-          Whether it’s hydration, refreshment, or specialized solutions, 
-          <span className="font-semibold"> Liquido</span> is here to serve you—one drop at a time.
+          With <span className="font-semibold"> Liquido</span>, you are not just buying products, you are choosing convenience, reliability and care. 
+          We are here to serve homes, offices, and businesses with liquid essentials that fit your style, 
+          taste, and everyday needs.
+          <span className="font-semibold"> Liquido</span> - Everything Liquid, Delivered with Ease.
         </motion.p>
       </div>
       

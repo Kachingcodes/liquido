@@ -2,10 +2,12 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Link as ScrollLink } from "react-scroll";
-import { Menu, X, Phone, ShoppingBasketIcon } from 'lucide-react';
+import { Menu, X, Phone } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from "@/public/assets";
 import { motion, AnimatePresence } from 'framer-motion';
+import { GiShoppingCart } from "react-icons/gi";
+
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -74,7 +76,7 @@ const Navbar = () => {
                 }}
               className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
             >
-              Shop <ShoppingBasketIcon size={18} />
+              Shop <GiShoppingCart size={18}/>
             </Link>               
           </li>
           <li>
@@ -134,7 +136,7 @@ const Navbar = () => {
                 onClick={() => setIsOpen(false)}
               >
                 <span>Shop</span>
-                <ShoppingBasketIcon className="w-5 h-5" />
+                <GiShoppingCart size={18}/>
               </Link>
               <Link 
                 href="/contact"
@@ -149,28 +151,27 @@ const Navbar = () => {
         )}
       </AnimatePresence>
 
-       <AnimatePresence>
-                 {drops.map((drop) => (
-                   <motion.img
-                     key={drop.id}
-                     src="/drop.png"
-                     alt="drop"
-                     initial={{ y: 0, opacity: 1 }}
-                     animate={{ y: 100, opacity: 0.8 }}
-                     exit={{ opacity: 0 }}
-                     transition={{ duration: 1.5, ease: "easeIn" }}
-                     className="absolute right-50 w-10 top-12 -translate-x-1/2"
-                   />
-                   ))}
-               </AnimatePresence>
+        <AnimatePresence>
+          {drops.map((drop) => (
+          <motion.img
+          key={drop.id}
+          src="/drop.png"
+          alt="drop"
+          initial={{ y: 0, opacity: 1 }}
+          animate={{ y: 100, opacity: 0.8 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 1.5, ease: "easeIn" }}
+          className="absolute right-50 w-10 top-12 -translate-x-1/2"
+          />
+          ))}
+        </AnimatePresence>
 
               <Link 
                 href="/shop"
-                className="fixed right-2 bottom-2 p-3 bg-black text-[#4C86C4] rounded-full text-sm"
+                className="fixed right-2 bottom-2 p-3 bg-black text-[#E0F2FE] rounded-full text-sm"
                 onClick={() => setIsOpen(false)}
               >
-                {/* <span>Shop</span> */}
-                <ShoppingBasketIcon className="w-5 h-5" />
+               <GiShoppingCart size={22}/>
               </Link>
     </header>
   );

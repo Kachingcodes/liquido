@@ -59,7 +59,9 @@ const Hero = () => {
           </h1>
 
           <span className="text-sm md:text-lg text-black">
-           Stay refreshed with our fast and reliable water delivery service, plus quality liquid products like soaps and beverages - all brought straight to you with ease.
+           Stay refreshed with our fast and reliable water delivery service, 
+           plus quality liquid products like soaps and beverages 
+           - all brought straight to you with ease.
           </span>
 
           <div className="relative inline-block mt-2">
@@ -121,7 +123,7 @@ const Hero = () => {
           initial={{ opacity: 0, x: -100 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ duration: 1.2 }}
-          className="absolute bottom-0 right-2 md:right-20 w-32 h-32 md:w-60 md:h-60"
+          className="absolute bottom-6 right-2 md:right-20 w-32 h-32 md:w-60 md:h-60"
         >
           <Image src={assets.van} alt="van" fill className="object-contain" placeholder="blur"/>
         </motion.div>
