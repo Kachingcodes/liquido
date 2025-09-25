@@ -4,7 +4,6 @@ import { Quicksand } from 'next/font/google';
 import { motion } from "framer-motion";
 
 
-
 const quick = Quicksand({
    subsets: ["latin"],
   weight: ["600"]

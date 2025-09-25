@@ -11,7 +11,7 @@
   display: none;
 }
 .scrollbar-hide {
-  -ms-overflow-style: none;  /* IE/Edge --font-ovo: "Ovo", "serif";*/
+  -ms-overflow-style: none;  /* IE/Edge */
   scrollbar-width: none;     /* Firefox */
 }
 

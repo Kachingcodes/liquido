@@ -254,3 +254,17 @@ export const adverts = [
   { img: "/adverts/wine.png", text: "🚚 Free Shipping on Orders Over ₦20,000!" },
   { img: "/adverts/icetea.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
 ];
+
+
+export const faqs = [
+  { q: "What is a car?", a: "A car is a wheeled motor vehicle used for transportation." },
+  { q: "How long is delivery?", a: "Delivery usually takes between 3–5 business days." },
+  { q: "Do you offer warranty?", a: "Yes, all our products come with at least 1 year warranty." },
+  { q: "Can I track my order?", a: "Absolutely, tracking info is shared once your order is shipped." },
+  { q: "Do you ship internationally?", a: "Yes, we ship worldwide with additional costs." },
+  { q: "Can I return a product?", a: "Yes, products can be returned within 14 days." },
+  { q: "What payment methods are accepted?", a: "We accept credit cards, PayPal, and bank transfers." },
+  { q: "Is there customer support?", a: "Yes, our support team is available 24/7." },
+  { q: "Do you offer bulk discounts?", a: "Yes, discounts are available for bulk orders." },
+  { q: "Are my details safe?", a: "We ensure all transactions are encrypted and secure." },
+];
