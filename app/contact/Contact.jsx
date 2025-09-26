@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Clock, ArrowBigRight, ArrowBigDown } from 'lucide-react';
+import { Send, MapPin, Clock, ArrowBigRight, ArrowBigDown, ArrowRight } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
@@ -47,22 +47,23 @@ const Contact = () => {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
           {/* Card 1 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
-            <MapPin className="mx-auto mb-2" size={20}/>
-            <h1 className='text-lg'>LOCATION</h1>
-            <p className='text-black text-sm'>Welcome to Agraba</p>
+            <MapPin className="mx-auto mb-1" size={20}/>
+            <h1 className='text-lg mb-2'>LOCATION</h1>
+            <p className='text-black text-sm'>107A Adeniyi Jones, Ikeja, Lagos</p>
           </div>
 
           {/* Card 2 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40  hover:text-white hover:bg-[#4C86C4]">
-            <Clock className="mx-auto mb-2" size={20}/>
-            <h1 className='text-lg'>WORK HOURS</h1>
-            <p className='text-black text-sm'>Welcome to Agraba</p>
+            <Clock className="mx-auto mb-1" size={20}/>
+            <h1 className='text-lg mb-2'>WORK HOURS</h1>
+            <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 8AM - 8PM</p>
+            <p className='text-black text-sm flex justify-evenly '>Sundays <ArrowRight size={16}/> 1PM - 8PM</p>
           </div>
 
           {/* Card 3 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
-            <FaEnvelopeOpenText className="mx-auto mb-2" size={20}/>
-            <h1 className='text-lg'>Email</h1>
+            <FaEnvelopeOpenText className="mx-auto mb-1" size={20}/>
+            <h1 className='text-lg mb-2'>Email</h1>
             <p className='text-black text-sm'>Welcome to Agraba</p>
           </div>
         </div>
