@@ -191,6 +191,21 @@ export const categories = [
   }
 ];
 
+
+export const images = [
+    "/trusted/banahGrace.jpg",
+    "/trusted/darwayCoast.jpg",
+    "/trusted/ivy.jpg",
+    "/trusted/landmark1.jpg",
+    "/trusted/landmark2.jpg",
+    "/trusted/luxolHomes.jpg",
+    "/trusted/mikano.jpg",
+    "/trusted/solarPro.jpg",
+    "/trusted/togaTravels.jpg",
+    "/trusted/wgTrips.jpg"
+];
+
+
 export const testimonials =[
   {
     id:1,

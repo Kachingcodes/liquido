@@ -2,19 +2,14 @@
 import { motion, useAnimation } from "framer-motion";
 import { useEffect } from "react";
 import Image from "next/image";
+import { Quicksand } from "next/font/google";
+import { images } from '@/public/assets';
 
-const images = [
-    "/trusted/banahGrace.jpg",
-    "/trusted/darwayCoast.jpg",
-    "/trusted/ivy.jpg",
-    "/trusted/landmark1.jpg",
-    "/trusted/landmark2.jpg",
-    "/trusted/luxolHomes.jpg",
-    "/trusted/mikano.jpg",
-    "/trusted/solarPro.jpg",
-    "/trusted/togaTravels.jpg",
-    "/trusted/wgTrips.jpg"
-];
+const quick = Quicksand({
+   subsets: ["latin"],
+  weight: ["700"]
+});
+
 
 export default function Trusted() {
   const controls = useAnimation();
@@ -49,6 +44,13 @@ export default function Trusted() {
 
   return (
     <div className="relative w-full overflow-hidden py-20">
+      <motion.h1 
+      initial={{y: -100, opacity: 0}}
+      whileInView={{y: 0, opacity: 1}}
+      transition={{ duration: 1.0 }}
+      className={` ${quick.className} text-3xl md:text-4xl text-black text-center mb-8 p-2`}>
+        TRUSTED BY
+      </motion.h1>
       <motion.div
         className="flex gap-8"
         animate={controls}
