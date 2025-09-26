@@ -8,18 +8,41 @@ import { Menu, X, ArrowUpIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 
+const loadStorage = (key, fallback) => {
+  try{
+    const data = localStorage.getItem(key);
+    return data ? JSON.parse(data) : fallback;
+  } catch {
+    return fallback;
+  }
+};
+
 const MainPage = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [activeCategory, setActiveCategory] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
   const [searchTerm, setSearchTerm] = useState("");
-  const [favorites, setFavorites] = useState([]); 
+  const [favorites, setFavorites] = useState(() => loadStorage("favorites", [])); 
   const [showFavorites, setShowFavorites] = useState(false);
   const [visible, setVisible] = useState(false);
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(() => loadStorage("cart", []));
   const [showCart, setShowCart] = useState(false);
-  const [counts, setCounts] = useState({});
+  const [counts, setCounts] = useState(() => loadStorage("counts", {}));
 
+  //Save Cart when it changes
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
+   // Save favorites when it changes
+  useEffect(() => {
+    localStorage.setItem("favorites", JSON.stringify(favorites));
+  }, [favorites]);
+
+  // Save counts when it changes
+  useEffect(() => {
+    localStorage.setItem("counts", JSON.stringify(counts));
+  }, [counts]);
 
 
   useEffect(() => {
