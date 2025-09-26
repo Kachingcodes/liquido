@@ -166,13 +166,13 @@ const Navbar = () => {
           ))}
         </AnimatePresence>
 
-              <Link 
-                href="/shop"
-                className="fixed right-2 bottom-8 p-3 bg-[#092850] hover:bg-[#305f9e] text-[#E0F2FE] rounded-full text-sm shadow shadow-[#000000]/50"
-                onClick={() => setIsOpen(false)}
-              >
-               <GiShoppingCart size={30}/>
-              </Link>
+        <Link 
+          href="/shop"
+          className="fixed right-2 bottom-12 p-3 bg-[#092850] hover:bg-[#305f9e] text-[#E0F2FE] rounded-full text-sm shadow shadow-[#000000]/50"
+          onClick={() => setIsOpen(false)}
+        >
+          <GiShoppingCart size={30}/>
+        </Link>
     </header>
   );
 };

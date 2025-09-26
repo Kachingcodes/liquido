@@ -23,11 +23,10 @@ const AboutTop = () => {
         initial={{y: -100, opacity: 0 }}
         whileInView={{y: 0, opacity: 1}}
         transition={{ duration: 1.0 }}
-        className={`${quick.className} text-3xl md:text-5xl relative z-10 text-white font-bold text-center`}>
+        className={`${quick.className} text-3xl md:text-5xl relative z-10 md:mt-0 mt-30 text-white font-bold text-center`}>
           GET IN TOUCH
         </motion.h1>
     </section>
-
   );
 };
 

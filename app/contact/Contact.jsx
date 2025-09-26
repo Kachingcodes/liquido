@@ -28,9 +28,14 @@ const Contact = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // You can integrate API call / email service here 
-    console.log('Form submitted:', formData);
-    alert('Thank you! Your message has been sent.');
+    const phoneNumber = "2347062757706"; 
+
+    const message = `Name: ${formData.name}\n
+    Email: ${formData.email}\n\n
+    ${formData.message}`;
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
     setFormData({ name: '', email: '', message: '' });
   };
 
@@ -57,14 +62,14 @@ const Contact = () => {
             <Clock className="mx-auto mb-1" size={20}/>
             <h1 className='text-lg mb-2'>WORK HOURS</h1>
             <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 8AM - 8PM</p>
-            <p className='text-black text-sm flex justify-evenly '>Sundays <ArrowRight size={16}/> 1PM - 8PM</p>
+            <p className='text-black text-sm flex justify-evenly'>Sundays <ArrowRight size={16}/> 1PM - 8PM</p>
           </div>
 
           {/* Card 3 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
             <FaEnvelopeOpenText className="mx-auto mb-1" size={20}/>
             <h1 className='text-lg mb-2'>Email</h1>
-            <p className='text-black text-sm'>Welcome to Agraba</p>
+            <p className='text-black text-sm'>getliquido@gmail.com</p>
           </div>
         </div>
       </motion.div>

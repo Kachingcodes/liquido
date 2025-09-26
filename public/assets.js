@@ -209,59 +209,60 @@ export const images = [
 export const testimonials =[
   {
     id:1,
-    name: "Amina Yusuf",
-    review: "I love how fast and reliable this service is. I never run out of my essential liquids anymore. Highly recommend to everyone!",
-    img:"/people/girl.jpg"
+    name: "Kester Africa Limited",
+    review: "Liquido stores are always closer to your doorstep than you think, and that's exactly what makes them so convenient! Kudos to the team for making their services so accessible.",
+    img:"/people/kester.png"
   },
   {
     id:2,
-    name: "David Okeke",
-    review: "The app is super easy to use, and the delivery is always on time. The quality of the products is top-notch.",
-    img:"/people/david.jpg"
-  },
-  {
-    id:3,
-    name: "Adaobi Eze",
-    review: "Finally, a service that actually cares about its customers. Friendly support and smooth deliveries every time.",
-    img:"/people/ada.jpg"
-  },
-  {
-    id:4,
-    name: "Emeka Nwosu",
-    review: "I’ve tried a few liquid delivery services, but this one is by far the best. Affordable, fast, and dependable.",
-    img:"/people/emeka.jpg"
-  },
-  {
-    id:5,
-    name: "Fatima Bello",
-    review: "I was worried about ordering liquids online, but everything arrived safely and well-packaged. I’m definitely a loyal customer now!",
-    img:"/people/fatima.jpg"
-  },
-  {
-    id:6,
-    name: "Tunde Adeyemi",
-    review: "Convenient, quick, and professional. I can’t imagine going back to buying from stores when I have this service at my fingertips.",
-    img:"/people/tunde.jpg"
-  },
-  {
-    id:7,
     name: "Ebun Adeola",
     review: "I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers.",
     img:"/people/ebun.jpg"
   },
   {
+    id:3,
+    name: "Alina Becker",
+    review: "They really combine affordability with convenience. That's rare to find these days.",
+    img:"/people/happy3.jpg"
+  },
+  {
+    id:4,
+    name: "Akinwolire Damilare",
+    review: "Very reliable and fast in delivery.",
+    img:"/people/happy4.jpg"
+  },
+  {
+    id:5,
+    name: "Emeka Nonso",
+    review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!",
+    img:"/people/emeka.jpg"
+  },
+  {
+    id:6,
+    name: "Saviour Ikrangubek",
+    review: "Fast and Reliable.",
+    img:"/people/happy6.jpg"
+  },
+  {
+    id:7,
+    name: "Opia Favour",
+    review: "The Service was great and the delivery was swift.",
+    img:"/people/happy7.jpg"
+  },
+  {
     id:8,
     name: "Blessing Chukwu",
     review: "I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed.",
-    img:"/people/blessing.jpg"
+    img:"/people/ada.jpg"
   },
   {
     id:9,
-    name: "Zainab Ahmed",
-    review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!",
-    img:"/people/zainab.jpg"
+    name: "Jane Ogba",
+    review: "He is reliable. Just give him a call and he will deliver to you anywhere you are.",
+    img:"/people/happy9.jpg"
   }
 ];
+
 
 export const adverts = [
   { img: "/adverts/smoothie.png", text: "🔥 Big Discount – 20% Off All Items!" },
@@ -272,14 +273,12 @@ export const adverts = [
 
 
 export const faqs = [
-  { q: "What is a car?", a: "A car is a wheeled motor vehicle used for transportation." },
-  { q: "How long is delivery?", a: "Delivery usually takes between 3–5 business days." },
-  { q: "Do you offer warranty?", a: "Yes, all our products come with at least 1 year warranty." },
-  { q: "Can I track my order?", a: "Absolutely, tracking info is shared once your order is shipped." },
-  { q: "Do you ship internationally?", a: "Yes, we ship worldwide with additional costs." },
-  { q: "Can I return a product?", a: "Yes, products can be returned within 14 days." },
-  { q: "What payment methods are accepted?", a: "We accept credit cards, PayPal, and bank transfers." },
-  { q: "Is there customer support?", a: "Yes, our support team is available 24/7." },
-  { q: "Do you offer bulk discounts?", a: "Yes, discounts are available for bulk orders." },
-  { q: "Are my details safe?", a: "We ensure all transactions are encrypted and secure." },
+  { q: "What is the timing of your deliveries?", a: "We deliver daily between 9Am and 6PM. Once your order is placed, we will confirm your exact delivery window." },
+  { q: "How does your delivery service work?", a: "It's simple! Tell us the drinks you want, place your order and we'll deliver them to your doorstep quickly and free of charge [Depending on your location]." },
+  { q: "What brands of water and drinks do you offer?", a: "We offer a wide range of trusted wateer brands and various beverages to suit your needs. You can find a detailed list on our website." },
+  { q: "How do I make payment?", a: "You can pay via transfer, POS (card) or cash on delivery. Once your order is confirmed, we'll send you the payment details. We accept Payment on Delivery." },
+  { q: "How much is delivery?", a: "Delivery is free/affordable within Adeniyi Jones (Ikeja). For longer distances, we'll confirm the delivery fee once you share your location." },
+  { q: "Do you accept bulk orders?", a: "Yes we do. For bulk orders, kindly share the quantity and location via our DM so we can give you a tailored quote and delivery plan." },
+  { q: "Apart from water, what else do you deliver?", a: "Liquido NG is more than water. We also deliver liquid soap, soft drinks, wines and other essential liquids straight to your doorstep." },
+    { q: "Which areas do you deliver to?", a: "We currently deliver across Ikeja and Environs. If your location isn't listed, kindly share it with us and we'll confirm availability." },
 ];

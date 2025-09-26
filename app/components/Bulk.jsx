@@ -68,14 +68,9 @@ const TextTiller = () => {
 
                     <div className="flex flex-row items-center justify-between mt-4 md:mt-6">
                         <button onClick={TextTiller}
-                        className="bg-[#1C4672] px-4 py-3 flex items-center gap-2 text-white text-sm md:text-md 
-                        rounded-lg w-fit hover:bg-white hover:text-[#1C4672] transition shadow-md shadow-[#000000]/40">
+                        className="bg-[#1C4672] px-4 py-3 flex items-center justify-center gap-2 text-white text-sm md:text-md 
+                        rounded-lg w-full hover:bg-white hover:text-[#1C4672] transition shadow-md shadow-[#000000]/40">
                             Book Rep <MessageSquareText size={20}/>
-                        </button>
-
-                        <button className="bg-[#1C4672] px-3 py-3 flex items-center gap-2 text-white text-sm md:text-md 
-                        rounded-lg w-fit hover:bg-white hover:text-[#1C4672] transition shadow-md shadow-[#000000]/40">
-                            Fill Form <NotebookPen size={20}/>
                         </button>
                     </div>
                 </div>

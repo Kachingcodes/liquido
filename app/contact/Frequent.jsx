@@ -15,29 +15,31 @@ const quick = Quicksand({
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
-    const [formData, setFormData] = useState({
-      question: '',
-    });
-  
-    const handleChange = (e) => {
-      const { name, value } = e.target;
-      setFormData((prev) => ({ ...prev, [name]: value }));
-    };
-  
-    const handleSubmit = (e) => {
-      e.preventDefault();
-      // You can integrate API call / email service here 
-      console.log('Form submitted:', formData);
-      alert('Thank you! Your message has been sent.');
-      setFormData({ question: '' });
-    };
+const [formData, setFormData] = useState({ question: "" });
+
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const phoneNumber = "2347062757706"; 
+
+    // WhatsApp URL
+    const message = `Hello, I have a question: ${formData.question}`;
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
+    window.open(whatsappURL, "_blank");
+
+    setFormData({ question: "" });
+  };
+
 
   return (
     <section
       id="frequent"
       className="bg-white relative w-full py-8 flex items-center justify-center"
     >
-      <div className="grid grid-cols-1 md:grid-cols-2 p-6 gap-10 w-full max-w-6xl">
+      <div className="grid grid-cols-1 md:grid-cols-2 p-4 md:p-6 gap-10 w-full max-w-6xl">
         {/* Left */}
         <div className="flex flex-col justify-between max-w-xl">
           <div className="gap-4 flex flex-col">
@@ -48,7 +50,7 @@ export default function FaqSection() {
           className={` ${quick.className} text-3xl font-bold text-black tracking-wide`}>
             Frequently Asked Questions
           </motion.h1>
-          <p className="text-md">We are here to answer your inquiries</p>
+          <p className="text-md md:mb-0 mb-4">We are here to answer your inquiries</p>
         </div>
 
           <motion.div
@@ -58,11 +60,11 @@ export default function FaqSection() {
             className="bg-gray-100 space-y-4 p-4 rounded-lg">
             <h3 className="font-semibold">Can't locate the answers you need?</h3>
             <span className="text-gray-700 text-sm block">
-              Send us an email and we will get back to you as soon as possible.
+              Send us a message and we will get back to you as soon as possible.
             </span>
 
-            <form  className="w-full space-y-5">
-            {/* Input Question onSubmit={handleSubmit} */}
+            <form onSubmit={handleSubmit} className="w-full space-y-5">
+            {/* Input Question */}
             <div>
               <label className="block text-sm mb-2">Type Your Question</label>
               <input
@@ -76,7 +78,7 @@ export default function FaqSection() {
             </div>
 
             <button className="flex gap-2 items-center justify-center px-4 py-2 text-white bg-[#4C86C4] hover:bg-[#1C4672] rounded-md">
-             <MailCheck size={20}/> Send email
+             <MailCheck size={20}/> Send Inquiry
             </button>
             </form>
           </motion.div>

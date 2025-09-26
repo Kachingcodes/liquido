@@ -1,14 +1,32 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { assets } from '@/public/assets';
 import { Quicksand } from "next/font/google";
-import { FaXTwitter, FaWhatsapp, FaInstagram } from "react-icons/fa6";
+import { FaXTwitter, FaWhatsapp, FaInstagram, FaX } from "react-icons/fa6";
 import Link from 'next/link'; 
-
+import Certified from './Certified';
 
 const Footer = () => {
+  const [open, setIsOpen] = useState(false);
+
+  const handleCert = () => {
+    setIsOpen(true);
+  };
+
+    useEffect(() => {
+      if(open) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "auto";
+      }
+  
+      return () => {
+        document.body.style.overflow = "auto";
+      };
+    }, [open]);
+
   const phoneNumber = "2347062757706"; 
   const message = "Hello Liquido 💧. I would like to make some inquiries.";
 
@@ -31,26 +49,43 @@ const Footer = () => {
       </div>
 
       {/* Column 2 */}
-      <div className="flex flex-col gap-3 mt-0 md:mt-4">
+      <div className="flex flex-col gap-3 mt-0 md:mt-6">
         <h2 className="font-semibold text-md">Quick Links</h2>
         <Link href= "/contact">
-          <span className='text-sm'>About Us</span>
+          <span className='text-sm cursor-pointer'>About Us</span>
         </Link>
-        <span className='text-sm'>Services</span>
+        {/* <span className='text-sm cursor-pointer'>Services</span> */}
         <Link href= "/contact">
-        <span className='text-sm'>Contact</span>
+        <span className='text-sm cursor-pointer'>Contact</span>
         </Link>
         <Link href= "/shop">
-        <span className='text-sm'>Shop</span>
+        <span className='text-sm cursor-pointer'>Shop</span>
         </Link>
       </div>
 
       {/* Column 3 */}
       <div className="flex flex-col gap-3 mt-0 md:mt-4">
         <h2 className="font-semibold text-md">Trust & Legal</h2>
-        <span className='text-sm'>Certifications & Licenses</span>
-        <span className='text-sm'>Privacy Policy</span>
-        <span className='text-sm'>Terms & Conditions</span>
+        <span 
+        onClick={handleCert}
+        className='text-sm cursor-pointer'>Certifications & Licenses</span>
+        {open && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+          
+          <button
+            onClick={() => setIsOpen(false)}
+            className="absolute top-6 right-6 text-white hover:text-gray-300"
+          >
+            <FaX size={28} />
+          </button>
+
+          <div className="bg-white rounded-lg p-6 max-w-3xl w-[90%] shadow-lg overflow-y-auto max-h-[90%]">
+            <Certified />
+          </div>
+        </div>
+        )}
+        <span className='text-sm cursor-pointer'>Privacy Policy</span>
+        <span className='text-sm cursor-pointer'>Terms & Conditions</span>
       </div>
     </div>
 
