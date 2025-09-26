@@ -37,18 +37,13 @@ const Contact = () => {
   return (
     <div className="px-6 pb-10 flex flex-col items-center bg-white">
 
-      {/* Get in Touch + Grid */}
+      {/* Grid */}
       <motion.div 
         initial={{ opacity: 0, y: -70 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 1.2 }}
       className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
-        {/* Left: GET IN TOUCH */}
-        <h1 className={`${quick.className} text-3xl md:text-4xl text-black`}>
-          GET IN TOUCH
-        </h1>
-
-        {/* Right: Contacts Grid */}
+        {/* Contacts Grid */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
           {/* Card 1 */}
           <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">

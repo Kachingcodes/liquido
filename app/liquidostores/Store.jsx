@@ -3,14 +3,13 @@ import { db } from "../firebase";
 import { getDocs, collection, query, where } from "firebase/firestore";
 import { StarIcon, Loader2, Minus, Plus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import Cart from "./Cart";
 
 
-
-const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavorites }) => {
+const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavorites, cart, setCart, counts, handleIncrease, handleDecrease, handleAddCart }) => {
   const [productsList, setProductsList] = useState([]);
   const [loading, setLoading] = useState(false);
   const productsCollectionRef = collection(db, "products");
-  const [quantity, setQuantity] = useState(0);
 
 
   useEffect(() => {
@@ -63,20 +62,6 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
 };
 
 
-
-  // const handleAdd = () => {
-  //   setQuantity(1); // when clicked first time
-  // };
-
-  // const increase = () => {
-  //   setQuantity((prev) => prev + 1);
-  // };
-
-  // const decrease = () => {
-  //   setQuantity((prev) => (prev > 1 ? prev - 1 : 0));
-  // };
-
-
   return (
     <section className="w-full py-8 md:py-14 overflow-hidden">
       {/* Loader */}
@@ -90,7 +75,7 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
       <Toaster position="top-center" />
 
       {/* Products */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-5 p-4 scrollbar-hide">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 p-4 scrollbar-hide">
         {!loading && filteredProducts.length > 0 ? (
           filteredProducts.map((product) => (
             <div
@@ -130,46 +115,30 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
                   </div>
                 </div>
 
-                <div className="flex items-center justify-between w-full mt-2 md:flex-row flex-col gap-2">
-                  <div className="flex items-center justify-evenly px-4 border border-black bg-gray-100 rounded-lg text-sm md:text-md"> 
+                <div className="flex items-center justify-between w-full mt-2 md:flex-row flex-col ">
+                  <div className="flex items-center justify-evenly md:px-1 px-4 border border-black bg-gray-100 rounded-lg text-sm md:text-md"> 
                     <button
-                   
-                      className="hover:bg-[#4C86C4] p-2 rounded-lg text-gray-500 hover:text-white"
+                      onClick={() => handleDecrease(product.id)}
+                      className="p-2 rounded-lg text-gray-500 hover:text-gray-900"
                     >
                       <Minus size={18}/>
                     </button>
-                      <span className="min-w-[24px] text-center font-semibold text-gray-900">1</span>
+                      <span className="min-w-[24px] text-center font-semibold text-gray-900">{counts[product.id] || 1}</span>
                     <button
-                     
-                      className=" hover:bg-[#4C86C4] p-2 rounded-lg text-gray-500 hover:text-white"
+                      onClick={() => handleIncrease(product.id)}
+                      className="p-2 rounded-lg text-gray-500 hover:text-gray-900"
                     >
                       <Plus size={18}/>
                     </button>
                   </div>
-                  <div>
+                  <div className="mt-2 md:mt-0">
                     <button 
+                    onClick={() => handleAddCart(product)}
                         className="bg-[#1C4672] text-center w-full px-8 md:px-4 py-2 text-white text-sm md:text-md rounded-lg hover:shadow-md hover:shadow-[#000000]/20 hover:bg-[#4C86C4] transition"
                       >
                         Add to Cart
                       </button>
                     </div>
-                  {/* ) : (
-                    <div className="flex items-center gap-2"> 
-                      <button
-                        onClick={decrease}
-                        className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300"
-                      >
-                        -
-                      </button>
-                        <span className="min-w-[24px] text-center font-semibold">{quantity}</span>
-                      <button
-                        onClick={increase}
-                        className="px-3 py-1 bg-gray-200 rounded-lg hover:bg-gray-300"
-                      >
-                        +
-                      </button>
-                    </div>
-                  )}  */}
                 </div>    
               </div>
             </div>

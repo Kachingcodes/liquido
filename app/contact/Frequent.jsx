@@ -2,7 +2,9 @@
 import React, { useState } from "react";
 import { Quicksand } from "next/font/google";
 import { faqs } from '@/public/assets';
-import { ChevronDown, ChevronUp } from "lucide-react";
+import { ChevronDown, ChevronUp, MailCheck } from "lucide-react";
+import { motion } from "framer-motion";
+
 
 const quick = Quicksand({
   subsets: ["latin"],
@@ -13,6 +15,23 @@ const quick = Quicksand({
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
 
+    const [formData, setFormData] = useState({
+      question: '',
+    });
+  
+    const handleChange = (e) => {
+      const { name, value } = e.target;
+      setFormData((prev) => ({ ...prev, [name]: value }));
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+      // You can integrate API call / email service here 
+      console.log('Form submitted:', formData);
+      alert('Thank you! Your message has been sent.');
+      setFormData({ question: '' });
+    };
+
   return (
     <section
       id="frequent"
@@ -20,22 +39,47 @@ export default function FaqSection() {
     >
       <div className="grid grid-cols-1 md:grid-cols-2 p-6 gap-10 w-full max-w-6xl">
         {/* Left */}
-        <div className="space-y-8 max-w-xl">
-          <h1 className={` ${quick.className} text-3xl font-bold text-black tracking-wide`}>
+        <div className="flex flex-col justify-between max-w-xl">
+          <div className="gap-4 flex flex-col">
+          <motion.h1 
+          initial={{y: -100, opacity: 0 }}
+          whileInView={{y: 0, opacity: 1}}
+          transition={{ duration: 1.0 }}
+          className={` ${quick.className} text-3xl font-bold text-black tracking-wide`}>
             Frequently Asked Questions
-          </h1>
+          </motion.h1>
+          <p className="text-md">We are here to answer your inquiries</p>
+        </div>
 
-          <div className="bg-gray-100 space-y-4 p-4 rounded-lg">
-            <h3 className="font-semibold">Still have questions?</h3>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 1.2, ease: "easeInOut" }}
+            className="bg-gray-100 space-y-4 p-4 rounded-lg">
+            <h3 className="font-semibold">Can't locate the answers you need?</h3>
             <span className="text-gray-700 text-sm block">
-              Can't find the answer to your question? Send us an email and we
-              will get back to you as soon as possible.
+              Send us an email and we will get back to you as soon as possible.
             </span>
 
-            <button className="px-4 py-2 text-white bg-[#4C86C4] hover:bg-[#1C4672] rounded-md">
-              Send email
+            <form  className="w-full space-y-5">
+            {/* Input Question onSubmit={handleSubmit} */}
+            <div>
+              <label className="block text-sm mb-2">Type Your Question</label>
+              <input
+                type="text"
+                name="question"
+                value={formData.question}
+                onChange={handleChange}
+                required
+                className="w-full rounded-lg px-4 py-2 text-sm bg-gray-200 text-black border border-gray-900 focus:border-[#1C4672] focus:outline-none"
+              />
+            </div>
+
+            <button className="flex gap-2 items-center justify-center px-4 py-2 text-white bg-[#4C86C4] hover:bg-[#1C4672] rounded-md">
+             <MailCheck size={20}/> Send email
             </button>
-          </div>
+            </form>
+          </motion.div>
         </div>
 
         {/* Right */}

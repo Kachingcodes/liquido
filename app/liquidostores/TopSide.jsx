@@ -1,6 +1,6 @@
 "use client";
 import React, { useState } from "react";
-import { Search, ArrowLeftIcon, X, ArrowRight } from "lucide-react";
+import { Search, ArrowLeftIcon, X, ArrowRight, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
 import { categories } from '@/public/assets';
@@ -9,7 +9,7 @@ import PhoneAdvert from '../shop/PhoneAdvert';
 
 
 
-const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelectedOption, searchTerm, setSearchTerm }) => {
+const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelectedOption, searchTerm, setSearchTerm, setCart, setShowCart }) => {
   const [showSearch, setShowSearch] = useState(false);
   const [drops, setDrops] = useState([]);
 
@@ -28,7 +28,7 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
   const options = activeCat.options || [];
 
   return (
-    <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white">
+    <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white ">
       {/* Top Search + Back - Desktop*/}
       <div className="hidden md:flex items-center justify-evenly w-full gap-4">       
         <div className="flex items-center w-full rounded-lg bg-white shadow-md px-3 py-2">
@@ -45,7 +45,7 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
         <div className="relative inline-block">
           <button
             onClick={handleBackIntro}
-            className="bg-[#1C4672] p-2 flex items-center gap-2 text-white md:text-md text-md rounded-lg shadow-md shadow-[#000000]/40 w-fit hover:bg-[#4C86C4] transition relative z-30"
+            className="bg-[#1C4672] p-2 flex items-center gap-2 text-white md:text-md text-md rounded-lg shadow-md shadow-[#000000]/40 w-fit hover:bg-[#4C86C4] transition relative"
           >
             Back <ArrowLeftIcon size={20}/>
           </button>
@@ -56,42 +56,48 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
         <DeskAdvert/>
       </div>
 
-      <div className="w-full md:hidden">
+      <div className="w-full md:hidden items-end justify-end flex">
         <PhoneAdvert/>
       </div>
 
       {/* Top Search - Mobile */}
-      <div className="md:hidden flex items-end w-auto ml-auto relative">
-        <div className="flex items-center mt-2"> 
+      <div className="md:hidden flex items-end justify-end w-full relative">
+        <div className="flex items-center mt-2 gap-1"> 
           {!showSearch ? (
             <button
               onClick={() => setShowSearch(true)}
-              className="p-2 rounded-full hover:bg-gray-100"
+              className="p-2 rounded-full bg-gray-100 hover:bg-[#8FC0F4]/40"
             >
-              <Search size={20} className="text-gray-600" />
+              <Search size={20} className="text-gray-700"/>
             </button>
           ) : (
             <motion.div
               initial={{ width: 0, opacity: 0 }}
-              animate={{ width: 320, opacity: 1 }}
+              animate={{ width: "100%", opacity: 1 }}
               exit={{ width: 0, opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="flex items-center bg-white rounded-lg shadow px-2 w-full"
+              className="flex items-center bg-white rounded-lg shadow px-2"
             >
               <input
                 type="text"
                 placeholder="Search liquids..."
                 autoFocus
-                className="flex-1 outline-none text-sm text-gray-700 bg-transparent"
+                className="flex-1 outline-none text-sm text-gray-700 bg-transparent max-w-3 w-full"
               />
               <button
                 onClick={() => setShowSearch(false)}
-                className="ml-2 p-2 text-gray-500 hover:text-gray-700"
+                className="p-2 text-gray-500 hover:text-gray-700"
               >
                 <X size={20}/>
               </button>
             </motion.div>
           )}
+
+            <button 
+            onClick={() => setShowCart(true)}
+            className="p-2 rounded-full bg-gray-100 hover:bg-[#8FC0F4]/40">
+            <ShoppingCart size={20} className="text-gray-700"/>
+          </button>
         </div>
       </div>
 

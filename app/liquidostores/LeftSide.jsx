@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { ShoppingCart, Star, Home, Truck, Recycle, PartyPopper, DollarSign, Bell, Phone, HelpCircle, Clock, StarOff } from "lucide-react";
+import { ShoppingCart, Star, Home, Truck, Recycle, PartyPopper, DollarSign, Bell, Phone, HelpCircle, Clock, StarOff, MinusCircle } from "lucide-react";
 import Link from 'next/link';
 
 const quick = Quicksand({
@@ -11,7 +11,7 @@ const quick = Quicksand({
   weight: ["600"]
 });
 
-const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen}) => {
+const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen, showCart, setShowCart}) => {
 
   return (    
     <div className='flex flex-col items-center justify-start py-2 space-y-6 z-100'>
@@ -30,9 +30,35 @@ const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen}) => {
             <Link href= "/">
                 <div className="flex text-sm items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
             </Link>
-            <div className="flex text-sm items-center gap-2 hover:text-[#c4e0f9]"><ShoppingCart size={16}/> View Cart</div>
+            <div 
+            onClick={() => { 
+                if(showCart) {
+                    setShowCart(false);
+                } else {
+                    setShowCart(true);
+                    setIsOpen(false); 
+                    setShowFavorites(false) 
+                }
+                }}
+            className="flex text-sm items-center gap-2 hover:text-[#c4e0f9]"
+            >
+                {showCart ? (
+                    <> <MinusCircle size={16}/> Close Cart </>
+                ) : (
+                    <><ShoppingCart size={16}/> View Cart</>
+                )}
+                </div>
+            
             <div
-                onClick={() => { setShowFavorites(!showFavorites); setIsOpen(false); }}
+                onClick={() => { 
+                if (showFavorites) {
+                    setShowFavorites(false);
+                } else{
+                    setShowFavorites(true);
+                    setShowCart(false);
+                    setIsOpen(false);
+                    }
+                }}
                 className="flex items-center text-sm gap-2 cursor-pointer text-white hover:text-[#c4e0f9]"
                 >       
                 {showFavorites ? (

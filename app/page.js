@@ -1,13 +1,13 @@
 'use client'
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-// import SignIn from './components/SignIn';
 import Features from './components/Features';
 import Categories from './components/Categories';
 import Order from './components/Order';
 import ChooseUs from './components/ChooseUs';
 import Distance from './components/Distance';
 import Bulk from './components/Bulk';
+import Trusted from './components/Trusted';
 import Testimonials from './components/Testimonials';
 import Wave from './components/Wave';
 import Footer from './components/Footer';
@@ -19,13 +19,13 @@ export default function Home() {
     <>
       <Navbar/>
       <Hero/>
-      {/* <SignIn/> */}
       <Features/>
       <Categories/>
       <Order/>
       <ChooseUs/>
       <Distance/>
       <Bulk/>
+      <Trusted/>
       <Testimonials/>
       <Wave/>
       <Footer/> 
