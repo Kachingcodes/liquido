@@ -104,6 +104,25 @@ const MainPage = () => {
 
 const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
 
+// For Cart (post-cart quantities)
+const handleCartIncrease = (id) => {
+  setCart((prev) =>
+    prev.map((item) =>
+      item.id === id ? { ...item, quantity: item.quantity + 1 } : item
+    )
+  );
+};
+
+const handleCartDecrease = (id) => {
+  setCart((prev) =>
+    prev.map((item) =>
+      item.id === id && item.quantity > 1
+        ? { ...item, quantity: item.quantity - 1 }
+        : item
+    )
+  );
+};
+
   return (
     <section className="w-full min-h-screen flex text-white relative overflow-hidden">
       {/* Hamburger button (mobile only) */}
@@ -254,7 +273,9 @@ const total = cart.reduce((acc, item) => acc + item.price * item.quantity, 0);
                 setShowCart={setShowCart}
                 handleIncrease={handleIncrease}
                 handleDecrease={handleDecrease}
-                handleAddCart={handleAddCart} />
+                handleAddCart={handleAddCart} 
+                handleCartIncrease={handleCartIncrease}
+                handleCartDecrease={handleCartDecrease}/>
             </motion.div>
             </>
           )}

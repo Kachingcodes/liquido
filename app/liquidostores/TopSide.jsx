@@ -147,7 +147,7 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
 
           {options.length > 1 && (
             <div className="flex justify-end w-full mt-1">
-              <span className="flex items-center gap-1 text-gray-700 text-xs md:text-sm">
+              <span className="md:hidden flex items-center gap-1 text-gray-700 text-xs md:text-sm">
                 Scroll For More <ArrowRight size={16} />
               </span>
             </div>

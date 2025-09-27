@@ -67,7 +67,7 @@ const Navbar = () => {
               </ScrollLink>
             </li>
           ))}
-          {/* <li>
+          <li>
             <Link 
               href="/shop"
               onClick ={() => {
@@ -78,7 +78,7 @@ const Navbar = () => {
             >
               Shop <GiShoppingCart size={18}/>
             </Link>               
-          </li> */}
+          </li>
           <li>
             <Link 
               href="/contact"
@@ -130,14 +130,14 @@ const Navbar = () => {
                   {section}
                 </ScrollLink>
               ))}
-              {/* <Link 
+              <Link 
                 href="/shop"
                 className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Shop</span>
                 <GiShoppingCart size={18}/>
-              </Link> */}
+              </Link>
               <Link 
                 href="/contact"
                 className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm"
@@ -167,7 +167,7 @@ const Navbar = () => {
         </AnimatePresence>
 
         <Link 
-          href="/shop"
+          href="/liquidostores"
           className="fixed right-2 bottom-12 p-3 bg-[#092850] hover:bg-[#305f9e] text-[#E0F2FE] rounded-full text-sm shadow shadow-[#000000]/50"
           onClick={() => setIsOpen(false)}
         >
