@@ -19,20 +19,30 @@ const Hero = () => {
   const [drops, setDrops] = useState([]);
   const router = useRouter();
 
-  const handlePlaceOrder = () => {
-    // Add drop on click
-    const newDrop = { id: Date.now() };
-    setDrops((prev) => [...prev, newDrop]);
+ const handleDiscoverMore = () => {
+  // Add drop on click
+  const newDrop = { id: Date.now() };
+  setDrops((prev) => [...prev, newDrop]);
 
-    // Remove drop after animation
-    setTimeout(() => {
-      setDrops((prev) => prev.filter((drop) => drop.id !== newDrop.id));
-    }, 3000);
+  // Remove drop after animation
+  setTimeout(() => {
+    setDrops((prev) => prev.filter((drop) => drop.id !== newDrop.id));
+  }, 3000);
 
-    setTimeout(() => {
-      router.push("/shop");
-    }, 600); 
-  };
+  setTimeout(() => {
+    const element = document.getElementById("Categories");
+    if (element) {
+      const navbarHeight = 60;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }, 500);
+};
 
   const phoneNumber = "2347062757706"; 
   const message = "Hello Liquido 💧. I would like to make some inquiries.";
@@ -66,7 +76,7 @@ const Hero = () => {
 
           <div className="relative inline-block mt-2">
             <button 
-              onClick={handlePlaceOrder}
+              onClick={handleDiscoverMore}
               className="bg-[#1C4672] px-2 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg shadow-md shadow-[#000000]/36 w-fit hover:bg-[#4C86C4] transition relative z-30"
             >
               Discover Liquido <Compass size={20}/>
