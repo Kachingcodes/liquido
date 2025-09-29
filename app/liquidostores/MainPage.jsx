@@ -115,13 +115,14 @@ const handleCartIncrease = (id) => {
 
 const handleCartDecrease = (id) => {
   setCart((prev) =>
-    prev.map((item) =>
-      item.id === id && item.quantity > 1
-        ? { ...item, quantity: item.quantity - 1 }
-        : item
-    )
+    prev
+      .map((item) =>
+        item.id === id ? { ...item, quantity: item.quantity - 1 } : item
+      )
+      .filter((item) => item.quantity > 0) // remove products with 0
   );
 };
+
 
   return (
     <section className="w-full min-h-screen flex text-white relative overflow-hidden">

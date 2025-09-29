@@ -24,7 +24,7 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
     setTimeout(() => router.push("/shop"), 600);
   };
 
-  const activeCat = categories.find(c => c.name === activeCategory) || { options: [] };
+  const activeCat = categories.find(c => c.name === activeCategory)?.options[0] || "";
   const options = activeCat.options || [];
 
   return (
@@ -128,7 +128,7 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
           transition={{ duration: 0.18 }}
           className={`absolute inset-0 flex flex-col px-2 ${activeCategory ? "pointer-events-auto" : "pointer-events-none"}`}
         >
-          {/* Row of buttons */}
+          {/* Second Row of buttons */}
           <div className="flex gap-2 w-full overflow-x-auto no-scrollbar">
             {options.map((option) => (
               <div

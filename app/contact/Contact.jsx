@@ -1,11 +1,10 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Clock, ArrowBigRight, ArrowBigDown, ArrowRight } from 'lucide-react';
+import { Send, MapPin, Clock, ArrowBigRight, ArrowBigDown, ArrowRight, InfoIcon } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { FaEnvelopeOpenText } from 'react-icons/fa6';
 
 
 const quick = Quicksand({
@@ -40,126 +39,127 @@ const Contact = () => {
   };
 
   return (
-    <div className="px-6 pb-10 flex flex-col items-center bg-white">
+    <section id='Contact'>
+      <div className="px-6 pb-10 flex flex-col items-center bg-white">
 
-      {/* Grid */}
-      <motion.div 
-        initial={{ opacity: 0, y: -70 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1.2 }}
-      className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
-        {/* Contacts Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
-          {/* Card 1 */}
-          <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
-            <MapPin className="mx-auto mb-1" size={20}/>
-            <h1 className='text-lg mb-2'>LOCATION</h1>
-            <p className='text-black text-sm'>107A Adeniyi Jones, Ikeja, Lagos</p>
-          </div>
-
-          {/* Card 2 */}
-          <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40  hover:text-white hover:bg-[#4C86C4]">
-            <Clock className="mx-auto mb-1" size={20}/>
-            <h1 className='text-lg mb-2'>WORK HOURS</h1>
-            <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 8AM - 8PM</p>
-            <p className='text-black text-sm flex justify-evenly'>Sundays <ArrowRight size={16}/> 1PM - 8PM</p>
-          </div>
-
-          {/* Card 3 */}
-          <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
-            <FaEnvelopeOpenText className="mx-auto mb-1" size={20}/>
-            <h1 className='text-lg mb-2'>Email</h1>
-            <p className='text-black text-sm'>getliquido@gmail.com</p>
-          </div>
-        </div>
-      </motion.div>
-
-        {/* BELOW - Contact Us + Form */}
-      <div className="w-full max-w-5xl flex flex-col md:flex-row items-start p-1 md:p-20 justify-evenly">
-        {/* Left: Contact Us heading + Image */}
+        {/* Grid */}
         <motion.div 
-          initial={{ opacity: 0, x: -28 }}
-          whileInView={{ opacity: 1, x: 0 }}
+          initial={{ opacity: 0, y: -70 }}
+          whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
-          className="flex flex-col md:items-start w-full md:w-[50%] items-center py-12 md:py-4">
-            <div className='flex gap-4 text-black'>
-              <h2 className="text-2xl md:text-3xl font-bold">
-              Contact Us   
-              </h2>
-              <ArrowBigDown size={30} className='mt-1 md:hidden flex'/>
-              <ArrowBigRight size={30} className='mt-1 hidden md:flex'/>
+        className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
+          {/* Contacts Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+            {/* Card 1 */}
+            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
+              <MapPin className="mx-auto mb-1" size={20}/>
+              <h1 className='text-lg mb-2'>LOCATION</h1>
+              <p className='text-black text-sm'>107A Adeniyi Jones, Ikeja, Lagos</p>
             </div>
-          
-          <div className="relative w-60 h-60">
-            <Image 
-              src={assets.tiller} 
-              alt="Contact illustration" 
-              fill 
-              className="object-contain"
-            />
+
+            {/* Card 2 */}
+            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40  hover:text-white hover:bg-[#4C86C4]">
+              <Clock className="mx-auto mb-1" size={20}/>
+              <h1 className='text-lg mb-2'>WORK HOURS</h1>
+              <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 8AM - 8PM</p>
+              <p className='text-black text-sm flex justify-evenly'>Sundays <ArrowRight size={16}/> 1PM - 8PM</p>
+            </div>
+
+            {/* Card 3 */}
+            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
+              <InfoIcon className="mx-auto mb-1" size={20}/>
+              <h1 className='text-lg mb-2'>Contact Info</h1>
+              <p className='text-black text-sm'>07062757706</p>
+              <p className='text-black text-sm'>getliquido@gmail.com</p>
+            </div>
           </div>
         </motion.div>
 
-        {/* Right: Contact Form */}
-        <motion.div
-            initial={{ opacity: 0, x: 28 }}
+          {/* BELOW - Contact Us + Form */}
+        <div className="w-full max-w-5xl flex flex-col md:flex-row items-start p-1 md:p-20 justify-evenly">
+          {/* Left: Contact Us heading + Image */}
+          <motion.div 
+            initial={{ opacity: 0, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="w-full md:w-[60%] flex justify-center bg-[#4C86C4] p-4 md:p-8 rounded-2xl text-white">
-          <form onSubmit={handleSubmit} className="w-full space-y-5">
-            {/* Name */}
-            <div>
-              <label className="block text-sm mb-2">Name</label>
-              <input
-                type="text"
-                name="name"
-                value={formData.name}
-                onChange={handleChange}
-                required
-                className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-900 focus:border-[#1C4672] focus:outline-none"
+            className="flex flex-col md:items-start w-full md:w-[50%] items-center py-12 md:py-4">
+              <div className='flex gap-4 text-black'>
+                <h2 className="text-xl md:text-3xl font-bold">
+                Contact Us   
+                </h2>
+                <ArrowBigDown size={30} className='mt-1 md:hidden flex'/>
+                <ArrowBigRight size={30} className='mt-1 hidden md:flex'/>
+              </div>
+            
+            <div className="relative w-30 h-30 md:w-60 md:h-60">
+              <Image 
+                src={assets.tiller} 
+                alt="Contact illustration" 
+                fill 
+                className="object-contain"
               />
             </div>
+          </motion.div>
 
-            {/* Email */}
-            <div>
-              <label className="block text-sm mb-2">Email</label>
-              <input
-                type="email"
-                name="email"
-                value={formData.email}
-                onChange={handleChange}
-                required
-                className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
-              />
-            </div>
+          {/* Right: Contact Form */}
+          <motion.div
+              initial={{ opacity: 0, x: 28 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 1.2 }}
+              className="w-full md:w-[60%] flex justify-center md:bg-[#4C86C4] bg-none p-4 md:p-8 rounded-2xl md:text-white text-black">
+            <form onSubmit={handleSubmit} className="w-full space-y-5">
+              {/* Name */}
+              <div>
+                <label className="block text-sm mb-2">Name</label>
+                <input
+                  type="text"
+                  name="name"
+                  value={formData.name}
+                  onChange={handleChange}
+                  required
+                  className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-900 focus:border-[#1C4672] focus:outline-none"
+                />
+              </div>
 
-            {/* Message */}
-            <div>
-              <label className="block text-sm mb-2">Message</label>
-              <textarea
-                name="message"
-                value={formData.message}
-                onChange={handleChange}
-                rows="5"
-                required
-                className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none resize-none"
-              ></textarea>
-            </div>
+              {/* Email */}
+              <div>
+                <label className="block text-sm mb-2">Email</label>
+                <input
+                  type="email"
+                  name="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  required
+                  className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
+                />
+              </div>
 
-            {/* Submit */}
-            <button
-              type="submit"
-              className="bg-gray-100 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
-            >
-              <Send className="w-4 h-4" />
-              Send Message
-            </button>
-          </form>
-        </motion.div>
+              {/* Message */}
+              <div>
+                <label className="block text-sm mb-2">Message</label>
+                <textarea
+                  name="message"
+                  value={formData.message}
+                  onChange={handleChange}
+                  rows="5"
+                  required
+                  className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none resize-none"
+                ></textarea>
+              </div>
+
+              <button
+                type="submit"
+                className="bg-gray-100 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
+              >
+                <Send className="w-4 h-4" />
+                Send Message
+              </button>
+            </form>
+          </motion.div>
+        </div>
+
       </div>
-
-    </div>
-
+    </section>
   );
 };
 

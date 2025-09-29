@@ -30,7 +30,7 @@ const AboutNav = () => {
     }, 2000);
   };
 
-  const liquidSections = ['Home'];
+  const liquidSections = ['About', 'Contact', 'FAQ'];
 
   useEffect(() => {
     if (isOpen) {
@@ -58,6 +58,20 @@ const AboutNav = () => {
 
         {/* Desktop Nav */}
         <ul className="hidden md:flex items-center gap-6">
+          {liquidSections.map((section) => (
+            <li key={section}>
+              <ScrollLink
+                to={section}
+                spy={true}
+                smooth={true}
+                offset={-100}
+                duration={500}
+                className="text-white hover:text-[#1C4672] text-sm transition list-none cursor-pointer"
+              >
+                {section}
+              </ScrollLink>
+            </li>
+          ))}
             <li>
                 <Link 
                 href="/"
