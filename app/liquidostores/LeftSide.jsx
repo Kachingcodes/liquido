@@ -90,7 +90,7 @@ const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen, showCart,
             <Link href="/contact">
                 <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Phone size={16}/> Contact Support</div>
             </Link>
-            <Link href="/contact">
+            <Link href="/contact#FAQ" className="scroll-mt-20">
                 <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><HelpCircle size={16}/> FAQ</div>
             </Link>
             <Link href="/contact">

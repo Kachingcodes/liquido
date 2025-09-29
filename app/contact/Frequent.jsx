@@ -36,8 +36,8 @@ const [formData, setFormData] = useState({ question: "" });
 
   return (
     <section
-      id="FAQ"
-      className="bg-white relative w-full py-8 flex items-center justify-center"
+      id="FAQ" 
+      className="bg-white relative w-full py-8 flex items-center justify-center scroll-mt-20"
     >
       <div className="grid grid-cols-1 md:grid-cols-2 p-4 md:p-6 gap-10 w-full max-w-6xl">
         {/* Left */}
