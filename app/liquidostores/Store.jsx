@@ -92,7 +92,6 @@ const Store = ({ activeCategory, selectedOption, searchTerm, favorites, setFavor
                 }`}
               />
               </div>
-
               <img
                 src={product.image}
                 alt={product.name}

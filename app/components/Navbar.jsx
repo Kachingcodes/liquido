@@ -132,7 +132,7 @@ const Navbar = () => {
               ))}
               <Link 
                 href="/shop"
-                className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm"
+                className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm md:text-md"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Shop</span>
@@ -140,7 +140,7 @@ const Navbar = () => {
               </Link>
               <Link 
                 href="/contact"
-                className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm"
+                className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm md:text-md"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Contact</span>

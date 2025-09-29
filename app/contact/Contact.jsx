@@ -1,10 +1,11 @@
 'use client';
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
-import { Send, MapPin, Clock, ArrowBigRight, ArrowBigDown, ArrowRight, InfoIcon } from 'lucide-react';
+import { Send, MapPin, Clock, ArrowRight, ArrowBigRight, ArrowBigDown, InfoIcon, Phone, Mail } from 'lucide-react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
+import { FaWhatsapp } from 'react-icons/fa6';
 
 
 const quick = Quicksand({
@@ -38,9 +39,12 @@ const Contact = () => {
     setFormData({ name: '', email: '', message: '' });
   };
 
+  const phoneNum = "2347062757706"; 
+  const chat = "Hello Liquido 💧. I would like to make some inquiries.";
+
   return (
     <section id='Contact'>
-      <div className="px-6 pb-10 flex flex-col items-center bg-white">
+      <div className="px-6 flex flex-col items-center bg-white">
 
         {/* Grid */}
         <motion.div 
@@ -49,7 +53,7 @@ const Contact = () => {
           transition={{ duration: 1.2 }}
         className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
           {/* Contacts Grid */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 flex-1">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:p-0 flex-1">
             {/* Card 1 */}
             <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
               <MapPin className="mx-auto mb-1" size={20}/>
@@ -58,7 +62,7 @@ const Contact = () => {
             </div>
 
             {/* Card 2 */}
-            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40  hover:text-white hover:bg-[#4C86C4]">
+            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
               <Clock className="mx-auto mb-1" size={20}/>
               <h1 className='text-lg mb-2'>WORK HOURS</h1>
               <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 8AM - 8PM</p>
@@ -66,23 +70,36 @@ const Contact = () => {
             </div>
 
             {/* Card 3 */}
-            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
+            <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 items-center justify-center hover:text-white hover:bg-[#4C86C4]">
               <InfoIcon className="mx-auto mb-1" size={20}/>
               <h1 className='text-lg mb-2'>Contact Info</h1>
-              <p className='text-black text-sm'>07062757706</p>
-              <p className='text-black text-sm'>getliquido@gmail.com</p>
+              <div className='cursor-pointer hover:border-b-2 hover:border-dotted hover:border-black w-fit'>
+                <a
+                  href={`https://wa.me/${phoneNum}?text=${encodeURIComponent(chat)}`}
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  <p className='text-black text-sm flex justify-center gap-2 items-center cursor-pointer'><FaWhatsapp size={16}/>07062757706</p>
+                </a>
+              </div>
+              <div className='cursor-pointer hover:border-b-2 hover:border-dotted hover:border-black w-fit'>
+                <a
+                  href="tel:+2347067259151">
+                  <p className='text-black text-sm flex justify-center gap-2 items-center'><Phone size={16}/>07067259151</p>
+                </a>
+              </div>
+              <p className='text-black text-sm flex justify-center gap-2 items-center'><Mail size={16}/>getliquido@gmail.com</p>
             </div>
           </div>
         </motion.div>
 
-          {/* BELOW - Contact Us + Form */}
+        {/* BELOW - Contact Us + Form */}
         <div className="w-full max-w-5xl flex flex-col md:flex-row items-start p-1 md:p-20 justify-evenly">
           {/* Left: Contact Us heading + Image */}
           <motion.div 
             initial={{ opacity: 0, x: -28 }}
             whileInView={{ opacity: 1, x: 0 }}
             transition={{ duration: 1.2 }}
-            className="flex flex-col md:items-start w-full md:w-[50%] items-center py-12 md:py-4">
+            className="flex flex-col md:items-start w-full md:w-[50%] items-center py-6 md:py-4">
               <div className='flex gap-4 text-black'>
                 <h2 className="text-xl md:text-3xl font-bold">
                 Contact Us   

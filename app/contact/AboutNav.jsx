@@ -30,7 +30,7 @@ const AboutNav = () => {
     }, 2000);
   };
 
-  const liquidSections = ['About', 'Contact', 'FAQ'];
+  const liquidSections = ['Contact', 'About', 'FAQ'];
 
   useEffect(() => {
     if (isOpen) {
@@ -118,10 +118,26 @@ const AboutNav = () => {
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#4C86C4] shadow-md z-50 flex flex-col"
           >
+            <hr className='text-white'/>
+
             <div className="flex-1 flex flex-col justify-between px-6 py-6 space-y-4">
+              {liquidSections.map((section) => (
+                <ScrollLink
+                  key={section}
+                  to={section}
+                  spy={true}
+                  smooth={true}
+                  offset={-100}
+                  duration={500}
+                  className="block font-medium text-white text-sm cursor-pointer"
+                  onClick={() => setIsOpen(false)}
+                >
+                  {section}
+                </ScrollLink>
+                ))}
               <Link 
                 href="/"
-                className="flex items-center justify-center gap-2 py-2 px-2 bg-white text-[#1C4672] rounded-2xl"
+                className="flex items-center justify-center gap-2 py-2 px-2 bg-white text-[#1C4672] rounded-2xl text-sm md:text-md"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Home</span>
@@ -130,7 +146,7 @@ const AboutNav = () => {
               
               <Link 
                 href="/shop"
-                className="flex items-center justify-center gap-2 py-2 px-2 bg-white text-[#1C4672] rounded-2xl"
+                className="flex items-center justify-center gap-2 py-2 px-2 bg-white text-[#1C4672] rounded-2xl text-sm md:text-md"
                 onClick={() => setIsOpen(false)}
               >
                 <span>Shop</span>

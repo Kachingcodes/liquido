@@ -21,7 +21,7 @@ const textVariants = {
 const About = () => {
   return (
     <section id="About"
-    className="relative bg-white text-black py-10 px-6 mt-14 overflow-hidden">
+    className="relative bg-white text-black py-10 px-6  overflow-hidden">
 
       <div className="relative max-w-3xl mx-auto py-4">
         <motion.h2

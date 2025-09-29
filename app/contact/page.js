@@ -14,9 +14,11 @@ export default function About() {
   return (
     <>
       <AboutNav/>
-      <AboutUs/>
       <AboutTop/>
       <Contact/>
+      <AboutUs/>
+      
+      
       <Frequent/>
       <Wave/>
       <Footer/>
