@@ -6,26 +6,39 @@ import { assets } from '@/public/assets';
 import { Quicksand } from "next/font/google";
 import { FaXTwitter, FaWhatsapp, FaInstagram, FaX } from "react-icons/fa6";
 import Link from 'next/link'; 
-import Certified from './Certified';
+import Certified from '../trust/Certified';
+import Terms from '../trust/Terms';
+import Privacy from '../trust/Privacy';
 
 const Footer = () => {
-  const [open, setIsOpen] = useState(false);
+  const [openCert, setIsOpenCert] = useState(false);
+  const [openTerms, setIsOpenTerms] = useState(false);
+  const [openPrivacy, setIsOpenPrivacy] = useState(false);
 
   const handleCert = () => {
-    setIsOpen(true);
+    setIsOpenCert(true);
   };
 
-    useEffect(() => {
-      if(open) {
-        document.body.style.overflow = "hidden";
-      } else {
-        document.body.style.overflow = "auto";
-      }
-  
-      return () => {
-        document.body.style.overflow = "auto";
-      };
-    }, [open]);
+    const handleTerms = () => {
+    setIsOpenTerms(true);
+  };
+
+  const handlePrivacy = () => {
+    setIsOpenPrivacy(true);
+  };
+
+   useEffect(() => {
+  if (openCert || openTerms || openPrivacy) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "auto";
+  }
+
+  return () => {
+    document.body.style.overflow = "auto";
+  };
+}, [openCert, openTerms, openPrivacy]);
+
 
   const phoneNumber = "2347062757706"; 
   const message = "Hello Liquido 💧. I would like to make some inquiries.";
@@ -66,14 +79,15 @@ const Footer = () => {
       {/* Column 3 */}
       <div className="flex flex-col gap-3 mt-0 md:mt-4">
         <h2 className="font-semibold text-md">Trust & Legal</h2>
+
+        {/* Certifications & Licenses */}
         <span 
         onClick={handleCert}
         className='text-sm cursor-pointer'>Certifications & Licenses</span>
-        {open && (
+        {openCert && (
           <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-          
           <button
-            onClick={() => setIsOpen(false)}
+            onClick={() => setIsOpenCert(false)}
             className="absolute top-6 right-6 text-white hover:text-gray-300"
           >
             <FaX size={28} />
@@ -84,8 +98,44 @@ const Footer = () => {
           </div>
         </div>
         )}
-        <span className='text-sm cursor-pointer'>Privacy Policy</span>
-        <span className='text-sm cursor-pointer'>Terms & Conditions</span>
+
+        {/* Terms & Conditions */}
+        <span 
+        onClick={handleTerms}
+        className='text-sm cursor-pointer'>Terms & Conditions</span>
+          {openTerms && (
+            <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+            <button
+              onClick={() => setIsOpenTerms(false)}
+              className="absolute top-6 right-6 text-white hover:text-gray-300"
+            >
+              <FaX size={28} />
+            </button>
+
+            <div className="bg-white rounded-lg p-6 max-w-3xl w-[90%] shadow-lg overflow-y-auto max-h-[90%]">
+              <Terms/>
+            </div>
+          </div>
+          )}
+
+          {/* Privacy Policy */}
+        <span 
+        onClick={handlePrivacy}
+        className='text-sm cursor-pointer'>Privacy Policy</span>
+          {openPrivacy && (
+          <div className="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
+            <button
+              onClick={() => setIsOpenPrivacy(false)}
+              className="absolute top-6 right-6 text-white hover:text-gray-300"
+            >
+              <FaX size={28} />
+            </button>
+
+            <div className="bg-white rounded-lg p-6 max-w-3xl w-[90%] shadow-lg overflow-y-auto max-h-[90%]">
+              <Privacy/>
+            </div>
+          </div>
+          )}
       </div>
     </div>
 

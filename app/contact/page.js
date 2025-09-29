@@ -17,8 +17,6 @@ export default function About() {
       <AboutTop/>
       <Contact/>
       <AboutUs/>
-      
-      
       <Frequent/>
       <Wave/>
       <Footer/>
