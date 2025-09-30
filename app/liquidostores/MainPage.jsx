@@ -6,6 +6,9 @@ import Store from './Store';
 import Cart from './Cart';
 import { Menu, X, ArrowUpIcon } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import Image from 'next/image';
+import { assets } from '@/public/assets';
+
 
 
 const loadStorage = (key, fallback) => {
@@ -262,6 +265,11 @@ const handleCartDecrease = (id) => {
             exit={{ x: "100%" }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
             className='fixed top-0 right-0 w-[100%] md:w-[40%] h-screen bg-white py-4 z-100 overflow-auto min-h-screen'>
+              
+              <div className="absolute top-2 left-4 w-24 h-12">
+                <Image src={assets.middle} alt="logo" fill className="object-contain"/>
+              </div>
+              
               <button
               onClick={() => setShowCart(false)}
               className='absolute top-4 right-4 text-gray-600 hover:text-black'

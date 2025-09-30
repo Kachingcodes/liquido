@@ -3,7 +3,7 @@ import React from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { ShoppingCart, Star, Home, Truck, Recycle, PartyPopper, DollarSign, Bell, Phone, HelpCircle, Clock, StarOff, MinusCircle } from "lucide-react";
+import { ShoppingCart, Star, Home, Phone, HelpCircle, StarOff, MinusCircle, ArrowRight } from "lucide-react";
 import Link from 'next/link';
 
 const quick = Quicksand({
@@ -71,18 +71,15 @@ const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen, showCart,
 
         {/* Delivery Info */}
         <div className="w-full px-4 text-white space-y-3 cursor-pointer">
-            <h2 className="text-m font-semibold border-b border-white/30 pb-1">Delivery & Info</h2>
-            <div className="text-sm flex items-center gap-2 hover:text-[#c4e0f9]"><Truck size={16}/> Delivery Options</div>
-            <div className="text-sm flex items-center gap-2 hover:text-[#c4e0f9]"><Recycle size={16}/> Refill & Recycling Info</div>
+            <h2 className="text-md font-semibold border-b border-white/30 pb-1">Delivery Hours</h2>
+            <p className='flex items-center justify-evenly text-sm'>Sundays <ArrowRight size={14}/> 1PM - 6PM</p>
+            <p className='flex items-center justify-evenly text-sm'>Mondays <ArrowRight size={14}/> 9AM - 6PM</p>
+            <p className='flex items-center justify-evenly text-sm'>Tuesdays <ArrowRight size={14}/> 9AM - 6PM</p>
+            <p className='flex items-center justify-evenly text-sm'>Wednesdays <ArrowRight size={14}/> 9AM - 6PM</p>
+            <p className='flex items-center justify-evenly text-sm'>Thursdays <ArrowRight size={14}/> 9AM - 6PM</p>
+            <p className='flex items-center justify-evenly text-sm'>Fridays <ArrowRight size={14}/> 9AM - 6PM</p>
+            <p className='flex items-center justify-evenly text-sm'>Saturdays <ArrowRight size={14}/> 9AM - 6PM</p>
         </div>
-
-        {/* Promotions / Offers */}
-        {/* <div className="w-full px-4 text-white text-sm space-y-3 cursor-pointer">
-            <h2 className="text-md font-semibold border-b border-white/30 pb-1">Promotions / Offers</h2>
-            <div className="text-sm flex items-center gap-2 hover:text-[#c4e0f9]"><PartyPopper size={16}/> “Buy 2, Get 1 Free”</div>
-            <div className="text-sm flex items-center gap-2 hover:text-[#c4e0f9]"><DollarSign size={16}/> Discounts for bulk orders</div>
-            <div className="flex items-center gap-2 hover:text-[#c4e0f9]"><Bell size={16}/> Seasonal offers</div>
-        </div> */}
 
         {/* Help / Support */}
         <div className="w-full px-4 text-white space-y-3 cursor-pointer">
@@ -90,12 +87,12 @@ const LeftSide = ({showFavorites, setShowFavorites, isOpen, setIsOpen, showCart,
             <Link href="/contact">
                 <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Phone size={16}/> Contact Support</div>
             </Link>
-            <Link href="/contact#FAQ" className="scroll-mt-20">
+            <Link href="/contact#FAQ">
                 <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><HelpCircle size={16}/> FAQ</div>
             </Link>
-            <Link href="/contact">
+            {/* <Link href="/contact">
                 <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Clock size={16}/> Delivery Hours</div>
-            </Link>
+            </Link> */}
         </div>
     </div>
     );

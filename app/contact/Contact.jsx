@@ -65,8 +65,8 @@ const Contact = () => {
             <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
               <Clock className="mx-auto mb-1" size={20}/>
               <h1 className='text-lg mb-2'>WORK HOURS</h1>
-              <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 8AM - 8PM</p>
-              <p className='text-black text-sm flex justify-evenly'>Sundays <ArrowRight size={16}/> 1PM - 8PM</p>
+              <p className='text-black text-sm flex justify-evenly items-center'>Mondays - Saturdays <ArrowRight size={16}/> 9AM - 6PM</p>
+              <p className='text-black text-sm flex justify-evenly'>Sundays <ArrowRight size={16}/> 1PM - 6PM</p>
             </div>
 
             {/* Card 3 */}

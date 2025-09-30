@@ -6,6 +6,7 @@ import drop from './drop.png';
 import jugs from './jugs.png';
 import location from './location.png';
 import logo from './logo.png';
+import middle from './middle.jpg';
 import nylon from './nylon.png';
 import tiller from './tiller.png';
 import van from './van.png';
@@ -21,6 +22,7 @@ export const assets = {
     jugs,
     location,
     logo,
+    middle,
     nylon,
     tiller,
     van,

@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Search, ArrowLeftIcon, X, ArrowRight, ShoppingCart } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -14,7 +14,17 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
   const [drops, setDrops] = useState([]);
 
   const toggleOption = (option) => setSelectedOption(prev => (prev === option ? null : option));
-  const toggleCategory = (categoryName) => setActiveCategory(prev => (prev === categoryName ? null : categoryName));
+  
+const toggleCategory = (categoryName) => {
+  setActiveCategory(categoryName);
+  const newCat = categories.find(c => c.name === categoryName);
+  if (newCat && newCat.options?.length > 0) {
+    setSelectedOption(newCat.options[0]); // 👈 always pick first option
+  } else {
+    setSelectedOption(null);
+  }
+};
+
 
   const router = useRouter();
   const handleBackIntro = () => {
@@ -24,8 +34,20 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
     setTimeout(() => router.push("/shop"), 600);
   };
 
-  const activeCat = categories.find(c => c.name === activeCategory)?.options[0] || "";
-  const options = activeCat.options || [];
+const activeCat = categories.find(c => c.name === activeCategory) || {};
+const options = activeCat.options || [];
+
+
+React.useEffect(() => {
+  if (!activeCategory && categories.length > 0) {
+    const firstCat = categories[0];
+    setActiveCategory(firstCat.name);
+    if (firstCat.options && firstCat.options.length > 0) {
+      setSelectedOption(firstCat.options[0]); // 👈 auto-select first option
+    }
+  }
+}, [activeCategory, setActiveCategory, setSelectedOption]);
+
 
   return (
     <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white ">
@@ -124,9 +146,9 @@ const TopSide = ({ activeCategory, setActiveCategory, selectedOption, setSelecte
         {/* absolutely-positioned, horizontally-scrollable content inside the reserved strip */}
         <motion.div
           initial={{ opacity: 0, y: 8 }}
-          animate={activeCategory ? { opacity: 1, y: 0 } : { opacity: 0, y: 8 }}
+          animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.18 }}
-          className={`absolute inset-0 flex flex-col px-2 ${activeCategory ? "pointer-events-auto" : "pointer-events-none"}`}
+          className={`absolute inset-0 flex flex-col px-2 pointer-events-auto`}
         >
           {/* Second Row of buttons */}
           <div className="flex gap-2 w-full overflow-x-auto no-scrollbar">
