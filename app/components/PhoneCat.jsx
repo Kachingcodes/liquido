@@ -35,7 +35,7 @@ const PhoneCat = () => {
 
 
   return (
-    <div className="flex flex-col items-center justify-center relative w-full px-4 py-8">
+    <div className="flex flex-col items-center justify-center relative w-full px-4 py-12">
         <div className="relative flex items-center justify-center">
             {/* Main Circle */}
             <motion.div
@@ -43,7 +43,7 @@ const PhoneCat = () => {
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.35 }}
-            className="w-40 h-40 rounded-full bg-[#4C86C4] mt-12 flex items-center justify-center text-white font-bold text-center p-4"
+            className="w-40 h-40 rounded-full bg-[#4C86C4] mt-14 flex items-center justify-center text-white font-bold text-center p-4"
             >
             <span className="break-words">{mainText}</span>
             </motion.div>
@@ -59,13 +59,13 @@ const PhoneCat = () => {
                         className="absolute"
                         style={{
                         top: `calc(66% + ${y}px - 30px)`,
-                        left: `calc(50% + ${x}px - 40px)`,
+                        left: `calc(50% + ${x}px - 44px)`,
                         transform: "translate(-80%, -80%)",
                         }}>
                             <div
-                                className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-white cursor-pointer group"
+                                className="bg-gradient-to-br from-[#ffffff]/40 via-[#4C86C4]/10 to-[#1C4672]/5 backdrop-blur-lg border border-white/50 shadow-lg relative w-22 h-22 rounded-full overflow-hidden cursor-pointer group"
                                 >
-                                <Image src={item.img} alt={item.top} fill className="object-contain"/>
+                                <Image src={item.img} alt={item.top} fill className="object-contain p-1"/>
                             </div>
 
                     </motion.div>

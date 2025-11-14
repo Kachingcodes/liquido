@@ -212,55 +212,55 @@ export const testimonials =[
   {
     id:1,
     name: "Kester Africa Limited",
-    review: "Liquido stores are always closer to your doorstep than you think, and that's exactly what makes them so convenient! Kudos to the team for making their services so accessible.",
+    review: "'Liquido stores are always closer to your doorstep than you think, and that's exactly what makes them so convenient! Kudos to the team for making their services so accessible.'",
     img:"/people/kester.png"
   },
   {
     id:2,
     name: "Ebun Adeola",
-    review: "I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers.",
+    review: "'I love that they offer eco-friendly packaging. It’s rare to find a delivery service that cares about the environment as much as the customers.'",
     img:"/people/ebun.jpg"
   },
   {
     id:3,
     name: "Alina Becker",
-    review: "They really combine affordability with convenience. That's rare to find these days.",
+    review: "'They really combine affordability with convenience. That's rare to find these days.'",
     img:"/people/happy3.jpg"
   },
   {
     id:4,
     name: "Akinwolire Damilare",
-    review: "Very reliable and fast in delivery.",
+    review: "'Very reliable and fast in delivery.'",
     img:"/people/happy4.jpg"
   },
   {
     id:5,
     name: "Emeka Nonso",
-    review: "The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!",
+    review: "'The delivery drivers are friendly and professional, and my orders always arrive ahead of time. Makes life so much easier!'",
     img:"/people/emeka.jpg"
   },
   {
     id:6,
     name: "Saviour Ikrangubek",
-    review: "Fast and Reliable.",
+    review: "'Fast and Reliable.'",
     img:"/people/happy6.jpg"
   },
   {
     id:7,
     name: "Opia Favour",
-    review: "The Service was great and the delivery was swift.",
+    review: "'The Service was great and the delivery was swift.'",
     img:"/people/happy7.jpg"
   },
   {
     id:8,
     name: "Blessing Chukwu",
-    review: "I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed.",
+    review: "'I was blown away by how personalized the service felt. They remembered my preferences and always delivered exactly what I needed.'",
     img:"/people/ada.jpg"
   },
   {
     id:9,
     name: "Jane Ogba",
-    review: "He is reliable. Just give him a call and he will deliver to you anywhere you are.",
+    review: "'He is reliable. Just give him a call and he will deliver to you anywhere you are.'",
     img:"/people/happy9.jpg"
   }
 ];
@@ -268,8 +268,8 @@ export const testimonials =[
 
 export const adverts = [
   { img: "/adverts/smoothie.png", text: "🔥 Big Discount – 20% Off All Items!" },
-  { img: "/adverts/coffee.png", text: "🎉 Buy 1 Get 1 Free This Week!" },
-  { img: "/adverts/wine.png", text: "🚚 Free Shipping on Orders Over ₦20,000!" },
+  { img: "/adverts/coffee.png", text: "🎉 Want To Advertise Your Products Here? Contact Us!" },
+  { img: "/adverts/wine.png", text: "🚚 Free Shipping on Orders In And Around Adeniyi Jones!" },
   { img: "/adverts/icetea.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
 ];
 

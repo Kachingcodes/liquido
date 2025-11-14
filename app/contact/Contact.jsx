@@ -17,30 +17,56 @@ const quick = Quicksand({
 const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
-    email: '',
+    contact: '',
     message: '',
   });
+
+  const [errors, setErrors] = useState({});
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+
+    setErrors((prev) => ({ ...prev, [name]: ""}));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
+    const newErrors = {};
+
+    if (!formData.name.trim()) {
+      newErrors.name ="Please enter your name";
+    }
+
+    if (!formData.message.trim()) {
+      newErrors.message = "Please enter your message";
+    }
+
+    // If there are errors, stop submission
+    if (Object.keys(newErrors).length > 0) {
+      setErrors(newErrors);
+      return;
+    }
+
+    // Otherwise proceed with form action
+    console.log("Form submitted:", formData);
+
     const phoneNumber = "2347062757706"; 
 
-    const message = `Name: ${formData.name}\n
-    Email: ${formData.email}\n\n
+    const message = `Hi LIQUIDO, my name is ${formData.name}\n
+    Contact Info: ${formData.contact}\n\n
     ${formData.message}`;
 
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
-    setFormData({ name: '', email: '', message: '' });
+    setFormData({ name: '', contact: '', message: '' });
   };
 
   const phoneNum = "2347062757706"; 
-  const chat = "Hello Liquido 💧. I would like to make some inquiries.";
+  const chat = "Hi LIQUIDO 💧. My name is  I would like to make some inquiries.";
+
+
 
   return (
     <section id='Contact'>
@@ -51,7 +77,8 @@ const Contact = () => {
           initial={{ opacity: 0, y: -70 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 1.2 }}
-        className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
+          className="w-full max-w-5xl flex flex-col md:flex-row md:items-start md:justify-between gap-8 mt-12">
+          
           {/* Contacts Grid */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 md:p-0 flex-1">
             {/* Card 1 */}
@@ -119,11 +146,7 @@ const Contact = () => {
           </motion.div>
 
           {/* Right: Contact Form */}
-          <motion.div
-              initial={{ opacity: 0, x: 28 }}
-              whileInView={{ opacity: 1, x: 0 }}
-              transition={{ duration: 1.2 }}
-              className="w-full md:w-[60%] flex justify-center md:bg-[#4C86C4] bg-none p-4 md:p-8 rounded-2xl md:text-white text-black">
+          <div className="w-full md:w-[60%] flex justify-center md:bg-[#4C86C4] bg-none p-4 md:p-8 rounded-2xl md:text-white text-black">
             <form onSubmit={handleSubmit} className="w-full space-y-5">
               {/* Name */}
               <div>
@@ -134,17 +157,22 @@ const Contact = () => {
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-900 focus:border-[#1C4672] focus:outline-none"
+                  className={`w-full rounded-lg px-4 py-3 bg-gray-200 text-black border 
+                    ${ errors.name ? "border-red-500" : "border-gray-900"} 
+                    focus:border-[#1C4672] focus:outline-none`}
                 />
+                  {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.name}</p>
+                )}
               </div>
 
-              {/* Email */}
+              {/* Contact */}
               <div>
-                <label className="block text-sm mb-2">Email</label>
+                <label className="block text-sm mb-2">Phone Number/Instagram handle</label>
                 <input
-                  type="email"
-                  name="email"
-                  value={formData.email}
+                  type="contact"
+                  name="contact"
+                  value={formData.contact}
                   onChange={handleChange}
                   required
                   className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
@@ -160,19 +188,24 @@ const Contact = () => {
                   onChange={handleChange}
                   rows="5"
                   required
-                  className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none resize-none"
+                  className={`w-full rounded-lg px-4 py-3 bg-gray-200 text-black border 
+                    ${ errors.name ? "border-red-500" : "border-gray-900"} 
+                    focus:border-[#1C4672] focus:outline-none resize-none`}
                 ></textarea>
+                  {errors.name && (
+                  <p className="text-red-500 text-sm mt-1">{errors.message}</p>
+                )}
               </div>
 
               <button
                 type="submit"
                 className="bg-gray-100 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
               >
-                <Send className="w-4 h-4" />
-                Send Message
+                <FaWhatsapp size={18}/>
+                Chat on WhatsApp
               </button>
             </form>
-          </motion.div>
+          </div>
         </div>
 
       </div>

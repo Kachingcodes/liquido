@@ -17,7 +17,7 @@ const Order = () => {
   const MotionImage = motion(Image);
 
   return (
-    <section id='Order'
+    <section id='How To Order'
     className="w-full flex flex-col justify-start items-center bg-white text-white relative overflow-hidden px-4 py-6 md:py-8">
     
       {/* Top Heading (Phone) */}

@@ -27,7 +27,7 @@ const TextTiller = () => {
   };
 
   return (
-    <section id='Bulk'
+    <section id='Bulk Order'
     className="w-full flex justify-center items-center text-black relative overflow-hidden py-4 bg-no-repeat bg-cover bg-center">
         <div className="flex w-full p-4 md:p-6 items-center justify-center">
 

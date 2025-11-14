@@ -7,6 +7,7 @@ import Image from 'next/image';
 import { assets } from "@/public/assets";
 import { motion, AnimatePresence } from 'framer-motion';
 import { GiShoppingCart } from "react-icons/gi";
+import { FaPerson } from 'react-icons/fa6';
               
 
 
@@ -94,7 +95,7 @@ const AboutNav = () => {
               }}
                 className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
                 >
-                Shop <GiShoppingCart size={20}/>
+                Shop Now<GiShoppingCart size={20}/>
                 </Link>  
             </li>
         </ul>

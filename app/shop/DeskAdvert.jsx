@@ -6,7 +6,6 @@ import { adverts } from '@/public/assets';
 
 
 
-
 const DeskAdvert = () => {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
@@ -22,7 +21,7 @@ const DeskAdvert = () => {
 
   return (
     <div
-      className="relative w-full max-w-5xl h-48 overflow-hidden rounded-xl shadow-md"
+      className="relative w-full max-w-5xl h-28 overflow-hidden rounded-xl shadow-md"
       onMouseEnter={() => setPaused(true)}
       onMouseLeave={() => setPaused(false)}
     >
@@ -41,6 +40,7 @@ const DeskAdvert = () => {
               alt={adverts[index].text}
               fill
               className="object-contain"
+              priority
             />
             {/* Dark Overlay */}
             <div className="absolute inset-0 bg-[#4C86C4]/60 flex items-center justify-center">

@@ -44,8 +44,8 @@ const [formData, setFormData] = useState({ question: "" });
         <div className="flex flex-col justify-between max-w-xl">
           <div className="gap-4 flex flex-col">
           <motion.h1 
-          initial={{y: -100, opacity: 0 }}
-          whileInView={{y: 0, opacity: 1}}
+          initial={{x: -100, opacity: 0 }}
+          whileInView={{x: 0, opacity: 1}}
           transition={{ duration: 1.0 }}
           className={` ${quick.className} text-3xl font-bold text-black tracking-wide`}>
             Frequently Asked Questions
@@ -53,10 +53,7 @@ const [formData, setFormData] = useState({ question: "" });
           <p className="text-md md:mb-0 mb-4">We are here to answer your inquiries</p>
         </div>
 
-          <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.2, ease: "easeInOut" }}
+          <div
             className="bg-gray-100 space-y-4 p-4 rounded-lg">
             <h3 className="font-semibold">Can't locate the answers you need?</h3>
             <span className="text-gray-700 text-sm block">
@@ -81,7 +78,7 @@ const [formData, setFormData] = useState({ question: "" });
              <MailCheck size={20}/> Send Inquiry
             </button>
             </form>
-          </motion.div>
+          </div>
         </div>
 
         {/* Right */}

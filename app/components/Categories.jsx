@@ -36,7 +36,7 @@ const Categories = () => {
       <div className="">
         <button 
           onClick={handlePlaceOrder}
-          className="bg-[#1C4672] px-3 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg shadow-md shadow-[#000000]/36 w-fit hover:bg-[#4C86C4] transition">
+          className="md:hidden bg-[#1C4672] px-3 py-3 flex items-center gap-2 text-white text-sm md:text-lg rounded-lg shadow-md shadow-[#000000]/36 w-fit hover:bg-[#4C86C4] transition">
           View More <ArrowRight size={20}/>
         </button>
       </div>

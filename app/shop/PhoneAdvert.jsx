@@ -21,8 +21,8 @@ const PromoBanner = () => {
   }, []);
 
   return (
-    <div className="w-[85%] overflow-hidden relative bg-[#1C4672] text-white py-3 px-2 rounded-lg shadow-md">
-      <div className="h-6 flex items-center justify-center">
+    <div className="w-[85%] overflow-hidden relative text-black py-2 rounded-lg">
+      <div className="h-6 flex items-end justify-end">
         <AnimatePresence mode="wait">
           <motion.span
             key={index}

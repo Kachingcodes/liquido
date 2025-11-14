@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { assets } from '@/public/assets';
 import { Quicksand } from "next/font/google";
-import { FaXTwitter, FaWhatsapp, FaInstagram, FaX } from "react-icons/fa6";
+import { FaXTwitter, FaWhatsapp, FaInstagram, FaX, FaTiktok, FaLinkedin } from "react-icons/fa6";
 import Link from 'next/link'; 
 import Certified from '../trust/Certified';
 import Terms from '../trust/Terms';
@@ -57,7 +57,7 @@ const Footer = () => {
           <Image src={assets.logo} alt="logo" fill className="object-contain" />
         </div>
         <span className='text-sm'>300+ Customers Satisfied</span>
-        <span className='text-sm'>1000+ Deliveries Made</span>
+        <span className='text-sm'>5000+ Deliveries Made</span>
         <span className='text-sm'>Preferred supplier for 50+ businesses</span>
       </div>
 
@@ -67,7 +67,6 @@ const Footer = () => {
         <Link href= "/contact">
           <span className='text-sm cursor-pointer'>About Us</span>
         </Link>
-        {/* <span className='text-sm cursor-pointer'>Services</span> */}
         <Link href= "/contact">
         <span className='text-sm cursor-pointer'>Contact</span>
         </Link>
@@ -148,7 +147,7 @@ const Footer = () => {
 
       <div>
         <span className="block font-semibold text-center">Follow Us</span>
-        <div className="flex flex-row gap-8 mt-4 text-white">
+        <div className="flex flex-row gap-4 mt-4 text-white">
           <a href="https://twitter.com/liquido_ng" target="_blank" rel="noopener noreferrer">
             <FaXTwitter size={16}/>
           </a>
@@ -160,6 +159,12 @@ const Footer = () => {
           </a>
           <a href="https://instagram.com/liquido.ng" target="_blank" rel="noopener noreferrer">
             <FaInstagram size={16}/>
+          </a>
+          <a href="https://tiktok.com/@liquido.ng" target="_blank" rel="noopener noreferrer">
+            <FaTiktok size={16}/>
+          </a>
+          <a href="https://linkedin.com/company/liquidong" target="_blank" rel="noopener noreferrer">
+            <FaLinkedin size={16}/>
           </a>
           </div>
       </div>

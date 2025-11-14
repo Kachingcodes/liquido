@@ -14,7 +14,7 @@ const quick = Quicksand({
 const ChooseUs = () => {
 
   return (
-    <section id='Choose Us'
+    <section id='Why Choose Us'
     className="w-full flex justify-center items-center text-white bg-[#4C86C4] relative overflow-hidden py-10 md:py-8 p-2 md:p-6 bg-[url('/backgrounds/Desk2.svg')] bg-no-repeat bg-cover bg-center">
         
       <div className="flex w-full md:flex-row flex-col p-4 md:p-12 items-center justify-evenly">

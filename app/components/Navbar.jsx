@@ -25,7 +25,7 @@ const Navbar = () => {
   }, 1500);
 };
 
-  const liquidSections = ['Home', 'Categories', 'Order', 'Choose Us', 'Bulk', 'Testimonials'];
+  const liquidSections = ['Home', 'Categories', 'How To Order', 'Why Choose Us', 'Bulk Order', 'Testimonials'];
 
   useEffect(() => {
     if (isOpen) {
@@ -76,7 +76,7 @@ const Navbar = () => {
                 }}
               className="bg-[white] px-2 py-3 flex items-center gap-2 shadow-md shadow-[#000000]/50 text-[#1C4672] text-sm rounded-lg w-fit hover:bg-[#8FC0F4]/40 hover:text-white transition"
             >
-              Shop <GiShoppingCart size={18}/>
+              Shop Now <GiShoppingCart size={18}/>
             </Link>               
           </li>
           <li>
@@ -135,7 +135,7 @@ const Navbar = () => {
                 className="flex items-center justify-center gap-3 py-3 px-4 bg-white text-[#1C4672] rounded-2xl text-sm md:text-md"
                 onClick={() => setIsOpen(false)}
               >
-                <span>Shop</span>
+                <span>Shop Now</span>
                 <GiShoppingCart size={18}/>
               </Link>
               <Link 

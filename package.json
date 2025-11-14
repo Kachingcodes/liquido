@@ -13,7 +13,9 @@
     "@vercel/analytics": "^1.5.0",
     "firebase": "^12.2.1",
     "framer-motion": "^12.23.11",
+    "html2canvas": "^1.4.1",
     "jspdf": "^3.0.3",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.532.0",
     "next": "^15.5.2",
     "react": "^19.1.1",
@@ -26,6 +28,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4",
+    "@types/react": "19.2.2",
     "eslint": "^9",
     "eslint-config-next": "15.4.4",
     "tailwindcss": "^4"

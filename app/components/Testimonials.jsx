@@ -85,8 +85,9 @@ const Testimonials = () => {
                 exit={{ opacity: 0, x: -80 }}
 
                 className='flex flex-col rounded-2xl overflow-hidden shadow-md shadow-[#000000]/40 min-h-[170px] md:min-h-[240px]'> 
-                    <div className='text-black p-4 md:p-4 text-center flex-grow text-sm md:text-md'>
-                        <p>{test.review}</p>
+                    <div className='text-black p-4 md:p-4 text-center italic flex-grow text-sm md:text-md'>
+                        <p style={{ fontStyle: "italic" }}>{test.review}</p>
+
                     </div>
                     <div className='bg-[#4C86C4] text-black flex flex-row items-center gap-4 p-2 md:p-4'>
                         <div className='relative w-8 h-8 md:w-16 md:h-16'>

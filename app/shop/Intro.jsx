@@ -59,7 +59,7 @@ const Intro = () => {
               disabled
             className=" px-4 py-3 flex items-center gap-2 text-md rounded-lg shadow-md shadow-[#000000]/40 transition relative z-30 disabled:bg-gray-400 disabled:cursor-not-allowed"
             > 
-              COMING SOON <TruckIcon size={20}/>
+              LIQUIDO EXPRESS <TruckIcon size={20}/>
           </button>
 
             {/* <Link href="/liquidoexpress"
