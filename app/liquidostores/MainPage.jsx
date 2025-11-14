@@ -16,7 +16,7 @@ export default function MainPage() {
   } = useStore();
 
   // Track quantity per product
-  const [quantities, setQuantities] = React.useState({});
+//   const [quantities, setQuantities] = React.useState({});
 
 //   const increaseQty = (id) => {
 //     setQuantities((prev) => ({
@@ -32,11 +32,12 @@ export default function MainPage() {
 //     }));
 //   };
 
-  const handleAddToCart = (product) => {
-    const qty = quantities[product.id] || 1;
-    addToCart({ ...product, qty });
-    toast.success(`${product.name} added to cart (${qty})`);
-  };
+//   const handleAddToCart = (product) => {
+//     const qty = quantities[product.id] || 1;
+//     addToCart({ ...product, qty });
+//     toast.success(`${product.name} added to cart (${qty})`);
+//     setQuantities((prev) => ({ ...prev, [product.id]: 1 })); // reset after add
+//   };
 
   const productsToDisplay = viewFavourites ? favourites : filteredProducts;
 
@@ -52,9 +53,9 @@ export default function MainPage() {
     <div className="md:p-6 p-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
       <Toaster position="top-right" reverseOrder={false} />
 
-      {productsToDisplay.map((product) => (
+      {productsToDisplay.map((product, index) => (
         <div
-          key={product.id}
+          key={`${product.id || product.name}-${index}`} // ✅ unique key
           className="relative bg-white rounded-2xl p-4 w-full h-auto border border-gray-500 flex flex-col justify-between shadow-md hover:shadow-lg transition-shadow"
         >
           {/* Product Image */}
@@ -102,7 +103,7 @@ export default function MainPage() {
 
             {/* Add to Cart */}
             <button
-              onClick={() => handleAddToCart(product)}
+              onClick={() => addToCart(product)}
               className="bg-[#1C4672] px-3 py-2 text-white text-sm md:text-md rounded-lg hover:bg-[#2d6ab0] hover:shadow-md transition-all"
             >
               Add to Cart

@@ -1,7 +1,7 @@
 "use client";
 
-import { useStore } from '@/app/context/StoreContext';
-import { AnimatePresence, motion } from 'framer-motion';
+import { useStore } from "@/app/context/StoreContext";
+import { AnimatePresence, motion } from "framer-motion";
 import { X, Trash2 } from "lucide-react";
 
 export default function Cart() {
@@ -14,84 +14,118 @@ export default function Cart() {
     removeFromCart,
   } = useStore();
 
-  const totalPrice = cart.reduce(
-    (sum, item) => sum + item.price * item.qty,
-    0
-  );
+  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+
+  // Animation variants
+  const drawerVariants = {
+    hidden: { x: "100%" },
+    visible: { x: 0 },
+    exit: { x: "100%" },
+  };
+
+  const overlayVariants = {
+    hidden: { opacity: 0 },
+    visible: { opacity: 0.4 },
+    exit: { opacity: 0 },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, x: 50 },
+    visible: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: 50 },
+  };
 
   return (
-    <>
     <AnimatePresence>
-      {/* Background Overlay */}
       {cartOpen && (
-        <div
-        //   onClick={toggleCart}
-          className="fixed inset-0 bg-black/40 z-40"
-        />
-      )}
+        <>
+          {/* Overlay */}
+          <motion.div
+            key="overlay"
+            variants={overlayVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{ duration: 0.25 }}
+            className="fixed inset-0 bg-black z-40"
+            onClick={toggleCart}
+          />
 
-      {/* Drawer */}
-      <div
-        className={`fixed top-0 right-0 h-full w-100 bg-white shadow-xl z-50 transform transition-transform duration-300 
-          ${cartOpen ? "translate-x-0" : "translate-x-full"}`}
-      >
-        {/* Header */}
-        <div className="flex justify-between items-center p-4 border-b">
-          <h2 className="text-xl font-semibold">Your Cart</h2>
-          <button onClick={toggleCart}>
-            <X size={24} />
-          </button>
-        </div>
-
-        {/* Cart Items */}
-        <div className="p-4 overflow-y-auto h-[70%]">
-          {cart.length === 0 && (
-            <p className="text-gray-500 mt-10 text-center">
-              Your cart is empty.
-            </p>
-          )}
-
-          {cart.map((item) => (
-            <div
-              key={item.id}
-              className="flex justify-between items-start border-b py-3"
-            >
-              <div>
-                <p className="font-semibold">{item.name}</p>
-                <p className="text-sm text-gray-500">₦{item.price}</p>
-
-                {/* Quantity */}
-                <div className="flex items-center gap-2 mt-2">
-                  <button
-                    className="px-2 py-1 border rounded"
-                    onClick={() => decreaseQty(item.id)}
-                  >
-                    -
-                  </button>
-                  <span>{item.qty}</span>
-                  <button
-                    className="px-2 py-1 border rounded"
-                    onClick={() => increaseQty(item.id)}
-                  >
-                    +
-                  </button>
-                </div>
-              </div>
-
-              <button onClick={() => removeFromCart(item.id)}>
-                <Trash2 size={18} className="text-red-500" />
+          {/* Drawer */}
+          <motion.div
+            key="drawer"
+            variants={drawerVariants}
+            initial="hidden"
+            animate="visible"
+            exit="exit"
+            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            className="fixed top-0 right-0 h-full md:w-[400px] w-80 bg-white shadow-xl z-50 flex flex-col"
+          >
+            {/* Header */}
+            <div className="flex justify-between items-center p-4 border-b">
+              <h2 className="text-xl font-semibold">Your Cart</h2>
+              <button onClick={toggleCart}>
+                <X size={24} />
               </button>
             </div>
-          ))}
-        </div>
 
-        {/* Footer Total */}
-        <div className="p-4 border-t font-semibold text-lg flex justify-between">
-          <span>Total:</span>
-          <span>₦{totalPrice.toLocaleString()}</span>
-        </div>
-      </div>
-      </AnimatePresence>
-    </>
+            {/* Cart Items */}
+            <div className="p-4 overflow-y-auto flex-1 flex flex-col gap-3">
+              {cart.length === 0 ? (
+                <p className="text-gray-500 mt-10 text-center">
+                  Your cart is empty.
+                </p>
+              ) : (
+                <AnimatePresence>
+                  {cart.map((item, index) => (
+                    <motion.div
+                      key={`${item.id}-${index}`}
+                      variants={itemVariants}
+                      initial="hidden"
+                      animate="visible"
+                      exit="exit"
+                      transition={{ duration: 0.2 }}
+                      className="flex justify-between items-start border-b py-3"
+                    >
+                      <div>
+                        <p className="font-semibold">{item.name}</p>
+                        <p className="text-sm text-gray-500">₦{item.price}</p>
+
+                        {/* Quantity */}
+                        <div className="flex items-center gap-2 mt-2">
+                          <button
+                            className="px-2 py-1 border rounded"
+                            onClick={() => decreaseQty(item.id)}
+                          >
+                            -
+                          </button>
+                          <span>{item.qty}</span>
+                          <button
+                            className="px-2 py-1 border rounded"
+                            onClick={() => increaseQty(item.id)}
+                          >
+                            +
+                          </button>
+                        </div>
+                      </div>
+
+                      <button onClick={() => removeFromCart(item.id)}>
+                        <Trash2 size={18} className="text-red-500" />
+                      </button>
+                    </motion.div>
+                  ))}
+                </AnimatePresence>
+              )}
+            </div>
+
+            {/* Footer Total */}
+            <div className="p-4 border-t font-semibold text-lg flex justify-between">
+              <span>Total:</span>
+              <span>₦{totalPrice.toLocaleString()}</span>
+            </div>
+          </motion.div>
+        </>
+      )}
+    </AnimatePresence>
   );
 }

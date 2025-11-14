@@ -2,19 +2,41 @@
 import React, { createContext, useContext, useEffect, useState } from "react";
 import { db } from "../firebase"; // adjust path
 import { collection, getDocs } from "firebase/firestore";
+import toast from "react-hot-toast";
 
 const StoreContext = createContext();
 
 export function StoreProvider({ children }) {
+  // --- STATES ---
   const [products, setProducts] = useState([]);
+  const [filteredProducts, setFilteredProducts] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [viewFavourites, setViewFavourites] = useState(false);
   const [cart, setCart] = useState([]);
-  const [filteredProducts, setFilteredProducts] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
+//   const [sidePanelOpen, setSidePanelOpen] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+  const [leftSideOpen, setLeftSideOpen] = useState(false);
 
 
-  // Fetch all products from Firestore
+  // --- DETECT MOBILE ---
+  useEffect(() => {
+    const handleResize = () => setIsMobile(window.innerWidth < 768);
+    handleResize();
+    window.addEventListener("resize", handleResize);
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
+  // --- SCROLL LOCK ---
+  useEffect(() => {
+    if ((isMobile && (cartOpen || leftSideOpen)) || (!isMobile && cartOpen)) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+  }, [cartOpen, leftSideOpen, isMobile]);
+
+  // --- FETCH PRODUCTS ---
   useEffect(() => {
     const fetchProducts = async () => {
       const querySnapshot = await getDocs(collection(db, "products"));
@@ -28,21 +50,22 @@ export function StoreProvider({ children }) {
     fetchProducts();
   }, []);
 
-  // --- HANDLERS ---
+  // --- FAVOURITES ---
+  const toggleFavourite = (product) => {
+  const exists = favourites.some((item) => item.id === product.id);
+  const message = exists
+    ? `${product.name} removed from favourites`
+    : `${product.name} added to favourites`;
 
-const toggleFavourite = (product) => {
-    setFavourites((prev) => {
-      const exists = prev.find((item) => item.id === product.id);
-      return exists
-        ? prev.filter((item) => item.id !== product.id)
-        : [...prev, product];
-    });  
-  };
+  toast.success(message);
 
-      //Check if a product is already in favourites 
-    const isFavourite = (productId) => {
-    return favourites.some((item) => item.id === productId);
-    };
+  setFavourites((prev) =>
+    exists ? prev.filter((item) => item.id !== product.id) : [...prev, product]
+  );
+};
+
+
+  const isFavourite = (productId) => favourites.some((item) => item.id === productId);
 
   const filterByCategoryAndOption = (category, option) => {
     if (!category) return setFilteredProducts(products);
@@ -51,55 +74,91 @@ const toggleFavourite = (product) => {
     setFilteredProducts(filtered);
   };
 
+  // --- CART HANDLERS ---
   const addToCart = (product) => {
-    setCart((prev) => {
-        const exists = prev.find((item) => item.id === product.id);
-        if (exists) {
-            return prev.map((item) =>
-            item.id === product.id
-        ? {...item, qty: item.qty + 1}
-        : item
-    );
-        }
-        return [...prev, {...product, qty: 1}];
-    });
-  };
+  const exists = cart.some((item) => item.id === product.id);
+  const message = exists
+    ? `${product.name} quantity increased`
+    : `${product.name} added to cart`;
 
-  const increaseQty = (id) => {
-    setCart((prev) =>
-    prev.map((item) =>
-        item.id === id ? {...item, qty: item.qty + 1} : item
-    )
-    );
-  };
+  toast.success(message);
 
-    const decreaseQty = (id) => {
-    setCart((prev) =>
-      prev
-        .map((item) =>
-          item.id === id ? { ...item, qty: item.qty - 1 } : item
+  setCart((prev) =>
+    exists
+      ? prev.map((item) =>
+          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
         )
-        .filter((item) => item.qty > 0)
-    );
+      : [...prev, { ...product, qty: 1 }]
+  );
+};
+
+const increaseQty = (id) => {
+  const item = cart.find((i) => i.id === id);
+  if (!item) return;
+
+  // Fire toast before updating state
+  toast.success(`${item.name} quantity increased`);
+
+  setCart((prev) =>
+    prev.map((i) =>
+      i.id === id ? { ...i, qty: i.qty + 1 } : i
+    )
+  );
+};
+
+const decreaseQty = (id) => {
+  const item = cart.find((i) => i.id === id);
+  if (!item) return;
+
+  // Fire toast before updating state
+  toast.success(`${item.name} quantity decreased`);
+
+  setCart((prev) =>
+    prev
+      .map((i) =>
+        i.id === id ? { ...i, qty: i.qty - 1 } : i
+      )
+      .filter((i) => i.qty > 0)
+  );
+};
+
+
+const removeFromCart = (id) => {
+  const removedItem = cart.find((item) => item.id === id);
+  if (!removedItem) return;
+
+  // Fire toast before updating state
+  toast.success(`${removedItem.name} removed from cart`);
+
+  setCart((prev) => prev.filter((item) => item.id !== id));
+};
+
+
+  // --- PANEL HANDLERS ---
+  const openCart = () => {
+    setCartOpen(true);
+    if (isMobile && leftSideOpen) setLeftSideOpen(false);
   };
 
-  const removeFromCart = (id) => {
-    setCart((prev) => prev.filter((item) => item.id !== id));
+  const toggleCart = () => (cartOpen ? setCartOpen(false) : openCart());
+
+  const openSidePanel = () => {
+    setSidePanelOpen(true);
+    if (isMobile && cartOpen) setCartOpen(false);
   };
 
-  const toggleCart = () => setCartOpen((prev) => !prev);
+  const toggleSidePanel = () => (sidePanelOpen ? setSidePanelOpen(false) : openSidePanel());
 
-  
+  // --- PROVIDER VALUES ---
   return (
     <StoreContext.Provider
       value={{
         products,
-        setProducts,
         filteredProducts,
         setFilteredProducts,
         favourites,
-        isFavourite,
         toggleFavourite,
+        isFavourite,
         viewFavourites,
         setViewFavourites,
         filterByCategoryAndOption,
@@ -109,13 +168,20 @@ const toggleFavourite = (product) => {
         decreaseQty,
         removeFromCart,
         cartOpen,
+        setCartOpen,
         toggleCart,
+        openCart,
+        leftSideOpen,
+        setLeftSideOpen,
+        toggleSidePanel,
+        openSidePanel,
+        isMobile,
       }}
     >
       {children}
     </StoreContext.Provider>
   );
-};
+}
 
-// Custom hook for easy access
+// --- CUSTOM HOOK ---
 export const useStore = () => useContext(StoreContext);

@@ -15,7 +15,7 @@ const TopSide = () => {
     const [drops, setDrops] = useState([]);
     const [activeCategory, setActiveCategory] = React.useState(null);
     const [selectedOption, setSelectedOption] = React.useState(null);
-    const { toggleCart, cart } = useStore();
+    const { toggleCart, cart, leftSideOpen, setLeftSideOpen } = useStore();
 
     const toggleOption = (option) => setSelectedOption(prev => (prev === option ? null : option));
   
@@ -86,7 +86,7 @@ const TopSide = () => {
             <div className="w-full flex flex-col md:hidden items-center justify-center gap-4">
                 <div className="w-full md:hidden items-center justify-evenly gap-2 flex">
                     <button
-                        onClick={() => setIsOpen(true)}
+                        onClick={() => setLeftSideOpen(prev => !prev)}
                         className=" z-50 p-2 mt-2 rounded-full text-black"
                 >
                         <Menu size={24} />
@@ -94,7 +94,7 @@ const TopSide = () => {
 
                     <div
                         className={`fixed top-0 left-0 h-screen bg-[#1C4672] z-50 overflow-y-auto no-scrollbar transform transition-transform duration-300 ease-in-out 
-                        ${isOpen ? 'translate-x-0 w-[60%]' : '-translate-x-full'} 
+                        ${leftSideOpen ? 'translate-x-0 w-[60%]' : '-translate-x-full'} 
                         md:translate-x-0 md:w-[16%]`}>
 
                     {/* Close button (mobile only) */}
