@@ -11,11 +11,17 @@ import { useStore } from '@/app/context/StoreContext';
 
 const TopSide = () => {
     const [isOpen, setIsOpen] = useState(false);
-    // const [showSearch, setShowSearch] = useState(false);
     const [drops, setDrops] = useState([]);
     const [activeCategory, setActiveCategory] = React.useState(null);
     const [selectedOption, setSelectedOption] = React.useState(null);
-    const { toggleCart, cart, leftSideOpen, setLeftSideOpen } = useStore();
+    const { toggleCart, cart, leftSideOpen, setLeftSideOpen, performSearch, filteredProducts } = useStore();
+    const [query, setQuery] = useState("");
+
+  const suggestions = query
+    ? filteredProducts.filter((p) =>
+        p.name.toLowerCase().includes(query.toLowerCase())
+      )
+    : [];
 
     const toggleOption = (option) => setSelectedOption(prev => (prev === option ? null : option));
   
@@ -72,12 +78,15 @@ const TopSide = () => {
                     <div className="flex items-center w-full rounded-lg bg-white shadow-md px-3 py-3">
                         <Search size={18} className="text-gray-500 mr-2" />
                             <input
-                                type="text"
+                                value={query}
+                                onChange={(e) => {
+                                const value = e.target.value;
+                                setQuery(value);
+                                performSearch(value);
+                                }}
+                                className="w-full bg-transparent border-none outline-none focus:ring-0 text-sm text-black"
                                 placeholder="Search liquids..."
-                                // value={searchTerm}
-                                // onChange={(e) => setSearchTerm(e.target.value)}
-                                className="flex-1 outline-none text-sm text-gray-700 bg-transparent"
-                            />
+                            />                           
                     </div>
                 </div>
             </div>
@@ -112,14 +121,17 @@ const TopSide = () => {
                 <div className="flex items-center justify-center gap-4 w-full">
                     <div className="flex items-center w-full rounded-lg bg-gray-200 px-2 py-2">
                         <Search size={18} className="text-black mr-2" />
-                        <input
-                            type="text"
-                            placeholder="Search liquids..."
-                            // value={searchTerm}
-                            // onChange={(e) => setSearchTerm(e.target.value)}
-                            className="flex-1 outline-none text-sm text-gray-700 bg-transparent"
-                        />
-                    </div>
+                            <input
+                                value={query}
+                                onChange={(e) => {
+                                const value = e.target.value;
+                                setQuery(value);
+                                performSearch(value);
+                                }}
+                                className="w-full bg-transparent border-none outline-none focus:ring-0 text-sm text-black"
+                                placeholder="Search liquids..."
+                            />
+                    </div> 
 
                     <div 
                     onClick={toggleCart}

@@ -13,6 +13,8 @@ export default function MainPage() {
     isFavourite,
     viewFavourites,
     addToCart,
+    viewSearchResults,
+    searchResults,
   } = useStore();
 
   // Track quantity per product
@@ -39,7 +41,13 @@ export default function MainPage() {
 //     setQuantities((prev) => ({ ...prev, [product.id]: 1 })); // reset after add
 //   };
 
-  const productsToDisplay = viewFavourites ? favourites : filteredProducts;
+  // Priority: Search → Favourites → Normal
+  const productsToDisplay = viewSearchResults
+    ? searchResults
+    : viewFavourites
+    ? favourites
+    : filteredProducts;
+
 
   if (!productsToDisplay.length) {
     return (
@@ -52,6 +60,23 @@ export default function MainPage() {
   return (
     <div className="md:p-6 p-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
       <Toaster position="top-right" reverseOrder={false} />
+
+      {viewSearchResults && (
+        <h2 className="text-lg font-semibold mb-4">
+          Is this what you are looking for?
+        </h2>
+      )}
+
+      {/* Message if nothing found */}
+      {!productsToDisplay.length && (
+        <p className="text-gray-500">
+          {viewSearchResults
+            ? "No results found."
+            : viewFavourites
+            ? "No favourites yet."
+            : "No products available."}
+        </p>
+      )}
 
       {productsToDisplay.map((product, index) => (
         <div

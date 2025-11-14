@@ -14,7 +14,8 @@ export function StoreProvider({ children }) {
   const [viewFavourites, setViewFavourites] = useState(false);
   const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
-//   const [sidePanelOpen, setSidePanelOpen] = useState(false);
+  const [viewSearchResults, setViewSearchResults] = useState(false);
+  const [searchResults, setSearchResults] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [leftSideOpen, setLeftSideOpen] = useState(false);
 
@@ -134,6 +135,22 @@ const removeFromCart = (id) => {
 };
 
 
+const performSearch = (query) => {
+    if (!query.trim()) {
+      setViewSearchResults(false);
+      setSearchResults([]);
+      return;
+    }
+
+    const results = filteredProducts.filter((p) =>
+      p.name.toLowerCase().includes(query.toLowerCase())
+    );
+
+    setSearchResults(results);
+    setViewSearchResults(true);
+    setViewFavourites(false); // turn off favourites view while searching
+  };
+
   // --- PANEL HANDLERS ---
   const openCart = () => {
     setCartOpen(true);
@@ -176,6 +193,10 @@ const removeFromCart = (id) => {
         toggleSidePanel,
         openSidePanel,
         isMobile,
+        searchResults,
+        viewSearchResults,
+        performSearch,
+        setViewSearchResults,
       }}
     >
       {children}
