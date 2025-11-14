@@ -15,16 +15,6 @@ const firebaseConfig = {
 };
 
 
-// const firebaseConfig = {
-//   apiKey: "AIzaSyCK97eo8xyVOqmAiug6YeeuqDBm_HzuZRk",
-//   authDomain: "liquido-99b05.firebaseapp.com",
-//   projectId: "liquido-99b05",
-//   storageBucket: "liquido-99b05.firebasestorage.app",
-//   messagingSenderId: "551428334367",
-//   appId: "1:551428334367:web:89f406bea4c6834a51c62a",
-//   measurementId: "G-6ET556Q1CB"
-// };
-
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 // const analytics = getAnalytics(app);
