@@ -2,7 +2,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowLeft, ArrowRight, Instagram,  Linkedin, Facebook } from "lucide-react";
 import { FaXTwitter, FaWhatsapp, FaInstagram, FaX, FaTiktok, FaLinkedin } from "react-icons/fa6";
-import { Quicksand } from "next/font/google";
+import { Imprima, Quicksand } from "next/font/google";
+// import { useRouter } from "next/router";
+
 
 // Example usage: <LiquidoHero products={products} />
 // products = [{ id, title, subtitle, image, tag }]
@@ -12,6 +14,9 @@ const quick = Quicksand({
 });
 
 export default function Hero({ products }) {
+  const [drops, setDrops] = useState([]);
+  // const router = useRouter();
+
   const defaultProducts = [
     {
       id: 1,
@@ -74,11 +79,36 @@ export default function Hero({ products }) {
     setIndex((i) => (i + 1) % items.length);
   }
 
+   const handleExploreLiquido = () => {
+  // Add drop on click
+  const newDrop = { id: Date.now() };
+  setDrops((prev) => [...prev, newDrop]);
+
+  // Remove drop after animation
+  setTimeout(() => {
+    setDrops((prev) => prev.filter((drop) => drop.id !== newDrop.id));
+  }, 3000);
+
+  setTimeout(() => {
+    const element = document.getElementById("Categories");
+    if (element) {
+      const navbarHeight = 60;
+      const elementPosition = element.getBoundingClientRect().top + window.scrollY;
+      const offsetPosition = elementPosition - navbarHeight;
+
+      window.scrollTo({
+        top: offsetPosition,
+        behavior: "smooth",
+      });
+    }
+  }, 500);
+};
   const phoneNumber = "2347062757706"; 
   const message = "Hello Liquido 💧. I would like to make some inquiries.";
 
   return (
-    <section className="relative overflow-hidden">
+    <section id="Home"
+    className="relative overflow-hidden">
       <div
         className="absolute inset-0 -z-10"
         style={{
@@ -102,17 +132,18 @@ export default function Hero({ products }) {
 
               <h1 className={`${quick.className} text-2xl sm:text-3xl lg:text-6xl leading-tight font-extrabold text-white drop-shadow-lg`}>
                 Everything Liquid Delivered To You With Ease
-                <span className="block text-xl sm:text-xl font-medium text-white/90 mt-2">Fresh drinks • Personal care • Culinary essentials</span>
+                {/* <span className="block text-xl sm:text-xl font-medium text-white/90 mt-2">Fresh drinks • Personal care • Culinary essentials</span> */}
               </h1>
 
               <p className="text-white/85 max-w-xl text-md">
-                Liquido is your number-one plug — redefining the way you get water and drinks. Say goodbye to
+                Liquido is your number-one plug, redefining the way you get water and drinks. Say goodbye to
                 heavy lifting and long queues at supermarkets. We’re here to save your time and energy by
                 delivering every liquid product you need, directly to your doorstep.
               </p>
 
               <div className="flex items-center gap-4">
                 <button
+                onClick={handleExploreLiquido}
                   className="relative inline-flex items-center gap-3 rounded-2xl px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 transform transition shadow-md"
                   onMouseEnter={stopAutoplay}
                   onMouseLeave={startAutoplay}
@@ -127,19 +158,6 @@ export default function Hero({ products }) {
                 </button>
 
                 <div className="hidden sm:flex items-center gap-3 text-white">
-                  {/* <a href="#" aria-label="Instagram" className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <Instagram size={18} className="text-white" />
-                  </a> */}
-                  {/* <a href="#" aria-label="Tiktok" className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <Tiktok size={18} className="text-white" />
-                  </a> */}
-                  {/* <a href="#" aria-label="LinkedIn" className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <Linkedin size={18} className="text-white" />
-                  </a>
-                  <a href="#" aria-label="Facebook" className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <Facebook size={18} className="text-white" />
-                  </a> */}
-
                   <a href="https://twitter.com/liquido_ng" target="_blank" rel="noopener noreferrer" 
                     className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
                     <FaXTwitter size={18}/>
@@ -166,21 +184,21 @@ export default function Hero({ products }) {
               <div className="mt-6 flex gap-4 text-sm text-white/80">
                 <div className="inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white/80" />
-                  <span>Same‑day delivery</span>
+                  <span>Same‑day Delivery</span>
                 </div>
                 <div className="inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white/60" />
-                  <span>Eco packaging</span>
+                  <span>Bulk Delivery</span>
                 </div>
                 <div className="inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white/60" />
-                  <span>Subscription available</span>
+                  <span>Scheduled Delivery</span>
                 </div>
               </div>
             </motion.div>
           </div>
 
-          <div className="lg:col-span-6">
+          <div className="lg:col-span-6 hidden">
             <div className="relative">
               <div className="relative w-full h-[420px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-white/6 to-white/3 backdrop-blur-2xl">
                 <div className="absolute -left-24 -top-10 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
@@ -263,29 +281,6 @@ export default function Hero({ products }) {
                   ))}
                 </div>
               </div>
-
-              {/* <div className="absolute -right-6 top-1/4 hidden md:flex flex-col gap-3 z-30">
-                  <a href="https://twitter.com/liquido_ng" target="_blank" rel="noopener noreferrer" 
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaXTwitter size={18}/>
-                  </a>
-                  <a href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaWhatsapp size={18}/>
-                  </a>
-                  <a href="https://instagram.com/liquido.ng" target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaInstagram size={18}/>
-                  </a>
-                  <a href="https://tiktok.com/@liquido.ng" target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaTiktok size={18}/>
-                  </a>
-                  <a href="https://linkedin.com/company/liquidong" target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaLinkedin size={18}/>
-                  </a>
-              </div> */}
             </div>
 
             <div className="mt-6 flex items-center gap-4 overflow-x-auto py-2">

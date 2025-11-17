@@ -128,18 +128,20 @@ export default function CheckoutPage() {
   if (!isLoaded) return null;
 
   return (
-    <div className="text-center py-4 min-h-screen overflow-hidden bg-[#1C4672]">
+    <div className="text-center py-4 min-h-screen overflow-hidden">
 
-      {/* <div className="flex items-center justify-center gap-4"> */}
+      <div className="flex items-center justify-center bg-[#1C4672] py-4">
+        <div className="relative items-start justify-start">
           <Image
             src={assets.logo}
             alt="logo"
-            className="w-[10%] h-auto absolute left-6 top-4"
+            className="w-[60%] h-auto"
           />
-        <h1 className={` ${quick.className} md:text-3xl text-2xl text-white`}>
+          </div>
+        <h1 className={` ${quick.className} md:text-3xl text-2xl text-white md:mt-0 mt-10`}>
             Checkout Page Details
         </h1>
-      {/* </div> */}
+      </div>
 
         <div className="py-8 px-4 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 overflow-hidden">
 
@@ -154,8 +156,8 @@ export default function CheckoutPage() {
                     onClick={() => setStep(i + 1)}
                     className={`${
                         i + 1 <= step
-                        ? "text-[#1C4672]"
-                        : "text-gray-400"
+                        ? "text-gray-900"
+                        : "text-gray-500"
                     }`}
                     >
                     {label}
@@ -297,7 +299,7 @@ export default function CheckoutPage() {
             </div>
 
             {/* -------------------- RIGHT SIDE — CART DETAILS -------------------- */}
-            <div className="bg-white p-6 rounded-xl shadow-md h-fit sticky top-9">
+            <div className="bg-white p-6 h-fit sticky top-9 border rounded-xl">
                 <h2 className="text-xl font-semibold mb-4">Your Cart</h2>
 
                 {cart.length === 0 ? (

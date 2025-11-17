@@ -10,7 +10,7 @@ import { categories } from '@/public/assets';
 import { useStore } from '@/app/context/StoreContext';
 
 const TopSide = () => {
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const [drops, setDrops] = useState([]);
     const [activeCategory, setActiveCategory] = React.useState(null);
     const [selectedOption, setSelectedOption] = React.useState(null);
@@ -115,11 +115,10 @@ const TopSide = () => {
 
                     {/* Close button (mobile only) */}
                     <div className="flex justify-end px-4 py-3 md:hidden">
-                        <button onClick={() => setIsOpen(false)} className="text-white">
+                        <button onClick={() => setLeftSideOpen(false)} className="text-white cursor-pointer z-50">
                             <X size={24} />
                         </button>
                     </div>
-                    
                         <LeftSide/>
                     </div>
                     <PhoneAdvert/>
