@@ -1,12 +1,14 @@
 "use client";
-
 import { useStore } from "@/app/context/StoreContext";
 import { AnimatePresence, motion } from "framer-motion";
 import { X, Trash2 } from "lucide-react";
+import { useRouter } from 'next/navigation';
 
 export default function Cart() {
-  const {
+   const router = useRouter();
+   const {
     cartOpen,
+    setCartOpen,
     toggleCart,
     cart,
     increaseQty,
@@ -85,33 +87,39 @@ export default function Cart() {
                       animate="visible"
                       exit="exit"
                       transition={{ duration: 0.2 }}
-                      className="flex justify-between items-start border-b py-3"
+                      className="flex justify-between items-center border-b py-3"
                     >
-                      <div>
-                        <p className="font-semibold">{item.name}</p>
-                        <p className="text-sm text-gray-500">₦{item.price}</p>
-
-                        {/* Quantity */}
-                        <div className="flex items-center gap-2 mt-2">
-                          <button
-                            className="px-2 py-1 border rounded"
-                            onClick={() => decreaseQty(item.id)}
-                          >
-                            -
-                          </button>
-                          <span>{item.qty}</span>
-                          <button
-                            className="px-2 py-1 border rounded"
-                            onClick={() => increaseQty(item.id)}
-                          >
-                            +
-                          </button>
+                        <div>
+                          <img src={item.image} alt="item.name" className="w-20 h-auto"/>
                         </div>
-                      </div>
 
-                      <button onClick={() => removeFromCart(item.id)}>
-                        <Trash2 size={18} className="text-red-500" />
-                      </button>
+                        <div className="flex flex-col gap-1">
+                          <p className="font-semibold">{item.name}</p>
+                          <p className="text-sm">{item.volume}</p>
+                          <p className="text-sm text-gray-500">₦{item.price}</p>
+                        </div>
+
+                        <div className="flex flex-col items-end justify-end gap-5">
+                          <button onClick={() => removeFromCart(item.id)}>
+                            <Trash2 size={18} className="text-red-500" />
+                          </button>
+
+                          <div className="flex items-center gap-2">
+                            <button
+                              className="px-2 py-1 border rounded"
+                              onClick={() => decreaseQty(item.id)}
+                            >
+                              -
+                            </button>
+                            <span>{item.qty}</span>
+                            <button
+                              className="px-2 py-1 border rounded"
+                              onClick={() => increaseQty(item.id)}
+                            >
+                              +
+                            </button>
+                          </div>
+                        </div>
                     </motion.div>
                   ))}
                 </AnimatePresence>
@@ -119,9 +127,26 @@ export default function Cart() {
             </div>
 
             {/* Footer Total */}
-            <div className="p-4 border-t font-semibold text-lg flex justify-between">
+            <div className="p-2 border-t font-semibold text-lg flex justify-between">
               <span>Total:</span>
               <span>₦{totalPrice.toLocaleString()}</span>
+            </div>
+
+            <div className="flex items-center justify-between p-2 mb-2">
+              <button 
+                onClick={toggleCart}
+                className="bg-[#1C4672] px-4 py-2 rounded-lg text-white">
+                Continue
+              </button>
+
+              <button 
+              onClick={() => {
+              setCartOpen(false);
+              router.push("/checkout");
+            }}
+              className="bg-[#1C4672] px-4 py-2 rounded-lg text-white">
+                Checkout
+              </button>
             </div>
           </motion.div>
         </>

@@ -1,5 +1,5 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
@@ -16,11 +16,18 @@ const quick = Quicksand({
 
 const LeftSide = () => {
     const { favourites, filterByCategoryAndOption, viewFavourites, setViewFavourites,
-        toggleCart, cart } = useStore();
+        toggleCart, cart, cartOpen } = useStore();
 
     const handleCategoryClick = (cat, option) => {
         filterByCategoryAndOption(categories, option);
     };
+
+    const [mounted, setMounted] = useState(false);
+
+useEffect(() => {
+  setMounted(true);
+}, []);
+
 
   return (    
     <div className='flex flex-col items-center justify-start py-2 space-y-6 bg-[#1C4672] h-screen overflow-y-auto scrollbar-hide'>
@@ -44,7 +51,11 @@ const LeftSide = () => {
                     onClick={toggleCart}
                     className="flex text-sm items-center gap-2 hover:text-[#c4e0f9]"
                 >
-                    <ShoppingCart size={16}/> View Cart
+                    {cartOpen ? (
+                        <><MinusCircle size={16}/> Close Cart</>
+                    ) : (
+                        <><ShoppingCart size={16}/> View Cart</>
+                    )}
                 </div>
                 
                 <div

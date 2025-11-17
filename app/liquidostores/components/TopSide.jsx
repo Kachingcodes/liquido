@@ -57,6 +57,13 @@ const TopSide = () => {
         setTimeout(() => router.push("/shop"), 600);
       };
 
+      const [mounted, setMounted] = useState(false);
+
+        useEffect(() => {
+        setMounted(true);
+        }, []);
+
+
     return (
         <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white">
         {/* Top Search + Back - Desktop*/}
@@ -138,7 +145,7 @@ const TopSide = () => {
                     className="rounded-lg border px-2 py-2">
                         <ShoppingCart size={18}/>
 
-                        {cart.length > 0 && (
+                            {mounted && cart.length > 0 && (
                             <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
                                 {cart.length}
                             </span>

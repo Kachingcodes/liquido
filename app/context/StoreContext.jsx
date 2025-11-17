@@ -12,12 +12,30 @@ export function StoreProvider({ children }) {
   const [filteredProducts, setFilteredProducts] = useState([]);
   const [favourites, setFavourites] = useState([]);
   const [viewFavourites, setViewFavourites] = useState(false);
-  const [cart, setCart] = useState([]);
   const [cartOpen, setCartOpen] = useState(false);
   const [viewSearchResults, setViewSearchResults] = useState(false);
   const [searchResults, setSearchResults] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [leftSideOpen, setLeftSideOpen] = useState(false);
+
+  const [cart, setCart] = useState(() => {
+  if (typeof window !== "undefined") {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  }
+  return [];
+});
+
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }
+}, [cart]);
+
+const clearCart = () => {
+  setCart([]);
+  localStorage.removeItem("cart");
+};
 
 
   // --- DETECT MOBILE ---
@@ -159,27 +177,42 @@ const performSearch = (query) => {
 
   const toggleCart = () => (cartOpen ? setCartOpen(false) : openCart());
 
-  const openSidePanel = () => {
-    setSidePanelOpen(true);
-    if (isMobile && cartOpen) setCartOpen(false);
-  };
+const openSidePanel = () => {
+  setLeftSideOpen(true);
+  if (isMobile && cartOpen) setCartOpen(false);
+};
 
-  const toggleSidePanel = () => (sidePanelOpen ? setSidePanelOpen(false) : openSidePanel());
+const toggleSidePanel = () => {
+  setLeftSideOpen((prev) => {
+    const newState = !prev;
+    if (newState && cartOpen && isMobile) {
+      setCartOpen(false);
+    }
+    return newState;
+  });
+};
+
 
   // --- PROVIDER VALUES ---
   return (
     <StoreContext.Provider
       value={{
+        //PRODUCTS
         products,
         filteredProducts,
         setFilteredProducts,
+        filterByCategoryAndOption,
+
+        //FAVOURITES
         favourites,
         toggleFavourite,
         isFavourite,
         viewFavourites,
         setViewFavourites,
-        filterByCategoryAndOption,
+
+        //CART
         cart,
+        setCart,
         addToCart,
         increaseQty,
         decreaseQty,
@@ -188,11 +221,15 @@ const performSearch = (query) => {
         setCartOpen,
         toggleCart,
         openCart,
+
+        //LEFTSIDE MOBILE VIEW
         leftSideOpen,
         setLeftSideOpen,
         toggleSidePanel,
         openSidePanel,
         isMobile,
+
+        //SEARCH
         searchResults,
         viewSearchResults,
         performSearch,
