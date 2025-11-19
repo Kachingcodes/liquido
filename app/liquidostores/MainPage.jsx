@@ -4,6 +4,11 @@ import { useStore } from "../context/StoreContext";
 import Image from "next/image";
 import { Minus, Plus } from "lucide-react";
 import toast, { Toaster } from "react-hot-toast";
+import { FaSadTear } from "react-icons/fa";
+import { GiMeltingIceCube } from "react-icons/gi";
+
+
+
 
 export default function MainPage() {
   const {
@@ -48,34 +53,27 @@ export default function MainPage() {
     ? favourites
     : filteredProducts;
 
-
-  if (!productsToDisplay.length) {
-    return (
-      <p className="p-6 text-gray-500">
-        {viewFavourites ? "No favourites yet." : "No products available."}
-      </p>
-    );
-  }
-
   return (
     <div className="md:p-6 p-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
       <Toaster position="top-right" reverseOrder={false} />
 
-      {viewSearchResults && (
+      {/* {viewSearchResults && (
         <h2 className="text-lg font-semibold mb-4">
           Is this what you are looking for?
         </h2>
-      )}
+      )} */}
 
       {/* Message if nothing found */}
+      
       {!productsToDisplay.length && (
-        <p className="text-gray-500">
+        <div className="text-gray-500">
           {viewSearchResults
-            ? "No results found."
+            ? <div className="flex gap-2">  No results found. <FaSadTear size={18} className="mt-1"/> </div>
             : viewFavourites
             ? "No favourites yet."
-            : "No products available."}
-        </p>
+            : <div className="flex flex-col md:flex-row gap-2"> No products available. <GiMeltingIceCube size={18} className="mt-1"/> </div>
+            }
+        </div>
       )}
 
       {productsToDisplay.map((product, index) => (
@@ -107,25 +105,6 @@ export default function MainPage() {
 
           {/* Quantity & Add to Cart */}
           <div className="flex items-center justify-evenly w-full mt-4 flex-col md:flex-row gap-3">
-            {/* Quantity Controls */}
-            {/* <div className="flex items-center justify-center gap-3 border border-gray-300 bg-gray-50 rounded-lg px-3 py-1">
-              <button
-                onClick={() => decreaseQty(product.id)}
-                className="p-1 text-gray-600 hover:text-gray-900 hover:scale-110 transition-transform"
-              >
-                <Minus size={18} />
-              </button>
-              <span className="font-semibold text-gray-800">
-                {quantities[product.id] || 1}
-              </span>
-              <button
-                onClick={() => increaseQty(product.id)}
-                className="p-1 text-gray-600 hover:text-gray-900 hover:scale-110 transition-transform"
-              >
-                <Plus size={18} />
-              </button>
-            </div> */}
-
             {/* Add to Cart */}
             <button
               onClick={() => addToCart(product)}

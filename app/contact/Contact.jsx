@@ -18,6 +18,7 @@ const Contact = () => {
   const [formData, setFormData] = useState({
     name: '',
     contact: '',
+    social: '',
     message: '',
   });
 
@@ -39,6 +40,10 @@ const Contact = () => {
       newErrors.name ="Please enter your name";
     }
 
+    if (!formData.contact.trim()) {
+      newErrors.contact = "Please enter your number";
+    }
+
     if (!formData.message.trim()) {
       newErrors.message = "Please enter your message";
     }
@@ -55,12 +60,13 @@ const Contact = () => {
     const phoneNumber = "2347062757706"; 
 
     const message = `Hi LIQUIDO, my name is ${formData.name}\n
-    Contact Info: ${formData.contact}\n\n
+    Contact Info: ${formData.contact}\n
+    Social Handle: ${formData.social}\n\n
     ${formData.message}`;
 
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`;
     window.open(whatsappURL, "_blank");
-    setFormData({ name: '', contact: '', message: '' });
+    setFormData({ name: '', contact: '', social: '', message: '' });
   };
 
   const phoneNum = "2347062757706"; 
@@ -146,18 +152,18 @@ const Contact = () => {
           </motion.div>
 
           {/* Right: Contact Form */}
-          <div className="w-full md:w-[60%] flex justify-center md:bg-[#4C86C4] bg-none p-4 md:p-8 rounded-2xl md:text-white text-black">
-            <form onSubmit={handleSubmit} className="w-full space-y-5">
+          <div className="w-full md:w-[60%] flex justify-center md:bg-[#4C86C4] bg-none p-4 md:p-5 rounded-2xl md:text-white text-black">
+            <form onSubmit={handleSubmit} className="w-full space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-sm mb-2">Name</label>
+                <label className="block text-sm mb-2">Name <span className="text-red-500 text-lg mt-1">*</span></label>
                 <input
                   type="text"
                   name="name"
                   value={formData.name}
                   onChange={handleChange}
                   required
-                  className={`w-full rounded-lg px-4 py-3 bg-gray-200 text-black border 
+                  className={`w-full rounded-lg px-4 py-2 bg-gray-200 text-black border 
                     ${ errors.name ? "border-red-500" : "border-gray-900"} 
                     focus:border-[#1C4672] focus:outline-none`}
                 />
@@ -168,27 +174,44 @@ const Contact = () => {
 
               {/* Contact */}
               <div>
-                <label className="block text-sm mb-2">Phone Number/Instagram handle</label>
+                <label className="block text-sm mb-2">Phone Number <span className="text-red-500 text-lg mt-1">*</span></label>
                 <input
                   type="contact"
                   name="contact"
                   value={formData.contact}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-lg px-4 py-3 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
+                  className={`w-full rounded-lg px-4 py-2 bg-gray-200 text-black border
+                    ${ errors.contact ? "border-red-500" : "border-gray-900"}  
+                    focus:border-[#1C4672] focus:outline-none`}
+                />
+                  {errors.contact && (
+                  <p className="text-red-500 text-sm mt-1">{errors.contact}</p>
+                )}
+              </div>
+
+              {/* Social Handle */}
+              <div>
+                <label className="block text-sm mb-2">Social handle</label>
+                <input
+                  type="social"
+                  name="social"
+                  value={formData.social}
+                  onChange={handleChange}
+                  className="w-full rounded-lg px-4 py-2 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
                 />
               </div>
 
               {/* Message */}
               <div>
-                <label className="block text-sm mb-2">Message</label>
+                <label className="block text-sm mb-2">Message <span className="text-red-500 text-lg mt-1">*</span></label>
                 <textarea
                   name="message"
                   value={formData.message}
                   onChange={handleChange}
                   rows="5"
                   required
-                  className={`w-full rounded-lg px-4 py-3 bg-gray-200 text-black border 
+                  className={`w-full rounded-lg px-4 py-2 bg-gray-200 text-black border 
                     ${ errors.name ? "border-red-500" : "border-gray-900"} 
                     focus:border-[#1C4672] focus:outline-none resize-none`}
                 ></textarea>
@@ -199,7 +222,7 @@ const Contact = () => {
 
               <button
                 type="submit"
-                className="bg-gray-100 w-full flex items-center justify-center gap-2 py-3 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
+                className="bg-gray-100 w-full flex items-center justify-center gap-2 py-2 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
               >
                 <FaWhatsapp size={18}/>
                 Chat on WhatsApp

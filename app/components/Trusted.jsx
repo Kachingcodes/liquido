@@ -21,7 +21,7 @@ export default function Trusted() {
         x: {
           repeat: Infinity,
           repeatType: "loop",
-          duration: 32, // slower or faster
+          duration: 10, // slower or faster
           ease: "linear",
         },
       },

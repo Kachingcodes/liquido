@@ -30,7 +30,7 @@ useEffect(() => {
 
 
   return (    
-    <div className='flex flex-col items-center justify-start py-2 space-y-6 bg-[#1C4672] h-screen overflow-y-auto scrollbar-hide'>
+    <div className='flex flex-col items-center justify-start py-2 space-y-6 bg-[#1C4672] overflow-y-auto'>
         {/* Logo + Title */}
         <div className="relative w-30 h-auto mt-2">
             <Image src={assets.logo} alt="logo" className="object-contain" priority/>
@@ -69,22 +69,8 @@ useEffect(() => {
                     )}
                 </div>
 
-                          {/* This area is temporary. I am using it to test the admin side */}
-                            <div>
-                              <Link 
-                                href="/admin"
-                                onClick={(e) => {
-                                handleDrop(e);
-                                setIsOpen(false)
-                                }}
-                                className="flex items-center gap-2 text-sm cursor-pointer hover:text-[#c4e0f9]"
-                                >
-                                    <FaPerson size={16}/> Admin
-                              </Link>  
-                            </div>
-                            {/* Ends here */}
-
-                {/* <div
+                {/* Make this section a transaction history link instead
+                <div
                     onClick={() => { 
                     if (showInvoice) {
                         setShowInvoice(false);
@@ -108,13 +94,8 @@ useEffect(() => {
             <div className="w-full px-0 md:px-4 text-white space-y-3 cursor-pointer">
                 <h2 className="text-md font-semibold border-b border-white/30 pb-1">Delivery Hours</h2>
                 {[
-                    ["Sundays", "1PM - 6PM"],
-                    ["Mondays", "9AM - 6PM"],
-                    ["Tuesdays", "9AM - 6PM"],
-                    ["Wednesdays", "9AM - 6PM"],
-                    ["Thursdays", "9AM - 6PM"],
-                    ["Fridays", "9AM - 6PM"],
-                    ["Saturdays", "9AM - 6PM"],
+                    ["Mon - Sat", "9AM - 6PM"],
+                    ["Sun", "1PM - 6PM"],
                     ].map(([day, time]) => (
                     <p key={day} className="flex items-start justify-start space-y-2 gap-2 text-sm">
                         {day} <ArrowRight size={14} className='mt-1'/> {time}
@@ -141,3 +122,17 @@ useEffect(() => {
 };
 
 export default LeftSide;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

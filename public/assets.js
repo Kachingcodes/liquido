@@ -284,3 +284,19 @@ export const faqs = [
   { q: "Apart from water, what else do you deliver?", a: "Liquido NG is more than water. We also deliver liquid soap, soft drinks, wines and other essential liquids straight to your doorstep." },
     { q: "Which areas do you deliver to?", a: "We currently deliver across Ikeja and Environs. If your location isn't listed, kindly share it with us and we'll confirm availability." },
 ];
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

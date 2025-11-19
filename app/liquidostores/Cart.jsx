@@ -49,7 +49,7 @@ export default function Cart() {
             animate="visible"
             exit="exit"
             transition={{ duration: 0.25 }}
-            className="fixed inset-0 bg-black z-40"
+            className="fixed inset-0 bg-black z-[40] backdrop-blur-sm"
             onClick={toggleCart}
           />
 
@@ -60,14 +60,14 @@ export default function Cart() {
             initial="hidden"
             animate="visible"
             exit="exit"
-            transition={{ type: "spring", stiffness: 300, damping: 30 }}
+            transition={{ type: "spring", stiffness: 200, damping: 30 }}
             className="fixed top-0 right-0 h-full md:w-[400px] w-80 bg-white shadow-xl z-50 flex flex-col"
           >
             {/* Header */}
             <div className="flex justify-between items-center p-4 border-b">
               <h2 className="text-xl font-semibold">Your Cart</h2>
               <button onClick={toggleCart}>
-                <X size={24} />
+                <X size={24} className="cursor-pointer"/>
               </button>
             </div>
 

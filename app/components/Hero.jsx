@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowLeft, ArrowRight, Instagram,  Linkedin, Facebook } from "lucide-react";
+import { Compass, ArrowLeft, ArrowRight, Instagram,  Linkedin, Facebook } from "lucide-react";
 import { FaXTwitter, FaWhatsapp, FaInstagram, FaX, FaTiktok, FaLinkedin } from "react-icons/fa6";
 import { Imprima, Quicksand } from "next/font/google";
 // import { useRouter } from "next/router";
+import Link from "next/link";
 
 
 // Example usage: <LiquidoHero products={products} />
@@ -116,7 +117,111 @@ export default function Hero({ products }) {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-6 lg:px-8 py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-20 lg:py-28">
+
+{/*MOBILE VIEW HERE*/}
+        <div className="flex relative md:hidden mb-7">
+  <div className="relative w-full h-[280px] rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl">
+
+    {/* Background circles */}
+    <div className="absolute -left-16 -top-10 w-56 h-56 rounded-full opacity-10"
+      style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
+
+    <div className="absolute -right-16 -bottom-10 w-60 h-60 rounded-full opacity-8"
+      style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
+
+    {/* Left / Right buttons */}
+    <button
+      onClick={prev}
+      className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
+    >
+      <ArrowLeft size={14} className="text-white" />
+    </button>
+
+    <button
+      onClick={next}
+      className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
+    >
+      <ArrowRight size={14} className="text-white" />
+    </button>
+
+    {/* Content */}
+    <div className="absolute inset-0 flex items-center justify-center px-4">
+      <AnimatePresence initial={false} mode="wait">
+        {items.map((p, i) => {
+          if (i !== index) return null;
+          return (
+            <motion.div
+              key={p.id}
+              initial={{ opacity: 0, scale: 0.95, y: 8 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.97, y: -6 }}
+              transition={{ duration: 0.45 }}
+              className="w-full"
+            >
+              <div className="grid grid-cols-1 gap-4 items-center">
+
+                {/* Image */}
+                <div className="flex items-center justify-center">
+                  <div className="relative w-40 h-40 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-md">
+                    <motion.div
+                      animate={{ rotate: [0, 3, 0, -3, 0] }}
+                      transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+                      className="absolute inset-0"
+                    />
+                    <img src={p.image} alt={p.title} className="w-28 h-28 object-contain z-10" />
+                  </div>
+                </div>
+
+                {/* Text */}
+                <div className="">
+                  <div className="inline-flex items-center gap-2">
+                    <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/10 border border-white/10 text-white">
+                      {p.tag}
+                    </span>
+                  </div>
+
+                  {/* <h3 className="text-xl font-semibold text-white">{p.title}</h3> */}
+                  {/* <p className="text-white/80 mt-2 text-sm leading-tight">{p.subtitle}</p> */}
+
+                  {/* Buttons */}
+                  {/* <div className="mt-4 flex gap-2">
+                    <a className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/10 border border-white/10 backdrop-blur-sm hover:scale-105 transition">
+                      View details
+                    </a>
+                    <a className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white text-slate-800 hover:opacity-95 transition">
+                      Order now
+                    </a>
+                  </div> */}
+
+                  <div className="mt-3 flex items-center gap-1 text-xs text-white/70">
+                    <span>•</span>
+                    <span>Free delivery over ₦10,000</span>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </AnimatePresence>
+    </div>
+
+    {/* Indicators */}
+    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+      {items.map((_, i) => (
+        <button
+          key={i}
+          onClick={() => setIndex(i)}
+          className={`w-1.5 h-1.5 rounded-full transition-transform ${i === index ? "scale-110 bg-white" : "bg-white/30"}`}
+        />
+      ))}
+    </div>
+  </div>
+</div>
+
+
+{/*ENDS HERE*/}
+
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           <div className="lg:col-span-6">
             <motion.div
@@ -125,12 +230,12 @@ export default function Hero({ products }) {
               transition={{ duration: 0.6 }}
               className="space-y-6"
             >
-              <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full shadow-sm border border-white/10">
+              <div className="hidden md:inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full shadow-sm border border-white/10">
                 <span className="text-xs uppercase tracking-wider text-white/90 font-medium">Liquido</span>
                 <span className="text-xs text-white/60">Luxury • Lifestyle</span>
               </div>
 
-              <h1 className={`${quick.className} text-2xl sm:text-3xl lg:text-6xl leading-tight font-extrabold text-white drop-shadow-lg`}>
+              <h1 className={`${quick.className} text-2xl sm:text-3xl lg:text-6xl leading-tight font-extrabold text-[#1C4672] drop-shadow-lg`}>
                 Everything Liquid Delivered To You With Ease
                 {/* <span className="block text-xl sm:text-xl font-medium text-white/90 mt-2">Fresh drinks • Personal care • Culinary essentials</span> */}
               </h1>
@@ -151,9 +256,9 @@ export default function Hero({ products }) {
                   <motion.span
                     whileHover={{ x: 6 }}
                     transition={{ type: "spring", stiffness: 300 }}
-                    className="text-white font-semibold"
+                    className="text-white font-semibold flex gap-3"
                   >
-                    Explore Liquido
+                    Explore Liquido <Compass size={18} className="mt-1"/>
                   </motion.span>
                 </button>
 
@@ -198,8 +303,8 @@ export default function Hero({ products }) {
             </motion.div>
           </div>
 
-          <div className="lg:col-span-6 hidden">
-            <div className="relative">
+          <div className="lg:col-span-6">
+            <div className="md:flex relative hidden">
               <div className="relative w-full h-[420px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-white/6 to-white/3 backdrop-blur-2xl">
                 <div className="absolute -left-24 -top-10 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
                 <div className="absolute -right-24 -bottom-12 w-80 h-80 rounded-full opacity-8" style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
@@ -254,8 +359,10 @@ export default function Hero({ products }) {
                               <p className="text-white/85 mt-3">{p.subtitle}</p>
 
                               <div className="mt-6 flex gap-3">
-                                <a href="#" className="text-sm font-medium px-4 py-2 rounded-xl bg-white/10 border border-white/10 backdrop-blur-sm hover:scale-105 transition">View details</a>
-                                <a href="#" className="text-sm font-medium px-4 py-2 rounded-xl bg-white text-slate-800 hover:opacity-95 transition">Order now</a>
+                                <Link 
+                                  href="/liquidostores"               
+                                  className="text-sm font-medium px-4 py-2 rounded-xl bg-gray-200 hover:bg-white text-slate-800 hover:opacity-95 transition">Order now
+                                </Link>
                               </div>
 
                               <div className="mt-5 flex items-center gap-2 text-sm text-white/70">
@@ -283,7 +390,7 @@ export default function Hero({ products }) {
               </div>
             </div>
 
-            <div className="mt-6 flex items-center gap-4 overflow-x-auto py-2">
+            <div className="mt-6 hidden md:flex items-center gap-4 overflow-x-auto py-2">
               {items.map((p, i) => (
                 <button
                   key={p.id}

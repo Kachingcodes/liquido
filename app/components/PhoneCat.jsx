@@ -4,9 +4,11 @@ import { motion } from "framer-motion";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import { categories } from "@/public/assets";
+// import { useRouter } from "next/navigation";
+
 
 const PhoneCat = () => {
- 
+    // const router = useRouter();
     const [currentCategory, setCurrentCategory] = useState(0);
     const [mainText, setMainText] = useState(categories[0].name);
 
@@ -33,6 +35,13 @@ const PhoneCat = () => {
         };
     });
 
+//     const handleItemClick = (category, option) => {
+//   const cat = category.toLowerCase().replace(/\s+/g, "-");
+//   const opt = option.toLowerCase().replace(/\s+/g, "-");
+
+//   router.push(`/liquidostores?category=${cat}&option=${opt}`);
+// };
+
 
   return (
     <div className="flex flex-col items-center justify-center relative w-full px-4 py-12">
@@ -43,7 +52,7 @@ const PhoneCat = () => {
             initial={{ scale: 0.6, opacity: 0 }}
             animate={{ scale: 1, opacity: 1 }}
             transition={{ duration: 0.35 }}
-            className="w-40 h-40 rounded-full bg-[#4C86C4] mt-14 flex items-center justify-center text-white font-bold text-center p-4"
+            className="w-36 h-36 rounded-full bg-[#4C86C4] mt-14 flex items-center justify-center text-white font-bold text-center p-4"
             >
             <span className="break-words">{mainText}</span>
             </motion.div>
@@ -58,11 +67,12 @@ const PhoneCat = () => {
                         transition={{ duration: 0.5, delay: i * 0.2 }}
                         className="absolute"
                         style={{
-                        top: `calc(66% + ${y}px - 30px)`,
+                        top: `calc(58% + ${y}px - 30px)`,
                         left: `calc(50% + ${x}px - 44px)`,
                         transform: "translate(-80%, -80%)",
                         }}>
                             <div
+                                // onClick={() => handleItemClick(currentGroup.name, item.top)}
                                 className="bg-gradient-to-br from-[#ffffff]/40 via-[#4C86C4]/10 to-[#1C4672]/5 backdrop-blur-lg border border-white/50 shadow-lg relative w-22 h-22 rounded-full overflow-hidden cursor-pointer group"
                                 >
                                 <Image src={item.img} alt={item.top} fill className="object-contain p-1"/>

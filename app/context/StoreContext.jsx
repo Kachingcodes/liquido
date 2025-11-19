@@ -3,6 +3,8 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { db } from "../firebase"; // adjust path
 import { collection, getDocs } from "firebase/firestore";
 import toast from "react-hot-toast";
+import { useSearchParams } from "next/navigation";
+
 
 const StoreContext = createContext();
 
@@ -17,6 +19,12 @@ export function StoreProvider({ children }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [leftSideOpen, setLeftSideOpen] = useState(false);
+  const searchParams = useSearchParams();
+  const categoryParam = searchParams.get("category");
+  const optionParam = searchParams.get("option");
+  const [activeCategory, setActiveCategory] = useState(null);
+  const [selectedOption, setSelectedOption] = useState(null);
+
 
   const [cart, setCart] = useState(() => {
   if (typeof window !== "undefined") {
@@ -82,7 +90,6 @@ const clearCart = () => {
     exists ? prev.filter((item) => item.id !== product.id) : [...prev, product]
   );
 };
-
 
   const isFavourite = (productId) => favourites.some((item) => item.id === productId);
 
@@ -193,6 +200,51 @@ const toggleSidePanel = () => {
 };
 
 
+  // --- NAVIGATING TO PRODUCTS ---
+  useEffect(() => {
+    if (!products.length) return;
+
+    let result = [...products];
+
+    // Normalize
+const normalize = (str) =>
+  str.toLowerCase().trim().replace(/\s+/g, "-");
+
+
+    if (categoryParam) {
+      result = result.filter(
+        (p) => normalize(p.category) === categoryParam
+      );
+    }
+
+    if (optionParam) {
+      result = result.filter(
+        (p) => normalize(p.option) === optionParam
+      );
+    }
+
+    setFilteredProducts(result);
+  }, [products, categoryParam, optionParam]);
+
+  useEffect(() => {
+  if (!products.length) return;
+
+  let result = [...products];
+
+  // Filter by category
+  if (activeCategory) {
+    result = result.filter((p) => p.category === activeCategory);
+  }
+
+  // Filter by option
+  if (selectedOption) {
+    result = result.filter((p) => p.option === selectedOption);
+  }
+
+  setFilteredProducts(result);
+}, [products, activeCategory, selectedOption]);
+
+
   // --- PROVIDER VALUES ---
   return (
     <StoreContext.Provider
@@ -202,6 +254,11 @@ const toggleSidePanel = () => {
         filteredProducts,
         setFilteredProducts,
         filterByCategoryAndOption,
+        activeCategory, 
+        setActiveCategory,
+        selectedOption, 
+        setSelectedOption,
+
 
         //FAVOURITES
         favourites,

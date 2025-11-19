@@ -130,17 +130,22 @@ export default function CheckoutPage() {
   return (
     <div className="text-center py-4 min-h-screen overflow-hidden">
 
-      <div className="flex items-center justify-center bg-[#1C4672] py-4">
-        <div className="relative items-start justify-start">
+      <div className="flex md:flex-row flex-col items-center bg-[#1C4672] py-4 px-4">
+        {/* Left - Logo */}
+        <div className="flex-shrink-0">
           <Image
             src={assets.logo}
             alt="logo"
             className="w-[60%] h-auto"
           />
-          </div>
-        <h1 className={` ${quick.className} md:text-3xl text-2xl text-white md:mt-0 mt-10`}>
+        </div>
+
+        {/* Center - Text */}
+        <div className="flex-1 flex justify-center">
+          <h1 className={`${quick.className} md:text-3xl text-2xl text-white text-center mr-0 md:mr-20`}>
             Checkout Page Details
-        </h1>
+          </h1>
+        </div>
       </div>
 
         <div className="py-8 px-4 max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 overflow-hidden">
@@ -191,12 +196,12 @@ export default function CheckoutPage() {
                         className={`mt-6 w-full py-3 rounded-lg text-white ${
                         !location
                             ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-[#1C4672]"
+                            : "bg-[#1C4672] hover:bg-[#8FC0F4] hover:text-black"
                         }`}
                     >
-                        Continue
+                      Next
                     </button>
-                    </StepWrapper>
+                  </StepWrapper>
                 )}
 
                 {/* STEP 2: TIME */}
@@ -224,10 +229,10 @@ export default function CheckoutPage() {
                         className={`mt-6 w-full py-3 rounded-lg text-white ${
                         !time
                             ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-[#1C4672]"
+                            : "bg-[#1C4672] hover:bg-[#8FC0F4] hover:text-black"
                         }`}
                     >
-                        Continue
+                        Next
                     </button>
                     </StepWrapper>
                 )}
@@ -259,10 +264,10 @@ export default function CheckoutPage() {
                         className={`mt-6 w-full py-3 rounded-lg text-white ${
                         !payment
                             ? "bg-gray-400 cursor-not-allowed"
-                            : "bg-[#1C4672]"
+                            : "bg-[#1C4672] hover:bg-[#8FC0F4] hover:text-black"
                         }`}
                     >
-                        Continue
+                        Next
                     </button>
                     </StepWrapper>
                 )}
@@ -291,9 +296,9 @@ export default function CheckoutPage() {
                         onClick={placeOrder}
                         className="mt-6 bg-green-600 text-white w-full py-3 rounded-lg"
                     >
-                        Place Order
+                      Place Order
                     </button>
-                    </StepWrapper>
+                  </StepWrapper>
                 )}
                 </AnimatePresence>
             </div>

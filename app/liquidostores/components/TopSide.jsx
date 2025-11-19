@@ -10,11 +10,9 @@ import { categories } from '@/public/assets';
 import { useStore } from '@/app/context/StoreContext';
 
 const TopSide = () => {
-    // const [isOpen, setIsOpen] = useState(false);
     const [drops, setDrops] = useState([]);
-    const [activeCategory, setActiveCategory] = React.useState(null);
-    const [selectedOption, setSelectedOption] = React.useState(null);
-    const { toggleCart, cart, leftSideOpen, setLeftSideOpen, performSearch, filteredProducts } = useStore();
+    const { activeCategory, setActiveCategory, selectedOption, setSelectedOption,
+        toggleCart, cart, leftSideOpen, setLeftSideOpen, performSearch, filteredProducts } = useStore();
     const [query, setQuery] = useState("");
 
   const suggestions = query
@@ -65,7 +63,7 @@ const TopSide = () => {
 
 
     return (
-        <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white">
+        <div className="w-full flex flex-col items-center p-3 md:p-6 space-y-6 bg-white overflow-x-hidden">
         {/* Top Search + Back - Desktop*/}
             <div className="hidden md:flex items-center justify-evenly w-full gap-4">
                 <div className="max-w-4xl hidden md:flex flex-1/2">
@@ -99,14 +97,15 @@ const TopSide = () => {
             </div>
 
             {/* Top part Mobile View */}
-            <div className="w-full flex flex-col md:hidden items-center justify-center gap-4">
+            <div className="w-full flex flex-col md:hidden items-center justify-center gap-4 overflow-y-hidden">
                 <div className="w-full md:hidden items-center justify-evenly gap-2 flex">
                     <button
                         onClick={() => setLeftSideOpen(prev => !prev)}
                         className=" z-50 p-2 mt-2 rounded-full text-black"
                 >
-                        <Menu size={24} />
+                        <Menu size={24} className="cursor-pointer"/>
                     </button>
+                    
 
                     <div
                         className={`fixed top-0 left-0 h-screen bg-[#1C4672] z-50 overflow-y-auto no-scrollbar transform transition-transform duration-300 ease-in-out 
@@ -121,8 +120,16 @@ const TopSide = () => {
                     </div>
                         <LeftSide/>
                     </div>
+
+                    {leftSideOpen && (
+                        <div
+                            onClick={() => setLeftSideOpen(false)}
+                            className="fixed inset-0 bg-black/50 backdrop-blur-xs z-[40] transition-opacity duration-300"
+                            />
+                    )}
                     <PhoneAdvert/>
                 </div>
+                
 
                 <div className="flex items-center justify-center gap-4 w-full">
                     <div className="flex items-center w-full rounded-lg bg-gray-200 px-2 py-2">
@@ -140,15 +147,15 @@ const TopSide = () => {
                     </div> 
 
                     <div 
-                    onClick={toggleCart}
-                    className="rounded-lg border px-2 py-2">
-                        <ShoppingCart size={18}/>
+                        onClick={toggleCart}
+                        className="rounded-lg border px-2 py-2">
+                            <ShoppingCart size={18}/>
 
-                            {mounted && cart.length > 0 && (
-                            <span className="absolute -top-1 -right-1 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
-                                {cart.length}
-                            </span>
-                            )}
+                                {mounted && cart.length > 0 && (
+                                <span className="absolute top-16 right-14 bg-red-500 text-white text-xs px-2 py-0.5 rounded-full">
+                                    {cart.length}
+                                </span>
+                                )}
                     </div>
                         
                     <div className="rounded-lg border px-2 py-2">

@@ -10,12 +10,12 @@ export default function LiquidoStores({ children }) {
     <StoreProvider>
       <div className="flex min-h-screen">
         {/* Sidebar (fixed on desktop) */}
-        <div className="hidden md:flex fixed top-0 left-0 h-screen w-64 z-30">
+        <div className="hidden md:flex fixed top-0 left-0 min-h-screen w-64 z-30">
           <LeftSide />
         </div>
 
         {/* Main content area */}
-        <div className="flex flex-col flex-1 md:ml-54">
+        <div className="flex flex-col flex-1 md:ml-48">
           {/* Topbar (sticky) */}
           <div className="sticky top-0 z-20 bg-white">
             <TopSide />
