@@ -1,13 +1,13 @@
-// app/checkout/page.jsx
-"use client";
-import React from "react";
+import { Suspense } from "react";
 import { StoreProvider } from "../context/StoreContext";
-import CheckoutPage from "./CheckoutPage"; // your current CheckoutPage component
+import CheckoutPageClient from "./CheckoutPageClient";
 
-export default function Checkout() {
+export default function CheckoutPageWrapper() {
   return (
-    <StoreProvider>
-      <CheckoutPage />
-    </StoreProvider>
+    <Suspense fallback={<div>Loading checkout...</div>}>
+      <StoreProvider>
+        <CheckoutPageClient />
+      </StoreProvider>
+    </Suspense>
   );
 }
