@@ -3,7 +3,7 @@ import React, { createContext, useContext, useEffect, useState } from "react";
 import { db } from "../firebase"; // adjust path
 import { collection, getDocs } from "firebase/firestore";
 import toast from "react-hot-toast";
-import { useSearchParams } from "next/navigation";
+// import { useSearchParams } from "next/navigation";
 
 
 const StoreContext = createContext();
@@ -19,9 +19,9 @@ export function StoreProvider({ children }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [leftSideOpen, setLeftSideOpen] = useState(false);
-  const searchParams = useSearchParams();
-  const categoryParam = searchParams.get("category");
-  const optionParam = searchParams.get("option");
+  // const searchParams = useSearchParams();
+  // const categoryParam = searchParams.get("category");
+  // const optionParam = searchParams.get("option");
   const [activeCategory, setActiveCategory] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
 
@@ -201,30 +201,30 @@ const toggleSidePanel = () => {
 
 
   // --- NAVIGATING TO PRODUCTS ---
-  useEffect(() => {
-    if (!products.length) return;
+  // useEffect(() => {
+  //   if (!products.length) return;
 
-    let result = [...products];
+  //   let result = [...products];
 
     // Normalize
-const normalize = (str) =>
-  str.toLowerCase().trim().replace(/\s+/g, "-");
+// const normalize = (str) =>
+//   str.toLowerCase().trim().replace(/\s+/g, "-");
 
 
-    if (categoryParam) {
-      result = result.filter(
-        (p) => normalize(p.category) === categoryParam
-      );
-    }
+//     if (categoryParam) {
+//       result = result.filter(
+//         (p) => normalize(p.category) === categoryParam
+//       );
+//     }
 
-    if (optionParam) {
-      result = result.filter(
-        (p) => normalize(p.option) === optionParam
-      );
-    }
+//     if (optionParam) {
+//       result = result.filter(
+//         (p) => normalize(p.option) === optionParam
+//       );
+//     }
 
-    setFilteredProducts(result);
-  }, [products, categoryParam, optionParam]);
+//     setFilteredProducts(result);
+//   }, [products, categoryParam, optionParam]);
 
   useEffect(() => {
   if (!products.length) return;
