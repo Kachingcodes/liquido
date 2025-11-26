@@ -6,29 +6,22 @@ import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
 import { FaWhatsapp } from 'react-icons/fa6';
-import Confetti from 'react-confetti'; // optional for animation
+import Confetti from 'react-confetti';
+import { db } from '@/app/firebase'; // adjust path
+import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
-const quick = Quicksand({
-  subsets: ['latin'],
-  weight: ['600'],
-});
+const quick = Quicksand({ subsets: ['latin'], weight: ['600'] });
 
 const Contact = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    contact: '',
-    social: '',
-    message: '',
-  });
-
+  const [formData, setFormData] = useState({ name: '', contact: '', social: '', message: '' });
   const [loading, setLoading] = useState(false);
   const [errors, setErrors] = useState({});
   const [showModal, setShowModal] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setErrors((prev) => ({ ...prev, [name]: '' }));
+    setFormData(prev => ({ ...prev, [name]: value }));
+    setErrors(prev => ({ ...prev, [name]: '' }));
   };
 
   const handleSubmit = async (e) => {
@@ -47,24 +40,23 @@ const Contact = () => {
     }
 
     try {
-      // Send to API (email)
-      const res = await fetch('/api/sendContact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+      // ✅ Log message to Firebase
+      await addDoc(collection(db, 'contactMessages'), {
+        ...formData,
+        createdAt: serverTimestamp(),
+        status: 'new',
       });
 
-      if (!res.ok) throw new Error('Email failed');
-
-      // WhatsApp notification
-      const phoneNum = '2347062757706';
-      const whatsappLink = `https://wa.me/${phoneNum}?text=${encodeURIComponent(
+      // ✅ WhatsApp notification
+      const whatsappLink = `https://wa.me/2347062757706?text=${encodeURIComponent(
         `Hi LIQUIDO 💧. My name is ${formData.name}\nContact: ${formData.contact}\nMessage: ${formData.message}`
       )}`;
       window.open(whatsappLink, '_blank');
 
-      setShowModal(true); // show modal only on success
+      // ✅ Show modal & reset form
+      setShowModal(true);
       setFormData({ name: '', contact: '', social: '', message: '' });
+
     } catch (err) {
       console.error(err);
       alert('Failed to send message. Please try again.');
@@ -77,7 +69,7 @@ const Contact = () => {
     <section id="Contact">
       <div className="px-6 flex flex-col items-center bg-white">
 
-        {/* Contacts Grid */}
+        {/* Contact Info Grid */}
         <motion.div
           initial={{ opacity: 0, y: -70 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -95,8 +87,12 @@ const Contact = () => {
             <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 hover:text-white hover:bg-[#4C86C4]">
               <Clock className="mx-auto mb-1" size={20} />
               <h1 className="text-lg mb-2">WORK HOURS</h1>
-              <p className="text-black text-sm flex justify-evenly items-center">Mondays - Saturdays <ArrowRight size={16} /> 9AM - 6PM</p>
-              <p className="text-black text-sm flex justify-evenly">Sundays <ArrowRight size={16} /> 1PM - 6PM</p>
+              <p className="text-black text-sm flex justify-evenly items-center">
+                Mondays - Saturdays <ArrowRight size={16} /> 9AM - 6PM
+              </p>
+              <p className="text-black text-sm flex justify-evenly">
+                Sundays <ArrowRight size={16} /> 1PM - 6PM
+              </p>
             </div>
             {/* Contact Info */}
             <div className="bg-white text-[#1C4672] p-6 text-center flex flex-col rounded-2xl shadow-md shadow-[#000000]/40 items-center justify-center hover:text-white hover:bg-[#4C86C4]">
@@ -132,12 +128,7 @@ const Contact = () => {
               <ArrowBigRight size={30} className='mt-1 hidden md:flex'/>
             </div>
             <div className="relative w-30 h-30 md:w-60 md:h-60">
-              <Image 
-                src={assets.tiller} 
-                alt="Contact illustration" 
-                fill 
-                className="object-contain"
-              />
+              <Image src={assets.tiller} alt="Contact illustration" fill className="object-contain"/>
             </div>
           </motion.div>
 
@@ -146,14 +137,8 @@ const Contact = () => {
             <form onSubmit={handleSubmit} className="w-full space-y-4">
               {/* Name */}
               <div>
-                <label className="block text-sm mb-2">
-                  Name <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
+                <label className="block text-sm mb-2">Name <span className="text-red-500">*</span></label>
+                <input type="text" name="name" value={formData.name} onChange={handleChange}
                   className={`w-full rounded-lg px-4 py-2 bg-gray-200 text-black border ${errors.name ? 'border-red-500' : 'border-gray-900'} focus:border-[#1C4672] focus:outline-none`}
                 />
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -161,14 +146,8 @@ const Contact = () => {
 
               {/* Contact */}
               <div>
-                <label className="block text-sm mb-2">
-                  Phone Number <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  name="contact"
-                  value={formData.contact}
-                  onChange={handleChange}
+                <label className="block text-sm mb-2">Phone Number <span className="text-red-500">*</span></label>
+                <input type="text" name="contact" value={formData.contact} onChange={handleChange}
                   className={`w-full rounded-lg px-4 py-2 bg-gray-200 text-black border ${errors.contact ? 'border-red-500' : 'border-gray-900'} focus:border-[#1C4672] focus:outline-none`}
                 />
                 {errors.contact && <p className="text-red-500 text-sm mt-1">{errors.contact}</p>}
@@ -177,35 +156,21 @@ const Contact = () => {
               {/* Social */}
               <div>
                 <label className="block text-sm mb-2">Social Handle</label>
-                <input
-                  type="text"
-                  name="social"
-                  value={formData.social}
-                  onChange={handleChange}
+                <input type="text" name="social" value={formData.social} onChange={handleChange}
                   className="w-full rounded-lg px-4 py-2 bg-gray-200 text-black border border-gray-700 focus:border-[#1C4672] focus:outline-none"
                 />
               </div>
 
               {/* Message */}
               <div>
-                <label className="block text-sm mb-2">
-                  Message <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="5"
+                <label className="block text-sm mb-2">Message <span className="text-red-500">*</span></label>
+                <textarea name="message" value={formData.message} onChange={handleChange} rows="5"
                   className={`w-full rounded-lg px-4 py-2 bg-gray-200 text-black border ${errors.message ? 'border-red-500' : 'border-gray-900'} focus:border-[#1C4672] focus:outline-none resize-none`}
                 ></textarea>
                 {errors.message && <p className="text-red-500 text-sm mt-1">{errors.message}</p>}
               </div>
 
-              <button
-                type="submit"
-                disabled={loading}
-                className="bg-gray-100 w-full flex items-center justify-center gap-2 py-2 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition"
-              >
+              <button type="submit" disabled={loading} className="bg-gray-100 w-full flex items-center justify-center gap-2 py-2 px-4 hover:bg-[#1C4672] text-[#1C4672] hover:text-white rounded-xl shadow-lg shadow-[#000000]/20 transition">
                 {loading ? <> <FaWhatsapp size={18} /> Sending... </> : <> <FaWhatsapp size={18} /> Chat on WhatsApp </>}
               </button>
             </form>
@@ -215,23 +180,12 @@ const Contact = () => {
         {/* Success Modal */}
         {showModal && (
           <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-            {/* Optional confetti */}
             <Confetti width={window.innerWidth} height={window.innerHeight} recycle={false} numberOfPieces={150} />
-            
-            <motion.div 
-              initial={{ scale: 0.8, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.8, opacity: 0 }}
-              transition={{ duration: 0.3 }}
-              className="relative bg-[#1C4672] p-6 rounded-2xl shadow-xl w-[90%] max-w-md text-center"
-            >
+            <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.8, opacity: 0 }} transition={{ duration: 0.3 }} className="relative bg-[#1C4672] p-6 rounded-2xl shadow-xl w-[90%] max-w-md text-center">
               <CheckCircle2 size={48} className="text-[#00FFAA] mx-auto mb-3 animate-bounce"/>
               <h2 className="text-xl font-semibold mb-2 text-white">Message Sent!</h2>
               <p className="text-white text-sm">Your message has been successfully delivered. Admin has been notified.</p>
-              <button
-                onClick={() => setShowModal(false)}
-                className="absolute right-2 top-2 bg-white text-[#1C4672] px-4 py-2 rounded-lg"
-              >
+              <button onClick={() => setShowModal(false)} className="absolute right-2 top-2 bg-white text-[#1C4672] px-4 py-2 rounded-lg">
                 <X size={18}/>
               </button>
             </motion.div>
