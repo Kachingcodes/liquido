@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Search, ArrowLeftIcon, X, ArrowRight, ShoppingCart, Menu } from "lucide-react";
 import DeskAdvert from '../../shop/DeskAdvert';
 import PhoneAdvert from '../../shop/PhoneAdvert';
@@ -12,8 +12,13 @@ import { useStore } from '@/app/context/StoreContext';
 const TopSide = () => {
     const [drops, setDrops] = useState([]);
     const { activeCategory, setActiveCategory, selectedOption, setSelectedOption,
-        toggleCart, cart, leftSideOpen, setLeftSideOpen, performSearch, filteredProducts } = useStore();
-    const [query, setQuery] = useState("");
+        toggleCart, cart, leftSideOpen, setLeftSideOpen, 
+        performSearch, filteredProducts, topCartRef } = useStore();
+    
+        // const cartRef = useRef(null);
+        // const topCartRef = useRef();
+
+        const [query, setQuery] = useState("");
 
   const suggestions = query
     ? filteredProducts.filter((p) =>
@@ -147,6 +152,7 @@ const TopSide = () => {
                     </div> 
 
                     <div 
+                        ref={topCartRef}
                         onClick={toggleCart}
                         className="rounded-lg border px-2 py-2">
                             <ShoppingCart size={18}/>

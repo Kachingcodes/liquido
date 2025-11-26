@@ -1,5 +1,5 @@
 'use client';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
@@ -16,7 +16,11 @@ const quick = Quicksand({
 
 const LeftSide = () => {
     const { favourites, filterByCategoryAndOption, viewFavourites, setViewFavourites,
-        toggleCart, cart, cartOpen } = useStore();
+        toggleCart, cart, cartOpen, leftCartRef } = useStore();
+
+    // const cartRef = useRef(null);
+
+    // const leftCartRef = useRef();
 
     const handleCategoryClick = (cat, option) => {
         filterByCategoryAndOption(categories, option);
@@ -48,6 +52,7 @@ useEffect(() => {
                     <div className="flex text-sm items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
                 </Link>
                 <div 
+                    ref={leftCartRef}
                     onClick={toggleCart}
                     className="flex text-sm items-center gap-2 hover:text-[#c4e0f9]"
                 >

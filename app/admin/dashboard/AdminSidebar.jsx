@@ -3,10 +3,11 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+// import { useRouter } from "next/navigation";
 import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
+import { useAuth } from "../../context/AuthContext";
 
 
 const quick = Quicksand({
@@ -16,12 +17,13 @@ const quick = Quicksand({
 
 
 const AdminSidebar = () => {
-    const router = useRouter();
+      const { logout } = useAuth();
+    // const router = useRouter();
 
-    const handleLogout = () => {
-        localStorage.removeItem("adminAuth");
-        router.push("/admin");
-    };
+    // const handleLogout = () => {
+    //     localStorage.removeItem("adminAuth");
+    //     router.push("/admin");
+    // };
 
     return (
         <aside className="w-64 bg-[#1C4672] text-white hidden md:flex flex-col justify-between overflow-hidden">
@@ -45,7 +47,7 @@ const AdminSidebar = () => {
                     </Link>
 
                     <Link
-                    href="/admin/dashboard/products"
+                    href="/admin/products"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     >
                     <div className="flex items-center gap-2">
@@ -54,7 +56,7 @@ const AdminSidebar = () => {
                     </Link>
 
                     <Link
-                    href="/admin/dashboard/orders"
+                    href="/admin/orders"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     >
                     <div className="flex items-center gap-2">
@@ -63,7 +65,7 @@ const AdminSidebar = () => {
                     </Link>
 
                     <Link
-                    href="/admin/dashboard/messages"
+                    href="/admin/messages"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     >
                     <div className="flex items-center gap-2">
@@ -101,7 +103,7 @@ const AdminSidebar = () => {
             </div>
 
             <button
-                onClick={handleLogout}
+                onClick={logout}
                 className="m-4 flex items-center gap-2 bg-white text-[#1C4672] px-4 py-2 rounded-lg hover:bg-blue-50 transition"
                 >
                 <LogOut size={18}/> Logout
@@ -111,3 +113,17 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

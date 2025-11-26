@@ -1,5 +1,5 @@
 "use client";
-import React, { createContext, useContext, useEffect, useState } from "react";
+import React, { createContext, useContext, useEffect, useState, useRef } from "react";
 import { db } from "../firebase"; // adjust path
 import { collection, getDocs } from "firebase/firestore";
 import toast from "react-hot-toast";
@@ -19,11 +19,10 @@ export function StoreProvider({ children }) {
   const [searchResults, setSearchResults] = useState([]);
   const [isMobile, setIsMobile] = useState(false);
   const [leftSideOpen, setLeftSideOpen] = useState(false);
-  // const searchParams = useSearchParams();
-  // const categoryParam = searchParams.get("category");
-  // const optionParam = searchParams.get("option");
   const [activeCategory, setActiveCategory] = useState(null);
   const [selectedOption, setSelectedOption] = useState(null);
+  const leftCartRef = useRef(null);
+  const topCartRef = useRef(null);
 
 
   const [cart, setCart] = useState(() => {
@@ -200,32 +199,6 @@ const toggleSidePanel = () => {
 };
 
 
-  // --- NAVIGATING TO PRODUCTS ---
-  // useEffect(() => {
-  //   if (!products.length) return;
-
-  //   let result = [...products];
-
-    // Normalize
-// const normalize = (str) =>
-//   str.toLowerCase().trim().replace(/\s+/g, "-");
-
-
-//     if (categoryParam) {
-//       result = result.filter(
-//         (p) => normalize(p.category) === categoryParam
-//       );
-//     }
-
-//     if (optionParam) {
-//       result = result.filter(
-//         (p) => normalize(p.option) === optionParam
-//       );
-//     }
-
-//     setFilteredProducts(result);
-//   }, [products, categoryParam, optionParam]);
-
   useEffect(() => {
   if (!products.length) return;
 
@@ -291,6 +264,9 @@ const toggleSidePanel = () => {
         viewSearchResults,
         performSearch,
         setViewSearchResults,
+
+        leftCartRef,
+        topCartRef,
       }}
     >
       {children}
