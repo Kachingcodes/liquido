@@ -6,6 +6,10 @@ import toast from "react-hot-toast";
 import { Quicksand } from "next/font/google";
 import Image from "next/image";
 import { assets } from "@/public/assets";
+import { db } from "../firebase"; // your Firebase config
+import { collection, addDoc, Timestamp } from "firebase/firestore";
+import { useRouter } from "next/navigation";
+
 
 
 const quick = Quicksand({
@@ -38,6 +42,7 @@ export default function CheckoutPage() {
   const [payment, setPayment] = useState("");
   const [summary, setSummary] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
+  const router = useRouter(); // inside your component
 
   const locations = ["Ikeja", "Agege", "Ogba", "Berger", "GRA", "Oshodi", "Yaba"];
   const paymentOptions = ["Cash", "Transfer", "POS"];
@@ -118,17 +123,73 @@ export default function CheckoutPage() {
     setStep(step + 1);
   };
 
-  const placeOrder = () => {
-    toast.success("Order placed successfully!");
-    setCart([]);
-    localStorage.removeItem("checkout-progress");
-    toast("Invoice page coming soon!");
-  };
+  const placeOrder = async () => {
+    if (cart.length === 0) return;
+
+    const order = {
+      id: Date.now().toString(),
+      items: cart,
+      total: summary.total,
+      date: Timestamp.now(),
+      location,
+      time,
+      payment,
+    };
+
+    try {
+      // -------------------- SAVE TO FIREBASE --------------------
+      await addDoc(collection(db, "storesorders"), {
+        id: Date.now().toString(),
+        items: cart,
+        total: summary.total,
+        date: Timestamp.now(),
+        location,
+        time,
+        payment,
+        clientName: "",          
+        paymentStatus: false,
+      }); 
+
+      // -------------------- SAVE TO LOCAL STORAGE --------------------
+      const existingOrders = JSON.parse(localStorage.getItem("orders")) || [];
+      existingOrders.push(order);
+      localStorage.setItem("orders", JSON.stringify(existingOrders));
+
+      // -------------------- CONFETTI --------------------
+      // setShowConfetti(true);
+      // setTimeout(() => setShowConfetti(false), 5000);
+
+      // -------------------- OPEN WHATSAPP --------------------
+      const whatsappMsg = encodeURIComponent(
+        `New Order\n\nItems:\n${cart
+          .map((i) => `${i.name} x${i.qty} - ₦${i.price * i.qty}`)
+          .join("\n")}\n\nTotal: ₦${summary.total}\nLocation: ${location}\nDelivery: ${deliverySlots.find((s) => s.value === time)?.label}\nPayment: ${payment}`
+      );
+      window.open(`https://wa.me/2347062757706?text=${whatsappMsg}`, "_blank");
+
+
+    // -------------------- RESET & REDIRECT --------------------
+    setTimeout(() => {
+      // setShowConfetti(false);
+      setCart([]);
+      localStorage.removeItem("checkout-progress");
+
+      // redirect to Past Orders page
+      router.push("/pastOrders");
+    }, 3000); // confetti duration
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to place order. Please try again.");
+  }
+};
 
   if (!isLoaded) return null;
 
   return (
+    
     <div className="text-center py-4 min-h-screen overflow-hidden">
+      {/* {showConfetti && <Confetti width={width} height={height} />} */}
+
 
       <div className="flex md:flex-row flex-col items-center bg-[#1C4672] py-4 px-4">
         {/* Left - Logo */}

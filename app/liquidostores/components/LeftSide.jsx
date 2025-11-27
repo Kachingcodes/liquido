@@ -3,11 +3,14 @@ import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { ShoppingCart, Star, Home, Phone, HelpCircle, StarOff, MinusCircle, ArrowRight } from "lucide-react";
+import { ShoppingCart, Star, Home, Phone, HelpCircle, StarOff, MinusCircle, ArrowRight, Package, Boxes, History } from "lucide-react";
 import Link from 'next/link';
 import { FaPerson } from 'react-icons/fa6';
 import { useStore } from '@/app/context/StoreContext';
-// import { FaFileInvoice } from 'react-icons/fa6';
+import { useRouter } from 'next/navigation';
+import BulkBookingModal from "../../components/BulkBookingModal";
+
+
 
 const quick = Quicksand({
   subsets: ["latin"],
@@ -18,10 +21,9 @@ const LeftSide = () => {
     const { favourites, filterByCategoryAndOption, viewFavourites, setViewFavourites,
         toggleCart, cart, cartOpen, leftCartRef } = useStore();
 
-    // const cartRef = useRef(null);
-
-    // const leftCartRef = useRef();
-
+    const router = useRouter();
+    const [showRepModal, setShowRepModal] = useState(false);
+    
     const handleCategoryClick = (cat, option) => {
         filterByCategoryAndOption(categories, option);
     };
@@ -31,6 +33,7 @@ const LeftSide = () => {
 useEffect(() => {
   setMounted(true);
 }, []);
+
 
 
   return (    
@@ -52,47 +55,60 @@ useEffect(() => {
                     <div className="flex text-sm items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
                 </Link>
                 <div 
-                    ref={leftCartRef}
-                    onClick={toggleCart}
-                    className="flex text-sm items-center gap-2 hover:text-[#c4e0f9]"
+                ref={leftCartRef}
+                onClick={toggleCart}
+                className="relative flex text-sm items-center gap-3 hover:text-[#c4e0f9]"
                 >
-                    {cartOpen ? (
-                        <><MinusCircle size={16}/> Close Cart</>
-                    ) : (
-                        <><ShoppingCart size={16}/> View Cart</>
-                    )}
+                {cartOpen ? (
+                    <>
+                    <MinusCircle size={16} /> Close Cart
+                    </>
+                ) : (
+                    <>
+                    <ShoppingCart size={16} /> View Cart
+                    </>
+                )}
+
+                {/* Cart badge */}
+                {!cartOpen && mounted && cart.length > 0 && (
+                    <span className="absolute -top-2 left-2.5 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                    {cart.length}
+                    </span>
+                )}
                 </div>
-                
+
                 <div
                     onClick={() => setViewFavourites((prev) => !prev)}
-                    className="flex items-center text-sm gap-2 cursor-pointer text-white hover:text-[#c4e0f9]"
+                    className="relative flex items-center text-sm gap-3 cursor-pointer text-white hover:text-[#c4e0f9]"
                     > 
                     {viewFavourites ? (
                         <> <MinusCircle size={16}/> Close Favourites</>   
                     ) : (
                         <> <Star size={16} /> Favorites / Wishlist</>
                     )}
+
+                    {!viewFavourites && mounted && favourites.length > 0 && (
+                    <span className="absolute -top-2 left-2.5 bg-red-500 text-white text-xs px-1.5 py-0.5 rounded-full">
+                    {favourites.length}
+                    </span>
+                )}
                 </div>
 
-                {/* Make this section a transaction history link instead
                 <div
-                    onClick={() => { 
-                    if (showInvoice) {
-                        setShowInvoice(false);
-                    } else{
-                        setShowInvoice(true);
-                        setShowCart(false);
-                        setIsOpen(false);
-                        }
+                    onClick={() => {
+                    router.push("/pastOrders");
                     }}
-                    className="flex items-center text-sm gap-2 cursor-pointer text-white hover:text-[#c4e0f9]"
-                    >       
-                    {showInvoice ? (
-                        <> <MinusCircle size={16} /> Close Invoice </>
-                    ) : (
-                        <> <FaFileInvoice size={16} /> View Invoice </>
-                    )}
-                </div> */}
+                    className="relative flex items-center text-sm gap-3 cursor-pointer text-white hover:text-[#c4e0f9]"
+                >
+                   <History size={16}/> Order History
+                </div>
+
+                <div
+                    onClick={() => setShowRepModal(true)}
+                    className="relative flex items-center text-sm gap-3 cursor-pointer text-white hover:text-[#c4e0f9]"
+                    >
+                        <Boxes size={16}/> Bulk Delivery
+                </div>
             </div>
 
             {/* Delivery Info */}
@@ -122,6 +138,12 @@ useEffect(() => {
                 </Link> */}
             </div>
         </div>
+
+        
+           <BulkBookingModal 
+                open={showRepModal} 
+                onClose={() => setShowRepModal(false)} 
+            />
     </div>
     );
 };

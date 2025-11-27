@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { assets } from '@/public/assets';
 import Link from "next/link";
 // import { useRouter } from "next/navigation";
-import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon } from "lucide-react";
+import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
 import { useAuth } from "../../context/AuthContext";
@@ -60,7 +60,16 @@ const AdminSidebar = () => {
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     >
                     <div className="flex items-center gap-2">
-                        <ShoppingBag size={18}/> Orders
+                        <ShoppingBag size={18}/> Regular Orders
+                    </div>
+                    </Link>
+
+                    <Link
+                    href="/admin/bulkorders"
+                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    >
+                    <div className="flex items-center gap-2">
+                        <Boxes size={18}/> Bulk Orders
                     </div>
                     </Link>
 
@@ -113,17 +122,3 @@ const AdminSidebar = () => {
 };
 
 export default AdminSidebar;
-
-
-
-
-
-
-
-
-
-
-
-
-
-

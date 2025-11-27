@@ -9,7 +9,6 @@ import { GiMeltingIceCube } from "react-icons/gi";
 import { flyToCartAnimation } from "../utils/flyToCart";
 
 
-
 export default function MainPage() {
   const {
     filteredProducts,

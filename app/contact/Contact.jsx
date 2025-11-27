@@ -7,7 +7,7 @@ import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
 import { FaWhatsapp } from 'react-icons/fa6';
 import Confetti from 'react-confetti';
-import { db } from '@/app/firebase'; // adjust path
+import { db } from '@/app/firebase'; 
 import { collection, addDoc, serverTimestamp } from 'firebase/firestore';
 
 const quick = Quicksand({ subsets: ['latin'], weight: ['600'] });

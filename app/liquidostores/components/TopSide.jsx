@@ -14,17 +14,14 @@ const TopSide = () => {
     const { activeCategory, setActiveCategory, selectedOption, setSelectedOption,
         toggleCart, cart, leftSideOpen, setLeftSideOpen, 
         performSearch, filteredProducts, topCartRef } = useStore();
-    
-        // const cartRef = useRef(null);
-        // const topCartRef = useRef();
 
-        const [query, setQuery] = useState("");
+    const [query, setQuery] = useState("");
 
-  const suggestions = query
-    ? filteredProducts.filter((p) =>
-        p.name.toLowerCase().includes(query.toLowerCase())
-      )
-    : [];
+    const suggestions = query
+        ? filteredProducts.filter((p) =>
+            p.name.toLowerCase().includes(query.toLowerCase())
+        )
+        : [];
 
     const toggleOption = (option) => setSelectedOption(prev => (prev === option ? null : option));
   

@@ -1,10 +1,14 @@
 'use client';
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { assets } from '@/public/assets';
 import { Quicksand } from 'next/font/google';
-import { MessageSquareText, NotebookPen } from 'lucide-react';
+import { MessageSquareText, NotebookPen, X } from 'lucide-react';
+import { FaWhatsapp } from 'react-icons/fa6';
+import BulkBookingModal from "./BulkBookingModal";
+
+
 
 const quick = Quicksand({
    subsets: ["latin"],
@@ -14,17 +18,7 @@ const quick = Quicksand({
 
 const Bulk = () => {
 
-const TextTiller = () => {
-   let message = `Kindly fill out the blanks befor hitting send: \n\n
-    Hello Liquido 💧, I’d like to make a bulk order / event booking.\n
-    My name is: ______\n
-    Event type (Owambe, Birthday, Wedding, Party, Supermarket, Estate, Bulk Stocking): ______\n
-    Quantity needed: ______\n
-    Event date / delivery schedule: ______\n
-    Location: ______`;
-    const url = `https://wa.me/2347062757706?text=${encodeURIComponent(message)}`;
-    window.open(url, "_blank");
-  };
+    const [showRepModal, setShowRepModal] = useState(false);
 
   return (
     <section id='Bulk Order'
@@ -67,15 +61,21 @@ const TextTiller = () => {
                     </ul>
 
                     <div className="flex flex-row items-center justify-between mt-4 md:mt-6">
-                        <button onClick={TextTiller}
-                        className="bg-[#1C4672] px-4 py-3 flex items-center justify-center gap-2 text-white text-sm md:text-md 
-                        rounded-lg w-full hover:bg-white hover:text-[#1C4672] transition shadow-md shadow-[#000000]/40">
+                        <button 
+                            onClick={() => setShowRepModal(true)}
+                            className="bg-[#1C4672] px-4 py-3 flex items-center justify-center gap-2 text-white text-sm md:text-md 
+                            rounded-lg w-full hover:bg-white hover:text-[#1C4672] transition shadow-md shadow-[#000000]/40"
+                            >
                             Book Rep <MessageSquareText size={20}/>
                         </button>
                     </div>
                 </div>
             </div>
 
+            <BulkBookingModal 
+                open={showRepModal} 
+                onClose={() => setShowRepModal(false)} 
+            />
         </div>
     </section>
 
@@ -83,6 +83,3 @@ const TextTiller = () => {
 };
 
 export default Bulk;
-
-//Create a redirect page to fill forms. When done include a button to continue to Intro page
-//Create a collection in firestore called bulkOrders to collect orders filled through the form
