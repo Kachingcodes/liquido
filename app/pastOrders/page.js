@@ -24,6 +24,16 @@ export default function PastOrdersPage() {
       <div className="min-h-screen flex flex-col items-center justify-center p-4">
         <h1 className={`${quick.className} text-3xl mb-4`}>Past Orders</h1>
         <p className="text-gray-500">You have not placed any orders yet.</p>
+        <div>
+          <button                    
+            onClick={() => {
+                router.push("/liquidostores");
+                }}
+                    className="mt-6 bg-[#1C4672] text-white w-full py-3 rounded-lg"
+                    >
+                      Back to Store
+          </button>
+        </div>
       </div>
     );
   }
