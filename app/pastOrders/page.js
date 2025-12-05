@@ -29,7 +29,7 @@ export default function PastOrdersPage() {
             onClick={() => {
                 router.push("/liquidostores");
                 }}
-                    className="mt-2 bg-[#1C4672] hover:bg-[#8FC0F4] text-white hover:text-black w-full py-3 px-4 rounded-lg"
+                    className="mt-4 bg-[#1C4672] hover:bg-[#8FC0F4] text-white hover:text-black w-full py-3 px-4 rounded-lg"
                     >
                       Back to Store
           </button>

@@ -155,10 +155,6 @@ export default function CheckoutPage() {
       existingOrders.push(order);
       localStorage.setItem("orders", JSON.stringify(existingOrders));
 
-      // -------------------- CONFETTI --------------------
-      // setShowConfetti(true);
-      // setTimeout(() => setShowConfetti(false), 5000);
-
       // -------------------- OPEN WHATSAPP --------------------
       const whatsappMsg = encodeURIComponent(
         `New Order\n\nItems:\n${cart
@@ -214,22 +210,38 @@ export default function CheckoutPage() {
             {/* -------------------- LEFT SIDE — STEPS -------------------- */}
             <div className="space-y-4">
 
-                {/* STEP HEADERS with click-to-navigate */}
-                <div className="flex justify-between text-sm font-semibold">
-                {["Location", "Delivery Time", "Payment", "Review"].map((label, i) => (
-                    <button
+            {/* PROGRESS BAR */}
+            <div className="w-full bg-gray-200 h-2 rounded-full mb-5">
+              <div
+                className="bg-[#1C4672] h-2 rounded-full transition-all duration-300"
+                style={{ width: `${(step / 4) * 100}%` }}
+              />
+            </div>
+
+            {/* STEP HEADERS with click-to-navigate */}
+            <div className="flex justify-between text-sm font-semibold">
+              {["Location", "Delivery Time", "Payment", "Review"].map((label, i) => {
+                const stepNumber = i + 1;
+                const isEnabled = stepNumber <= step;
+
+                return (
+                  <button
                     key={i}
-                    onClick={() => setStep(i + 1)}
+                    onClick={() => {
+                      if (isEnabled) setStep(stepNumber);
+                    }}
+                    disabled={!isEnabled}
                     className={`${
-                        i + 1 <= step
-                        ? "text-gray-900"
-                        : "text-gray-500"
+                      isEnabled
+                        ? "text-gray-900 cursor-pointer"
+                        : "text-gray-400 cursor-not-allowed pointer-events-none"
                     }`}
-                    >
+                  >
                     {label}
-                    </button>
-                ))}
-                </div>
+                  </button>
+                );
+              })}
+            </div>
 
                 {/* -------------------- STEP CONTENT -------------------- */}
                 <AnimatePresence mode="wait">

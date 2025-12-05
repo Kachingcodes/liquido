@@ -33,23 +33,23 @@ export const assets = {
 export const steps = [
   {
     id: "01",
-    title: "Place your order",
-    desc: "Call, WhatsApp or order online — Make your choice of liquid",
+    title: "Choose Your Liquid",
+    desc: "Browse our available products - water, drinks, or other liquid essentials - and pick what you need.", 
   },
   {
     id: "02",
-    title: "Fast Processing",
-    desc: "We confirm your order and prepare it right away",
+    title: "Place Your Order",
+    desc: "Order directly through our website or send us a message on WhatsApp with your product choice, quantity, and delivery location.",
   },
   {
     id: "03",
-    title: "Reliable Delivery",
-    desc: "Timely water supply for homes, businesses, and estates",
+    title: "Quick Confirmation",
+    desc: "Our team confirms your order instantly and prepares it for dispatch.",
   },
   {
     id: "04",
-    title: "Enjoy",
-    desc: "Clean, certified water with strict safety standards",
+    title: "Fast & Reliable Delivery",
+    desc: "We deliver your liquids to your location in the shortest possible time. Just relax and enjoy!",
   },
 ];
 
