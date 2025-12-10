@@ -126,7 +126,7 @@ export default function DashboardPage() {
 
     {/* ─── TOP BAR ────────────────────────────── */}
     <header className="sticky top-0 z-50 bg-gray-100 dark:bg-neutral-900 w-full flex items-center justify-between p-2 md:p-4">
-      <div>
+      <div className="flex flex-col px-8 md:px-0">
         <h1 className="text-2xl md:text-4xl font-semibold tracking-tight">Dashboard</h1>
         <p className="text-sm opacity-70 mt-1">Signed in as {adminEmail}</p>
       </div>
@@ -145,7 +145,7 @@ export default function DashboardPage() {
           <motion.div
             key={i}
             layout
-            className="rounded-2xl bg-[#4C86C4]/8 dark:bg-[#1C4672] p-6"
+            className="rounded-2xl bg-[#4C86C4]/8 dark:bg-[#1C4672] p-4 md:p-6"
           >
             <div className="text-sm opacity-70 mb-1">{card.title}</div>
             <div className="md:text-3xl text-2xl font-semibold tracking-tight">{card.value}</div>

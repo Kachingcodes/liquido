@@ -40,7 +40,7 @@ export default function AdminLayout({ children }) {
       <button
         id="hamburger-btn"
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-4 left-4 z-40 bg-white dark:bg-gray-800 p-2 rounded-full shadow"
+        className="md:hidden fixed top-5 left-2 z-100"
       >
         <Menu size={28} className="text-gray-800 dark:text-gray-100" />
       </button>
@@ -86,7 +86,7 @@ export default function AdminLayout({ children }) {
         {/* 🌗 Dark Mode Toggle */}
         <button
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          className="fixed top-4 right-4 p-2 z-100 rounded-full bg-gray-200 dark:bg-neutral-900 shadow transition"
+          className="fixed top-3 right-2 md:right-4 p-2 z-100 rounded-full  shadow transition"
         >
           {theme === "light" ? (
             <Moon className="text-gray-900" size={22} />
