@@ -50,7 +50,7 @@ export default function AdminLogin() {
       // Store admin email for dashboard display
       localStorage.setItem("adminEmail", userCred.user.email);
 
-      router.push("/admin");
+      router.push("/admin/dashboard");
     } catch (err) {
       setError("Invalid email or password.");
     }

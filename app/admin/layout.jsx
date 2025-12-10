@@ -1,23 +1,100 @@
 "use client";
-import { motion } from "framer-motion";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon } from "lucide-react";
-import { LuLayoutDashboard } from "react-icons/lu";
-import AdminSidebar from "./dashboard/AdminSidebar";
+import { useState, useEffect } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import AdminSidebar from "./AdminSidebar";
+import { Menu, X, Sun, Moon } from "lucide-react";
 
 export default function AdminLayout({ children }) {
- 
+  const [isOpen, setIsOpen] = useState(false);
+  const [theme, setTheme] = useState("light");
+
+  // ─── Load theme on mount ──────────────────────
+  useEffect(() => {
+    const stored = localStorage.getItem("theme");
+    if (stored) {
+      setTheme(stored);
+      document.documentElement.classList.toggle("dark", stored === "dark");
+    }
+  }, []);
+
+  // ─── Sync theme when changed ──────────────────
+  useEffect(() => {
+    localStorage.setItem("theme", theme);
+    document.documentElement.classList.toggle("dark", theme === "dark");
+  }, [theme]);
+
+  // ─── Prevent scroll when sidebar open ────────
+  useEffect(() => {
+    document.body.style.overflow = isOpen ? "hidden" : "auto";
+  }, [isOpen]);
 
   return (
-    <div className="flex min-h-screen bg-gray-100 overflow-hidden">
-      {/* Sidebar */}
-      <div className="hidden md:flex fixed top-0 left-0 min-h-screen w-64 z-30">
-          <AdminSidebar/>
-        </div>
+    <div className="flex min-h-screen bg-gray-100 dark:bg-neutral-900 transition-colors duration-300">
 
-      {/* Main content */}
-      <main className="flex-1 md:ml-60 lg:ml-64">
+      {/* ─── Desktop Sidebar ─────────────────────── */}
+      <div className="hidden md:flex fixed top-0 left-0 min-h-screen w-64 z-30">
+        <AdminSidebar />
+      </div>
+
+      {/* ─── Mobile Hamburger Button ────────────── */}
+      <button
+        id="hamburger-btn"
+        onClick={() => setIsOpen(true)}
+        className="md:hidden fixed top-4 left-4 z-40 bg-white dark:bg-gray-800 p-2 rounded-full shadow"
+      >
+        <Menu size={28} className="text-gray-800 dark:text-gray-100" />
+      </button>
+
+      {/* ─── Mobile Sidebar Overlay ─────────────── */}
+      <AnimatePresence>
+        {isOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 0.5 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              className="fixed inset-0 z-40 bg-black"
+              onClick={() => setIsOpen(false)}
+            />
+
+            {/* Sidebar */}
+            <motion.div
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.3 }}
+              id="mobile-sidebar"
+              className="md:hidden fixed top-0 left-0 min-h-screen w-64 z-100 bg-white dark:bg-gray-800 shadow-2xl overflow-y-auto"
+            >
+              <button
+                onClick={() => setIsOpen(false)}
+                className="absolute top-4 right-4 z-50 p-2"
+              >
+                <X size={26} className="text-gray-800 dark:text-gray-100" />
+              </button>
+
+              <AdminSidebar onSelect={() => setIsOpen(false)} />
+            </motion.div>
+          </>
+        )}
+      </AnimatePresence>
+
+      {/* ─── Main Content ───────────────────────── */}
+      <main className="flex-1 md:ml-64 p-2 relative">
+        {/* 🌗 Dark Mode Toggle */}
+        <button
+          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
+          className="fixed top-4 right-4 p-2 z-100 rounded-full bg-gray-200 dark:bg-neutral-900 shadow transition"
+        >
+          {theme === "light" ? (
+            <Moon className="text-gray-900" size={22} />
+          ) : (
+            <Sun className="text-yellow-300" size={22} />
+          )}
+        </button>
+
         <motion.div
           initial={{ opacity: 0, y: 15 }}
           animate={{ opacity: 1, y: 0 }}

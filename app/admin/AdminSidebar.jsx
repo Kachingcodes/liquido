@@ -7,7 +7,7 @@ import Link from "next/link";
 import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
-import { useAuth } from "../../context/AuthContext";
+import { useAuth } from "../context/AuthContext";
 
 
 const quick = Quicksand({

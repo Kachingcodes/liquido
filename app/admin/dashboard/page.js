@@ -18,6 +18,8 @@ export default function DashboardPage() {
   const [darkMode, setDarkMode] = useState(false);
   const [dateRange, setDateRange] = useState({ from: "", to: "" });
 
+  const adminEmail = typeof window !== "undefined" ? localStorage.getItem("adminEmail") : "";
+
   // -------------------- FIREBASE LIVE UPDATE --------------------
   useEffect(() => {
     const q = query(collection(db, "storesorders"), orderBy("date", "desc"));
@@ -119,115 +121,172 @@ export default function DashboardPage() {
   if (loading) return <div className="min-h-screen flex items-center justify-center text-gray-500">Loading dashboard...</div>;
 
   return (
-    <div className={`${darkMode ? "bg-gray-900 text-white" : "bg-gray-100 text-gray-900"} min-h-screen p-6`}>
-      {/* DARK MODE TOGGLE */}
-      <div className="flex justify-end mb-4">
-        <button onClick={() => setDarkMode(!darkMode)} className="p-2 rounded bg-gray-300 dark:bg-gray-800">
-          {darkMode ? <BsSun /> : <BsMoon />}
-        </button>
-      </div>
+    <div className={darkMode ? "dark" : ""}>
+  <div className="min-h-screen p-0 md:p-2 w-full text-black dark:text-white">
 
-      {/* SUMMARY WIDGETS */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-6">
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <div className="text-sm font-medium">Total Revenue</div>
-          <div className="text-2xl font-bold">₦{totalRevenue.toLocaleString()}</div>
-        </motion.div>
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <div className="text-sm font-medium">Total Orders</div>
-          <div className="text-2xl font-bold">{totalOrders}</div>
-        </motion.div>
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <div className="text-sm font-medium">Most Used Payment</div>
-          <div className="text-2xl font-bold">{mostUsedPayment}</div>
-        </motion.div>
+    {/* ─── TOP BAR ────────────────────────────── */}
+    <header className="sticky top-0 z-50 bg-gray-100 dark:bg-neutral-900 w-full flex items-center justify-between p-2 md:p-4">
+      <div>
+        <h1 className="text-2xl md:text-4xl font-semibold tracking-tight">Dashboard</h1>
+        <p className="text-sm opacity-70 mt-1">Signed in as {adminEmail}</p>
       </div>
+    </header>
 
-      {/* FILTER + EXPORT */}
-      <div className="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
-        <div className="flex gap-2 items-center">
-          <label>From:</label>
-          <input type="date" className="border rounded px-2 py-1" value={dateRange.from} onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))}/>
-          <label>To:</label>
-          <input type="date" className="border rounded px-2 py-1" value={dateRange.to} onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))}/>
+    {/* Add padding-top to main content to avoid overlap */}
+    <div className="pt-12 md:pt-12">
+
+      {/* ─── SUMMARY WIDGETS ──────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-14">
+        {[
+          { title: "Total Revenue", value: `₦${totalRevenue.toLocaleString()}` },
+          { title: "Total Orders", value: totalOrders },
+          { title: "Most Used Payment", value: mostUsedPayment }
+        ].map((card, i) => (
+          <motion.div
+            key={i}
+            layout
+            className="rounded-2xl bg-[#4C86C4]/8 dark:bg-[#1C4672] p-6"
+          >
+            <div className="text-sm opacity-70 mb-1">{card.title}</div>
+            <div className="md:text-3xl text-2xl font-semibold tracking-tight">{card.value}</div>
+          </motion.div>
+        ))}
+      </section>
+
+      {/* ─── FILTERS ─────────────────────────── */}
+      <section className="flex flex-col md:flex-row items-center justify-between gap-6 mb-14">
+        <div className="flex items-center gap-6">
+          <div>
+            <label className="text-xs opacity-70 block mb-1">From</label>
+            <input
+              type="date"
+              className="px-3 py-2 rounded-lg border border-[#4C86C4] dark:border-[#1C4672] 
+                         bg-[#4C86C4]/20 dark:bg-[#1C4672] w-40"
+              value={dateRange.from}
+              onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))}
+            />
+          </div>
+          <div>
+            <label className="text-xs opacity-70 block mb-1">To</label>
+            <input
+              type="date"
+              className="px-3 py-2 rounded-lg border border-[#4C86C4] dark:border-[#1C4672] 
+                         bg-[#4C86C4]/20 dark:bg-[#1C4672] w-40"
+              value={dateRange.to}
+              onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))}
+            />
+          </div>
         </div>
-        <button onClick={exportCSV} className="px-4 py-2 bg-green-600 text-white rounded">Export CSV</button>
-      </div>
 
-      {/* CHARTS */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        {/* Pie Chart - Payment Methods */}
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <h3 className="font-semibold mb-2">Orders by Payment Method</h3>
-          <ResponsiveContainer width="100%" height={250}>
+        <button
+          onClick={exportCSV}
+          className="px-5 py-2.5 text-md rounded-lg bg-[#1C4672] text-white dark:bg-[#4C86C4] dark:text-black font-medium shadow hover:opacity-80 transition"
+        >
+          Export CSV
+        </button>
+      </section>
+
+      {/* ─── CHARTS ROW 1 ────────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-14">
+        {/* PIE CHART */}
+        <motion.div 
+          layout
+          className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-6 shadow-sm"
+        >
+          <h3 className="md:text-lg text-md font-medium mb-4">Payment Methods</h3>
+          <ResponsiveContainer width="100%" height={240}>
             <PieChart>
-              <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={80} label>
-                {pieData.map((entry, index) => <Cell key={index} fill={COLORS[index % COLORS.length]} />)}
+              <Pie data={pieData} dataKey="value" nameKey="name" outerRadius={90} label>
+                {pieData.map((entry, index) => (
+                  <Cell key={`cell-${index}`} fill={["#1C4672","#4C86C4","#2E6FA3","#6FA8DC"][index % 4]} />
+                ))}
               </Pie>
               <Tooltip />
-              <Legend />
             </PieChart>
           </ResponsiveContainer>
         </motion.div>
 
-        {/* Bar Chart - Orders per Day */}
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <h3 className="font-semibold mb-2">Daily Order Volume</h3>
-          <ResponsiveContainer width="100%" height={250}>
+        {/* DAILY ORDERS */}
+        <motion.div 
+          layout
+          className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-3 md:p-6"
+        >
+          <h3 className="md:text-lg text-md font-medium mb-4">Daily Orders</h3>
+          <ResponsiveContainer width="100%" height={240}>
             <BarChart data={ordersByDay}>
               <XAxis dataKey="day" />
               <YAxis />
               <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#4caf50" />
+              <Bar dataKey="count" fill="#1C4672"/>
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
-      </div>
+      </section>
 
-      {/* Monthly Revenue + Orders by Location */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <h3 className="font-semibold mb-2">Monthly Revenue</h3>
-          <ResponsiveContainer width="100%" height={250}>
+      {/* ─── CHARTS ROW 2 ────────────────────── */}
+      <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-14">
+        <motion.div 
+          layout
+          className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-6 shadow-sm"
+        >
+          <h3 className="md:text-lg text-md font-medium mb-4">Monthly Revenue</h3>
+          <ResponsiveContainer width="100%" height={240}>
             <BarChart data={monthlyRevenue}>
               <XAxis dataKey="month" />
               <YAxis />
               <Tooltip />
-              <Legend />
-              <Bar dataKey="total" fill="#2196f3" />
+              <Bar dataKey="total" fill="#1C4672" />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
-        <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-          <h3 className="font-semibold mb-2">Orders by Location</h3>
-          <ResponsiveContainer width="100%" height={250}>
+
+        <motion.div 
+          layout
+          className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-4 md:p-6 shadow-sm"
+        >
+          <h3 className="md:text-lg text-md font-medium mb-4">Orders by Location</h3>
+          <ResponsiveContainer width="100%" height={260}>
             <BarChart data={ordersByLocation}>
               <XAxis dataKey="loc" />
               <YAxis />
               <Tooltip />
-              <Legend />
-              <Bar dataKey="count" fill="#f44336" />
+              <Bar dataKey="count" fill="#4C86C4" />
             </BarChart>
           </ResponsiveContainer>
         </motion.div>
-      </div>
+      </section>
 
-      {/* Active Orders List */}
-      <motion.div className="p-4 bg-white dark:bg-gray-800 rounded-xl shadow" layout>
-        <h3 className="font-semibold mb-2">Active Orders (Unpaid / In Progress)</h3>
-        <div className="space-y-2 max-h-64 overflow-y-auto">
+      {/* ─── ACTIVE ORDERS ────────────────────── */}
+      <motion.div 
+        layout
+        className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-4 md:p-6 shadow-sm"
+      >
+        <h3 className="md:text-lg text-md font-medium mb-4">Active Orders</h3>
+        <div className="space-y-4 max-h-80 overflow-y-auto pr-2">
           {activeOrders.map(o => (
-            <motion.div key={o.id} className="flex justify-between border-b py-1 px-2" layout>
-              <span>{o.clientName || "Unknown Client"}</span>
-              <span>₦{(o.total || 0).toLocaleString()}</span>
-              <span className={`px-2 py-0.5 rounded text-sm font-semibold ${o.paymentStatus === "paid" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+            <div 
+              key={o.id} 
+              className="flex justify-between items-center py-2 border-b border-[#4C86C4] dark:border-[#1C4672] last:border-none"
+            >
+              <span className="opacity-80">{o.clientName || "Unknown Client"}</span>
+              <span className="font-semibold">₦{(o.total || 0).toLocaleString()}</span>
+              <span 
+                className={`px-3 py-1 rounded-lg text-sm ${
+                  o.paymentStatus === "paid"
+                    ? "bg-[#4C86C4] dark:bg-[#1C4672]"
+                    : "bg-[#A6C8E0] dark:bg-[#2E6FA3]"
+                }`}
+              >
                 {o.paymentStatus || "unpaid"}
               </span>
-            </motion.div>
+            </div>
           ))}
         </div>
       </motion.div>
-    </div>
+
+    </div> {/* pt wrapper */}
+  </div>
+</div>
+
   );
 }
