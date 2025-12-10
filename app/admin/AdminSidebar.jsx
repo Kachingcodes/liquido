@@ -16,7 +16,7 @@ const quick = Quicksand({
 });
 
 
-const AdminSidebar = () => {
+const AdminSidebar = ({ isMobile = false, onSelect }) => {
       const { logout } = useAuth();
     // const router = useRouter();
 
@@ -26,7 +26,8 @@ const AdminSidebar = () => {
     // };
 
     return (
-        <aside className="w-64 bg-[#1C4672] text-white hidden md:flex flex-col justify-between overflow-hidden">
+        <aside className={`w-64 bg-[#1C4672] text-white flex flex-col justify-between overflow-hidden
+      ${!isMobile ? "hidden md:flex" : "flex md:hidden"}`}>
             <div>
                 <div className="relative w-30 h-auto py-4 ml-8">
                     <Image src={assets.logo} alt="logo" className="object-contain" priority/>
@@ -40,6 +41,7 @@ const AdminSidebar = () => {
                     <Link
                     href="/admin/dashboard"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
                         <LuLayoutDashboard size={18}/> Dashboard
@@ -49,6 +51,7 @@ const AdminSidebar = () => {
                     <Link
                     href="/admin/products"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
                         <Package size={18}/> Products
@@ -58,6 +61,7 @@ const AdminSidebar = () => {
                     <Link
                     href="/admin/orders"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
                         <ShoppingBag size={18}/> Regular Orders
@@ -67,6 +71,7 @@ const AdminSidebar = () => {
                     <Link
                     href="/admin/bulkorders"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
                         <Boxes size={18}/> Bulk Orders
@@ -76,6 +81,7 @@ const AdminSidebar = () => {
                     <Link
                     href="/admin/messages"
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
                         <MessageSquare size={18}/> Messages

@@ -28,6 +28,18 @@ export default function AdminLayout({ children }) {
     document.body.style.overflow = isOpen ? "hidden" : "auto";
   }, [isOpen]);
 
+  useEffect(() => {
+  const handleResize = () => {
+    if (window.innerWidth >= 768) {
+      setIsOpen(false);
+      document.body.style.overflow = "auto";
+    }
+  };
+  window.addEventListener("resize", handleResize);
+  return () => window.removeEventListener("resize", handleResize);
+}, []);
+
+
   return (
     <div className="flex min-h-screen bg-gray-100 dark:bg-neutral-900 transition-colors duration-300">
 
@@ -74,8 +86,16 @@ export default function AdminLayout({ children }) {
               >
                 <X size={26} className="text-gray-800 dark:text-gray-100" />
               </button>
+              
 
-              <AdminSidebar onSelect={() => setIsOpen(false)} />
+              
+              <div className="flex">
+                <AdminSidebar onSelect={() => setIsOpen(false)} isMobile={true}/>
+                {/* <h1 className="text-black">
+                  Hello world
+                </h1> */}
+              </div>
+              
             </motion.div>
           </>
         )}
