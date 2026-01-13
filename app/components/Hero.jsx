@@ -72,13 +72,13 @@ export default function Hero({ products }) {
     }
   }
 
-  function prev() {
-    setIndex((i) => (i - 1 + items.length) % items.length);
-  }
+  // function prev() {
+  //   setIndex((i) => (i - 1 + items.length) % items.length);
+  // }
 
-  function next() {
-    setIndex((i) => (i + 1) % items.length);
-  }
+  // function next() {
+  //   setIndex((i) => (i + 1) % items.length);
+  // }
 
    const handleExploreLiquido = () => {
   // Add drop on click
@@ -130,20 +130,6 @@ export default function Hero({ products }) {
     <div className="absolute -right-16 -bottom-10 w-60 h-60 rounded-full opacity-8"
       style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
 
-    {/* Left / Right buttons */}
-    {/* <button
-      onClick={prev}
-      className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
-    >
-      <ArrowLeft size={14} className="text-white" />
-    </button>
-
-    <button
-      onClick={next}
-      className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
-    >
-      <ArrowRight size={14} className="text-white" />
-    </button> */}
 
     {/* Content */}
     <div className="absolute inset-0 flex items-center justify-center px-4">
@@ -247,71 +233,46 @@ export default function Hero({ products }) {
               </p>
 
               <div className="flex   gap-3">
-  {/* CTA BUTTON */}
-  <button
-    onClick={handleExploreLiquido}
-    onMouseEnter={stopAutoplay}
-    onMouseLeave={startAutoplay}
-    className="
-      relative
-      inline-flex
-      items-center
-      gap-3
-      rounded-2xl
-      px-6
-      py-3
-      bg-white/10
-      backdrop-blur-md
-      border border-white/20
-      shadow-md
-      hover:scale-105
-      transition
-    "
-  >
-    <motion.span
-      whileHover={{ x: 6 }}
-      transition={{ type: "spring", stiffness: 300 }}
-      className="text-white font-semibold flex gap-3"
-    >
-      Explore Liquido <Compass size={18} className="mt-1" />
-    </motion.span>
-  </button>
+                {/* CTA BUTTON */}
+                <button
+                  onClick={handleExploreLiquido}
+                  onMouseEnter={stopAutoplay}
+                  onMouseLeave={startAutoplay}
+                  className="relative inline-flex items-center gap-3 rounded-2xl px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 shadow-md
+                    hover:scale-105 transition">
 
-  {/* SOCIALS CLUSTER */}
-  <div className="hidden sm:flex items-center gap-1.5">
-    {[
-      { href: "https://twitter.com/liquido_ng", icon: <FaXTwitter size={18} /> },
-      { href: `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, icon: <FaWhatsapp size={18} /> },
-      { href: "https://instagram.com/liquido.ng", icon: <FaInstagram size={18} /> },
-      { href: "https://tiktok.com/@liquido.ng", icon: <FaTiktok size={18} /> },
-      { href: "https://linkedin.com/company/liquidong", icon: <FaLinkedin size={18} /> },
-    ].map((item, i) => (
-      <motion.a
-        key={i}
-        href={item.href}
-        target="_blank"
-        rel="noopener noreferrer"
-        whileHover={{ y: -6 }}
-        transition={{ type: "spring", stiffness: 320, damping: 20 }}
-        className="
-          relative
-          p-2
-          rounded-lg
-          bg-white/6
-          backdrop-blur-sm
-          border border-white/10
-          text-white
-          shadow-sm
-          hover:shadow-lg
-          hover:z-10
-        "
-      >
-        {item.icon}
-      </motion.a>
-    ))}
-  </div>
-</div>
+                  <motion.span
+                    whileHover={{ x: 6 }}
+                    transition={{ type: "spring", stiffness: 300 }}
+                    className="text-white font-semibold flex gap-3"
+                  >
+                    Explore Liquido <Compass size={18} className="mt-1" />
+                  </motion.span>
+                </button>
 
+                {/* SOCIALS CLUSTER */}
+                <div className="hidden sm:flex items-center gap-1.5">
+                  {[
+                    { href: "https://twitter.com/liquido_ng", icon: <FaXTwitter size={18} /> },
+                    { href: `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, icon: <FaWhatsapp size={18} /> },
+                    { href: "https://instagram.com/liquido.ng", icon: <FaInstagram size={18} /> },
+                    { href: "https://tiktok.com/@liquido.ng", icon: <FaTiktok size={18} /> },
+                    { href: "https://linkedin.com/company/liquidong", icon: <FaLinkedin size={18} /> },
+                  ].map((item, i) => (
+                    <motion.a
+                      key={i}
+                      href={item.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      whileHover={{ y: -6 }}
+                      transition={{ type: "spring", stiffness: 320, damping: 20 }}
+                      className="relative p-2 rounded-lg bg-white/6 backdrop-blur-sm border border-white/10 text-white shadow-sm
+                        hover:shadow-lg hover:z-10">
+                      {item.icon}
+                    </motion.a>
+                  ))}
+                </div>
+              </div>
 
               <div className="mt-6 flex gap-4 text-sm text-white/80">
                 <div className="inline-flex items-center gap-2">
@@ -333,24 +294,6 @@ export default function Hero({ products }) {
           <div className="lg:col-span-6">
             <div className="md:flex relative hidden">
               <div className="relative w-full h-[420px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-white/6 to-white/3 backdrop-blur-2xl">
-                {/* <div className="absolute -left-24 -top-10 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
-                <div className="absolute -right-24 -bottom-12 w-80 h-80 rounded-full opacity-8" style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} /> */}
-
-                {/* <button
-                  onClick={prev}
-                  className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/6 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
-                  aria-label="Previous"
-                >
-                  <ArrowLeft size={18} className="text-white" />
-                </button>
-
-                <button
-                  onClick={next}
-                  className="absolute right-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/6 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
-                  aria-label="Next"
-                >
-                  <ArrowRight size={18} className="text-white" />
-                </button> */}
 
                 <div className="absolute inset-0 flex items-center justify-center px-6">
                   <AnimatePresence initial={false} mode="wait">
@@ -368,7 +311,6 @@ export default function Hero({ products }) {
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
                             <div className="flex items-center justify-center">
                               <div className="relative ">
-                                {/* w-56 h-56 sm:w-72 sm:h-72 rounded-2xl bg-white/6 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg */}
                                 <motion.div
                                   animate={{ rotate: [0, 4, 0, -3, 0] }}
                                   transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
@@ -418,7 +360,7 @@ export default function Hero({ products }) {
               </div>
             </div>
 
-            {/* <div className="mt-6 hidden md:flex items-center gap-4 overflow-x-auto py-2">
+            <div className="mt-6 hidden md:flex items-center gap-4 overflow-x-auto py-2 no-scrollbar">
               {items.map((p, i) => (
                 <button
                   key={p.id}
@@ -434,7 +376,7 @@ export default function Hero({ products }) {
                   </div>
                 </button>
               ))}
-            </div> */}
+            </div>
           </div>
         </div>
       </div>
