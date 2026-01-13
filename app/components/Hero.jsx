@@ -29,14 +29,14 @@ export default function Hero({ products }) {
     {
       id: 2,
       title: "Gourmet Olive Oil",
-      subtitle: "Cold pressed perfection.",
+      subtitle: "Where Health Meets Flavor.",
       image: "/categories/cooking.png",
       tag: "Cooking & Edibles",
     },
     {
       id: 3,
-      title: "Aromatic Body Mist",
-      subtitle: "Daily luxury for skin.",
+      title: "Long-lasting Fragrant Perfume",
+      subtitle: "Experience luxury in a bottle.",
       image: "/categories/perfume.png",
       tag: "Personal Care",
     },
@@ -119,96 +119,96 @@ export default function Hero({ products }) {
 
       <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-20 lg:py-28">
 
-{/*MOBILE VIEW HERE*/}
-<div className="flex relative md:hidden mb-7">
-  <div className="relative w-full h-[280px] rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl">
+      {/*MOBILE VIEW HERE*/}
+      <div className="flex relative md:hidden mb-7">
+        <div className="relative w-full h-[280px] rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl">
 
-    {/* Background circles */}
-    <div className="absolute -left-16 -top-10 w-56 h-56 rounded-full opacity-10"
-      style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
+          {/* Background circles */}
+          <div className="absolute -left-16 -top-10 w-56 h-56 rounded-full opacity-10"
+            style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
 
-    <div className="absolute -right-16 -bottom-10 w-60 h-60 rounded-full opacity-8"
-      style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
-
-
-    {/* Content */}
-    <div className="absolute inset-0 flex items-center justify-center px-4">
-      <AnimatePresence initial={false} mode="wait">
-        {items.map((p, i) => {
-          if (i !== index) return null;
-          return (
-            <motion.div
-              key={p.id}
-              initial={{ opacity: 0, scale: 0.95, y: 8 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.97, y: -6 }}
-              transition={{ duration: 0.45 }}
-              className="w-full"
-            >
-              <div className="grid grid-cols-1 gap-4 items-center">
-
-                {/* Image */}
-                <div className="flex items-center justify-center">
-                  <div className="relative flex items-center justify-center">
-                    <motion.div
-                      animate={{ rotate: [0, 3, 0, -3, 0] }}
-                      transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
-                      className="absolute inset-0"
-                    />
-                    <img src={p.image} alt={p.title} className="w-30 h-30 object-contain z-10"/>
-                  </div>
-                </div>
-
-                {/* Text */}
-                <div className="">
-                  <div className="inline-flex items-center gap-2">
-                    <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/10 border border-white/10 text-white">
-                      {p.tag}
-                    </span>
-                  </div>
-
-                  {/* <h3 className="text-xl font-semibold text-white">{p.title}</h3> */}
-                  {/* <p className="text-white/80 mt-2 text-sm leading-tight">{p.subtitle}</p> */}
-
-                  {/* Buttons */}
-                  {/* <div className="mt-4 flex gap-2">
-                    <a className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/10 border border-white/10 backdrop-blur-sm hover:scale-105 transition">
-                      View details
-                    </a>
-                    <a className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white text-slate-800 hover:opacity-95 transition">
-                      Order now
-                    </a>
-                  </div> */}
-
-                  <div className="mt-3 flex items-center gap-1 text-xs text-white/70">
-                    <span>•</span>
-                    <span>Free delivery over ₦10,000</span>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-          );
-        })}
-      </AnimatePresence>
-    </div>
-
-    {/* Indicators */}
-    <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
-      {items.map((_, i) => (
-        <button
-          key={i}
-          onClick={() => setIndex(i)}
-          className={`w-1.5 h-1.5 rounded-full transition-transform ${i === index ? "scale-110 bg-white" : "bg-white/30"}`}
-        />
-      ))}
-    </div>
-  </div>
-</div>
+          <div className="absolute -right-16 -bottom-10 w-60 h-60 rounded-full opacity-8"
+            style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
 
 
-{/*ENDS HERE*/}
+          {/* Content */}
+          <div className="absolute inset-0 flex items-center justify-center px-4">
+            <AnimatePresence initial={false} mode="wait">
+              {items.map((p, i) => {
+                if (i !== index) return null;
+                return (
+                  <motion.div
+                    key={p.id}
+                    initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.97, y: -6 }}
+                    transition={{ duration: 0.45 }}
+                    className="w-full"
+                  >
+                    <div className="grid grid-cols-1 gap-4 items-center">
 
-{/*DESKTOP VIEW*/}
+                      {/* Image */}
+                      <div className="flex items-center justify-center">
+                        <div className="relative flex items-center justify-center">
+                          <motion.div
+                            animate={{ rotate: [0, 3, 0, -3, 0] }}
+                            transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
+                            className="absolute inset-0"
+                          />
+                          <img src={p.image} alt={p.title} className="w-30 h-30 object-contain z-10"/>
+                        </div>
+                      </div>
+
+                      {/* Text */}
+                      <div className="">
+                        <div className="inline-flex items-center gap-2">
+                          <span className="px-2 py-0.5 rounded-full text-[10px] font-medium bg-white/10 border border-white/10 text-white">
+                            {p.tag}
+                          </span>
+                        </div>
+
+                        {/* <h3 className="text-xl font-semibold text-white">{p.title}</h3> */}
+                        {/* <p className="text-white/80 mt-2 text-sm leading-tight">{p.subtitle}</p> */}
+
+                        {/* Buttons */}
+                        {/* <div className="mt-4 flex gap-2">
+                          <a className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white/10 border border-white/10 backdrop-blur-sm hover:scale-105 transition">
+                            View details
+                          </a>
+                          <a className="text-xs font-medium px-3 py-1.5 rounded-lg bg-white text-slate-800 hover:opacity-95 transition">
+                            Order now
+                          </a>
+                        </div> */}
+
+                        <div className="mt-3 flex items-center gap-1 text-xs text-white/70">
+                          <span>•</span>
+                          <span>Free delivery over ₦10,000</span>
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                );
+              })}
+            </AnimatePresence>
+          </div>
+
+          {/* Indicators */}
+          <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-1.5 z-20">
+            {items.map((_, i) => (
+              <button
+                key={i}
+                onClick={() => setIndex(i)}
+                className={`w-1.5 h-1.5 rounded-full transition-transform ${i === index ? "scale-110 bg-white" : "bg-white/30"}`}
+              />
+            ))}
+          </div>
+        </div>
+      </div>
+
+
+      {/*ENDS HERE*/}
+
+      {/*DESKTOP VIEW*/}
 
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-center">
           <div className="lg:col-span-6">
@@ -277,15 +277,15 @@ export default function Hero({ products }) {
               <div className="mt-6 flex gap-4 text-sm text-white/80">
                 <div className="inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white/80" />
-                  <span>Same‑day Delivery</span>
+                  <span className="text-sm md:text-md">Same‑day Delivery</span>
                 </div>
                 <div className="inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white/60" />
-                  <span>Bulk Delivery</span>
+                  <span className="text-sm md:text-md">Bulk Delivery</span>
                 </div>
                 <div className="inline-flex items-center gap-2">
                   <span className="w-2 h-2 rounded-full bg-white/60" />
-                  <span>Scheduled Delivery</span>
+                  <span className="text-sm md:text-md">Scheduled Delivery</span>
                 </div>
               </div>
             </motion.div>

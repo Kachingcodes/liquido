@@ -18,16 +18,16 @@ import water2 from './water2.png';
 export const assets = {
   bulk,
   delivery,
-    drop,  
-    jugs,
-    location,
-    logo,
-    middle,
-    nylon,
-    tiller,
-    van,
-    water1,
-    water2
+  drop,  
+  jugs,
+  location,
+  logo,
+  middle,
+  nylon,
+  tiller,
+  van,
+  water1,
+  water2
 }
 
 export const steps = [
