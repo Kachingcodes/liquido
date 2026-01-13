@@ -113,7 +113,7 @@ export default function Hero({ products }) {
       <div
         className="absolute inset-0 -z-10"
         style={{
-          background: `linear-gradient(10deg, rgba(20,70,114,0.95) 0%, rgba(76,134,196,0.92) 55%, rgba(255,255,255,0.02) 100%)`,
+          background: `linear-gradient(150deg, rgba(20,70,114,0.95) 0%, rgba(56,134,196,0.92) 70%, rgba(255,255,255,0.02) 100%)`,
         }}
       />
 

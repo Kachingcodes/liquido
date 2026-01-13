@@ -25,7 +25,7 @@ const Navbar = () => {
   }, 1500);
 };
 
-  const liquidSections = ['Home', 'Categories', 'How To Order', 'Why Choose Us', 'Bulk Order', 'Testimonials'];
+  const liquidSections = ['Home', 'Categories', 'How To Order', 'Bulk Order', 'Testimonials'];
 
   useEffect(() => {
     if (isOpen) {
@@ -40,7 +40,8 @@ const Navbar = () => {
   }, [isOpen]);
 
   return (
-    <header className="w-full fixed top-0 left-0 bg-[#4C86C4] shadow z-50">
+    <header className="w-full fixed top-0 left-0 bg-[#4d7aab] shadow z-50"
+    >
       <div className="max-w-7xl mx-auto px-8 py-3 md:py-4 flex justify-between items-center">
         {/* Logo */}
         <Link href="/">
