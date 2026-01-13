@@ -163,13 +163,13 @@ export default function Hero({ products }) {
 
                 {/* Image */}
                 <div className="flex items-center justify-center">
-                  <div className="relative w-40 h-40 rounded-xl bg-white/10 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-md">
+                  <div className="relative flex items-center justify-center">
                     <motion.div
                       animate={{ rotate: [0, 3, 0, -3, 0] }}
                       transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
                       className="absolute inset-0"
                     />
-                    <img src={p.image} alt={p.title} className="w-28 h-28 object-contain z-10" />
+                    <img src={p.image} alt={p.title} className="w-30 h-30 object-contain z-10"/>
                   </div>
                 </div>
 

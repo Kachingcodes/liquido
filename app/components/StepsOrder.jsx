@@ -25,7 +25,7 @@ export default function StepsOrder() {
           </div>
 
           <div className="flex flex-col">
-            <span className="font-semibold text-gray-200 text-sm md:text-lg">{step.title}</span>
+            <span className="font-semibold text-gray-200 text-md md:text-lg">{step.title}</span>
             <p className="text-sm md:text-md text-white">{step.desc}</p>
           </div>
         </motion.div>
