@@ -84,16 +84,11 @@ export default function AdminLayout({ children }) {
                 onClick={() => setIsOpen(false)}
                 className="absolute top-4 right-4 z-50 p-2"
               >
-                <X size={26} className="text-gray-800 dark:text-gray-100" />
+                <X size={26} className="text-white"/>
               </button>
-              
-
-              
+                      
               <div className="flex">
                 <AdminSidebar onSelect={() => setIsOpen(false)} isMobile={true}/>
-                {/* <h1 className="text-black">
-                  Hello world
-                </h1> */}
               </div>
               
             </motion.div>

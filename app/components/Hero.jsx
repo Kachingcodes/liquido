@@ -108,19 +108,19 @@ export default function Hero({ products }) {
   const message = "Hello Liquido 💧. I would like to make some inquiries.";
 
   return (
-    <section id="Home"
+  <section id="Home"
     className="relative overflow-hidden">
       <div
         className="absolute inset-0 -z-10"
         style={{
-          background: `linear-gradient(120deg, rgba(28,70,114,0.95) 0%, rgba(76,134,196,0.92) 55%, rgba(255,255,255,0.02) 100%)`,
+          background: `linear-gradient(10deg, rgba(20,70,114,0.95) 0%, rgba(76,134,196,0.92) 55%, rgba(255,255,255,0.02) 100%)`,
         }}
       />
 
       <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-20 lg:py-28">
 
 {/*MOBILE VIEW HERE*/}
-        <div className="flex relative md:hidden mb-7">
+<div className="flex relative md:hidden mb-7">
   <div className="relative w-full h-[280px] rounded-2xl overflow-hidden shadow-xl border border-white/10 bg-gradient-to-br from-white/5 to-white/10 backdrop-blur-xl">
 
     {/* Background circles */}
@@ -131,7 +131,7 @@ export default function Hero({ products }) {
       style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
 
     {/* Left / Right buttons */}
-    <button
+    {/* <button
       onClick={prev}
       className="absolute left-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
     >
@@ -143,7 +143,7 @@ export default function Hero({ products }) {
       className="absolute right-2 top-1/2 -translate-y-1/2 z-20 p-1.5 rounded-full bg-white/10 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
     >
       <ArrowRight size={14} className="text-white" />
-    </button>
+    </button> */}
 
     {/* Content */}
     <div className="absolute inset-0 flex items-center justify-center px-4">
@@ -222,7 +222,9 @@ export default function Hero({ products }) {
 
 {/*ENDS HERE*/}
 
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+{/*DESKTOP VIEW*/}
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-7 items-center">
           <div className="lg:col-span-6">
             <motion.div
               initial={{ opacity: 0, y: 12 }}
@@ -232,59 +234,84 @@ export default function Hero({ products }) {
             >
               <div className="hidden md:inline-flex items-center gap-3 bg-white/10 backdrop-blur-md px-3 py-1 rounded-full shadow-sm border border-white/10">
                 <span className="text-xs uppercase tracking-wider text-white/90 font-medium">Liquido</span>
-                <span className="text-xs text-white/60">Luxury • Lifestyle</span>
+                <span className="text-xs text-white/80">Luxury • Lifestyle</span>
               </div>
 
-              <h1 className={`${quick.className} text-2xl sm:text-3xl lg:text-6xl leading-tight font-extrabold text-[#1C4672] drop-shadow-lg`}>
+              <h1 className={`${quick.className} text-2xl sm:text-3xl lg:text-5xl leading-tight font-extrabold text-[#d7e2ee] drop-shadow-lg`}>
                 Everything Liquid Delivered To You With Ease
                 {/* <span className="block text-xl sm:text-xl font-medium text-white/90 mt-2">Fresh drinks • Personal care • Culinary essentials</span> */}
               </h1>
 
               <p className="text-white/85 max-w-xl text-md">
-                Liquido is your number-one plug, redefining the way you get water and drinks. Say goodbye to
-                heavy lifting and long queues at supermarkets. We’re here to save your time and energy by
-                delivering every liquid product you need, directly to your doorstep.
+                Liquido is your number-one plug for water and drinks - fast, reliable, and delivered to your doorstep with ease.
               </p>
 
-              <div className="flex items-center gap-4">
-                <button
-                onClick={handleExploreLiquido}
-                  className="relative inline-flex items-center gap-3 rounded-2xl px-6 py-3 bg-white/10 backdrop-blur-md border border-white/20 hover:scale-105 transform transition shadow-md"
-                  onMouseEnter={stopAutoplay}
-                  onMouseLeave={startAutoplay}
-                >
-                  <motion.span
-                    whileHover={{ x: 6 }}
-                    transition={{ type: "spring", stiffness: 300 }}
-                    className="text-white font-semibold flex gap-3"
-                  >
-                    Explore Liquido <Compass size={18} className="mt-1"/>
-                  </motion.span>
-                </button>
+              <div className="flex   gap-3">
+  {/* CTA BUTTON */}
+  <button
+    onClick={handleExploreLiquido}
+    onMouseEnter={stopAutoplay}
+    onMouseLeave={startAutoplay}
+    className="
+      relative
+      inline-flex
+      items-center
+      gap-3
+      rounded-2xl
+      px-6
+      py-3
+      bg-white/10
+      backdrop-blur-md
+      border border-white/20
+      shadow-md
+      hover:scale-105
+      transition
+    "
+  >
+    <motion.span
+      whileHover={{ x: 6 }}
+      transition={{ type: "spring", stiffness: 300 }}
+      className="text-white font-semibold flex gap-3"
+    >
+      Explore Liquido <Compass size={18} className="mt-1" />
+    </motion.span>
+  </button>
 
-                <div className="hidden sm:flex items-center gap-3 text-white">
-                  <a href="https://twitter.com/liquido_ng" target="_blank" rel="noopener noreferrer" 
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaXTwitter size={18}/>
-                  </a>
-                  <a href={`https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`} target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaWhatsapp size={18}/>
-                  </a>
-                  <a href="https://instagram.com/liquido.ng" target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaInstagram size={18}/>
-                  </a>
-                  <a href="https://tiktok.com/@liquido.ng" target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaTiktok size={18}/>
-                  </a>
-                  <a href="https://linkedin.com/company/liquidong" target="_blank" rel="noopener noreferrer"
-                    className="p-2 bg-white/6 backdrop-blur-sm rounded-lg border border-white/10 hover:scale-105 transition">
-                    <FaLinkedin size={18}/>
-                  </a>                  
-                </div>
-              </div>
+  {/* SOCIALS CLUSTER */}
+  <div className="hidden sm:flex items-center gap-1.5">
+    {[
+      { href: "https://twitter.com/liquido_ng", icon: <FaXTwitter size={18} /> },
+      { href: `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, icon: <FaWhatsapp size={18} /> },
+      { href: "https://instagram.com/liquido.ng", icon: <FaInstagram size={18} /> },
+      { href: "https://tiktok.com/@liquido.ng", icon: <FaTiktok size={18} /> },
+      { href: "https://linkedin.com/company/liquidong", icon: <FaLinkedin size={18} /> },
+    ].map((item, i) => (
+      <motion.a
+        key={i}
+        href={item.href}
+        target="_blank"
+        rel="noopener noreferrer"
+        whileHover={{ y: -6 }}
+        transition={{ type: "spring", stiffness: 320, damping: 20 }}
+        className="
+          relative
+          p-2
+          rounded-lg
+          bg-white/6
+          backdrop-blur-sm
+          border border-white/10
+          text-white
+          shadow-sm
+          hover:shadow-lg
+          hover:z-10
+        "
+      >
+        {item.icon}
+      </motion.a>
+    ))}
+  </div>
+</div>
+
 
               <div className="mt-6 flex gap-4 text-sm text-white/80">
                 <div className="inline-flex items-center gap-2">
@@ -306,10 +333,10 @@ export default function Hero({ products }) {
           <div className="lg:col-span-6">
             <div className="md:flex relative hidden">
               <div className="relative w-full h-[420px] sm:h-[480px] rounded-3xl overflow-hidden shadow-2xl border border-white/10 bg-gradient-to-br from-white/6 to-white/3 backdrop-blur-2xl">
-                <div className="absolute -left-24 -top-10 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
-                <div className="absolute -right-24 -bottom-12 w-80 h-80 rounded-full opacity-8" style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} />
+                {/* <div className="absolute -left-24 -top-10 w-72 h-72 rounded-full opacity-10" style={{ background: "radial-gradient(circle at 30% 30%, rgba(255,255,255,0.08), transparent 30%)" }} />
+                <div className="absolute -right-24 -bottom-12 w-80 h-80 rounded-full opacity-8" style={{ background: "radial-gradient(circle at 70% 70%, rgba(255,255,255,0.06), transparent 30%)" }} /> */}
 
-                <button
+                {/* <button
                   onClick={prev}
                   className="absolute left-4 top-1/2 -translate-y-1/2 z-20 p-2 rounded-full bg-white/6 backdrop-blur-sm border border-white/10 hover:scale-105 transition"
                   aria-label="Previous"
@@ -323,7 +350,7 @@ export default function Hero({ products }) {
                   aria-label="Next"
                 >
                   <ArrowRight size={18} className="text-white" />
-                </button>
+                </button> */}
 
                 <div className="absolute inset-0 flex items-center justify-center px-6">
                   <AnimatePresence initial={false} mode="wait">
@@ -340,14 +367,15 @@ export default function Hero({ products }) {
                         >
                           <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
                             <div className="flex items-center justify-center">
-                              <div className="relative w-56 h-56 sm:w-72 sm:h-72 rounded-2xl bg-white/6 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg">
+                              <div className="relative ">
+                                {/* w-56 h-56 sm:w-72 sm:h-72 rounded-2xl bg-white/6 backdrop-blur-md border border-white/10 flex items-center justify-center shadow-lg */}
                                 <motion.div
                                   animate={{ rotate: [0, 4, 0, -3, 0] }}
                                   transition={{ repeat: Infinity, duration: 8, ease: "easeInOut" }}
                                   className="absolute inset-0"
                                 />
 
-                                <img src={p.image} alt={p.title} className="w-40 h-40 object-contain z-10" />
+                                <img src={p.image} alt={p.title} className="w-70 h-60 object-contain z-10" />
                               </div>
                             </div>
 
@@ -390,7 +418,7 @@ export default function Hero({ products }) {
               </div>
             </div>
 
-            <div className="mt-6 hidden md:flex items-center gap-4 overflow-x-auto py-2">
+            {/* <div className="mt-6 hidden md:flex items-center gap-4 overflow-x-auto py-2">
               {items.map((p, i) => (
                 <button
                   key={p.id}
@@ -406,7 +434,7 @@ export default function Hero({ products }) {
                   </div>
                 </button>
               ))}
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

@@ -161,7 +161,7 @@ const ProductsPage = () => {
   : [];
 
   return (
-    <div className="p-4">
+    <div className="p-2">
       {/* Filter Bar */}
       <FilterBar
         onFilterChange={handleFilterChange}
@@ -169,17 +169,27 @@ const ProductsPage = () => {
       />
 
       {/* Products List */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-4">
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mt-4">
         {filteredProducts.map((p) => (
-          <div key={p.id} className="border rounded-lg p-3 flex flex-col items-center shadow-sm">
-            {p.image && <img src={p.image} alt={p.name} className="w-32 h-30 object-contain mb-2" />}
-            <h3 className="font-semibold">{p.name}</h3>
-            <p>{p.category}</p>
-            <p>{p.option}</p>
-            <p>{p.volume}</p>
-            <p>₦{p.price}</p>
-            <p>{p.image}</p>
-            <div className="flex gap-2 mt-2">
+          <div key={p.id} className="flex flex-col items-center justify-between w-full md:px-4 px-2">
+            <div className="border-1 border-gray-300 rounded-xl">
+              {p.image && <img src={p.image} alt={p.name} className="w-40 h-36 object-contain mb-2" />}
+            </div>  
+            <div className="flex flex-col gap-2 items-start justify-start w-full mb-3">
+              <div className="flex gap-2 items-center justify-center">
+                <h3 className="font-semibold text-md md:text-lg">{p.name}</h3>
+                <p className="font-light text-sm md:text-md">({p.category})</p>
+              </div>
+              <p className="text-sm md:text-md">{p.option}</p>
+
+              <div className="flex items-center justify-between w-full">
+                <p className="text-sm md:text-md">₦{p.price}</p>
+                <p className="text-sm md:text-md">{p.volume}</p>
+              </div>
+              {/* <p>{p.image}</p> */}
+            </div>
+
+            <div className="flex items-center justify-between mb-2 w-full">
               <button
                 onClick={() => {
                   setEditProduct(p);
@@ -193,7 +203,7 @@ const ProductsPage = () => {
                   });
                   setModalOpen(true);
                 }}
-                className="bg-yellow-500 text-white px-3 py-1 rounded hover:bg-yellow-600 transition"
+                className="border border-gray-900 text-black px-3 py-1 rounded hover:bg-black hover:text-white transition"
               >
                 Edit
               </button>
