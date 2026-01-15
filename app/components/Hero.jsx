@@ -251,7 +251,7 @@ export default function Hero({ products }) {
                 </button>
 
                 {/* SOCIALS CLUSTER */}
-                <div className="hidden sm:flex items-center gap-1.5">
+                <div className="hidden sm:grid items-center gap-1.5">
                   {[
                     { href: "https://twitter.com/liquido_ng", icon: <FaXTwitter size={18} /> },
                     { href: `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, icon: <FaWhatsapp size={18} /> },

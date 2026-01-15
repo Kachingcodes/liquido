@@ -52,7 +52,7 @@ useEffect(() => {
             <div className="w-full px-0 md:px-4 text-white space-y-3 cursor-pointer">
                 <h2 className="text-md font-semibold border-b border-white/30 pb-1">Quick Actions</h2>
                 <Link href= "/">
-                    <div className="flex text-sm items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
+                    <div className="flex text-sm items-center gap-3 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
                 </Link>
                 <div 
                 ref={leftCartRef}

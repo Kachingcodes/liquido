@@ -9,6 +9,9 @@ import { saveAs } from "file-saver";
 import { Chart as ChartJS, CategoryScale, LinearScale, BarElement, Title, Tooltip, Legend, ArcElement, PieController } from "chart.js";
 import { Bar } from "react-chartjs-2";
 import { Doughnut } from "react-chartjs-2";
+import ProtectedRoute from '../ProtectedRoute';
+
+
 
 const quick = Quicksand({ subsets: ["latin"], weight: ["700"] });
 
@@ -162,6 +165,7 @@ const doughnutOptions = useMemo(() => ({
   if (loading) return <div className="min-h-screen flex items-center justify-center text-gray-500">Loading dashboard...</div>;
 
   return (
+    <ProtectedRoute>
     <div className={darkMode ? "dark" : ""}>
       <div className="min-h-screen p-0 md:p-2 w-full text-black dark:text-white">
 
@@ -287,5 +291,6 @@ const doughnutOptions = useMemo(() => ({
         </div>
       </div>
     </div>
+    </ProtectedRoute>
   );
 }

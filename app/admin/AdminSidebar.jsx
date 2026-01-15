@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import Link from "next/link";
-// import { useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
@@ -18,12 +18,8 @@ const quick = Quicksand({
 
 const AdminSidebar = ({ isMobile = false, onSelect }) => {
       const { logout } = useAuth();
-    // const router = useRouter();
+    
 
-    // const handleLogout = () => {
-    //     localStorage.removeItem("adminAuth");
-    //     router.push("/admin");
-    // };
 
     return (
         <aside className={`w-64 bg-[#1C4672] text-white flex flex-col justify-between overflow-hidden
