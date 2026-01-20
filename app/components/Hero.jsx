@@ -117,7 +117,7 @@ export default function Hero({ products }) {
         }}
       />
 
-      <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-20 lg:py-28">
+      <div className="max-w-7xl mx-auto px-3 md:px-6 lg:px-8 py-20 lg:py-24">
 
       {/*MOBILE VIEW HERE*/}
       <div className="flex relative md:hidden mb-7">
@@ -251,7 +251,7 @@ export default function Hero({ products }) {
                 </button>
 
                 {/* SOCIALS CLUSTER */}
-                <div className="hidden sm:grid items-center gap-1.5">
+                <div className="hidden sm:flex items-center gap-1.5">
                   {[
                     { href: "https://twitter.com/liquido_ng", icon: <FaXTwitter size={18} /> },
                     { href: `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`, icon: <FaWhatsapp size={18} /> },
