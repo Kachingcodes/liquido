@@ -23,7 +23,7 @@ export default function Hero({ products }) {
       id: 1,
       title: "Purified Spring Water",
       subtitle: "Crisp. Clean. Delivered.",
-      image: "/water1.png",
+      image: "/products/nestle.png",
       tag: "Water & Drinks",
     },
     {
