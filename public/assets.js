@@ -84,7 +84,7 @@ export const categories = [
     items: [
       {
         img: "/categories/detergent.png",
-        top: "Detergents",
+        top: "Mouthwash",
         text: "Morning Fresh, Mama Lemon, Ariel liquid"
       },
       {
