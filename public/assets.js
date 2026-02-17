@@ -60,12 +60,12 @@ export const categories = [
     options: ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"],   
       items: [
       {
-        img: "/categories/water1.png",
+        img: "/products/nestle.png",
         top: "Water",
         text: "Satchet, Bottled, Dispenser, Specialty"
       },
       {
-        img: "/categories/juice.png",
+        img: "/products/fanta.png",
         top: "Juices",
         text: "Orange, Apple, Mixed fruit, Mango"
       },
@@ -106,7 +106,7 @@ export const categories = [
     options: ["Cooking Oil", "Vinegar", "Liquid Seasoning", "Syrup"],
     items: [
       {
-        img: "/categories/cooking.png",
+        img: "/products/poweroil3.png",
         top: "Cooking oils",
         text: "Vegetable Oil, Palm oil, Soyabean oil."
       },

@@ -30,7 +30,7 @@ export default function Hero({ products }) {
       id: 2,
       title: "Gourmet Olive Oil",
       subtitle: "Where Health Meets Flavor.",
-      image: "/categories/cooking.png",
+      image: "/products/poweroil75.png",
       tag: "Cooking & Edibles",
     },
     {
@@ -44,7 +44,7 @@ export default function Hero({ products }) {
       id: 4,
       title: "Crafted Cold-Pressed Juice",
       subtitle: "Taste the freshness.",
-      image: "/categories/juice.png",
+      image: "/products/fanta.png",
       tag: "Water & Drinks",
     },
   ];
