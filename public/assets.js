@@ -80,12 +80,12 @@ export const categories = [
   {
     name: "Hygiene & Cleaning",
     icon: <Sparkles size={20}/>,
-    options: ["Detergents",  "Disinfectants", "Soaps"],
+    options: ["Mouthwash",  "Disinfectants", "Soaps"],
     items: [
       {
-        img: "/categories/detergent.png",
+        img: "/products/listerine.png",
         top: "Mouthwash",
-        text: "Morning Fresh, Mama Lemon, Ariel liquid"
+        text: "Listerine, Reflex"
       },
       {
         img: "/categories/dettol.png",
@@ -93,9 +93,9 @@ export const categories = [
         text: "Jik, Dettol, Harpic, Lysol"
       },
       {
-        img: "/categories/soap.png",
+        img: "/products/mamalemon1100.png",
         top: "Soaps",
-        text: "Dettol liquid soap, Lifebuoy, Kleanmate"
+        text: "Morning Fresh, Mama Lemon, Ariel liquid"
       }
     ]
   },

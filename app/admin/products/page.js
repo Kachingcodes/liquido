@@ -16,7 +16,7 @@ import { X } from "lucide-react";
 const ProductsPage = () => {
   const prodOptions = {
       "Water & Drinks": ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"],
-      "Hygiene & Cleaning": ["Detergents",  "Disinfectants", "Soaps"],
+      "Hygiene & Cleaning": ["Mouthwash",  "Disinfectants", "Soaps"],
       "Cooking & Edible Liquids": ["Cooking Oil", "Vinegar", "Liquid Seasoning", "Syrup"],
       "Personal Care": ["Shampoos", "Conditioners", "Body Oils", "Lotions"],
       "Luxury & Lifestyle": ["Perfumes", "Essential Oils", "Fragrance Diffusers"],
