@@ -68,6 +68,9 @@ export default function MainPage() {
               {product.name}
             </h3>
             <p className="text-sm text-gray-600 mt-1">
+              {product.comment}
+            </p>
+            <p className="text-sm text-gray-600 mt-1">
               {product.volume} &nbsp;—&nbsp; ₦{product.price}
             </p>
           </div>

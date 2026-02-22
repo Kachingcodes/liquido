@@ -35,16 +35,16 @@ export default function Hero({ products }) {
     },
     {
       id: 3,
-      title: "Long-lasting Fragrant Perfume",
-      subtitle: "Experience luxury in a bottle.",
-      image: "/categories/perfume.png",
-      tag: "Personal Care",
+      title: "Good Morning To Clean",
+      subtitle: "Tough on stains. Kind to your skin.",
+      image: "/products/morningfresh.png",
+      tag: "Hygiene & Cleaning",
     },
     {
       id: 4,
       title: "Crafted Cold-Pressed Juice",
       subtitle: "Taste the freshness.",
-      image: "/products/fanta.png",
+      image: "/products/pulpyorange.png",
       tag: "Water & Drinks",
     },
   ];

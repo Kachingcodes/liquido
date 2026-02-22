@@ -99,6 +99,7 @@ export default function BulkOrdersPage() {
               <th className="p-3 border">Event Date</th>
               <th className="p-3 border">Location</th>
               <th className="p-3 border">Drinks</th>
+              <th className="p-3 border">Chilled</th>
               <th className="p-3 border text-center">Price (₦)</th>
               <th className="p-3 border text-center">Paid</th>
               <th className="p-3 border text-center">Actions</th>
@@ -108,7 +109,7 @@ export default function BulkOrdersPage() {
           <tbody>
             {filteredOrders.length === 0 && (
               <tr>
-                <td colSpan="8" className="text-center py-6 text-gray-500">
+                <td colSpan="9" className="text-center py-6 text-gray-500">
                   No bulk orders found.
                 </td>
               </tr>
@@ -121,6 +122,9 @@ export default function BulkOrdersPage() {
                 <td className="p-3 border">{order.eventDate}</td>
                 <td className="p-3 border">{order.location}</td>
                 <td className="p-3 border whitespace-pre-wrap">{order.drinks}</td>
+                <td className="p-3 border">
+                  {order.chilledDrinks ? "Yes" : "No"}
+                </td>
 
                 {/* Price editable input */}
                 <td className="p-3 border text-center">

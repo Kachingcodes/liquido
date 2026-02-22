@@ -53,11 +53,15 @@ export const steps = [
   },
 ];
 
+
+
+//THIS IS WHERE YOU ADD NEW PRODUCTS FOR THE STORE SO THAT IT CAN BE VIEWED, AFTER ADDING IT IN PRODUCTS
+
 export const categories = [
   {
     name: "Water & Drinks",
     icon: <Droplets size={20}/>,
-    options: ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"],   
+    options: ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Diary", "Wine & Alcoholic Beverages"],   
       items: [
       {
         img: "/products/nestle.png",
@@ -70,7 +74,7 @@ export const categories = [
         text: "Orange, Apple, Mixed fruit, Mango"
       },
       {
-        img: "/categories/wine.png",
+        img: "/products/evawine.png",
         top: "Wine",
         text: "Red, White, Rosé, Sparkling"
       }
@@ -267,10 +271,10 @@ export const testimonials =[
 
 
 export const adverts = [
-  { img: "/adverts/smoothie.png", text: "🔥 Big Discount – 20% Off All Items!" },
-  { img: "/adverts/coffee.png", text: "🎉 Want To Advertise Your Products Here? Contact Us!" },
-  { img: "/adverts/wine.png", text: "🚚 Free Shipping on Orders In And Around Adeniyi Jones!" },
-  { img: "/adverts/icetea.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
+  { img: "/products/pulpyorange.png", text: "🔥 Big Discount – 20% Off All Items!" },
+  { img: "/products/poweroil3.png", text: "🎉 Want To Advertise Your Products Here? Contact Us!" },
+  { img: "/products/threecrowns.png", text: "🚚 Free Shipping on Orders In And Around Adeniyi Jones!" },
+  { img: "/products/strawberry.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
 ];
 
 
@@ -282,7 +286,7 @@ export const faqs = [
   { q: "How much is delivery?", a: "Delivery is free/affordable within Adeniyi Jones (Ikeja). For longer distances, we'll confirm the delivery fee once you share your location." },
   { q: "Do you accept bulk orders?", a: "Yes we do. For bulk orders, kindly share the quantity and location via our DM so we can give you a tailored quote and delivery plan." },
   { q: "Apart from water, what else do you deliver?", a: "Liquido NG is more than water. We also deliver liquid soap, soft drinks, wines and other essential liquids straight to your doorstep." },
-    { q: "Which areas do you deliver to?", a: "We currently deliver across Ikeja and Environs. If your location isn't listed, kindly share it with us and we'll confirm availability." },
+  { q: "Which areas do you deliver to?", a: "We currently deliver across Ikeja and Environs. If your location isn't listed, kindly share it with us and we'll confirm availability." },
 ];
 
 

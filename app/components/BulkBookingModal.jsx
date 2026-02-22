@@ -14,11 +14,17 @@ export default function BulkBookingModal({ open, onClose }) {
     location: "",
     guests: "",
     drinks: "",
+    chilledDrinks: false,
   });
 
   const handleRepChange = (e) => {
-    setRepForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
-  };
+  const { name, value, type, checked } = e.target;
+
+  setRepForm((prev) => ({
+    ...prev,
+    [name]: type === "checkbox" ? checked : value,
+  }));
+};
 
   const handleRepSubmit = async (e) => {
     e.preventDefault();
@@ -32,6 +38,7 @@ export default function BulkBookingModal({ open, onClose }) {
         location: repForm.location,
         guests: repForm.guests || "Not specified",
         drinks: repForm.drinks,
+        chilledDrinks: repForm.chilledDrinks,
         price: 0,
         paid: false, // default unpaid
         createdAt: serverTimestamp(),
@@ -50,6 +57,7 @@ export default function BulkBookingModal({ open, onClose }) {
 
         Drinks:
         ${repForm.drinks}
+        Chilled Drinks: ${repForm.chilledDrinks ? "Yes" : "No"}
       `.trim();
 
       const whatsappLink = `https://wa.me/${phoneNum}?text=${encodeURIComponent(whatsappText)}`;
@@ -65,6 +73,7 @@ export default function BulkBookingModal({ open, onClose }) {
         location: "",
         guests: "",
         drinks: "",
+        chilledDrinks: false,
       });
 
     } catch (err) {
@@ -204,6 +213,19 @@ export default function BulkBookingModal({ open, onClose }) {
               className="w-full border p-2 rounded-md outline-none resize-none"
               placeholder="Example: 2 crates of Malt, 1 pack of Hollandia ..."
             />
+          </div>
+
+          <div className="flex items-center gap-2">
+            <input
+              type="checkbox"
+              name="chilledDrinks"
+              checked={repForm.chilledDrinks}
+              onChange={handleRepChange}
+              className="w-4 h-4"
+            />
+            <label className="text-sm font-medium">
+              I would like the drinks delivered chilled
+            </label>
           </div>
 
           <button

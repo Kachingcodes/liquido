@@ -8,6 +8,8 @@ import {
   deleteDoc,
   doc,
   updateDoc,
+  query, 
+  orderBy,
 } from "firebase/firestore";
 import { ref, uploadBytes, getDownloadURL } from "firebase/storage";
 import FilterBar from "./FilterBar";
@@ -15,7 +17,7 @@ import { X } from "lucide-react";
 
 const ProductsPage = () => {
   const prodOptions = {
-      "Water & Drinks": ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Wine & Alcoholic Beverages"],
+      "Water & Drinks": ["Bottled Water", "Dispenser Refills", "Energy Drinks", "Soda", "Fruit Juices", "Diary", "Wine & Alcoholic Beverages"],
       "Hygiene & Cleaning": ["Mouthwash",  "Disinfectants", "Soaps"],
       "Cooking & Edible Liquids": ["Cooking Oil", "Vinegar", "Liquid Seasoning", "Syrup"],
       "Personal Care": ["Shampoos", "Conditioners", "Body Oils", "Lotions"],
@@ -36,22 +38,33 @@ const ProductsPage = () => {
     volume: "",
     price: "",
     imageFile: null,
+    comment: "",
   });
   const [loading, setLoading] = useState(false);
 
-  // Fetch products on mount
+
+
   useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setProducts(data);
-      setFilteredProducts(data);
-    };
-    fetchProducts();
-  }, []);
+  const fetchProducts = async () => {
+    const q = query(
+      collection(db, "products"),
+      orderBy("name", "asc") // 👈 Alphabetical A–Z
+    );
+
+    const querySnapshot = await getDocs(q);
+
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
+
+    setProducts(data);
+    setFilteredProducts(data);
+  };
+
+  fetchProducts();
+}, []);
+
 
   // Filter handler
   const handleFilterChange = ({ searchTerm, minPrice, maxPrice }) => {
@@ -98,6 +111,7 @@ const ProductsPage = () => {
         volume: newProduct.volume,
         price: parseFloat(newProduct.price),
         image: newProduct.image,
+        comment: newProduct.comment,
       });
 
       setProducts((prev) =>
@@ -114,6 +128,7 @@ const ProductsPage = () => {
         volume: newProduct.volume,
         price: parseFloat(newProduct.price),
         image: newProduct.image,
+        comment: newProduct.comment,
       });
 
       setProducts((prev) => [
@@ -132,6 +147,7 @@ const ProductsPage = () => {
       volume: "",
       price: "",
       image: "",
+      comment: "",
     });
   } catch (err) {
     console.error("Error saving product:", err);
@@ -169,52 +185,80 @@ const ProductsPage = () => {
       />
 
       {/* Products List */}
-      <div className="grid grid-cols-2 md:grid-cols-4 gap-2 md:gap-4 mt-4">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {filteredProducts.map((p) => (
-          <div key={p.id} className="flex flex-col items-center justify-between w-full md:px-4 px-2">
-            <div className="border-1 border-gray-300 rounded-xl">
-              {p.image && <img src={p.image} alt={p.name} className="w-40 h-36 object-contain mb-2" />}
-            </div>  
-            <div className="flex flex-col gap-2 items-start justify-start w-full mb-3">
-              <div className="flex gap-2 items-center justify-center">
-                <h3 className="font-semibold text-md md:text-lg">{p.name}</h3>
-                <p className="font-light text-sm md:text-md">({p.category})</p>
-              </div>
-              <p className="text-sm md:text-md">{p.option}</p>
-
-              <div className="flex items-center justify-between w-full">
-                <p className="text-sm md:text-md">₦{p.price}</p>
-                <p className="text-sm md:text-md">{p.volume}</p>
-              </div>
-              {/* <p>{p.image}</p> */}
-            </div>
-
-            <div className="flex items-center justify-between mb-2 w-full">
-              <button
-                onClick={() => {
-                  setEditProduct(p);
-                  setNewProduct({
-                    name: p.name,
-                    category: p.category,
-                    option: p.option,
-                    volume: p.volume,
-                    price: p.price,
-                    image: p.image,
-                  });
-                  setModalOpen(true);
-                }}
-                className="border border-gray-900 text-black px-3 py-1 rounded hover:bg-black hover:text-white transition"
-              >
-                Edit
-              </button>
-              <button
-                onClick={() => setDeleteProduct(p)}
-                className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600 transition"
-              >
-                Delete
-              </button>
-            </div>
+          <div key={p.id}  
+            className="border rounded-lg p-4 flex flex-col justify-between"
+>
+          {/* Image */}
+          <div className="bg-gray-50 rounded-xl p-4 flex items-center justify-center mb-4">
+            {p.image && (
+              <img
+                src={p.image}
+                alt={p.name}
+                className="w-36 h-32 object-contain"
+              />
+            )}
           </div>
+
+          {/* Product Info */}
+          <div className="flex flex-col gap-2 flex-grow">
+            <div className="flex items-center justify-center">
+              <h3 className="font-semibold text-lg">{p.name}</h3>
+            </div>
+
+            <div className="flex items-start justify-between mt-1 flex-col">
+                <span className="text-md text-gray-800">
+                {p.category}
+              </span>
+            <p className="text-sm text-gray-600 mt-1">{p.option}</p>
+            </div>
+
+            <div className="flex items-center justify-between mt-2 border-t pt-2">
+              <p className="text-base font-semibold text-black">
+                ₦{p.price}
+              </p>
+              <p className="text-sm text-gray-500">
+                {p.volume}
+              </p>
+            </div>
+
+            {p.comment && (
+              <p className="text-xs text-gray-500 italic border-t pt-2 mt-2">
+                {p.comment}
+              </p>
+            )}
+          </div>
+
+          {/* Buttons */}
+          <div className="flex gap-2 mt-4">
+            <button
+              onClick={() => {
+                setEditProduct(p);
+                setNewProduct({
+                  name: p.name,
+                  category: p.category,
+                  option: p.option,
+                  volume: p.volume,
+                  price: p.price,
+                  image: p.image,
+                  comment: p.comment,
+                });
+                setModalOpen(true);
+              }}
+              className="flex-1 border border-gray-800 text-gray-800 py-2 rounded-lg hover:bg-gray-800 hover:text-white transition"
+            >
+              Edit
+            </button>
+
+            <button
+              onClick={() => setDeleteProduct(p)}
+              className="flex-1 bg-red-500 text-white py-2 rounded-lg hover:bg-red-600 transition"
+            >
+              Delete
+            </button>
+          </div>
+        </div>
         ))}
       </div>
 
@@ -299,6 +343,15 @@ const ProductsPage = () => {
                 className="w-full border px-2 py-1 rounded-md"
                 required
               />
+              <input
+                type="text"
+                name="comment"
+                placeholder="Comment"
+                value={newProduct.comment}
+                onChange={handleFormChange}
+                className="w-full border px-2 py-1 rounded-md"
+                />
+
               {/* <input
                 type="file"
                 name="imageFile"
