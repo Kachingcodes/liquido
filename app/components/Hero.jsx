@@ -50,7 +50,7 @@ export default function Hero({ products }) {
   ];
 
   const items = products && products.length ? products : defaultProducts;
-  const [[index, direction], setIndex] = useState([0, 0]);
+  const [index, setIndex] = useState(0);
   const autoplayRef = useRef(null);
 
   useEffect(() => {
@@ -61,12 +61,10 @@ export default function Hero({ products }) {
   function startAutoplay() {
     stopAutoplay();
     autoplayRef.current = setInterval(() => {
-      setIndex(([prev]) => [(prev + 1) % items.length, 1]);
+      setIndex((i) => (i + 1) % items.length);
     }, 5000);
   }
 
-
-  
   function stopAutoplay() {
     if (autoplayRef.current) {
       clearInterval(autoplayRef.current);
@@ -140,35 +138,28 @@ export default function Hero({ products }) {
                 if (i !== index) return null;
                 return (
                   <motion.div
-  key={items[index].id}
-  custom={direction}
-  variants={{
-    enter: (direction) => ({
-      x: direction > 0 ? 80 : -80,
-      opacity: 0,
-      scale: 0.98
-    }),
-    center: {
-      x: 0,
-      opacity: 1,
-      scale: 1
-    },
-    exit: (direction) => ({
-      x: direction > 0 ? -80 : 80,
-      opacity: 0,
-      scale: 0.98
-    })
-  }}
-  initial="enter"
-  animate="center"
-  exit="exit"
-  transition={{
-    x: { type: "spring", stiffness: 300, damping: 30 },
-    opacity: { duration: 0.2 }
-  }}
-  className="w-full"
->
+                    key={p.id}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragStart={stopAutoplay}
+                    onDragEnd={(e, info) => {
+                      const swipeThreshold = 50;
 
+                      if (info.offset.x < -swipeThreshold) {
+                        setIndex((prev) => (prev + 1) % items.length);
+                      } else if (info.offset.x > swipeThreshold) {
+                        setIndex((prev) => (prev - 1 + items.length) % items.length);
+                      }
+
+                      startAutoplay();
+                    }}
+                    initial={{ opacity: 0, scale: 0.95, y: 8 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.97, y: -6 }}
+                    transition={{ duration: 0.45 }}
+                    className="w-full cursor-grab active:cursor-grabbing"
+                  >
 
                     <div className="grid grid-cols-1 gap-4 items-center">
 
@@ -222,12 +213,7 @@ export default function Hero({ products }) {
             {items.map((_, i) => (
               <button
                 key={i}
-                onClick={() => {
-  setIndex(([prev]) => [
-    i,
-    i > prev ? 1 : -1
-  ]);
-}}
+                onClick={() => setIndex(i)}
                 className={`w-1.5 h-1.5 rounded-full transition-transform ${i === index ? "scale-110 bg-white" : "bg-white/30"}`}
               />
             ))}
