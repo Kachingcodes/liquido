@@ -9,11 +9,16 @@ import Link from 'next/link';
 import Certified from '../trust/Certified';
 import Terms from '../trust/Terms';
 import Privacy from '../trust/Privacy';
+import { usePathname } from "next/navigation";
+import { Link as ScrollLink } from 'react-scroll';
+
 
 const Footer = () => {
   const [openCert, setIsOpenCert] = useState(false);
   const [openTerms, setIsOpenTerms] = useState(false);
   const [openPrivacy, setIsOpenPrivacy] = useState(false);
+  const pathname = usePathname();
+
 
   const handleCert = () => {
     setIsOpenCert(true);
@@ -53,8 +58,36 @@ const Footer = () => {
     <div className="flex flex-col md:flex-row w-full justify-between gap-6">
       {/* Column 1 */}
       <div className="flex flex-col gap-3">
-        <div className="relative w-30 h-20">
-          <Image src={assets.logo} alt="logo" fill className="object-contain" />
+        <div className="relative w-30 h-20 cursor-pointer">
+          {pathname === "/" ? (
+  <ScrollLink
+    to="Home"
+    smooth={true}
+    duration={500}
+    offset={-80}
+    className="cursor-pointer"
+  >
+    <div className="relative w-30 h-20">
+      <Image
+        src={assets.logo}
+        alt="logo"
+        fill
+        className="object-contain"
+      />
+    </div>
+  </ScrollLink>
+) : (
+  <Link href="/" className="cursor-pointer">
+    <div className="relative w-30 h-20">
+      <Image
+        src={assets.logo}
+        alt="logo"
+        fill
+        className="object-contain"
+      />
+    </div>
+  </Link>
+)}
         </div>
         <span className='text-sm'>300+ Customers Satisfied</span>
         <span className='text-sm'>5000+ Deliveries Made</span>
