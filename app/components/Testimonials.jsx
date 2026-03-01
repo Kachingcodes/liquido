@@ -45,16 +45,17 @@ const Testimonials = () => {
 
   return (
     <section id='Testimonials'
-    className="w-full flex justify-center items-center bg-white text-black relative overflow-hidden px-8 py-8 md:py-16">
-        <div className="flex w-full max-w-7xl flex-col md:flex-row items-start justify-between gap-6 md:gap-10">
+    className="w-full flex justify-center items-start bg-white text-black relative overflow-hidden px-8 py-8 md:py-16">
+        <div className="flex w-full max-w-7xl flex-col md:flex-row items-start justify-between gap-6 lg:gap-10">
             
             {/* Left Section */}
-            <div className="w-full md:w-1/4 flex flex-col gap-4">
+            <div className="w-full md:w-1/4 flex flex-col gap-4 md:items-start items-center">
                 <motion.h1 
                 initial={{ opacity: 0, y: -100 }}
                 whileInView={{ opacity: 1, y: 0 }}
+                
                 transition={{ duration: 1.2 }}
-                className={`${quick.className} text-3xl md:text-4xl text-center`}>
+                className={`${quick.className} text-3xl md:text-4xl text-center md:text-left`}>
                     What Our Customers Are Saying
                 </motion.h1>  
 
