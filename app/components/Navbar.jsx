@@ -111,7 +111,7 @@ const Navbar = () => {
             animate={{ y: 0 }}
             exit={{ y: '-100%' }}
             transition={{ duration: 0.4, ease: "easeInOut" }}
-            className="absolute top-full left-0 w-full max-w-sm md:hidden bg-[#4C86C4] shadow-md z-50 flex flex-col"
+            className="absolute top-full left-0 w-full md:hidden bg-[#4C86C4] shadow-md z-50 flex flex-col"
           >
             <hr className='text-white'/>
 
