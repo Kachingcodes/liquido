@@ -139,11 +139,26 @@ export default function Hero({ products }) {
                 return (
                   <motion.div
                     key={p.id}
+                    drag="x"
+                    dragConstraints={{ left: 0, right: 0 }}
+                    dragElastic={0.2}
+                    onDragStart={stopAutoplay}
+                    onDragEnd={(e, info) => {
+                      const swipeThreshold = 50;
+
+                      if (info.offset.x < -swipeThreshold) {
+                        setIndex((prev) => (prev + 1) % items.length);
+                      } else if (info.offset.x > swipeThreshold) {
+                        setIndex((prev) => (prev - 1 + items.length) % items.length);
+                      }
+
+                      startAutoplay();
+                    }}
                     initial={{ opacity: 0, scale: 0.95, y: 8 }}
                     animate={{ opacity: 1, scale: 1, y: 0 }}
                     exit={{ opacity: 0, scale: 0.97, y: -6 }}
                     transition={{ duration: 0.45 }}
-                    className="w-full"
+                    className="w-full cursor-grab active:cursor-grabbing"
                   >
                     <div className="grid grid-cols-1 gap-4 items-center">
 
