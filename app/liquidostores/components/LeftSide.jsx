@@ -37,11 +37,13 @@ useEffect(() => {
 
 
   return (    
-    <div className='flex flex-col items-center justify-start py-2 space-y-6 bg-[#1C4672] overflow-y-auto'>
+    <div className='flex flex-col items-start px-4 justify-start py-2 space-y-6 bg-[#1C4672] overflow-y-auto'>
         {/* Logo + Title */}
-        <div className="relative w-30 h-auto mt-2">
-            <Image src={assets.logo} alt="logo" className="object-contain" priority/>
-        </div>
+            <Link href= "/" className='cursor-pointer'>
+                <div className="relative w-30 h-auto mt-2">
+                    <Image src={assets.logo} alt="logo" className="object-contain" priority/>
+                </div>
+            </Link>
         
         <h1 className={`${quick.className} text-[#c4e0f9] text-xl text-center font-semibold`}>
             LIQUIDO STORES
@@ -49,7 +51,7 @@ useEffect(() => {
             
         {/* Quick Actions */}
         <div className='flex flex-col items-start justify-start space-y-5'>
-            <div className="w-full px-0 md:px-4 text-white space-y-3 cursor-pointer">
+            <div className="w-full text-white space-y-3 cursor-pointer">
                 <h2 className="text-md font-semibold border-b border-white/30 pb-1">Quick Actions</h2>
                 <Link href= "/">
                     <div className="flex text-sm items-center gap-3 mb-3 hover:text-[#c4e0f9]"><Home size={16}/> Home</div>
