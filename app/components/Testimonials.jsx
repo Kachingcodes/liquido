@@ -50,14 +50,15 @@ const Testimonials = () => {
             
             {/* Left Section */}
             <div className="w-full md:w-1/4 flex flex-col gap-4 md:items-start items-center">
-                <motion.h1 
+                <h1 className={`${quick.className} text-3xl md:text-4xl text-center md:text-left`}> What Our Customers Are Saying</h1>
+                {/* <motion.h1 
                 initial={{ opacity: 0, y: -100 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 
                 transition={{ duration: 1.2 }}
                 className={`${quick.className} text-3xl md:text-4xl text-center md:text-left`}>
                     What Our Customers Are Saying
-                </motion.h1>  
+                </motion.h1>   */}
 
                 <div className='hidden md:flex flex-row gap-3 text-black items-center justify-center'>
                     <ArrowBigLeft onClick={prevReview}
