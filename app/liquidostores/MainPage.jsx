@@ -23,6 +23,9 @@ export default function MainPage() {
     topCartRef
   } = useStore();
 
+  const [selectedProduct, setSelectedProduct] = React.useState(null);
+  const modalImageRef = React.useRef(null);
+
   // Priority: Search → Favourites → Normal
   const productsToDisplay = viewSearchResults
     ? searchResults
@@ -31,7 +34,7 @@ export default function MainPage() {
     : filteredProducts;
 
   return (
-    <div className="md:p-6 p-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-4 gap-4 relative">
+    <div className="md:p-6 p-2 grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-4 relative">
       <Toaster position="top-right" reverseOrder={false} />
       
       {!productsToDisplay.length && (
@@ -46,62 +49,106 @@ export default function MainPage() {
       )}
 
       {productsToDisplay.map((product, index) => (
-        <div
-          key={`${product.id || product.name}-${index}`} // ✅ unique key
-          className="product-card relative bg-white rounded-2xl p-4 w-full h-auto border border-gray-500 flex flex-col justify-between shadow-md hover:shadow-lg transition-shadow"
-        >
-          {/* Product Image */}
-          <div className="w-full h-30 flex items-center justify-center bg-gray-50 rounded-xl overflow-hidden">
-            <Image
-              src={product.image || "/products/placeholder.png"}
-              alt={product.name}
-              width={180}
-              height={100}
-              className="object-contain w-auto h-full mix-blend-multiply"
-              priority
-            />
-          </div>
+      <div
+        key={`${product.id || product.name}-${index}`}
+        className="bg-white rounded-lg overflow-hidden shadow-sm w-full max-w-[250px] mx-auto"
+      >
+        {/* Product Image */}
+        <div className="w-full  flex items-center justify-center">
+          <Image
+            src={product.image || "/products/placeholder.png"}
+            alt={product.name}
+            width={200}
+            height={200}
+            className="object-contain h-full w-auto"
+            priority
+          />
+        </div>
 
-          {/* Product Info */}
-          <div className="mt-3 flex flex-col items-center justify-center">
-            <h3 className="font-semibold text-gray-900 text-base md:text-lg line-clamp-1">
+        {/* Product Info */}
+        <div className="p-4 flex flex-col gap-2">
+          {/* Name + Favourite */}
+          <div className="flex items-center justify-between">
+            <h3 className="font-medium text-gray-800 text-sm md:text-base">
               {product.name}
             </h3>
-            <p className="text-sm text-gray-600 mt-1">
-              {product.comment}
-            </p>
-            <p className="text-sm text-gray-600 mt-1">
-              {product.volume} &nbsp;—&nbsp; ₦{product.price}
-            </p>
+
+            <button
+              onClick={() => toggleFavourite(product)}
+              className="text-yellow-500 text-lg hover:scale-110 transition"
+            >
+              {isFavourite(product.id) ? "★" : "☆"}
+            </button>
           </div>
 
-          {/* Quantity & Add to Cart */}
-          <div className="flex items-center justify-evenly w-full mt-4 flex-col md:flex-row gap-3">
+          {/* Price */}
+          {/* <p className="text-gray-900 font-semibold text-base">
+            ${product.price || "45.00"}
+          </p> */}
+
+          {/* Button */}
+          <button
+            onClick={() => setSelectedProduct(product)}
+            className="mt-2 w-full bg-[#C5A47E] text-white py-2 rounded-md text-sm hover:opacity-90 transition"
+          >
+            Shop Now
+          </button>
+        </div>
+      </div>
+    ))}
+
+      {selectedProduct && (
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
+            onClick={() => setSelectedProduct(null)}
+        >
+          <div className="bg-white rounded-2xl p-6 w-[90%] max-w-md relative"
+          onClick={(e) => e.stopPropagation()}>
+
+            {/* Close Button */}
+            <button
+              onClick={() => setSelectedProduct(null)}
+              className="absolute top-3 right-3 text-gray-500 text-xl"
+            >
+              ✕
+            </button>
+
+            {/* Image */}
+            <div
+              ref={modalImageRef}
+              className="w-full h-40 flex items-center justify-center"
+            >
+              <Image
+                src={selectedProduct.image || "/products/placeholder.png"}
+                alt={selectedProduct.name}
+                width={200}
+                height={150}
+                className="object-contain h-full"
+              />
+            </div>
+
+            {/* Name */}
+            <h2 className="text-lg font-semibold text-center mt-4">
+              {selectedProduct.name}
+            </h2>
+
             {/* Add to Cart */}
             <button
               onClick={(e) => {
-                const imageEl = e.currentTarget
-                .closest(".product-card")
-                .querySelector("img");
-
+                const imageEl = modalImageRef.current;
+                if (!imageEl) return;
                 flyToCartAnimation(imageEl, leftCartRef, topCartRef);
-                addToCart(product);
+                addToCart(selectedProduct);
+                setTimeout(() => {
+                setSelectedProduct(null);
+              }, 500);
               }}
-              className="bg-[#1C4672] px-3 py-2 text-white text-sm md:text-md rounded-lg hover:bg-[#2d6ab0] hover:shadow-md transition-all"
+              className="mt-6 w-full bg-[#1C4672] text-white py-2 rounded-lg hover:bg-[#2d6ab0]"
             >
               Add to Cart
             </button>
           </div>
-
-          {/* Favourite Toggle */}
-          <button
-            onClick={() => toggleFavourite(product)}
-            className="absolute top-3 right-3 text-yellow-500 text-xl hover:scale-110 transition-transform"
-          >
-            {isFavourite(product.id) ? "★" : "☆"}
-          </button>
         </div>
-      ))}
+      )}
     </div>
   );
 }

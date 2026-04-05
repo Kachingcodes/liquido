@@ -114,7 +114,7 @@ useEffect(() => {
             </div>
 
             {/* Delivery Info */}
-            <div className="w-full px-0 md:px-4 text-white space-y-3 cursor-pointer">
+            <div className="w-full text-white space-y-3 cursor-pointer">
                 <h2 className="text-md font-semibold border-b border-white/30 pb-1">Delivery Hours</h2>
                 {[
                     ["Mon - Sat", "9AM - 6PM"],
@@ -127,7 +127,7 @@ useEffect(() => {
             </div>
 
             {/* Help / Support */}
-            <div className="w-full px-0 md:px-4 text-white space-y-3 cursor-pointer">
+            <div className="w-full text-white space-y-3 cursor-pointer">
                 <h2 className="text-md font-semibold border-b border-white/30 pb-1">Help / Support</h2>
                 <Link href="/contact">
                     <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Phone size={16}/> Contact Support</div>

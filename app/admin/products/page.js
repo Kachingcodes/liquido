@@ -111,7 +111,7 @@ const ProductsPage = () => {
         volume: newProduct.volume,
         price: parseFloat(newProduct.price),
         image: newProduct.image,
-        comment: newProduct.comment,
+        comment: newProduct.comment || "",
       });
 
       setProducts((prev) =>
@@ -128,7 +128,7 @@ const ProductsPage = () => {
         volume: newProduct.volume,
         price: parseFloat(newProduct.price),
         image: newProduct.image,
-        comment: newProduct.comment,
+        comment: newProduct.comment || "",
       });
 
       setProducts((prev) => [
