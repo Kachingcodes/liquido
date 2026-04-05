@@ -54,7 +54,7 @@ export default function MainPage() {
         className="bg-white rounded-lg overflow-hidden shadow-sm w-full max-w-[250px] mx-auto"
       >
         {/* Product Image */}
-        <div className="w-full  flex items-center justify-center">
+        <div className="w-full h-[220px] flex items-center justify-center">
           <Image
             src={product.image || "/products/placeholder.png"}
             alt={product.name}
