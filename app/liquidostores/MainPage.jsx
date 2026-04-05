@@ -89,7 +89,7 @@ export default function MainPage() {
           {/* Button */}
           <button
             onClick={() => setSelectedProduct(product)}
-            className="mt-2 w-full bg-[#C5A47E] text-white py-2 rounded-md text-sm hover:opacity-90 transition"
+            className="mt-2 w-full bg-[#1C4672] text-white py-2 rounded-md text-sm hover:opacity-90 transition"
           >
             Shop Now
           </button>
