@@ -22,83 +22,83 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
 
 
     return (
-        <aside className={`w-64 bg-[#1C4672] text-white flex flex-col justify-between overflow-hidden
+        <aside className={`w-54 bg-[#1C4672] text-white flex flex-col justify-between overflow-hidden
       ${!isMobile ? "hidden md:flex" : "flex md:hidden"}`}>
             <div>
-                <div className="relative w-30 h-auto py-4 ml-8">
+                <div className="relative w-30 h-auto py-4 ml-6">
                     <Image src={assets.logo} alt="logo" className="object-contain" priority/>
                 </div>
         
-                <div className={`${quick.className} p-6 text-2xl font-semibold border-b border-blue-400`}>
+                <div className={`${quick.className} p-4 text-xl font-semibold border-b border-blue-400`}>
                     Liquido Admin
                 </div>
                 
-                <nav className="p-4 space-y-4">     
+                <nav className="p-2 space-y-2">     
                     <Link
                     href="/admin/dashboard"
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
-                        <LuLayoutDashboard size={18}/> Dashboard
+                        <LuLayoutDashboard size={16}/> Dashboard
                     </div>
                     </Link>
 
                     <Link
                     href="/admin/products"
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
-                        <Package size={18}/> Products
+                        <Package size={16}/> Products
                     </div>
                     </Link>
 
                     <Link
                     href="/admin/orders"
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
-                        <ShoppingBag size={18}/> Regular Orders
+                        <ShoppingBag size={16}/> Regular Orders
                     </div>
                     </Link>
 
                     <Link
                     href="/admin/bulkorders"
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
-                        <Boxes size={18}/> Bulk Orders
+                        <Boxes size={16}/> Bulk Orders
                     </div>
                     </Link>
 
                     <Link
                     href="/admin/messages"
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     onClick={onSelect}
                     >
                     <div className="flex items-center gap-2">
-                        <MessageSquare size={18}/> Messages
+                        <MessageSquare size={16}/> Messages
                     </div>
                     </Link>
                     
                     <Link 
                     href="/"               
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     >
                     <div className="flex items-center gap-2">
-                        <HomeIcon size={18}/> Home
+                        <HomeIcon size={16}/> Home
                     </div>
                     </Link>
 
                     <Link 
                     href="/liquidostores"               
-                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
                     >
                     <div className="flex items-center gap-2">
-                        <StoreIcon size={18}/> Liquido Stores
+                        <StoreIcon size={16}/> Liquido Stores
                     </div>
                     </Link>
 
@@ -115,9 +115,9 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
 
             <button
                 onClick={logout}
-                className="m-4 flex items-center gap-2 bg-white text-[#1C4672] px-4 py-2 rounded-lg hover:bg-blue-50 transition"
+                className="m-4 flex items-center gap-2 bg-white text-[#1C4672] px-2 py-2 rounded-lg hover:bg-blue-50 transition"
                 >
-                <LogOut size={18}/> Logout
+                <LogOut size={16}/> Logout
             </button>
         </aside> 
     );
