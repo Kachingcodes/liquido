@@ -3,11 +3,10 @@ import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
 import { assets } from '@/public/assets';
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { useRouter, usePathname } from "next/navigation";
 import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
-import { useAuth } from "../context/AuthContext";
 
 
 const quick = Quicksand({
@@ -17,7 +16,25 @@ const quick = Quicksand({
 
 
 const AdminSidebar = ({ isMobile = false, onSelect }) => {
-      const { logout } = useAuth();
+      const pathname = usePathname();
+
+      const router = useRouter();
+
+      async function handleLogout() {
+        try{
+            await fetch("/api/sessionLogout", {
+                method: "POST",
+            });
+
+            await signOut(auth);
+
+            router.refresh();
+
+            router.replace("/login");
+        } catch (error) {
+            console.error(error);
+        }
+      }
     
 
 
@@ -114,7 +131,7 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
             </div>
 
             <button
-                onClick={logout}
+                onClick={handleLogout}
                 className="m-4 flex items-center gap-2 bg-white text-[#1C4672] px-2 py-2 rounded-lg hover:bg-blue-50 transition"
                 >
                 <LogOut size={16}/> Logout

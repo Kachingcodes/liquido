@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { db } from '@/app/firebase'; // adjust path
+import { db } from '@/firebase/firebase'; // adjust path
 import { collection, onSnapshot, query, orderBy, doc, updateDoc } from 'firebase/firestore';
 import { Check } from 'lucide-react';
 import moment from 'moment';

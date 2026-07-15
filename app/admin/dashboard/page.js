@@ -1,7 +1,7 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
-import { db } from "../../firebase";
+import { db } from "../../../firebase/firebase";
 import { motion } from "framer-motion";
 import { Quicksand } from "next/font/google";
 import { format } from "date-fns";
@@ -86,7 +86,7 @@ const doughnutData = useMemo(() => ({
     borderColor: "#ffffff",
     borderWidth: 1,
     hoverOffset: 10,
-    borderRadius: 6
+    borderRadius: 2
   }]
 }), [paymentMethodCounts]);
 
@@ -170,14 +170,14 @@ const doughnutOptions = useMemo(() => ({
       <div className="min-h-screen p-0 md:p-2 w-full text-black dark:text-white">
 
         <header className="sticky top-0 z-50 bg-gray-100 dark:bg-neutral-900 w-full flex items-center justify-between p-2 md:p-4">
-          <div className="flex flex-col px-8 md:px-0">
-            <h1 className="text-2xl md:text-4xl font-semibold tracking-tight">Dashboard</h1>
+          <div className="flex flex-col px-4 md:px-0">
+            <h1 className="text-xl md:text-2xl font-semibold tracking-tight">Dashboard</h1>
             <p className="text-sm opacity-70 mt-1">Signed in as {adminEmail}</p>
           </div>
         </header>
 
-        <div className="pt-12 md:pt-12">
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-3 md:gap-6 mb-14">
+        <div className="pt-12 md:pt-6">
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-2 md:gap-4 mb-10">
             {[
               { title: "Total Revenue", value: `₦${totalRevenue.toLocaleString()}` },
               { title: "Total Orders", value: totalOrders },
@@ -186,23 +186,22 @@ const doughnutOptions = useMemo(() => ({
               <motion.div
                 key={i}
                 layout
-                className="rounded-2xl bg-[#4C86C4]/8 dark:bg-[#1C4672] p-4 md:p-6"
+                className="rounded-2xl bg-[#4C86C4]/8 dark:bg-[#1C4672] p-4 md:py-6 md:px-4"
               >
                 <div className="text-sm opacity-70 mb-1">{card.title}</div>
-                <div className="md:text-3xl text-2xl font-semibold tracking-tight">{card.value}</div>
+                <div className="md:text-xl text-lg font-semibold tracking-tight">{card.value}</div>
               </motion.div>
             ))}
           </section>
 
           {/* Filters */}
-          <section className="flex flex-col md:flex-row items-center justify-between gap-6 mb-14">
+          <section className="flex flex-col md:flex-row items-center justify-between gap-6 mb-10">
             <div className="flex items-center gap-6">
               <div>
                 <label className="text-xs opacity-70 block mb-1">From</label>
                 <input
                   type="date"
-                  className="px-3 py-2 rounded-lg border border-[#4C86C4] dark:border-[#1C4672] 
-                             bg-[#4C86C4]/20 dark:bg-[#1C4672] w-40"
+                  className="px-2 py-2 rounded-lg text-md border w-40"
                   value={dateRange.from}
                   onChange={(e) => setDateRange(prev => ({ ...prev, from: e.target.value }))}
                 />
@@ -211,8 +210,7 @@ const doughnutOptions = useMemo(() => ({
                 <label className="text-xs opacity-70 block mb-1">To</label>
                 <input
                   type="date"
-                  className="px-3 py-2 rounded-lg border border-[#4C86C4] dark:border-[#1C4672] 
-                             bg-[#4C86C4]/20 dark:bg-[#1C4672] w-40"
+                  className="px-3 py-2 rounded-lg text-md border dark:border-white w-40"
                   value={dateRange.to}
                   onChange={(e) => setDateRange(prev => ({ ...prev, to: e.target.value }))}
                 />
@@ -221,28 +219,28 @@ const doughnutOptions = useMemo(() => ({
 
             <button
               onClick={exportCSV}
-              className="px-5 py-2.5 text-md rounded-lg bg-[#1C4672] text-white dark:bg-[#4C86C4] dark:text-black font-medium shadow hover:opacity-80 transition"
+              className="px-2 py-2.5 text-xs rounded-lg bg-[#1C4672] text-white dark:bg-[#4C86C4] dark:text-black font-medium shadow hover:opacity-80 transition"
             >
               Export CSV
             </button>
           </section>
 
           {/* Charts Row 1 */}
-          <section className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-10 mb-14">
+          <section className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6 mb-10">
             <motion.div 
               layout
-              className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-4"
+              className="rounded-2xl border dark:border-[#1C4672] p-4"
             >
               <h3 className="md:text-lg text-md font-medium mb-4">Payment Methods</h3>
               
-              <div className="w-70 h-70 md:w-100 md:h-100 mx-auto">
+              <div className="w-40 h-40 md:w-70 md:h-70 mx-auto">
                 <Doughnut data={doughnutData} options={doughnutOptions} />
               </div>
             </motion.div>
 
             <motion.div 
               layout
-              className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-3 md:p-6"
+              className="rounded-2xl border p-3 md:p-6"
             >
               <h3 className="md:text-lg text-md font-medium mb-4">Daily Orders</h3>
               <Bar data={dailyOrdersData} options={{ responsive: true, plugins: { legend: { display: false } } }} />
@@ -250,10 +248,10 @@ const doughnutOptions = useMemo(() => ({
           </section>
 
           {/* Charts Row 2: Monthly Revenue by Location */}
-          <section className="grid grid-cols-1 md:grid-cols-1 gap-6 md:gap-10 mb-14">
+          <section className="grid grid-cols-1 md:grid-cols-1 mb-10">
             <motion.div 
               layout
-              className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-6 shadow-sm"
+              className="rounded-2xl border dark:border-[#1C4672] p-6"
             >
               <h3 className="md:text-lg text-md font-medium mb-4">Monthly Revenue (by Location)</h3>
               <Bar data={monthlyRevenueByLocation} options={{ responsive: true, plugins: { legend: { position: "top" } }, scales: { y: { beginAtZero: true } }, }} />
@@ -263,7 +261,7 @@ const doughnutOptions = useMemo(() => ({
           {/* Active Orders */}
           <motion.div 
             layout
-            className="rounded-2xl bg-[#4C86C4]/20 dark:bg-[#1C4672] border border-[#4C86C4] dark:border-[#1C4672] p-4 md:p-6 shadow-sm"
+            className="rounded-2xl border dark:border-[#1C4672] p-4 md:p-6 shadow-sm"
           >
             <h3 className="md:text-lg text-md font-medium mb-4">Active Orders</h3>
             <div className="space-y-4 max-h-80 overflow-y-auto pr-2">

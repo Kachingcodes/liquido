@@ -6,7 +6,7 @@ import toast from "react-hot-toast";
 import { Quicksand } from "next/font/google";
 import Image from "next/image";
 import { assets } from "@/public/assets";
-import { db } from "../firebase"; // your Firebase config
+import { db } from "../../firebase/firebase"; // your Firebase config
 import { collection, addDoc, Timestamp } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 

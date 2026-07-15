@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from "react";
 import { X } from "lucide-react";
-import { db } from "./../firebase"; // adjust path
+import { db } from "../../firebase/firebase"; // adjust path
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 
 export default function BulkBookingModal({ open, onClose }) {

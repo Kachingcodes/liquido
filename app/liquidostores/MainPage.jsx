@@ -131,6 +131,25 @@ export default function MainPage() {
               {selectedProduct.name}
             </h2>
 
+            <div className="mt-4 space-y-2 border-t pt-4">
+  <div className="flex justify-between">
+    <span className="font-medium">Volume</span>
+    <span>{selectedProduct.volume}</span>
+  </div>
+
+  <div className="flex justify-between">
+    <span className="font-medium">Packs</span>
+    <span>{selectedProduct.comment}</span>
+  </div>
+
+  <div className="flex justify-between">
+    <span className="font-medium">Price</span>
+    <span>
+      ₦{Number(selectedProduct.price).toLocaleString()}
+    </span>
+  </div>
+</div>
+
             {/* Add to Cart */}
             <button
               onClick={(e) => {

@@ -8,7 +8,7 @@ import {
   updateDoc,
   doc,
 } from "firebase/firestore";
-import { db } from "../../firebase"; // adjust path if necessary
+import { db } from "../../../firebase/firebase"; // adjust path if necessary
 import { motion, AnimatePresence } from "framer-motion";
 import { Quicksand } from "next/font/google";
 import { Search, CheckCircle, XCircle } from "lucide-react";

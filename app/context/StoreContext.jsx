@@ -1,6 +1,6 @@
 "use client";
 import React, { createContext, useContext, useEffect, useState, useRef } from "react";
-import { db } from "../firebase"; // adjust path
+import { db } from "../../firebase/firebase"; // adjust path
 import { collection, getDocs } from "firebase/firestore";
 import toast from "react-hot-toast";
 // import { useSearchParams } from "next/navigation";

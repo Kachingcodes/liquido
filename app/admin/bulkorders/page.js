@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from "react";
-import { db } from "@/app/firebase"; 
+import { db } from "@/firebase/firebase"; 
 import { collection, onSnapshot, doc, updateDoc, deleteDoc, orderBy, query } from "firebase/firestore";
 import { CheckCircle, Circle, Trash2 } from "lucide-react";
 import DeleteConfirm from "./deleteconfirm";

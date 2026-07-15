@@ -1,6 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
-import { auth } from "../firebase";
+import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 
@@ -26,12 +26,12 @@ export default function AdminLogin() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  const handleLogin = async (e) => {
+  async function handleLogin(e) {
     e.preventDefault();
     setError("");
 
     try {
-      const userCred = await signInWithEmailAndPassword(
+      const userCredential = await signInWithEmailAndPassword(
         auth,
         form.email,
         form.password
@@ -39,22 +39,57 @@ export default function AdminLogin() {
 
       const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS.split(",");
 
-      if (!adminEmails.includes(userCred.user.email)) {
+      if (!adminEmails.includes(userCredential.user.email)) {
         setError("You are not authorized.");
         return;
       }
 
-      // Set cookie so middleware allows access
-      document.cookie = "adminToken=1; path=/; max-age=86400";
+    const idToken = await userCredential.user.getIdToken(true);
 
-      // Store admin email for dashboard display
-      localStorage.setItem("adminEmail", userCred.user.email);
+    const response = await fetch("/api/sessionLogin", {
+      method: "POST",
+      headers: {
+        "ContentType": "application/json",
+      },
+      body: JSON.stringify({
+      idToken,
+  }),
+});
 
-      router.push("/admin/dashboard");
+if (!response.ok) {
+  throw new Error("Failed to create session.");
+}
+
+// Refresh the router so the server sees the new cookie
+router.refresh();
+
+// Go to dashboard
+router.push("/admin/dashboard");
     } catch (err) {
-      setError("Invalid email or password.");
+      switch (err.code) {
+        case "auth/invalid-email":
+          setError("Please enter a valid email address.");
+          break;
+
+        case "auth/invalid-credential":
+        case "auth/user-not-found":
+        case "auth/wrong-password":
+          setError("Incorrect email or password.");
+          break;
+
+        case "auth/too-many-requests":
+          setError(
+            "Too many failed attempts. Please try again later."
+          );
+          break;
+
+        default:
+          setError("Unable to sign in. Please try again.");
+      }
+    } finally {
+      setLoading(false);
     }
-  };
+  }
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">
