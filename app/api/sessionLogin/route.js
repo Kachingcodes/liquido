@@ -34,16 +34,19 @@ export async function POST(request) {
         success:true,
     });
     } catch (error) {
-        console.error(error);
+        console.error("Session Login Error:", error);
+console.error("Error Code:", error.code);
+console.error("Error Message:", error.message);
 
-        return NextResponse.json(
-            {
-                success: false,
-                error: "Unauthorized",
-            },
-            {
-                status: 401,
-            }
-        );
+return NextResponse.json(
+  {
+    success: false,
+    error: error.message,
+    code: error.code,
+  },
+  {
+    status: 401,
+  }
+);
     }
 }

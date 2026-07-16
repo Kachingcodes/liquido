@@ -49,22 +49,28 @@ export default function AdminLogin() {
     const response = await fetch("/api/sessionLogin", {
       method: "POST",
       headers: {
-        "ContentType": "application/json",
+        "Content-Type": "application/json",
       },
       body: JSON.stringify({
       idToken,
   }),
 });
 
+const data = await response.json();
+
+console.log(data);
+
 if (!response.ok) {
-  throw new Error("Failed to create session.");
+  throw new Error(data.error || "Failed to create session.");
 }
 
 // Refresh the router so the server sees the new cookie
 router.refresh();
 
 // Go to dashboard
-router.push("/admin/dashboard");
+console.log("Before redirect");
+window.location.assign("/admin/dashboard");
+console.log("After redirect");
     } catch (err) {
       switch (err.code) {
         case "auth/invalid-email":
@@ -86,8 +92,6 @@ router.push("/admin/dashboard");
         default:
           setError("Unable to sign in. Please try again.");
       }
-    } finally {
-      setLoading(false);
     }
   }
 
@@ -132,7 +136,9 @@ router.push("/admin/dashboard");
 
         {error && <p className="text-red-500 text-sm mt-3">{error}</p>}
 
-        <button className="w-full bg-black text-white py-2 mt-5 rounded">
+        <button 
+        type="submit"
+        className="w-full bg-black text-white py-2 mt-5 rounded">
           Login
         </button>
       </form>
