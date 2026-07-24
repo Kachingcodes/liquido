@@ -26,74 +26,61 @@ export default function AdminLogin() {
     setForm({ ...form, [e.target.name]: e.target.value });
   };
 
-  async function handleLogin(e) {
-    e.preventDefault();
-    setError("");
+async function handleLogin(e) {
+  e.preventDefault();
+  setError("");
 
-    try {
-      const userCredential = await signInWithEmailAndPassword(
-        auth,
-        form.email,
-        form.password
-      );
+  console.log("Attempting login...");
+  console.log(form.email);
 
-      const adminEmails = process.env.NEXT_PUBLIC_ADMIN_EMAILS.split(",");
+  try {
+    const userCredential = await signInWithEmailAndPassword(
+      auth,
+      form.email.trim(),
+      form.password
+    );
 
-      if (!adminEmails.includes(userCredential.user.email)) {
-        setError("You are not authorized.");
-        return;
-      }
+    console.log("Firebase login successful");
 
-    const idToken = await userCredential.user.getIdToken(true);
+    const adminEmails =
+      process.env.NEXT_PUBLIC_ADMIN_EMAILS.split(",");
+
+    console.log(adminEmails);
+
+    if (!adminEmails.includes(userCredential.user.email)) {
+      setError("You are not authorized.");
+      return;
+    }
+
+    console.log("Admin verified");
+
+    const idToken =
+      await userCredential.user.getIdToken(true);
+
+    console.log("Token created");
 
     const response = await fetch("/api/sessionLogin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({
-      idToken,
-  }),
-});
+      body: JSON.stringify({ idToken }),
+    });
 
-const data = await response.json();
+    console.log("sessionLogin status", response.status);
 
-console.log(data);
+    const data = await response.json();
 
-if (!response.ok) {
-  throw new Error(data.error || "Failed to create session.");
-}
+    console.log(data);
 
-// Refresh the router so the server sees the new cookie
-router.refresh();
+    router.refresh();
 
-// Go to dashboard
-console.log("Before redirect");
-window.location.assign("/admin/dashboard");
-console.log("After redirect");
-    } catch (err) {
-      switch (err.code) {
-        case "auth/invalid-email":
-          setError("Please enter a valid email address.");
-          break;
+    window.location.assign("/admin/dashboard");
 
-        case "auth/invalid-credential":
-        case "auth/user-not-found":
-        case "auth/wrong-password":
-          setError("Incorrect email or password.");
-          break;
-
-        case "auth/too-many-requests":
-          setError(
-            "Too many failed attempts. Please try again later."
-          );
-          break;
-
-        default:
-          setError("Unable to sign in. Please try again.");
-      }
-    }
+  } catch (err) {
+    console.log(err);
   }
+}
 
   return (
     <div className="min-h-screen flex items-center justify-center p-6 bg-gray-50">

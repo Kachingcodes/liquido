@@ -135,9 +135,6 @@ useEffect(() => {
                 <Link href="/contact#FAQ">
                     <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><HelpCircle size={16}/> FAQ</div>
                 </Link>
-                {/* <Link href="/contact">
-                    <div className="text-sm flex items-center gap-2 mb-3 hover:text-[#c4e0f9]"><Clock size={16}/> Delivery Hours</div>
-                </Link> */}
             </div>
         </div>
 
