@@ -2,6 +2,7 @@ import { Lato } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"; 
 import { AuthProvider } from "./context/AuthContext";
+import { StoreProvider } from "./context/StoreContext";
 
 
 const lato = Lato({
@@ -22,8 +23,10 @@ export default function RootLayout({ children }) {
         className={`${lato.className} antialiased`}
       >
           <AuthProvider>
+            <StoreProvider>
             {children}
             <Analytics/>
+            </StoreProvider>
           </AuthProvider>
       </body>
     </html>

@@ -102,31 +102,47 @@ const clearCart = () => {
   // --- CART HANDLERS ---
   const addToCart = (product) => {
   const exists = cart.some((item) => item.id === product.id);
-  const message = exists
-    ? `${product.name} quantity increased`
-    : `${product.name} added to cart`;
 
-  toast.success(message);
+  toast.success(
+    exists
+      ? `${product.name} quantity increased`
+      : `${product.name} added to cart`
+  );
 
   setCart((prev) =>
     exists
       ? prev.map((item) =>
-          item.id === product.id ? { ...item, qty: item.qty + 1 } : item
+          item.id === product.id
+            ? { ...item, qty: item.qty + 1 }
+            : item
         )
-      : [...prev, { ...product, qty: 1 }]
+      : [
+          ...prev,
+          {
+            ...product,
+            qty: 1,
+          },
+        ]
   );
 };
 
 const increaseQty = (id) => {
   const item = cart.find((i) => i.id === id);
+
   if (!item) return;
 
-  // Fire toast before updating state
+  if (item.qty >= item.stock) {
+    toast.error("No more stock available.");
+    return;
+  }
+
   toast.success(`${item.name} quantity increased`);
 
   setCart((prev) =>
     prev.map((i) =>
-      i.id === id ? { ...i, qty: i.qty + 1 } : i
+      i.id === id
+        ? { ...i, qty: i.qty + 1 }
+        : i
     )
   );
 };
@@ -147,17 +163,22 @@ const decreaseQty = (id) => {
   );
 };
 
-
 const removeFromCart = (id) => {
   const removedItem = cart.find((item) => item.id === id);
   if (!removedItem) return;
 
   // Fire toast before updating state
-  toast.success(`${removedItem.name} removed from cart`);
+toast.success(
+  `${removedItem.name} removed from cart`
+);
 
   setCart((prev) => prev.filter((item) => item.id !== id));
 };
 
+const cartCount = cart.reduce(
+  (total, item) => total + item.qty,
+  0
+);
 
 const performSearch = (query) => {
     if (!query.trim()) {
@@ -251,6 +272,8 @@ const toggleSidePanel = () => {
         setCartOpen,
         toggleCart,
         openCart,
+        clearCart,
+        cartCount,
 
         //LEFTSIDE MOBILE VIEW
         leftSideOpen,

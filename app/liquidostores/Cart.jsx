@@ -16,7 +16,7 @@ export default function Cart() {
     removeFromCart,
   } = useStore();
 
-  const totalPrice = cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+  const totalPrice = cart.reduce((sum, item) => sum + Number(item.price) * item.qty, 0);
 
   // Animation variants
   const drawerVariants = {
@@ -72,12 +72,21 @@ export default function Cart() {
             </div>
 
             {/* Cart Items */}
-            <div className="p-4 overflow-y-auto flex-1 flex flex-col gap-3">
-              {cart.length === 0 ? (
-                <p className="text-gray-500 mt-10 text-center">
-                  Your cart is empty.
-                </p>
-              ) : (
+            <div className="p-4 overflow-y-auto flex-1">
+
+  {cart.length === 0 ? (
+
+    <div className="flex flex-col items-center justify-center h-full text-gray-500 gap-3">
+
+      <Trash2 size={40} />
+
+      <p>Your cart is empty.</p>
+
+    </div>
+
+  ) : (
+
+    <div className="flex flex-col gap-3">
                 <AnimatePresence>
                   {cart.map((item, index) => (
                     <motion.div
@@ -90,13 +99,35 @@ export default function Cart() {
                       className="flex justify-between items-center border-b py-3"
                     >
                         <div>
-                          <img src={item.image} alt="item.name" className="w-20 h-auto"/>
+                          <img
+                            src={item.image}
+                            alt={item.name}
+                            className="w-20 h-auto object-contain"
+                          />
                         </div>
 
                         <div className="flex flex-col gap-1">
-                          <p className="font-semibold">{item.name}</p>
-                          <p className="text-sm">{item.volume}</p>
-                          <p className="text-sm text-gray-500">₦{item.price}</p>
+
+                          <p className="font-semibold">
+                            {item.name}
+                          </p>
+
+                          <p className="text-sm text-gray-600">
+                            {item.volume}
+                          </p>
+
+                          <p className="text-sm text-gray-600">
+                            Pack of {item.packSize}
+                          </p>
+
+                          <p className="text-sm font-semibold text-[#1C4672]">
+                            ₦{Number(item.price).toLocaleString()}
+                          </p>
+
+                          <p className="text-xs text-gray-500">
+                            Subtotal: ₦
+                            {(item.price * item.qty).toLocaleString()}
+                          </p>
                         </div>
 
                         <div className="flex flex-col items-end justify-end gap-5">
@@ -104,16 +135,16 @@ export default function Cart() {
                             <Trash2 size={18} className="text-red-500" />
                           </button>
 
-                          <div className="flex items-center gap-2">
+                          <div className="flex items-center gap-3 border rounded-lg px-2 py-1">
                             <button
-                              className="px-2 py-1 border rounded"
+                              className="w-7 h-7 rounded hover:bg-gray-100 transition"
                               onClick={() => decreaseQty(item.id)}
                             >
                               -
                             </button>
                             <span>{item.qty}</span>
                             <button
-                              className="px-2 py-1 border rounded"
+                              className="w-7 h-7 rounded hover:bg-gray-100 transition"
                               onClick={() => increaseQty(item.id)}
                             >
                               +
@@ -123,6 +154,7 @@ export default function Cart() {
                     </motion.div>
                   ))}
                 </AnimatePresence>
+                </div>
               )}
             </div>
 
