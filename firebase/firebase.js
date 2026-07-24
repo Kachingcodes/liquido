@@ -15,6 +15,8 @@ const firebaseConfig = {
   measurementId: "G-6ET556Q1CB"
 };
 
+console.log("Project:", firebaseConfig.projectId);
+console.log("Auth Domain:", firebaseConfig.authDomain);
 
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
