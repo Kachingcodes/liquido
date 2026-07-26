@@ -11,7 +11,7 @@ import { collection, addDoc, Timestamp, doc,
    getDoc, getDocs, updateDoc, onSnapshot, query } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { Banknote, Landmark, CreditCard, Check } from "lucide-react";
-
+import StepCard from "./StepCard";
 
 const quick = Quicksand({
    subsets: ["latin"],
@@ -431,246 +431,29 @@ return (
 
             {/* Card */}
 
-            <div className="bg-white rounded-2xl shadow-sm border p-8">
+            <div className=" rounded-2xl mt-4">
               {/* STEP 1: LOCATION */}
               <AnimatePresence mode="wait">
                 {step === 1 && (
                   <StepWrapper>
-                    <div className="mb-8">
-                      <div className="flex justify-between items-start">
-
-                        {/* Left */}
-                        <div>
-                          <span className="text-sm font-semibold tracking-wider uppercase text-[#1C4672]">
-                            Step 1
-                          </span>
-
-                          <h2 className="text-3xl font-bold mt-2">
-                            Select Delivery Location
-                          </h2>
-
-                          <p className="text-gray-500 mt-2">
-                            Choose where you'd like your order delivered.
-                          </p>
-                        </div>
-
-                        {/* Right */}
-
-                        <div className="w-14 h-14 rounded-2xl bg-[#1C4672]/10 flex items-center justify-center text-3xl flex-shrink-0">
-                          📍
-                        </div>
-
-                      </div>
-                    </div>
-
-                    {loadingDelivery ? (
-                      <div className="grid md:grid-cols-2 gap-5">
-                        {[1, 2, 3, 4].map((i) => (
-                          <div
-                            key={i}
-                            className="h-28 rounded-2xl border animate-pulse bg-gray-100"
-                          />
-                        ))}
-                      </div>
-                      ) : (
-                      <div className="grid md:grid-cols-1 gap-3">
-                        {deliveryFees.map((loc) => (
-                          <label
-                            key={loc.id}
-                            className={`
-                              cursor-pointer
-                              rounded-2xl
-                              border-2
-                              p-6
-                              transition-all
-                              duration-300
-                              hover:shadow-lg
-                              hover:-translate-y-1
-
-                              ${
-                                location === loc.name
-                                  ? "border-[#1C4672] bg-blue-50 shadow-lg"
-                                  : "border-gray-200 bg-white"
-                              }
-                            `}
-                          >
-                            <input
-                              type="radio"
-                              name="location"
-                              className="hidden"
-                              checked={location === loc.name}
-                              onChange={() => setLocation(loc.name)}
-                            />
-
-                            <div className="flex justify-between items-start">
-                              <div>
-
-                                <h3 className="text-xl font-semibold">
-                                  {loc.name}
-                                </h3>
-
-                                {/* <p className="text-gray-500 mt-1">
-                                  Estimated delivery available.
-                                </p> */}
-
-                              </div>
-
-                              <div className="text-right">
-
-                                <p className="text-xs uppercase tracking-wider text-gray-400">
-                                  Delivery Fee
-                                </p>
-
-                                <h3 className="text-2xl font-bold text-[#1C4672] mt-2">
-                                  ₦{Number(loc.fees).toLocaleString()}
-                                </h3>
-
-                              </div>
-
-                            </div>
-
-                            {location === loc.name && (
-                              <div className="mt-5 flex items-center gap-2 text-[#1C4672] font-medium">
-                                ✓ Selected
-                              </div>
-                            )}
-                          </label>
-                        ))}
-                      </div>
-                      )}
-
-                      <div className="flex justify-end mt-10">
-                        <button
-                          onClick={nextStep}
-                          disabled={!location}
-                          className={`
-                            px-10
-                            h-14
-                            rounded-xl
-                            font-semibold
-                            transition-all
-
-                            ${
-                              !location
-                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                                : "bg-[#1C4672] text-white hover:bg-[#16395d] hover:shadow-xl"
-                            }
-                          `}
-                        >
-                          Continue →
-                        </button>
-                      </div>
-                  </StepWrapper>
-                )}
-
-                
-                {/* STEP 2: DELIVERY TIME */}
-                {step === 2 && (
-                  <StepWrapper>
-                    <div className="mb-8">
-                      <div className="flex items-center justify-between gap-8 mb-8">
-                        <div>
-                          <span className="text-sm font-semibold tracking-wider uppercase text-[#1C4672]">
-                            Step 2
-                          </span>
-
-                          <h2 className="text-3xl font-bold mt-2">
-                            Choose Delivery Time
-                          </h2>
-
-                          <p className="text-gray-500 mt-2">
-                            Select the most convenient delivery window.
-                          </p>
-                        </div>
-
-                        <div className="w-20 h-20 rounded-2xl bg-[#1C4672]/10 flex items-center justify-center flex-shrink-0">
-                          <span className="text-4xl">🕒</span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="grid md:grid-cols-2 gap-5">
-                      {deliverySlots.map((slot) => {
-                        const selected = time === slot.value;
-
-                        const [day, hour] = slot.label.split(" - ");
-
-                        return (
-                          <label
-                            key={slot.value}
-                            className={`
-                              cursor-pointer
-                              rounded-2xl
-                              border-2
-                              p-6
-                              transition-all
-                              duration-300
-                              hover:-translate-y-1
-                              hover:shadow-lg
-
-                              ${
-                                selected
-                                  ? "border-[#1C4672] bg-blue-50 shadow-md"
-                                  : "border-gray-200"
-                              }
-                            `}
-                          >
-                            <input
-                              type="radio"
-                              name="slot"
-                              checked={selected}
-                              onChange={() => setTime(slot.value)}
-                              className="hidden"
-                            />
-
-                            <div className="flex justify-between items-start">
-
-                              <div>
-
-                                <p className="text-gray-500 text-sm">
-                                  {day}
-                                </p>
-
-                                <h3 className="text-2xl font-bold mt-1">
-                                  {hour}
-                                </h3>
-
-                              </div>
-
-                              {selected && (
-                                <div className="bg-[#1C4672] text-white rounded-full w-8 h-8 flex items-center justify-center">
-                                  ✓
-                                </div>
-                              )}
-
-                            </div>
-
-                          </label>
-                        );
-                      })}
-                    </div>
-
-                    <div className="flex justify-between mt-10">
-
-                      <button
-                        onClick={() => setStep(1)}
-                        className="px-8 h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
-                      >
-                        ← Back
-                      </button>
+                    <StepCard
+                      step="Step 1"
+                      title="Select Delivery Location"
+                      description="Choose where you'd like your order delivered."
+                      icon="📍"
+                      nextButton={
 
                       <button
                         onClick={nextStep}
-                        disabled={!time}
+                        disabled={!location}
                         className={`
                           px-10
                           h-14
                           rounded-xl
                           font-semibold
                           transition-all
-
                           ${
-                            !time
+                            !location
                               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
                               : "bg-[#1C4672] text-white hover:bg-[#16395d] hover:shadow-xl"
                           }
@@ -678,31 +461,203 @@ return (
                       >
                         Continue →
                       </button>
+                    }
+                  >
 
+                    {loadingDelivery ? (
+                    <div className="grid md:grid-cols-2 gap-5">
+                      {[1, 2, 3, 4].map((i) => (
+                        <div
+                          key={i}
+                          className="h-28 rounded-2xl border animate-pulse bg-gray-100"
+                        />
+                      ))}
                     </div>
+                    ) : (
+                    <div className="grid md:grid-cols-1 gap-3">
+                      {deliveryFees.map((loc) => (
+                        <label
+                          key={loc.id}
+                          className={`
+                            cursor-pointer
+                            rounded-2xl
+                            border-2
+                            p-6
+                            transition-all
+                            duration-300
+                            hover:shadow-lg
+                            hover:-translate-y-1
+                            ${
+                              location === loc.name
+                                ? "border-[#1C4672] bg-blue-50 shadow-lg"
+                                : "border-gray-200 bg-white"
+                            }
+                          `}
+                        >
+                          <input
+                            type="radio"
+                            name="location"
+                            className="hidden"
+                            checked={location === loc.name}
+                            onChange={() => setLocation(loc.name)}
+                          />
+
+                          <div className="flex justify-between items-start">
+                            <div>
+                              <h3 className="text-xl font-semibold">{loc.name}</h3>
+                            </div>
+
+                            <div className="text-right">
+                              <p className="text-xs uppercase tracking-wider text-gray-400">
+                                Delivery Fee
+                              </p>
+
+                              <h3 className="text-2xl font-bold text-[#1C4672] mt-2">
+                                ₦{Number(loc.fees).toLocaleString()}
+                              </h3>
+                            </div>
+                          </div>
+
+                          {location === loc.name && (
+                            <div className="mt-5 flex items-center gap-2 text-[#1C4672] font-medium">
+                              ✓ Selected
+                            </div>
+                          )}
+                        </label>
+                      ))}
+                    </div>
+                  )}
+                    </StepCard>
                   </StepWrapper>
                 )}
 
+                {/* STEP 2: DELIVERY TIME */}
+                {step === 2 && (
+                  <StepWrapper>
+                    <StepCard
+                      step="Step 2"
+                      title="Select Delivery Time"
+                      description="Select the most convenient delivery window."
+                      icon="🕒"
+
+                      backButton={
+                        <button
+                          onClick={() => setStep(1)}
+                          className="px-8 h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                        >
+                          ← Back
+                        </button>
+                      }
+                      nextButton={
+                        <button
+                          onClick={nextStep}
+                          disabled={!time}
+                          className={`
+                            px-10
+                            h-14
+                            rounded-xl
+                            font-semibold
+                            transition-all
+                            ${
+                              !time
+                                ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                                : "bg-[#1C4672] text-white hover:bg-[#16395d] hover:shadow-xl"
+                            }
+                          `}
+                        >
+                          Continue →
+                        </button>
+                      }
+                    >
+
+                      <div className="grid md:grid-cols-2 gap-5">
+                        {deliverySlots.map((slot) => {
+                          const selected = time === slot.value;
+                          const [day, hour] = slot.label.split(" - ");
+
+                          return (
+                            <label
+                              key={slot.value}
+                              className={` cursor-pointer rounded-2xl border-2 p-6
+                                transition-all duration-300 hover:-translate-y-1 hover:shadow-lg
+                                ${
+                                  selected
+                                    ? "border-[#1C4672] bg-blue-50 shadow-md"
+                                    : "border-gray-200"
+                                }
+                              `}
+                            >
+                              <input
+                                type="radio"
+                                name="slot"
+                                checked={selected}
+                                onChange={() => setTime(slot.value)}
+                                className="hidden"
+                              />
+
+                              <div className="flex justify-between items-start">
+
+                                <div>
+
+                                  <p className="text-gray-500 text-sm">
+                                    {day}
+                                  </p>
+
+                                  <h3 className="text-2xl font-bold mt-1">
+                                    {hour}
+                                  </h3>
+
+                                </div>
+
+                                {selected && (
+                                  <div className="bg-[#1C4672] text-white rounded-full w-8 h-8 flex items-center justify-center">
+                                    ✓
+                                  </div>
+                                )}
+
+                              </div>
+
+                            </label>
+                          );
+                        })}
+                      </div>
+                    </StepCard>
+                  </StepWrapper>
+                )}
 
                 {/* STEP 3: PAYMENT */}
                 {step === 3 && (
-                  <StepWrapper>
-                    <div className="mb-8">
-                      <span className="text-sm font-semibold tracking-wider uppercase text-[#1C4672]">
-                        Step 3
-                      </span>
-
-                      <h2 className="text-3xl font-bold mt-2">
-                        Choose Payment Method
-                      </h2>
-
-                      <p className="text-gray-500 mt-2">
-                        Select your preferred payment option.
-                      </p>
-                    </div>
-
+                <StepWrapper>
+                  <StepCard
+                    step="Step 3"
+                    title="Choose Payment Method"
+                    description="Select your preferred payment option."
+                    icon="💳"
+                    backButton={
+                      <button
+                        onClick={() => setStep(2)}
+                        className="px-8 h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                      >
+                        ← Back
+                      </button>
+                    }
+                    nextButton={
+                      <button
+                        onClick={nextStep}
+                        disabled={!payment}
+                        className={` px-10 h-14 rounded-xl font-semibold transition-all
+                          ${
+                            !payment
+                              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
+                              : "bg-[#1C4672] text-white hover:bg-[#16395d] hover:shadow-xl"
+                          }
+                        `}
+                      >
+                        Continue →
+                      </button>
+                    }
+                  >
                     <div className="grid md:grid-cols-3 gap-3">
-
                       {[
                         {
                           title: "Cash",
@@ -720,7 +675,6 @@ return (
                           desc: "Card on delivery",
                         },
                       ].map((method) => {
-
                         const selected = payment === method.title;
                         const Icon = method.icon;
 
@@ -737,7 +691,6 @@ return (
                               duration-300
                               hover:-translate-y-1
                               hover:shadow-lg
-
                               ${
                                 selected
                                   ? "border-[#1C4672] bg-blue-50 shadow-lg"
@@ -745,44 +698,23 @@ return (
                               }
                             `}
                           >
-
-                            <div className="flex justify-between">
-
-                              <div>
-
-                                <div className="w-14 h-14 rounded-xl bg-[#1C4672]/10 flex items-center justify-center mb-5">
-                                  <Icon size={28} className="text-[#1C4672]" />
-                                </div>
-
-                                <h3 className="text-xl font-semibold">
-                                  {method.title}
-                                </h3>
-
-                                <p className="text-gray-500 mt-2">
-                                  {method.desc}
-                                </p>
-
-                              </div>
-
-                              {selected && (
-                                <div className="w-8 h-8 rounded-full bg-[#1C4672] text-white flex items-center justify-center">
-                                  <Check size={18}/>
-                                </div>
-                              )}
-
+                            <div className="w-14 h-14 rounded-xl bg-[#1C4672]/10 flex items-center justify-center mb-5">
+                              <Icon size={28} className="text-[#1C4672]" />
                             </div>
 
+                            <h3 className="text-xl font-semibold">
+                              {method.title}
+                            </h3>
+
+                            <p className="text-gray-500 mt-2">
+                              {method.desc}
+                            </p>
                           </button>
                         );
-
                       })}
-
                     </div>
 
-                    {/* Payment Notice */}
-
                     <div className="mt-8 rounded-2xl border border-blue-200 bg-blue-50 p-5">
-
                       <h4 className="font-semibold text-[#1C4672]">
                         Payment Information
                       </h4>
@@ -792,153 +724,93 @@ return (
                         will either collect cash, provide bank transfer details, or
                         arrive with a POS terminal.
                       </p>
-
                     </div>
-
-                    <div className="flex justify-between mt-10">
-
-                      <button
-                        onClick={() => setStep(2)}
-                        className="px-8 h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
-                      >
-                        ← Back
-                      </button>
-
-                      <button
-                        onClick={nextStep}
-                        disabled={!payment}
-                        className={`
-                          px-10
-                          h-14
-                          rounded-xl
-                          font-semibold
-                          transition-all
-
-                          ${
-                            !payment
-                              ? "bg-gray-300 text-gray-500 cursor-not-allowed"
-                              : "bg-[#1C4672] text-white hover:bg-[#16395d] hover:shadow-xl"
-                          }
-                        `}
-                      >
-                        Continue →
-                      </button>
-
-                    </div>
-                  </StepWrapper>
-                )}
+                  </StepCard>
+                </StepWrapper>
+              )}
 
                 {/* STEP 4: REVIEW */}
                 {step === 4 && (
-                  <StepWrapper>
-                    <div className="mb-8">
-                      <span className="text-sm font-semibold tracking-wider uppercase text-[#1C4672]">
-                        Final Step
-                      </span>
-
-                      <h2 className="text-3xl font-bold mt-2">
-                        Review Your Order
-                      </h2>
-
-                      <p className="text-gray-500 mt-2">
-                        Please confirm your delivery information before placing your order.
-                      </p>
-                    </div>
-
+                <StepWrapper>
+                  <StepCard
+                    step="Final Step"
+                    title="Review Your Order"
+                    description="Please confirm your delivery information before placing your order."
+                    icon="✅"
+                    backButton={
+                      <button
+                        onClick={() => setStep(3)}
+                        className="h-14 px-8 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                      >
+                        ← Back
+                      </button>
+                    }
+                    nextButton={
+                      <button
+                        onClick={placeOrder}
+                        className="h-14 px-10 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition-all"
+                      >
+                        Confirm & Open WhatsApp →
+                      </button>
+                    }
+                  >
                     {/* Delivery Details */}
 
                     <div className="rounded-2xl border border-gray-200 p-6 bg-gray-50">
-
                       <h3 className="font-bold text-lg mb-5">
                         Delivery Details
                       </h3>
 
                       <div className="space-y-5">
-
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">
-                            Delivery Location
-                          </span>
-
-                          <span className="font-semibold">
-                            {location}
-                          </span>
+                          <span className="text-gray-500">Delivery Location</span>
+                          <span className="font-semibold">{location}</span>
                         </div>
 
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">
-                            Delivery Time
-                          </span>
-
+                          <span className="text-gray-500">Delivery Time</span>
                           <span className="font-semibold text-right">
                             {deliverySlots.find((s) => s.value === time)?.label}
                           </span>
                         </div>
 
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">
-                            Payment Method
-                          </span>
-
-                          <span className="font-semibold">
-                            {payment}
-                          </span>
+                          <span className="text-gray-500">Payment Method</span>
+                          <span className="font-semibold">{payment}</span>
                         </div>
-
                       </div>
-
                     </div>
 
-                    {/* Pricing */}
+                    {/* Payment Summary */}
 
                     <div className="mt-8 rounded-2xl border p-6">
-
                       <h3 className="font-bold text-lg mb-5">
                         Payment Summary
                       </h3>
 
                       <div className="space-y-4">
-
                         <div className="flex justify-between">
-                          <span className="text-gray-500">
-                            Items Subtotal
-                          </span>
-
-                          <span>
-                            ₦{summary.subtotal.toLocaleString()}
-                          </span>
+                          <span className="text-gray-500">Items Subtotal</span>
+                          <span>₦{summary.subtotal.toLocaleString()}</span>
                         </div>
 
                         <div className="flex justify-between">
-                          <span className="text-gray-500">
-                            Delivery Fee
-                          </span>
-
-                          <span>
-                            ₦{summary.delivery.toLocaleString()}
-                          </span>
+                          <span className="text-gray-500">Delivery Fee</span>
+                          <span>₦{summary.delivery.toLocaleString()}</span>
                         </div>
 
                         <hr />
 
                         <div className="flex justify-between text-2xl font-bold text-[#1C4672]">
-
                           <span>Total</span>
-
-                          <span>
-                            ₦{summary.total.toLocaleString()}
-                          </span>
-
+                          <span>₦{summary.total.toLocaleString()}</span>
                         </div>
-
                       </div>
-
                     </div>
 
-                    {/* Information Box */}
+                    {/* Information */}
 
                     <div className="mt-8 rounded-2xl bg-blue-50 border border-blue-200 p-5">
-
                       <h4 className="font-semibold text-[#1C4672]">
                         What happens next?
                       </h4>
@@ -949,34 +821,12 @@ return (
                         <li>Simply send the message to confirm your order.</li>
                         <li>Our team will contact you shortly.</li>
                       </ul>
-
-                      </div>
-
-                        {/* Buttons */}
-
-                        <div className="flex justify-between mt-10">
-
-                          <button
-                            onClick={() => setStep(3)}
-                            className="h-14 px-8 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
-                          >
-                            ← Back
-                          </button>
-
-                          <button
-                            onClick={placeOrder}
-                            className="h-14 px-10 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition-all"
-                          >
-                            Confirm & Open WhatsApp →
-                          </button>
-
-                        </div>
-
-                      </StepWrapper>
-                      )}
+                    </div>
+                  </StepCard>
+                </StepWrapper>
+              )}
               </AnimatePresence>
             </div>
-
 
           </div> {/*END OF PROGRESS*/}
 
