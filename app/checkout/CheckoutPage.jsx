@@ -173,7 +173,6 @@ export default function CheckoutPage() {
 
   // -------------------- PLACE ORDER --------------------
   const placeOrder = async () => {
-     alert("placeOrder called");
     if (cart.length === 0) return;
 
     const order = {
@@ -185,8 +184,6 @@ export default function CheckoutPage() {
       time,
       payment,
     };
-
-    alert("Before addDoc");
 
     try {
       await addDoc(collection(db, "storesorders"), {
@@ -200,8 +197,6 @@ export default function CheckoutPage() {
         clientName: "",
         paymentStatus: false,
       });
-
-alert("After addDoc");
 
       const existingOrders =
         JSON.parse(localStorage.getItem("orders")) || [];
@@ -235,10 +230,9 @@ alert("After addDoc");
           Payment: ${payment}`
       );
 
-      window.open(
-        `https://wa.me/2347062757706?text=${whatsappMsg}`,
-        "_blank"
-      );
+      const whatsappUrl = `whatsapp://send?phone=2347062757706&text=${whatsappMsg}`;
+
+window.location.href = whatsappUrl;
 
       // -------------------- DEDUCT STOCK --------------------
       for (const item of cart) {
