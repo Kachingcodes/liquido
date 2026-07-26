@@ -142,28 +142,28 @@ export default function Faqs() {
 
     {/* Header */}
     <div className="bg-white border-b sticky top-0 z-20">
-      <div className="max-w-7xl mx-auto px-6 py-5">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
 
-        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
           <div>
-            <h1 className="text-3xl font-bold text-[#1C4672]">
+            <h1 className="text-2xl md:text-3xl font-bold text-[#1C4672]">
               FAQs
             </h1>
 
-            <p className="text-gray-500 mt-1">
+            <p className="text-sm md:text-base text-gray-500 mt-1">
               Manage frequently asked questions shown across the website.
             </p>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex flex-col sm:flex-row gap-3">
 
             <div className="bg-white border rounded-xl px-5 py-3 shadow-sm text-center">
               <p className="text-xs uppercase text-gray-500">
                 FAQs
               </p>
 
-              <h2 className="text-2xl font-bold text-[#1C4672]">
+              <h2 className="text-xl md:text-2xl font-bold text-[#1C4672]">
                 {faqs.length}
               </h2>
             </div>
@@ -184,7 +184,7 @@ export default function Faqs() {
 
     {/* Search */}
 
-    <div className="max-w-7xl mx-auto px-6 mt-6">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 mt-5 md:mt-6">
 
       <div className="bg-white rounded-2xl border shadow-sm p-5">
 
@@ -212,7 +212,7 @@ export default function Faqs() {
 
         <div className="overflow-x-auto">
 
-          <table className="w-full">
+          <table className="min-w-[700px] w-full">
 
             <thead className="bg-gray-50">
 
@@ -331,34 +331,34 @@ export default function Faqs() {
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.95 }}
                 transition={{ duration: 0.2 }}
-                className="fixed left-1/2 top-1/2 z-50 w-[95%] max-w-2xl -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white shadow-2xl"
+                className="fixed left-1/2 top-1/2 z-50 w-[95%] max-w-2xl max-h-[90vh] overflow-y-auto -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white shadow-2xl"
             >
                 {/* Header */}
-                <div className="flex items-center justify-between border-b px-7 py-5">
-                <div>
-                    <h2 className="text-2xl font-bold text-[#1C4672]">
-                    {editingFaq ? "Edit FAQ" : "Add FAQ"}
-                    </h2>
+                <div className="flex items-start justify-between border-b px-5 md:px-7 py-5">
+                  <div>
+                      <h2 className="text-2xl font-bold text-[#1C4672]">
+                      {editingFaq ? "Edit FAQ" : "Add FAQ"}
+                      </h2>
 
-                    <p className="text-gray-500 text-sm mt-1">
-                    Questions displayed across the website.
-                    </p>
-                </div>
+                      <p className="text-gray-500 text-sm mt-1">
+                      Questions displayed across the website.
+                      </p>
+                  </div>
 
-                <button
-                    onClick={() => setDrawerOpen(false)}
-                    className="p-2 rounded-lg hover:bg-gray-100"
-                >
-                    <X size={20} />
-                </button>
+                  <button
+                      onClick={() => setDrawerOpen(false)}
+                      className="p-2 rounded-lg hover:bg-gray-100"
+                  >
+                      <X size={20} />
+                  </button>
                 </div>
 
                 {/* Body */}
-                <div className="p-7 space-y-6">
+                <div className="p-5 md:p-7 space-y-6">
 
-                {/* Question */}
+                  {/* Question */}
 
-                <div>
+                  <div>
                     <label className="block font-semibold mb-2">
                     Question
                     </label>
@@ -374,11 +374,10 @@ export default function Faqs() {
                     placeholder="Enter FAQ Question"
                     className="w-full rounded-xl border px-4 py-3"
                     />
-                </div>
+                  </div>
 
-                {/* Answer */}
-
-                <div>
+                  {/* Answer */}
+                  <div>
                     <label className="block font-semibold mb-2">
                     Answer
                     </label>
@@ -395,21 +394,20 @@ export default function Faqs() {
                     placeholder="Enter FAQ Answer"
                     className="w-full rounded-xl border px-4 py-3 resize-none"
                     />
-                </div>
+                  </div>
 
-                {/* Active */}
-
-                <div className="flex items-center justify-between rounded-xl border p-4">
+                  {/* Active */}
+                  <div className="flex items-center justify-between rounded-xl border p-4">
 
                     <div>
 
-                    <h3 className="font-semibold">
-                        Active
-                    </h3>
+                      <h3 className="font-semibold">
+                          Active
+                      </h3>
 
-                    <p className="text-sm text-gray-500">
-                        Display this FAQ on the website
-                    </p>
+                      <p className="text-sm text-gray-500">
+                          Display this FAQ on the website
+                      </p>
 
                     </div>
 
@@ -483,17 +481,17 @@ export default function Faqs() {
                 exit={{ opacity: 0, scale: .9 }}
                 className="fixed left-1/2 top-1/2 z-[61] w-[92%] max-w-md -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white shadow-2xl"
             >
-                <div className="p-7">
+                <div className="p-5 md:p-7">
 
-                <h2 className="text-2xl font-bold">
-                    Delete FAQ?
-                </h2>
+                  <h2 className="text-xl md:text-2xl font-bold">
+                      Delete FAQ?
+                  </h2>
 
-                <p className="text-gray-500 mt-3">
-                    This FAQ will be permanently deleted.
-                </p>
+                  <p className="text-gray-500 mt-3">
+                      This FAQ will be permanently deleted.
+                  </p>
 
-                <div className="mt-8 flex gap-3">
+                  <div className="mt-8 flex gap-3">
 
                     <button
                     onClick={() => setDeleteModal(false)}

@@ -251,10 +251,10 @@ const categoryOptions = currentCategory?.options || [];
       {/* HEADER */}
 
       <div className="bg-white border-b sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-6 py-5">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
             <div>
-              <h1 className="text-3xl font-bold text-[#1C4672]">
+              <h1 className="text-2xl md:text-3xl font-bold text-[#1C4672]">
                 Categories
               </h1>
 
@@ -263,20 +263,20 @@ const categoryOptions = currentCategory?.options || [];
               </p>
             </div>
 
-            <div className="flex items-center gap-3">
-              <div className="bg-white border rounded-xl px-5 py-3 shadow-sm text-center">
+            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
+              <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center flex-1 sm:flex-none">
                 <p className="text-xs uppercase text-gray-500">
                   Categories
                 </p>
 
-                <h2 className="text-2xl font-bold text-[#1C4672]">
+                <h2 className="text-xl md:text-2xl font-bold text-[#1C4672]">
                   {categories.length}
                 </h2>
               </div>
 
               <button
                 onClick={openAddCategory}
-                className="bg-[#1C4672] hover:bg-[#16395d] text-white px-5 py-3 rounded-xl font-semibold transition"
+                className="flex-1 sm:flex-none bg-[#1C4672] hover:bg-[#16395d] text-white px-5 py-3 rounded-xl font-semibold transition"
               >
                 + Add Category
               </button>
@@ -287,8 +287,8 @@ const categoryOptions = currentCategory?.options || [];
 
       {/* SEARCH */}
 
-      <div className="max-w-7xl mx-auto px-6 mt-6">
-        <div className="bg-white rounded-2xl border shadow-sm p-5">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 md:mt-6">
+        <div className="bg-white p-5">
           <div className="relative">
             <Search
               size={18}
@@ -304,9 +304,8 @@ const categoryOptions = currentCategory?.options || [];
           </div>
         </div>
 
-        {/* TABLE */}
-
-        <div className="bg-white rounded-2xl border shadow-sm overflow-hidden mt-6">
+        {/* Desktop Table */}
+        <div className="hidden md:block bg-white rounded-2xl border shadow-sm overflow-hidden mt-6">
           <div className="overflow-x-auto">
             <table className="w-full">
               <thead className="bg-gray-50">
@@ -387,6 +386,55 @@ const categoryOptions = currentCategory?.options || [];
         </div>
       </div>
 
+      {/* Mobile Cards */}
+        <div className="md:hidden space-y-4 mt-6">
+          {filteredCategories.map((category) => {
+            const optionCount = category.options?.length || 0;
+
+            return (
+              <div
+                key={category.id}
+                className="bg-white rounded-2xl border p-4 shadow-sm"
+              >
+                <div className="flex justify-between items-start">
+                  <div>
+                    <h3 className="font-semibold text-lg">
+                      {category.name}
+                    </h3>
+
+                    <p className="text-sm text-gray-500 mt-1">
+                      {optionCount} Option{optionCount !== 1 ? "s" : ""}
+                    </p>
+
+                    <span
+                      className={`inline-block mt-3 px-3 py-1 rounded-full text-xs font-semibold ${
+                        category.active
+                          ? "bg-green-100 text-green-700"
+                          : "bg-red-100 text-red-700"
+                      }`}
+                    >
+                      {category.active ? "Active" : "Inactive"}
+                    </span>
+                  </div>
+
+                  <button
+                    onClick={() => openEditCategory(category)}
+                    className="p-2 rounded-lg hover:bg-gray-100"
+                  >
+                    <MoreVertical size={18} />
+                  </button>
+                </div>
+              </div>
+            );
+          })}
+
+          {filteredCategories.length === 0 && (
+            <div className="bg-white rounded-2xl border py-10 text-center text-gray-500">
+              No categories found.
+            </div>
+          )}
+        </div>
+
       {/* CATEGORY MODAL */}
       <AnimatePresence>
         {categoryModalOpen && (
@@ -404,11 +452,11 @@ const categoryOptions = currentCategory?.options || [];
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
               transition={{ duration: 0.2 }}
-              className="fixed left-1/2 top-1/2 z-50 w-[95%] max-w-3xl -translate-x-1/2 -translate-y-1/2 rounded-3xl bg-white shadow-2xl max-h-[90vh] overflow-y-auto"
+              className="fixed inset-x-2 md:left-1/2 md:top-1/2 md:w-[95%] md:max-w-3xl md:-translate-x-1/2 md:-translate-y-1/2 bottom-2 md:bottom-auto rounded-3xl bg-white shadow-2xl max-h-[95vh] overflow-y-auto"
             >
-              {/* Header */}
 
-              <div className="sticky top-0 bg-white border-b px-7 py-5 flex items-center justify-between">
+              {/* Header */}
+              <div className="sticky top-0 bg-white border-b px-5 md:px-7 py-4 md:py-5">
                 <div>
                   <h2 className="text-2xl font-bold text-[#1C4672]">
                     {editingCategory ? "Edit Category" : "Add Category"}
@@ -427,7 +475,7 @@ const categoryOptions = currentCategory?.options || [];
                 </button>
               </div>
 
-              <div className="p-7 space-y-8">
+              <div className="p-5 md:p-7 space-y-6 md:space-y-8">
                 {/* Category Fields */}
 
                 <div className="space-y-5">
@@ -560,7 +608,7 @@ const categoryOptions = currentCategory?.options || [];
 
                 {/* Footer Buttons */}
 
-                <div className="flex gap-3 pt-3 border-t">
+                <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4 border-t">
                   {editingCategory && (
                     <button
                       onClick={() => setDeleteCategoryModal(true)}
@@ -633,7 +681,7 @@ const categoryOptions = currentCategory?.options || [];
                   />
                 </div>
 
-                <div className="flex items-center justify-between rounded-xl border p-4">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 rounded-xl border p-4">
                   <div>
                     <h3 className="font-semibold">Active</h3>
 

@@ -99,32 +99,32 @@ const handleDelete = async (id) => {
 
 
 return (
-    <div className="min-h-screen bg-gray-50">
+    <div className=" bg-gray-50">
 
         {/* Header */}
         <div className="bg-white border-b sticky top-0 z-20">
-            <div className="max-w-7xl mx-auto px-6 py-5">
+            <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
 
-                <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+                <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
                     <div>
-                        <h1 className="text-3xl font-bold text-[#1C4672]">
+                        <h1 className="text-2xl md:text-3xl font-bold text-[#1C4672]">
                         Delivery Fees
                         </h1>
 
-                        <p className="text-gray-500 mt-1">
+                        <p className="text-sm md:text-base text-gray-500 mt-1">
                         Manage delivery locations and their fees.
                         </p>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex flex-col sm:flex-row gap-3">
 
-                        <div className="bg-white border rounded-xl px-5 py-3 shadow-sm text-center">
+                        <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center">
                             <p className="text-xs uppercase text-gray-500">
                                 Locations
                             </p>
 
-                            <h2 className="text-2xl font-bold text-[#1C4672]">
+                            <h2 className="text-xl md:text-2xl font-bold text-[#1C4672]">
                                 {deliveryFees.length}
                             </h2>
                         </div>
@@ -474,7 +474,6 @@ return (
             )}
         </AnimatePresence>
     </div>
-
 
 );
 }
