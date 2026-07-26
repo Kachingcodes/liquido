@@ -296,7 +296,7 @@ return (
     {/* ================= HEADER ================= */}
     <div className="sticky top-0 z-30 bg-white border-b shadow-sm">
 
-      <div className="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
+      <div className="max-w-7xl mx-auto px-2 py-3 md:px-6 md:py-5 flex items-center justify-between">
 
         <div className="flex items-center gap-4">
 
@@ -304,13 +304,13 @@ return (
             <Image
               src={assets.logo}
               alt="logo"
-              className="w-14 h-14 object-contain"
+              className="w-10 h-10 md:w-14 md:h-14 object-contain"
             />
           </div>
 
           <div>
             <h1
-              className={`${quick.className} text-3xl text-[#1C4672]`}
+              className={`${quick.className} text-xl md:text-3xl text-[#1C4672]`}
             >
               Checkout
             </h1>
@@ -340,15 +340,15 @@ return (
 
     {/* ================= CONTENT ================= */}
 
-    <div className="max-w-7xl mx-auto px-5 py-10">
+    <div className="max-w-7xl mx-auto px-3 py-4 md:px-5 md:py-10">
 
-      <div className="grid lg:grid-cols-2 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 md:gap-8">
 
         {/* LEFT */}
         <div>
 
           {/* Progress */}
-          <div className="bg-white rounded-2xl shadow-sm border p-7 mb-6">
+          <div className="bg-white rounded-2xl shadow-sm border p-3 mb-4 md:p-7 md:mb-6">
 
             <div className="flex items-center justify-between">
               {[
@@ -379,15 +379,9 @@ return (
 
                     <div
                       className={`
-                      w-11
-                      h-11
-                      rounded-full
-                      flex
-                      items-center
-                      justify-center
-                      font-bold
-                      transition
-
+                      w-8 h-8 md:w-11 md:h-11 text-sm md:text-xl
+                      rounded-full flex items-center
+                      justify-center font-bold transition
                       ${
                         completed
                           ? "bg-green-600 text-white"
@@ -431,7 +425,7 @@ return (
 
             {/* Card */}
 
-            <div className=" rounded-2xl mt-4">
+            <div className=" rounded-2xl mt-2 md:mt-4">
               {/* STEP 1: LOCATION */}
               <AnimatePresence mode="wait">
                 {step === 1 && (
@@ -447,10 +441,8 @@ return (
                         onClick={nextStep}
                         disabled={!location}
                         className={`
-                          px-10
-                          h-14
-                          rounded-xl
-                          font-semibold
+                          px-4 h-10 md:px-10 md:h-14
+                          rounded-xl font-lightbold md:font-semibold
                           transition-all
                           ${
                             !location
@@ -469,7 +461,7 @@ return (
                       {[1, 2, 3, 4].map((i) => (
                         <div
                           key={i}
-                          className="h-28 rounded-2xl border animate-pulse bg-gray-100"
+                          className="h-14 md:h-28 rounded-2xl border animate-pulse bg-gray-100"
                         />
                       ))}
                     </div>
@@ -482,7 +474,7 @@ return (
                             cursor-pointer
                             rounded-2xl
                             border-2
-                            p-6
+                            p-3 md:p-6
                             transition-all
                             duration-300
                             hover:shadow-lg
@@ -504,22 +496,22 @@ return (
 
                           <div className="flex justify-between items-start">
                             <div>
-                              <h3 className="text-xl font-semibold">{loc.name}</h3>
+                              <h3 className="text-md md:text-xl font-semibold">{loc.name}</h3>
                             </div>
 
                             <div className="text-right">
-                              <p className="text-xs uppercase tracking-wider text-gray-400">
+                              <p className="text-xs uppercase tracking-wide md:tracking-wider text-gray-400">
                                 Delivery Fee
                               </p>
 
-                              <h3 className="text-2xl font-bold text-[#1C4672] mt-2">
+                              <h3 className="text-md md:text-2xl font-semibold md:font-bold text-[#1C4672] mt-2">
                                 ₦{Number(loc.fees).toLocaleString()}
                               </h3>
                             </div>
                           </div>
 
                           {location === loc.name && (
-                            <div className="mt-5 flex items-center gap-2 text-[#1C4672] font-medium">
+                            <div className="mt-2 md:mt-5 flex items-center gap-2 text-[#1C4672] font-medium">
                               ✓ Selected
                             </div>
                           )}
@@ -543,7 +535,7 @@ return (
                       backButton={
                         <button
                           onClick={() => setStep(1)}
-                          className="px-8 h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                          className="px-4 h-10 md:px-8 md:h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
                         >
                           ← Back
                         </button>
@@ -553,10 +545,8 @@ return (
                           onClick={nextStep}
                           disabled={!time}
                           className={`
-                            px-10
-                            h-14
-                            rounded-xl
-                            font-semibold
+                            px-4 h-10 md:px-10 md:h-14
+                            rounded-xl font-lightbold md:font-semibold
                             transition-all
                             ${
                               !time
@@ -570,7 +560,7 @@ return (
                       }
                     >
 
-                      <div className="grid md:grid-cols-2 gap-5">
+                      <div className="grid grid-cols-2 lg:grid-cols-3 gap-3 md:gap-5">
                         {deliverySlots.map((slot) => {
                           const selected = time === slot.value;
                           const [day, hour] = slot.label.split(" - ");
@@ -578,7 +568,7 @@ return (
                           return (
                             <label
                               key={slot.value}
-                              className={` cursor-pointer rounded-2xl border-2 p-6
+                              className={` cursor-pointer rounded-2xl border-2 p-3 md:p-6
                                 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg
                                 ${
                                   selected
@@ -603,14 +593,14 @@ return (
                                     {day}
                                   </p>
 
-                                  <h3 className="text-2xl font-bold mt-1">
+                                  <h3 className="text-lg font-semibold md:text-2xl md:font-bold mt-1">
                                     {hour}
                                   </h3>
 
                                 </div>
 
                                 {selected && (
-                                  <div className="bg-[#1C4672] text-white rounded-full w-8 h-8 flex items-center justify-center">
+                                  <div className="bg-[#1C4672] text-white rounded-full w-6 h-6 md:w-8 md:h-8 flex items-center justify-center">
                                     ✓
                                   </div>
                                 )}
@@ -636,7 +626,7 @@ return (
                     backButton={
                       <button
                         onClick={() => setStep(2)}
-                        className="px-8 h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                        className="px-4 h-10 md:px-8 md:h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
                       >
                         ← Back
                       </button>
@@ -645,7 +635,7 @@ return (
                       <button
                         onClick={nextStep}
                         disabled={!payment}
-                        className={` px-10 h-14 rounded-xl font-semibold transition-all
+                        className={` px-4 h-10 md:px-10 md:h-14 rounded-xl font-lightbold md:font-semibold transition-all
                           ${
                             !payment
                               ? "bg-gray-300 text-gray-500 cursor-not-allowed"
@@ -685,7 +675,7 @@ return (
                             className={`
                               rounded-2xl
                               border-2
-                              p-6
+                              p-3 md:p-6
                               text-left
                               transition-all
                               duration-300
@@ -698,15 +688,15 @@ return (
                               }
                             `}
                           >
-                            <div className="w-14 h-14 rounded-xl bg-[#1C4672]/10 flex items-center justify-center mb-5">
-                              <Icon size={28} className="text-[#1C4672]" />
+                            <div className="w-10 h-10 md:w-14 md:h-14 rounded-xl bg-[#1C4672]/10 flex items-center justify-center mb-2.5 md:mb-5">
+                              <Icon size={20} className="text-[#1C4672]" />
                             </div>
 
-                            <h3 className="text-xl font-semibold">
+                            <h3 className="text-md md:text-xl font-semibold">
                               {method.title}
                             </h3>
 
-                            <p className="text-gray-500 mt-2">
+                            <p className="text-sm md:text-md text-gray-500 mt-2">
                               {method.desc}
                             </p>
                           </button>
@@ -740,7 +730,7 @@ return (
                     backButton={
                       <button
                         onClick={() => setStep(3)}
-                        className="h-14 px-8 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
+                        className="px-4 h-10 md:px-10 md:h-14 rounded-xl border border-gray-300 hover:bg-gray-100 transition"
                       >
                         ← Back
                       </button>
@@ -748,60 +738,60 @@ return (
                     nextButton={
                       <button
                         onClick={placeOrder}
-                        className="h-14 px-10 rounded-xl bg-green-600 hover:bg-green-700 text-white font-semibold shadow-lg transition-all"
+                        className="px-4 h-10 md:px-10 md:h-14 rounded-xl bg-green-600 hover:bg-green-700 text-white font-lightbold md:font-bold shadow-lg transition-all"
                       >
-                        Confirm & Open WhatsApp →
+                        Confirm & Proceed →
                       </button>
                     }
                   >
                     {/* Delivery Details */}
 
-                    <div className="rounded-2xl border border-gray-200 p-6 bg-gray-50">
-                      <h3 className="font-bold text-lg mb-5">
+                    <div className="rounded-2xl border border-gray-200 p-4 md:p-6 bg-gray-50">
+                      <h3 className="font-semibold text-md md:font-bold md:text-lg mb-5">
                         Delivery Details
                       </h3>
 
                       <div className="space-y-5">
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">Delivery Location</span>
-                          <span className="font-semibold">{location}</span>
+                          <span className="text-sm md:text-lg text-gray-500">Delivery Location</span>
+                          <span className="font-lightbold md:font-semibold">{location}</span>
                         </div>
 
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">Delivery Time</span>
-                          <span className="font-semibold text-right">
+                          <span className="text-sm md:text-lg text-gray-500">Delivery Time</span>
+                          <span className="font-lightbold md:font-semibold text-right">
                             {deliverySlots.find((s) => s.value === time)?.label}
                           </span>
                         </div>
 
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-500">Payment Method</span>
-                          <span className="font-semibold">{payment}</span>
+                          <span className="text-sm md:text-lg text-gray-500">Payment Method</span>
+                          <span className="font-lightbold md:font-semibold">{payment}</span>
                         </div>
                       </div>
                     </div>
 
                     {/* Payment Summary */}
 
-                    <div className="mt-8 rounded-2xl border p-6">
-                      <h3 className="font-bold text-lg mb-5">
+                    <div className="mt-4 md:mt-8 rounded-2xl border p-4 md:p-6">
+                      <h3 className="font-lightbold md:font-bold text-lg mb-5">
                         Payment Summary
                       </h3>
 
                       <div className="space-y-4">
                         <div className="flex justify-between">
-                          <span className="text-gray-500">Items Subtotal</span>
+                          <span className="text-sm md:text-lg text-gray-500">Items Subtotal</span>
                           <span>₦{summary.subtotal.toLocaleString()}</span>
                         </div>
 
                         <div className="flex justify-between">
-                          <span className="text-gray-500">Delivery Fee</span>
+                          <span className="text-sm md:text-lg text-gray-500">Delivery Fee</span>
                           <span>₦{summary.delivery.toLocaleString()}</span>
                         </div>
 
                         <hr />
 
-                        <div className="flex justify-between text-2xl font-bold text-[#1C4672]">
+                        <div className="flex justify-between text-lg md:text-2xl font-lightbold md:font-bold text-[#1C4672]">
                           <span>Total</span>
                           <span>₦{summary.total.toLocaleString()}</span>
                         </div>
