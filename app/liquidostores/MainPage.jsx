@@ -284,7 +284,7 @@ export default function MainPage() {
               </div>
 
             </div>
-                        <div className="mt-6">
+            <div className="mt-6">
               <h4 className="font-medium mb-2">
                 Select Pack Size
               </h4>

@@ -232,11 +232,9 @@ export default function CheckoutPage() {
 
       const whatsappUrl = `whatsapp://send?phone=2347062757706&text=${whatsappMsg}`;
 
-window.location.href = whatsappUrl;
-
       // -------------------- DEDUCT STOCK --------------------
       for (const item of cart) {
-        const productRef = doc(db, "products", item.id);
+        const productRef = doc(db, "products", item.productId);
 
         const snapshot = await getDoc(productRef);
 
@@ -269,6 +267,8 @@ window.location.href = whatsappUrl;
       }
 
       toast.success("Order placed successfully!");
+
+      window.location.href = whatsappUrl;
 
       setTimeout(() => {
         setCart([]);

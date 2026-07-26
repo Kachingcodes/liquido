@@ -247,7 +247,7 @@ const categoryOptions = currentCategory?.options || [];
 
 
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="relative bg-gray-50">
       {/* HEADER */}
 
       <div className="bg-white border-b sticky top-0 z-20">
@@ -263,8 +263,8 @@ const categoryOptions = currentCategory?.options || [];
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-3 w-full sm:w-auto">
-              <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center flex-1 sm:flex-none">
+            <div className="flex flex-row gap-3 w-full md:w-auto">
+              <div className="flex-1 md:flex-none bg-white border rounded-xl px-5 py-3 shadow-sm text-center">
                 <p className="text-xs uppercase text-gray-500">
                   Categories
                 </p>
@@ -276,7 +276,7 @@ const categoryOptions = currentCategory?.options || [];
 
               <button
                 onClick={openAddCategory}
-                className="flex-1 sm:flex-none bg-[#1C4672] hover:bg-[#16395d] text-white px-5 py-3 rounded-xl font-semibold transition"
+                className="flex-1 md:flex-none bg-[#1C4672] hover:bg-[#16395d] text-white px-5 py-3 rounded-xl font-semibold transition"
               >
                 + Add Category
               </button>
@@ -287,9 +287,10 @@ const categoryOptions = currentCategory?.options || [];
 
       {/* SEARCH */}
 
-      <div className="max-w-7xl mx-auto px-4 md:px-6 mt-4 md:mt-6">
-        <div className="bg-white p-5">
+      <div className="max-w-7xl mx-auto px-4 md:px-6 mt-5 md:mt-6">
+        <div className="bg-white">
           <div className="relative">
+
             <Search
               size={18}
               className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
@@ -387,7 +388,7 @@ const categoryOptions = currentCategory?.options || [];
       </div>
 
       {/* Mobile Cards */}
-        <div className="md:hidden space-y-4 mt-6">
+        <div className="md:hidden space-y-4 px-4 mt-6">
           {filteredCategories.map((category) => {
             const optionCount = category.options?.length || 0;
 
@@ -448,15 +449,19 @@ const categoryOptions = currentCategory?.options || [];
             />
 
             <motion.div
-              initial={{ opacity: 0, scale: 0.95 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0.95 }}
-              transition={{ duration: 0.2 }}
-              className="fixed inset-x-2 md:left-1/2 md:top-1/2 md:w-[95%] md:max-w-3xl md:-translate-x-1/2 md:-translate-y-1/2 bottom-2 md:bottom-auto rounded-3xl bg-white shadow-2xl max-h-[95vh] overflow-y-auto"
-            >
+              initial={{ y: "100%" }}
+              animate={{ y: 0 }}
+              exit={{ y: "100%" }}
+              transition={{ type: "spring", damping: 28 }}
+              className="
+                fixed z-50 bg-white shadow-2xl overflow-y-auto
+                inset-x-0 bottom-0 h-[92vh] rounded-t-3xl
+                md:inset-y-0 md:right-0 md:left-auto md:h-screen
+                md:w-[430px] md:rounded-none scrollbar-hide"
+              >
 
               {/* Header */}
-              <div className="sticky top-0 bg-white border-b px-5 md:px-7 py-4 md:py-5">
+              <div className="flex items-start justify-between border-b px-5 md:px-7 py-5 bg-white rounded-t-3xl">
                 <div>
                   <h2 className="text-2xl font-bold text-[#1C4672]">
                     {editingCategory ? "Edit Category" : "Add Category"}
@@ -469,7 +474,7 @@ const categoryOptions = currentCategory?.options || [];
 
                 <button
                   onClick={() => setCategoryModalOpen(false)}
-                  className="p-2 rounded-lg hover:bg-gray-100"
+                  className="p-2 rounded-lg hover:bg-gray-100 flex-shrink-0"
                 >
                   <X size={20} />
                 </button>
@@ -612,7 +617,7 @@ const categoryOptions = currentCategory?.options || [];
                   {editingCategory && (
                     <button
                       onClick={() => setDeleteCategoryModal(true)}
-                      className="flex-1 h-12 rounded-xl bg-red-600 text-white hover:bg-red-700"
+                      className="flex-1 h-12 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700"
                     >
                       Delete Category
                     </button>
@@ -620,7 +625,7 @@ const categoryOptions = currentCategory?.options || [];
 
                   <button
                     onClick={saveCategory}
-                    className="flex-1 h-12 rounded-xl bg-[#1C4672] text-white hover:bg-[#16395d]"
+                    className="flex-1 h-12 py-2 rounded-xl bg-[#1C4672] text-white hover:bg-[#16395d]"
                   >
                     {editingCategory ? "Save Changes" : "Add Category"}
                   </button>

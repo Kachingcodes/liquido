@@ -173,9 +173,14 @@ export default function Cart() {
 
               <button 
               onClick={() => {
-              setCartOpen(false);
-              router.push("/checkout");
-            }}
+  console.log("Cart before checkout:", cart);
+
+  setCartOpen(false);
+
+  setTimeout(() => {
+    router.push("/checkout");
+  }, 100);
+}}
               className="bg-[#1C4672] px-4 py-2 rounded-lg text-white">
                 Checkout
               </button>

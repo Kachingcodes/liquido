@@ -116,6 +116,6 @@ export default function Configuration() {
 
         </div>
 
-        </div>
+    </div>
   );
 }
