@@ -277,14 +277,3 @@ export const adverts = [
   { img: "/products/strawberry.png", text: "✨ New Arrivals Just Dropped – Shop Now!" },
 ];
 
-
-export const faqs = [
-  { q: "What is the timing of your deliveries?", a: "We deliver daily between 9Am and 6PM. Once your order is placed, we will confirm your exact delivery window." },
-  { q: "How does your delivery service work?", a: "It's simple! Tell us the drinks you want, place your order and we'll deliver them to your doorstep quickly and free of charge [Depending on your location]." },
-  { q: "What brands of water and drinks do you offer?", a: "We offer a wide range of trusted wateer brands and various beverages to suit your needs. You can find a detailed list on our website." },
-  { q: "How do I make payment?", a: "You can pay via transfer, POS (card) or cash on delivery. Once your order is confirmed, we'll send you the payment details. We accept Payment on Delivery." },
-  { q: "How much is delivery?", a: "Delivery is free/affordable within Adeniyi Jones (Ikeja). For longer distances, we'll confirm the delivery fee once you share your location." },
-  { q: "Do you accept bulk orders?", a: "Yes we do. For bulk orders, kindly share the quantity and location via our DM so we can give you a tailored quote and delivery plan." },
-  { q: "Apart from water, what else do you deliver?", a: "Liquido NG is more than water. We also deliver liquid soap, soft drinks, wines and other essential liquids straight to your doorstep." },
-  { q: "Which areas do you deliver to?", a: "We currently deliver across Ikeja and Environs. If your location isn't listed, kindly share it with us and we'll confirm availability." },
-];

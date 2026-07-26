@@ -11,7 +11,7 @@ import {
 import { db } from "../../../firebase/firebase"; // adjust path if necessary
 import { motion, AnimatePresence } from "framer-motion";
 import { Quicksand } from "next/font/google";
-import { Search, CheckCircle, XCircle } from "lucide-react";
+import { Search, CheckCircle, XCircle, MoreVertical, X } from "lucide-react";
 
 const quick = Quicksand({
   subsets: ["latin"],
@@ -34,53 +34,73 @@ export default function AdminOrdersPage() {
   const [filter, setFilter] = useState("all"); // all | paid | unpaid
   const [sortOrder, setSortOrder] = useState("desc"); // desc | asc
   const [expandedId, setExpandedId] = useState(null); // expand order details
+  const [selectedOrder, setSelectedOrder] = useState(null);
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
   // subscribe to firestore orders (real-time)
   useEffect(() => {
     const q = query(collection(db, "storesorders"), orderBy("date", "desc"));
     const unsubscribe = onSnapshot(q, (snapshot) => {
-      setOrders(snapshot.docs.map((d) => ({ id: d.id, ...d.data() })));
+      setOrders
+      (snapshot.docs.map((d) => ({ 
+        firestoreId: d.id, 
+        ...d.data(),
+       }))
+      );
       setLoading(false);
     });
     return () => unsubscribe();
   }, []);
 
   // optimistic local update helper
-  const updateLocalOrderField = (orderId, field, value) => {
-    setOrders((prev) => prev.map((o) => (o.id === orderId ? { ...o, [field]: value } : o)));
-  };
+  const updateLocalOrderField = (firestoreId, field, value) => {
+  setOrders((prev) =>
+    prev.map((o) =>
+      o.firestoreId === firestoreId
+        ? { ...o, [field]: value }
+        : o
+    )
+  );
+};
 
   // persist clientName on blur
-  const handleClientNameBlur = async (orderId, value) => {
+  const handleClientNameBlur = async (firestoreId, value) => {
+  try {
+    await updateDoc(
+      doc(db, "storesorders", firestoreId),
+      {
+        clientName: value,
+      }
+    );
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+  // change payment status
+  const handlePaymentStatusChange = async (firestoreId, isPaid) => {
     try {
-      await updateDoc(doc(db, "storesorders", orderId), { clientName: value });
+      await updateDoc(
+        doc(db, "storesorders", firestoreId),
+        {
+          paymentStatus: isPaid,
+        }
+      );
     } catch (err) {
-      console.error("Failed to update clientName:", err);
-      // optionally: revert local state or show inline error
+      console.error("Failed to update payment status:", err);
     }
   };
 
-  // change payment status
-  const handlePaymentStatusChange = async (orderId, value) => {
-    // optimistic UI
-    updateLocalOrderField(orderId, "paymentStatus", value);
-    try {
-      await updateDoc(doc(db, "storesorders", orderId), { paymentStatus: value });
-    } catch (err) {
-      console.error("Failed to update paymentStatus:", err);
-      // optionally: revert local state
-    }
-  };
 
   // search + filter + sort
   const processedOrders = useMemo(() => {
     const q = search.trim().toLowerCase();
 
     let filtered = orders.filter((o) => {
-      const status = o.paymentStatus ?? (o.paid ? "paid" : "unpaid");
+      const status = o.paymentStatus === true;
 
-      if (filter === "paid" && status !== "paid") return false;
-      if (filter === "unpaid" && status === "paid") return false;
+      if (filter === "paid" && !status) return false;
+      if (filter === "unpaid" && status) return false;
       return true;
     });
 
@@ -125,184 +145,389 @@ export default function AdminOrdersPage() {
   }
 
   return (
-    <div className="min-h-screen p-2 md:p-6 max-w-7xl mx-auto dark:bg-gray-900">
+    <div className="min-h-screen bg-gray-50">
 
-      <div className="fixed left-0 md:hidden text-center bg-gray-100 z-50 top-0 w-full py-3">
-        <h1 className={`${quick.className} text-2xl md:text-3xl mt-1`}>Admin — Orders</h1>
-      </div>
+      {/* Header */}
+      <div className="bg-white border-b sticky top-0 z-20">
+        <div className="max-w-7xl mx-auto px-6 py-5">
 
-  <h1 className={`${quick.className} hidden md:flex text-2xl md:text-3xl mb-6 text-left`}>Admin — Orders</h1>
+          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
 
-  {/* Controls */}
-  <div className="md:mt-0 mt-14 flex flex-col md:flex-row gap-3 items-stretch md:items-center justify-between mb-6">
-    <div className="flex flex-col md:flex-row items-stretch md:items-center gap-2 w-full md:w-1/2">
-      <div className="relative flex-1">
-        <input
-          value={search}
-          onChange={(e) => setSearch(e.target.value)}
-          placeholder="Search by order ID, client, location, payment, or item..."
-          className="w-full border rounded-lg px-4 py-2 pr-10 focus:outline-none focus:ring-2 focus:ring-blue-200"
-        />
-        <div className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-400">
-          <Search size={16} />
+            <div>
+              <h1 className={`${quick.className} text-3xl text-[#1C4672]`}>
+                Orders Management
+              </h1>
+
+              <p className="text-gray-500 mt-1">
+                View and manage all customer orders.
+              </p>
+            </div>
+
+            <div className="flex items-center gap-3">
+
+              <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center min-w-[110px]">
+                <p className="text-xs text-gray-500 uppercase">
+                  Orders
+                </p>
+
+                <h2 className="text-2xl font-bold text-[#1C4672]">
+                  {processedOrders.length}
+                </h2>
+              </div>
+
+              <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center min-w-[130px]">
+                <p className="text-xs text-gray-500 uppercase">
+                  Revenue
+                </p>
+
+                <h2 className="text-xl font-bold text-green-600">
+                  ₦
+                  {processedOrders
+                    .reduce((sum, o) => sum + Number(o.total || 0), 0)
+                    .toLocaleString()}
+                </h2>
+              </div>
+
+            </div>
+
+          </div>
+
         </div>
       </div>
-    </div>
 
-    <div className="flex flex-col md:flex-row gap-3 items-stretch md:items-center">
-      <div className="flex flex-1 md:flex-none items-center gap-2">
-        <label className="text-sm">Filter:</label>
-        <select
-          value={filter}
-          onChange={(e) => setFilter(e.target.value)}
-          className="w-full md:w-auto border rounded px-3 py-2"
-        >
-          <option value="all">All</option>
-          <option value="paid">Paid only</option>
-          <option value="unpaid">Unpaid only</option>
-        </select>
-      </div>
+      {/* Search + Filters */}
 
-      <div className="flex flex-1 md:flex-none items-center gap-2">
-        <label className="text-sm">Sort:</label>
-        <select
-          value={sortOrder}
-          onChange={(e) => setSortOrder(e.target.value)}
-          className="w-full md:w-auto border rounded px-3 py-2"
-        >
-          <option value="desc">Newest → Oldest</option>
-          <option value="asc">Oldest → Newest</option>
-        </select>
-      </div>
-    </div>
-  </div>
+      <div className="max-w-7xl mx-auto px-6 mt-6">
 
-  {/* List */}
-  <div className="space-y-4">
-    <AnimatePresence>
-      {processedOrders.map((order) => {
-        const paymentStatus = order.paymentStatus ?? (order.paid ? "paid" : "unpaid");
-        const isPaid = paymentStatus === "paid";
-        return (
-          <motion.div
-            key={order.id}
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -8 }}
-            transition={{ duration: 0.18 }}
-            className="border rounded-xl p-4 shadow-sm bg-white"
-          >
-            {/* header row */}
-            <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-3">
-              <div className="flex flex-col md:flex-row md:items-center gap-2">
-                <div className="text-sm text-gray-600">Order ID:</div>
-                <div className="font-medium">{order.id}</div>
-                <div className="text-sm text-gray-500">• {formatDate(order.date)}</div>
-              </div>
+        <div className="bg-white rounded-2xl border shadow-sm p-5">
 
-              <div className="flex flex-col md:flex-row md:items-center gap-3">
-                {/* badge */}
-                <div
-                  className={`px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-2 ${
-                    isPaid ? "bg-green-50 text-green-800" : "bg-red-50 text-red-800"
-                  }`}
-                >
-                  {isPaid ? <CheckCircle size={14} /> : <XCircle size={14} />}
-                  <span>{isPaid ? "Paid" : "Unpaid"}</span>
-                </div>
+          <div className="flex flex-col lg:flex-row gap-4">
 
-                {/* total */}
-                <div className="text-sm md:text-base font-semibold">
-                  ₦{(order.total || 0).toLocaleString()}
-                </div>
-              </div>
+            {/* Search */}
+
+            <div className="relative flex-1">
+
+              <Search
+                size={18}
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+              />
+
+              <input
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                placeholder="Search Order ID, customer, item..."
+                className="w-full h-12 rounded-xl border border-gray-200 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#1C4672]"
+              />
+
             </div>
 
-            {/* main grid */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-4">
-              {/* client name */}
-              <div>
-                <label className="text-sm font-medium text-gray-700">Client Name</label>
-                <input
-                  type="text"
-                  value={order.clientName ?? ""}
-                  onChange={(e) => updateLocalOrderField(order.id, "clientName", e.target.value)}
-                  onBlur={(e) => handleClientNameBlur(order.id, e.target.value)}
-                  placeholder="Enter client's name"
-                  className="w-full mt-1 border rounded px-3 py-2"
-                />
-              </div>
+            {/* Filter */}
 
-              {/* payment status */}
-              <div>
-                <label className="text-sm font-medium text-gray-700">Payment Status</label>
-                <select
-                  value={paymentStatus}
-                  onChange={(e) => handlePaymentStatusChange(order.id, e.target.value)}
-                  className="w-full mt-1 border rounded px-3 py-2"
-                >
-                  <option value="pending">Pending</option>
-                  <option value="unpaid">Unpaid</option>
-                  <option value="paid">Paid</option>
-                </select>
-              </div>
+            <select
+              value={filter}
+              onChange={(e) => setFilter(e.target.value)}
+              className="h-12 rounded-xl border border-gray-200 px-4"
+            >
+              <option value="all">All Orders</option>
+              <option value="paid">Paid</option>
+              <option value="unpaid">Unpaid</option>
+            </select>
 
-              {/* info */}
-              <div>
-                <label className="text-sm font-medium text-gray-700">Info</label>
-                <div className="mt-1 text-sm text-gray-600 space-y-1">
-                  <div>
-                    <span className="font-medium">Location:</span> {order.location || "—"}
-                  </div>
-                  <div>
-                    <span className="font-medium">Delivery:</span> {order.time ? new Date(order.time).toLocaleString() : "—"}
-                  </div>
-                  <div>
-                    <span className="font-medium">Method:</span> {order.payment || "—"}
-                  </div>
-                </div>
-              </div>
-            </div>
+            {/* Sort */}
 
-            {/* items list */}
-            <div className="mt-4">
-              <div className="flex items-center justify-between">
-                <h4 className="font-semibold">Items</h4>
+            <select
+              value={sortOrder}
+              onChange={(e) => setSortOrder(e.target.value)}
+              className="h-12 rounded-xl border border-gray-200 px-4"
+            >
+              <option value="desc">Newest</option>
+              <option value="asc">Oldest</option>
+            </select>
 
-                <button
-                  onClick={() => setExpandedId(expandedId === order.id ? null : order.id)}
-                  className="text-sm text-gray-500 underline"
-                >
-                  {expandedId === order.id ? "Hide" : "Show"}
-                </button>
-              </div>
+          </div>
 
+        </div>
+
+        {/* Orders Table starts below
+
+        <div className="bg-white rounded-2xl shadow-sm border mt-6 overflow-hidden"></div> */}
+
+        {/* Orders Table */}
+        <div className="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden">
+          <div className="overflow-x-auto">
+            <table className="w-full min-w-[900px]">
+              <thead className="bg-gray-50 border-b">
+                <tr className="text-left text-sm text-gray-600">
+                  <th className="px-6 py-4 font-semibold">Order ID</th>
+                  <th className="px-6 py-4 font-semibold">Date</th>
+                  <th className="px-6 py-4 font-semibold">Customer</th>
+                  <th className="px-6 py-4 font-semibold">Location</th>
+                  <th className="px-6 py-4 font-semibold">Total</th>
+                  <th className="px-6 py-4 font-semibold">Payment</th>
+                  <th className="px-6 py-4 text-right font-semibold"></th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <AnimatePresence>
+                  {processedOrders.map((order) => {
+                    const paymentStatus = order.paymentStatus === true;
+
+                    const badgeClass = paymentStatus
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700";
+
+                    return (
+                      <motion.tr
+                        key={order.id}
+                        initial={{ opacity: 0, y: 10 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        exit={{ opacity: 0 }}
+                        className="border-b last:border-0 hover:bg-gray-50 transition"
+                      >
+                        <td className="px-6 py-5 font-semibold whitespace-nowrap">
+                          #{order.id}
+                        </td>
+
+                        <td className="px-6 py-5 whitespace-nowrap text-gray-600">
+                          {formatDate(order.date)}
+                        </td>
+
+                        <td className="px-6 py-5">
+                          {order.clientName || (
+                            <span className="text-gray-400">
+                              Not Assigned
+                            </span>
+                          )}
+                        </td>
+
+                        <td className="px-6 py-5">
+                          {order.location}
+                        </td>
+
+                        <td className="px-6 py-5 font-semibold">
+                          ₦{Number(order.total).toLocaleString()}
+                        </td>
+
+                        <td className="px-6 py-5">
+                          <span
+                            className={`px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}
+                          >
+                            {paymentStatus ? "PAID" : "UNPAID"}
+                          </span>
+                        </td>
+
+                        <td className="px-6 py-5 text-right">
+                          <button
+                            onClick={() => {
+                              setSelectedOrder(order);
+                              setDrawerOpen(true);
+                            }}
+                            className="p-2 rounded-lg hover:bg-gray-100 transition"
+                          >
+                            <MoreVertical size={18} />
+                          </button>
+                        </td>
+                      </motion.tr>
+                    );
+                  })}
+                </AnimatePresence>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      <AnimatePresence>
+          {drawerOpen && selectedOrder && (
+            <>
+              {/* Overlay */}
               <motion.div
-                initial={{ opacity: 0, height: 0 }}
-                animate={{ opacity: expandedId === order.id ? 1 : 0, height: expandedId === order.id ? "auto" : 0 }}
-                transition={{ duration: 0.25 }}
-                className="overflow-hidden"
-              >
-                <ul className="divide-y mt-3">
-                  {Array.isArray(order.items) &&
-                    order.items.map((it) => (
-                      <li key={it.id} className="py-2 flex flex-col sm:flex-row justify-between text-sm gap-1 sm:gap-0">
-                        <div className="flex flex-col">
-                          <span className="font-medium">{it.name}</span>
-                          <span className="text-xs text-gray-500">qty: {it.qty}</span>
-                        </div>
-                        <div>₦{(it.price * it.qty).toLocaleString()}</div>
-                      </li>
-                    ))}
-                </ul>
-              </motion.div>
-            </div>
-          </motion.div>
-        );
-      })}
-    </AnimatePresence>
-  </div>
-</div>
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                onClick={() => setDrawerOpen(false)}
+                className="fixed inset-0 bg-black/40 z-40"
+              />
 
+              {/* Drawer */}
+              <motion.div
+                initial={{ x: 500 }}
+                animate={{ x: 0 }}
+                exit={{ x: 500 }}
+                transition={{ type: "spring", damping: 28 }}
+                className="fixed right-0 top-0 h-screen w-full md:w-[430px] bg-white shadow-2xl z-50 overflow-y-auto"
+              >
+                <div className="sticky top-0 bg-white border-b p-5 flex justify-between items-center">
+                  <div>
+                    <h2 className="text-xl font-bold">
+                      Order #{selectedOrder.id}
+                    </h2>
+
+                    <p className="text-gray-500 text-sm">
+                      {formatDate(selectedOrder.date)}
+                    </p>
+                  </div>
+
+                  <button
+                    onClick={() => setDrawerOpen(false)}
+                    className="p-2 rounded-lg hover:bg-gray-100"
+                  >
+                    <X size={20} />
+                  </button>
+                </div>
+
+                <div className="p-6 space-y-6">
+
+                  {/* Customer */}
+                  <div>
+                    <h3 className="font-semibold mb-3">Customer</h3>
+
+                    <input
+                      type="text"
+                      value={selectedOrder.clientName ?? ""}
+                      onChange={(e) => {
+                        updateLocalOrderField(
+                          selectedOrder.firestoreId,
+                          "clientName",
+                          e.target.value
+                        );
+
+                        setSelectedOrder({
+                          ...selectedOrder,
+                          clientName: e.target.value,
+                        });
+                      }}
+                      onBlur={(e) =>
+                        handleClientNameBlur(
+                          selectedOrder.firestoreId,
+                          e.target.value
+                        )
+                      }
+                      placeholder="Client Name"
+                      className="w-full border rounded-xl px-4 py-3"
+                    />
+                  </div>
+
+                  {/* Payment */}
+                  <div>
+                    <h3 className="font-semibold mb-3">
+                      Payment Status
+                    </h3>
+
+                    <select
+                      value={selectedOrder.paymentStatus ? "paid" : "unpaid"}
+                      onChange={(e) => {
+                        const isPaid = e.target.value === "paid";
+
+                        // Update the table
+                        updateLocalOrderField(selectedOrder.firestoreId, "paymentStatus", isPaid);
+
+                        // Update the drawer immediately
+                        setSelectedOrder((prev) => ({
+                          ...prev,
+                          paymentStatus: isPaid,
+                        }));
+
+                        // Save to Firestore
+                        handlePaymentStatusChange(selectedOrder.firestoreId, isPaid);
+                      }}
+                      className="w-full mt-1 border rounded px-3 py-2"
+                    >
+                      <option value="unpaid">Unpaid</option>
+                      <option value="paid">Paid</option>
+                    </select>
+                  </div>
+
+                  {/* Information */}
+                  <div className="space-y-3 rounded-2xl bg-gray-50 p-5">
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">
+                        Total
+                      </span>
+
+                      <span className="font-bold">
+                        ₦{Number(selectedOrder.total).toLocaleString()}
+                      </span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">
+                        Location
+                      </span>
+
+                      <span>{selectedOrder.location}</span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">
+                        Payment
+                      </span>
+
+                      <span>{selectedOrder.payment}</span>
+                    </div>
+
+                    <div className="flex justify-between">
+                      <span className="text-gray-500">
+                        Delivery
+                      </span>
+
+                      <span className="text-right">
+                        {selectedOrder.time
+                          ? new Date(selectedOrder.time).toLocaleString()
+                          : "--"}
+                      </span>
+                    </div>
+
+                  </div>
+
+                  {/* Items */}
+                  <div>
+
+                    <h3 className="font-semibold mb-4">
+                      Ordered Items
+                    </h3>
+
+                    <div className="space-y-3">
+
+                      {selectedOrder.items?.map((item) => (
+                        <div
+                          key={item.id}
+                          className="flex justify-between border rounded-xl p-4"
+                        >
+                          <div>
+
+                            <p className="font-medium">
+                              {item.name}
+                            </p>
+
+                            <p className="text-sm text-gray-500">
+                              Qty {item.qty}
+                            </p>
+
+                          </div>
+
+                          <div className="font-semibold">
+                            ₦
+                            {(
+                              Number(item.price) *
+                              item.qty
+                            ).toLocaleString()}
+                          </div>
+
+                        </div>
+                      ))}
+
+                    </div>
+
+                  </div>
+
+                </div>
+              </motion.div>
+            </>
+          )}
+        </AnimatePresence>
+  </div>
   );
 }

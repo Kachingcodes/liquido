@@ -4,7 +4,7 @@ import Image from 'next/image';
 import { assets } from '@/public/assets';
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes } from "lucide-react";
+import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes, Settings } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
 
@@ -99,6 +99,15 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
                     <div className="flex items-center gap-2">
                         <MessageSquare size={16}/> Messages
                     </div>
+                    </Link>
+
+                    <Link 
+                    href="/admin/configuration"               
+                    className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    >
+                        <div className="flex items-center gap-2">
+                            <Settings size={18}/> Configuration
+                        </div>
                     </Link>
                     
                     <Link 

@@ -5,7 +5,6 @@ import Image from "next/image";
 import toast, { Toaster } from "react-hot-toast";
 import { FaSadTear } from "react-icons/fa";
 import { GiMeltingIceCube } from "react-icons/gi";
-
 import { useStore } from "../context/StoreContext";
 import { flyToCartAnimation } from "../utils/flyToCart";
 

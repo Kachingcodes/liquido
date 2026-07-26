@@ -4,7 +4,7 @@ import { auth } from "../../firebase/firebase";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useRouter } from "next/navigation";
 import {Eye, EyeOff, Lock, Mail, Loader2, ShieldCheck } from "lucide-react";
-
+import Image from "next/image";
 
 
 export default function AdminLogin() {
@@ -87,20 +87,25 @@ router.push("/admin/dashboard");
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-white via-gray-50 to-primary/5 p-6">
-      <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-white p-8 shadow-2xl">
+      <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-[#1C4672] p-8 shadow-2xl">
 
         {/* Logo */}
 
         <div className="mb-8 text-center">
-          <div className="mx-auto mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary text-white">
-            <ShieldCheck size={30} />
+          <div className="mx-auto flex h-30 w-60 items-center justify-center">
+            <Image
+              src="/logo.png"
+              alt="Icon"
+              width={280}
+              height={280}
+            />
           </div>
 
-          <h1 className="text-3xl font-semibold">
+          {/* <h1 className="text-3xl font-semibold">
             LIQUIDO
-          </h1>
+          </h1> */}
 
-          <p className="mt-2 text-gray-500">
+          <p className="text-gray-200">
             Admin Portal
           </p>
         </div>
@@ -112,14 +117,14 @@ router.push("/admin/dashboard");
           {/* Email */}
 
           <div>
-            <label className="mb-2 block text-sm font-medium">
+            <label className="mb-2 block text-white text-sm font-medium">
               Email
             </label>
 
             <div className="relative">
               <Mail
                 size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-900"
               />
 
               <input
@@ -129,7 +134,7 @@ router.push("/admin/dashboard");
                 onChange={(e) =>
                   setEmail(e.target.value)
                 }
-                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-4 outline-none transition focus:border-primary"
+                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-4 outline-none transition focus:border-white"
               />
             </div>
           </div>
@@ -137,14 +142,14 @@ router.push("/admin/dashboard");
           {/* Password */}
 
           <div>
-            <label className="mb-2 block text-sm font-medium">
+            <label className="mb-2 block text-white text-sm font-medium">
               Password
             </label>
 
             <div className="relative">
               <Lock
                 size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-900"
               />
 
               <input
@@ -158,7 +163,7 @@ router.push("/admin/dashboard");
                 onChange={(e) =>
                   setPassword(e.target.value)
                 }
-                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-12 outline-none transition focus:border-primary"
+                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-12 outline-none transition focus:border-white"
               />
 
               <button
@@ -166,7 +171,7 @@ router.push("/admin/dashboard");
                 onClick={() =>
                   setShowPassword(!showPassword)
                 }
-                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-500 hover:text-primary"
+                className="absolute right-4 top-1/2 -translate-y-1/2 text-gray-900 hover:text-primary"
               >
                 {showPassword ? (
                   <EyeOff size={20} />
@@ -190,7 +195,7 @@ router.push("/admin/dashboard");
           <button
             type="submit"
             disabled={loading}
-            className="flex w-full items-center justify-center rounded-xl bg-blue-800 py-3 font-medium text-white transition hover:bg-blue-900 disabled:cursor-not-allowed disabled:opacity-60"
+            className="flex w-full items-center justify-center rounded-xl bg-gray-200 py-3 font-medium text-gray-900 transition hover:bg-white disabled:cursor-not-allowed disabled:opacity-60"
           >
             {loading ? (
               <>

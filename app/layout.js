@@ -1,7 +1,6 @@
 import { Lato } from "next/font/google";
 import "./globals.css";
 import { Analytics } from "@vercel/analytics/react"; 
-import { AuthProvider } from "./context/AuthContext";
 import { StoreProvider } from "./context/StoreContext";
 
 
@@ -22,12 +21,10 @@ export default function RootLayout({ children }) {
       <body
         className={`${lato.className} antialiased`}
       >
-          <AuthProvider>
-            <StoreProvider>
-            {children}
-            <Analytics/>
-            </StoreProvider>
-          </AuthProvider>
+        <StoreProvider>
+          {children}
+          <Analytics/>
+        </StoreProvider>
       </body>
     </html>
   );

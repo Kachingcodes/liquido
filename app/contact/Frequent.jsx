@@ -1,7 +1,8 @@
 "use client";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Quicksand } from "next/font/google";
-import { faqs } from '@/public/assets';
+import { collection, onSnapshot, query } from "firebase/firestore";
+import { db } from "../../firebase/firebase"; // adjust the path if needed
 import { ChevronDown, ChevronUp, MailCheck } from "lucide-react";
 import { motion } from "framer-motion";
 
@@ -14,8 +15,9 @@ const quick = Quicksand({
 
 export default function FaqSection() {
   const [openIndex, setOpenIndex] = useState(null);
-
-const [formData, setFormData] = useState({ question: "" });
+  const [faqs, setFaqs] = useState([]);
+  const [loadingFaqs, setLoadingFaqs] = useState(true);
+  const [formData, setFormData] = useState({ question: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -32,6 +34,24 @@ const [formData, setFormData] = useState({ question: "" });
 
     setFormData({ question: "" });
   };
+
+  useEffect(() => {
+  const q = query(collection(db, "faqs"));
+
+  const unsubscribe = onSnapshot(q, (snapshot) => {
+    const data = snapshot.docs
+      .map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }))
+      .filter((faq) => faq.active === true);
+
+    setFaqs(data);
+    setLoadingFaqs(false);
+  });
+
+  return () => unsubscribe();
+}, []);
 
 
   return (
@@ -83,7 +103,17 @@ const [formData, setFormData] = useState({ question: "" });
 
         {/* Right */}
         <div className="max-h-[400px] overflow-y-auto pr-2 space-y-4">
-          {faqs.map((faq, i) => (
+          {loadingFaqs ? (
+            <div className="space-y-4">
+              {[1,2,3].map((item) => (
+                <div
+                  key={item}
+                  className="h-16 rounded-xl bg-gray-100 animate-pulse"
+                />
+              ))}
+            </div>
+          ) : (
+            faqs.map((faq, i) => (
             <div
               key={i}
               className="border-b border-gray-300 pb-2 cursor-pointer"
@@ -92,7 +122,7 @@ const [formData, setFormData] = useState({ question: "" });
                 className="flex justify-between items-center"
                 onClick={() => setOpenIndex(openIndex === i ? null : i)}
               >
-                <h2 className="font-medium text-gray-800">{faq.q}</h2>
+                <h2 className="font-medium text-gray-800">{faq.question}</h2>
                 {openIndex === i ? (
                   <ChevronUp size={20} className="text-gray-600" />
                 ) : (
@@ -101,10 +131,11 @@ const [formData, setFormData] = useState({ question: "" });
               </div>
 
               {openIndex === i && (
-                <p className="mt-2 text-sm text-gray-600">{faq.a}</p>
+                <p className="mt-2 text-sm text-gray-600">{faq.answer}</p>
               )}
             </div>
-          ))}
+          ))
+        )}
         </div>
       </div>
     </section>

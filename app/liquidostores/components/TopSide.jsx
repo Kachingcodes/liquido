@@ -6,7 +6,9 @@ import PhoneAdvert from '../../shop/PhoneAdvert';
 import LeftSide from "./LeftSide";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-import { categories } from '@/public/assets';
+import { Droplets, Sparkles, CookingPot, User, Gem, Car } from 'lucide-react';
+import { collection, onSnapshot, getDocs } from "firebase/firestore";
+import { db } from "@/firebase/firebase";
 import { useStore } from '@/app/context/StoreContext';
 
 const TopSide = () => {
@@ -14,7 +16,7 @@ const TopSide = () => {
     const { activeCategory, setActiveCategory, selectedOption, setSelectedOption,
         toggleCart, cart, leftSideOpen, setLeftSideOpen, 
         performSearch, filteredProducts, topCartRef } = useStore();
-
+    const [categories, setCategories] = useState([]);
     const [query, setQuery] = useState("");
 
     const suggestions = query
@@ -27,27 +29,87 @@ const TopSide = () => {
   
     const toggleCategory = (categoryName) => {
     setActiveCategory(categoryName);
-    const newCat = categories.find(c => c.name === categoryName);
-    if (newCat && newCat.options?.length > 0) {
-        setSelectedOption(newCat.options[0]); // 👈 always pick first option
+
+    const newCat = categories.find(
+        c => c.name === categoryName
+    );
+
+    if (newCat?.options?.length) {
+        setSelectedOption(newCat.options[0].name);
     } else {
         setSelectedOption(null);
     }
     };
 
-    const activeCat = categories.find(c => c.name === activeCategory) || {};
-    const options = activeCat.options || [];
+    const activeCat =
+    categories.find(
+        c => c.name === activeCategory
+    );
 
+    const options = activeCat?.options || [];
 
-    React.useEffect(() => {
+    useEffect(() => {
+    const unsubscribe = onSnapshot(
+        collection(db, "categories"),
+        async (snapshot) => {
+
+        const data = await Promise.all(
+            snapshot.docs.map(async (categoryDoc) => {
+
+            const optionSnapshot = await getDocs(
+                collection(
+                db,
+                "categories",
+                categoryDoc.id,
+                "options"
+                )
+            );
+
+          return {
+            id: categoryDoc.id,
+            ...categoryDoc.data(),
+
+            options: optionSnapshot.docs
+              .map(option => ({
+                id: option.id,
+                ...option.data(),
+              }))
+              .filter(option => option.active)
+              .sort((a, b) => a.name.localeCompare(b.name))
+          };
+        })
+      );
+
+        setCategories(
+            data
+                .filter(category => category.active)
+        );
+    }
+  );
+
+  return () => unsubscribe();
+}, []);
+
+    useEffect(() => {
     if (!activeCategory && categories.length > 0) {
         const firstCat = categories[0];
+
         setActiveCategory(firstCat.name);
-        if (firstCat.options && firstCat.options.length > 0) {
-        setSelectedOption(firstCat.options[0]); // 👈 auto-select first option
+
+        if (firstCat.options?.length > 0) {
+        setSelectedOption(firstCat.options[0].name);
         }
     }
-    }, [activeCategory, setActiveCategory, setSelectedOption]);
+    }, [categories, activeCategory, setActiveCategory, setSelectedOption]);
+
+        const categoryIcons = {
+        "Water & Drinks": Droplets,
+        "Personal Care": User,
+        "Cooking & Edible Liquids": CookingPot,
+        "Hygiene & Cleaning": Sparkles,
+        "Luxury & Lifestyle": Gem,
+        "Automobile": Car,
+        };
 
       const router = useRouter();
       const handleBackIntro = () => {
@@ -169,40 +231,45 @@ const TopSide = () => {
 
             {/* First Row of Buttons */}
             <div className="grid grid-cols-3 md:grid-cols-6 gap-3 w-full">
-                {categories.map((cat) => (
-                    <button
-                        key={cat.name}
-                        onClick={() => toggleCategory(cat.name)}
-                        className={`flex flex-col items-center justify-center px-3 py-4 text-md rounded-lg transition
-                        ${
-                            activeCategory === cat.name
-                            ? "bg-[#8FC0F4] text-white" 
-                            : "text-[#1C4672] hover:bg-[#8FC0F4] hover:text-white border border-[#807d7d83]"
-                        }`}
-                    >
-                        {/* Icon */}
-                        <p
-                        className={`transition ${
-                            activeCategory === cat.name
-                            ? "text-[#1C4672]"
-                            : "group-hover:text-white"
-                        }`}
-                        >
-                        {cat.icon}
-                        </p>
+  {categories.map((cat) => {
+    const Icon = categoryIcons[cat.name];
 
-                        {/* Label */}
-                        <span
-                        className={`text-xs mt-1 transition ${
-                            activeCategory === cat.name ? "text-[#1C4672]" : "hover:text-white"
-                        }`}
-                        >
-                        {cat.name}
-                        </span>
-                    </button>
-                    ))}
+    return (
+      <button
+        key={cat.id}
+        onClick={() => toggleCategory(cat.name)}
+        className={`flex flex-col items-center justify-center px-3 py-4 rounded-lg transition
+        ${
+          activeCategory === cat.name
+            ? "bg-[#8FC0F4] text-white"
+            : "text-[#1C4672] hover:bg-[#8FC0F4] hover:text-white border border-[#807d7d83]"
+        }`}
+      >
+        <div
+          className={`mb-2 ${
+            activeCategory === cat.name
+              ? "text-[#1C4672]"
+              : "text-[#1C4672]"
+          }`}
+        >
+          {Icon && <Icon size={24} />}
+        </div>
 
-            </div>
+        <span
+          className={`text-xs text-center ${
+            activeCategory === cat.name
+              ? "text-[#1C4672]"
+              : ""
+          }`}
+        >
+          {cat.name}
+        </span>
+      </button>
+    );
+  })}
+</div>
+
+            
 
             <div className="w-full relative md:h-10 h-14">
                 {/* absolutely-positioned, horizontally-scrollable content inside the reserved strip */}
@@ -216,17 +283,18 @@ const TopSide = () => {
                 <div className="flex gap-2 w-full overflow-x-auto no-scrollbar">
                     {options.map((option) => (
                     <div
-                        key={option}
-                        onClick={() => toggleOption(option)}
-                        className={`flex-shrink-0 min-w-max px-4 py-2 rounded-md text-sm cursor-pointer select-none transition
-                        ${selectedOption === option
-                            ? "bg-[#76abe3] text-white"
-                            : "border border-black text-black hover:bg-[#67a1e3] hover:text-gray-800"
+                        key={option.id}
+                        onClick={() => toggleOption(option.name)}
+                        className={`flex-shrink-0 min-w-max px-4 py-2 rounded-md text-sm cursor-pointer transition
+                        ${
+                            selectedOption === option.name
+                                ? "bg-[#76abe3] text-white"
+                                : "border border-black text-black hover:bg-[#67a1e3]"
                         }`}
                     >
-                        {option}
+                        {option.name}
                     </div>
-                    ))}
+                ))}
                 </div>
 
                 {options.length > 1 && (

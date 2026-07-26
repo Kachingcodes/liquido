@@ -8,7 +8,7 @@ import Image from "next/image";
 import { assets } from "@/public/assets";
 import { db } from "../../firebase/firebase"; // your Firebase config
 import { collection, addDoc, Timestamp, doc,
-   getDoc, getDocs, updateDoc } from "firebase/firestore";
+   getDoc, getDocs, updateDoc, onSnapshot, query } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { Banknote, Landmark, CreditCard, Check } from "lucide-react";
 
@@ -90,28 +90,28 @@ export default function CheckoutPage() {
   const deliverySlots = generateSlots();
 
   // -------------------- LOAD DELIVERY FEES --------------------
-  useEffect(() => {
-    const fetchDeliveryFees = async () => {
-      try {
-        const snapshot = await getDocs(collection(db, "deliveryFees"));
+ useEffect(() => {
+  const unsubscribe = onSnapshot(
+    collection(db, "deliveryFees"),
+    (snapshot) => {
+      const fees = snapshot.docs
+        .map((doc) => ({
+          id: doc.id,
+          ...doc.data(),
+        }))
+        .filter((item) => item.active);
 
-        const fees = snapshot.docs
-          .map((doc) => ({
-            id: doc.id,
-            ...doc.data(),
-          }))
-          .filter((item) => item.active === true);
+      setDeliveryFees(fees);
+      setLoadingDelivery(false);
+    },
+    (error) => {
+      console.error("Error loading delivery fees:", error);
+      setLoadingDelivery(false);
+    }
+  );
 
-        setDeliveryFees(fees);
-      } catch (error) {
-        console.error("Error loading delivery fees:", error);
-      } finally {
-        setLoadingDelivery(false);
-      }
-    };
-
-    fetchDeliveryFees();
-  }, []);
+  return () => unsubscribe();
+}, []);
 
   // -------------------- LOCAL STORAGE RESTORE --------------------
   useEffect(() => {
