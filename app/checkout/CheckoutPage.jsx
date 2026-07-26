@@ -173,6 +173,7 @@ export default function CheckoutPage() {
 
   // -------------------- PLACE ORDER --------------------
   const placeOrder = async () => {
+     alert("placeOrder called");
     if (cart.length === 0) return;
 
     const order = {
@@ -230,10 +231,10 @@ export default function CheckoutPage() {
           Payment: ${payment}`
       );
 
-const whatsappUrl = `https://wa.me/2347062757706?text=${whatsappMsg}`;
-
-window.location.href = whatsappUrl;
-      
+      window.open(
+        `https://wa.me/2347062757706?text=${whatsappMsg}`,
+        "_blank"
+      );
 
       // -------------------- DEDUCT STOCK --------------------
       for (const item of cart) {
