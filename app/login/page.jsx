@@ -134,7 +134,7 @@ router.push("/admin/dashboard");
                 onChange={(e) =>
                   setEmail(e.target.value)
                 }
-                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-4 outline-none transition focus:border-white"
+                className="w-full rounded-xl text-white border border-gray-300 py-3 pl-12 pr-4 outline-none transition focus:border-white"
               />
             </div>
           </div>
@@ -163,7 +163,7 @@ router.push("/admin/dashboard");
                 onChange={(e) =>
                   setPassword(e.target.value)
                 }
-                className="w-full rounded-xl border border-gray-300 py-3 pl-12 pr-12 outline-none transition focus:border-white"
+                className="w-full rounded-xl text-white border border-gray-300 py-3 pl-12 pr-12 outline-none transition focus:border-white"
               />
 
               <button
