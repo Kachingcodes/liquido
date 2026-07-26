@@ -186,6 +186,8 @@ export default function CheckoutPage() {
       payment,
     };
 
+    alert("Before addDoc");
+
     try {
       await addDoc(collection(db, "storesorders"), {
         id: order.id,
@@ -198,6 +200,8 @@ export default function CheckoutPage() {
         clientName: "",
         paymentStatus: false,
       });
+
+alert("After addDoc");
 
       const existingOrders =
         JSON.parse(localStorage.getItem("orders")) || [];
