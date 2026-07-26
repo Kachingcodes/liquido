@@ -230,10 +230,10 @@ export default function CheckoutPage() {
           Payment: ${payment}`
       );
 
-      window.open(
-        `https://wa.me/2347062757706?text=${whatsappMsg}`,
-        "_blank"
-      );
+const whatsappUrl = `https://wa.me/2347062757706?text=${whatsappMsg}`;
+
+window.location.href = whatsappUrl;
+      
 
       // -------------------- DEDUCT STOCK --------------------
       for (const item of cart) {
