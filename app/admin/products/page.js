@@ -111,7 +111,7 @@ const ProductsPage = () => {
           </h1>
 
           <p className="text-gray-500 mt-1 text-sm md:text-base">
-            Add, View and manage all products.
+            Add, view and manage all products.
           </p>
         </div>
 

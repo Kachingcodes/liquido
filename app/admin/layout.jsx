@@ -41,28 +41,12 @@ export default function AdminLayout({ children }) {
 
 
   return (
-    <div className="flex min-h-screen bg-gray-100 dark:bg-neutral-900 transition-colors duration-300">
+    <div className="flex min-h-screen bg-white md:bg-gray-100 dark:bg-neutral-900 transition-colors duration-300">
 
       {/* ─── Desktop Sidebar ─────────────────────── */}
       <div className="hidden md:flex fixed top-0 left-0 min-h-screen w-64 z-30">
         <AdminSidebar />
       </div>
-
-      {/* ─── Mobile Hamburger Button ────────────── */}
-      <button
-        id="hamburger-btn"
-        onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-5 left-2 z-[60]"
-      >
-        <Menu
-          size={28}
-          className={` ${
-            isOpen
-              ? "hidden"
-              : "text-gray-800 dark:text-gray-100"
-          }`}
-        />
-      </button>
 
       {/* ─── Mobile Sidebar Overlay ─────────────── */}
       <AnimatePresence>
@@ -101,27 +85,41 @@ export default function AdminLayout({ children }) {
         )}
       </AnimatePresence>
 
-      {/* ─── Main Content ───────────────────────── */}
-      <main className="flex-1 md:ml-64 mt-4 p-2 relative">
-        {/* 🌗 Dark Mode Toggle */}
-        {/* <button
-          onClick={() => setTheme(theme === "light" ? "dark" : "light")}
-          className="fixed top-3 right-2 md:right-4 p-2 z-100 rounded-full  shadow transition"
-        >
-          {theme === "light" ? (
-            <Moon className="text-gray-900" size={22} />
-          ) : (
-            <Sun className="text-yellow-300" size={22} />
-          )}
-        </button> */}
+      {/* ─── Main Content ─── */}
+      <main className="flex-1 md:ml-64 relative">
 
-        <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.4 }}
-        >
-          {children}
-        </motion.div>
+        {/* Sticky Mobile Header */}
+        <div className="md:hidden fixed top-0 left-0 right-0 z-40 h-14 bg-[#1C4672] shadow-md flex items-center justify-center">
+          <div className="md:hidden flex items-center justify-center">
+
+            <button
+              onClick={() => setIsOpen(true)}
+              className={`absolute left-4 transition ${
+                isOpen ? "opacity-0 pointer-events-none" : "opacity-100"
+              }`}
+            >
+              <Menu size={24} className="text-white" />
+            </button>
+
+            <h1 className="text-lg font-semibold text-white">
+              Liquido Admin
+            </h1>
+
+            <div className="absolute right-4 w-7" />
+          </div>
+        </div>
+
+        {/* Page Content */}
+        <div className="p-2 mt-8 md:mt-0">
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            {children}
+          </motion.div>
+        </div>
+
       </main>
     </div>
   );
