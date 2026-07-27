@@ -110,7 +110,7 @@ export default function AdminLayout({ children }) {
         </div>
 
         {/* Page Content */}
-        <div className="p-2 mt-8 md:mt-0">
+        <div className="p-2 mt-12 md:mt-0">
           <motion.div
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
