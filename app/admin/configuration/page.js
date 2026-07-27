@@ -38,12 +38,12 @@ export default function Configuration() {
 
             <div className="flex items-center gap-3">
 
-                <div className="h-12 w-12 md:h-14 md:w-14 rounded-2xl bg-[#1C4672]/10 flex items-center justify-center flex-shrink-0">
+                {/* <div className="h-12 w-12 md:h-14 md:w-14 rounded-2xl bg-[#1C4672]/10 flex items-center justify-center flex-shrink-0">
                 <Settings2
                     size={24}
                     className="text-[#1C4672] md:w-7 md:h-7"
                 />
-                </div>
+                </div> */}
 
                 <div className="min-w-0">
                 <h1 className="text-2xl md:text-3xl font-bold text-[#1C4672]">

@@ -52,9 +52,16 @@ export default function AdminLayout({ children }) {
       <button
         id="hamburger-btn"
         onClick={() => setIsOpen(true)}
-        className="md:hidden fixed top-5 left-2 z-100"
+        className="md:hidden fixed top-5 left-2 z-[60]"
       >
-        <Menu size={28} className="text-gray-800 dark:text-gray-100" />
+        <Menu
+          size={28}
+          className={` ${
+            isOpen
+              ? "hidden"
+              : "text-gray-800 dark:text-gray-100"
+          }`}
+        />
       </button>
 
       {/* ─── Mobile Sidebar Overlay ─────────────── */}
@@ -85,9 +92,9 @@ export default function AdminLayout({ children }) {
 
               <button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-4 right-4 rounded-lg p-2 bg-white/20 hover:bg-white/30"
+                  className="absolute top-4 right-4 rounded-lg"
               >
-                  <X className="text-white" size={24} />
+                  <X className="text-white" size={22} />
               </button>
             </motion.div>
           </>
@@ -95,9 +102,9 @@ export default function AdminLayout({ children }) {
       </AnimatePresence>
 
       {/* ─── Main Content ───────────────────────── */}
-      <main className="flex-1 md:ml-64 p-2 relative">
+      <main className="flex-1 md:ml-64 mt-4 p-2 relative">
         {/* 🌗 Dark Mode Toggle */}
-        <button
+        {/* <button
           onClick={() => setTheme(theme === "light" ? "dark" : "light")}
           className="fixed top-3 right-2 md:right-4 p-2 z-100 rounded-full  shadow transition"
         >
@@ -106,7 +113,7 @@ export default function AdminLayout({ children }) {
           ) : (
             <Sun className="text-yellow-300" size={22} />
           )}
-        </button>
+        </button> */}
 
         <motion.div
           initial={{ opacity: 0, y: 15 }}

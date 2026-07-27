@@ -147,198 +147,316 @@ export default function AdminOrdersPage() {
   return (
     <div className="min-h-screen bg-gray-50">
 
-      {/* Header */}
-      <div className="bg-white border-b sticky top-0 z-20">
-        <div className="max-w-7xl mx-auto px-6 py-5">
+  {/* ================= HEADER ================= */}
 
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-5">
+  <div className="bg-white border-b sticky top-0 z-20">
+    <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
 
-            <div>
-              <h1 className={`${quick.className} text-3xl text-[#1C4672]`}>
-                Orders Management
-              </h1>
+      <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
 
-              <p className="text-gray-500 mt-1">
-                View and manage all customer orders.
-              </p>
-            </div>
+        <div>
+          <h1 className={`${quick.className} text-2xl md:text-3xl text-[#1C4672]`}>
+            Orders Management
+          </h1>
 
-            <div className="flex items-center gap-3">
+          <p className="text-gray-500 mt-1 text-sm md:text-base">
+            View and manage all customer orders.
+          </p>
+        </div>
 
-              <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center min-w-[110px]">
-                <p className="text-xs text-gray-500 uppercase">
-                  Orders
-                </p>
+        <div className="grid grid-cols-2 gap-3 w-full md:w-auto">
 
-                <h2 className="text-2xl font-bold text-[#1C4672]">
-                  {processedOrders.length}
-                </h2>
-              </div>
+          <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center">
+            <p className="text-xs uppercase text-gray-500">
+              Orders
+            </p>
 
-              <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center min-w-[130px]">
-                <p className="text-xs text-gray-500 uppercase">
-                  Revenue
-                </p>
+            <h2 className="text-xl md:text-2xl font-bold text-[#1C4672]">
+              {processedOrders.length}
+            </h2>
+          </div>
 
-                <h2 className="text-xl font-bold text-green-600">
-                  ₦
-                  {processedOrders
-                    .reduce((sum, o) => sum + Number(o.total || 0), 0)
-                    .toLocaleString()}
-                </h2>
-              </div>
+          <div className="bg-white border rounded-xl px-4 py-3 shadow-sm text-center">
+            <p className="text-xs uppercase text-gray-500">
+              Revenue
+            </p>
 
-            </div>
-
+            <h2 className="text-lg md:text-xl font-bold text-green-600">
+              ₦
+              {processedOrders
+                .reduce((sum, o) => sum + Number(o.total || 0), 0)
+                .toLocaleString()}
+            </h2>
           </div>
 
         </div>
+
       </div>
 
-      {/* Search + Filters */}
+    </div>
+  </div>
 
-      <div className="max-w-7xl mx-auto px-6 mt-6">
+  {/* ================= SEARCH ================= */}
 
-        <div className="bg-white rounded-2xl border shadow-sm p-5">
+  <div className="max-w-7xl mx-auto px-4 md:px-6 mt-5 md:mt-6">
 
-          <div className="flex flex-col lg:flex-row gap-4">
+    <div className="bg-white rounded-2xl border shadow-sm p-4 md:p-5">
 
-            {/* Search */}
+      <div className="flex flex-col md:flex-row gap-3">
 
-            <div className="relative flex-1">
+        <div className="relative flex-1">
 
-              <Search
-                size={18}
-                className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
-              />
+          <Search
+            size={18}
+            className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-400"
+          />
 
-              <input
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-                placeholder="Search Order ID, customer, item..."
-                className="w-full h-12 rounded-xl border border-gray-200 pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#1C4672]"
-              />
-
-            </div>
-
-            {/* Filter */}
-
-            <select
-              value={filter}
-              onChange={(e) => setFilter(e.target.value)}
-              className="h-12 rounded-xl border border-gray-200 px-4"
-            >
-              <option value="all">All Orders</option>
-              <option value="paid">Paid</option>
-              <option value="unpaid">Unpaid</option>
-            </select>
-
-            {/* Sort */}
-
-            <select
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value)}
-              className="h-12 rounded-xl border border-gray-200 px-4"
-            >
-              <option value="desc">Newest</option>
-              <option value="asc">Oldest</option>
-            </select>
-
-          </div>
+          <input
+            value={search}
+            onChange={(e) => setSearch(e.target.value)}
+            placeholder="Search Order ID, customer..."
+            className="w-full h-12 rounded-xl border pl-11 pr-4 outline-none focus:ring-2 focus:ring-[#1C4672]"
+          />
 
         </div>
 
-        {/* Orders Table starts below
+        <select
+          value={filter}
+          onChange={(e) => setFilter(e.target.value)}
+          className="h-12 rounded-xl border px-4 md:w-44"
+        >
+          <option value="all">All Orders</option>
+          <option value="paid">Paid</option>
+          <option value="unpaid">Unpaid</option>
+        </select>
 
-        <div className="bg-white rounded-2xl shadow-sm border mt-6 overflow-hidden"></div> */}
+        <select
+          value={sortOrder}
+          onChange={(e) => setSortOrder(e.target.value)}
+          className="h-12 rounded-xl border px-4 md:w-40"
+        >
+          <option value="desc">Newest</option>
+          <option value="asc">Oldest</option>
+        </select>
 
-        {/* Orders Table */}
-        <div className="bg-white rounded-2xl shadow border border-gray-100 overflow-hidden">
-          <div className="overflow-x-auto">
-            <table className="w-full min-w-[900px]">
-              <thead className="bg-gray-50 border-b">
-                <tr className="text-left text-sm text-gray-600">
-                  <th className="px-6 py-4 font-semibold">Order ID</th>
-                  <th className="px-6 py-4 font-semibold">Date</th>
-                  <th className="px-6 py-4 font-semibold">Customer</th>
-                  <th className="px-6 py-4 font-semibold">Location</th>
-                  <th className="px-6 py-4 font-semibold">Total</th>
-                  <th className="px-6 py-4 font-semibold">Payment</th>
-                  <th className="px-6 py-4 text-right font-semibold"></th>
-                </tr>
-              </thead>
-
-              <tbody>
-                <AnimatePresence>
-                  {processedOrders.map((order) => {
-                    const paymentStatus = order.paymentStatus === true;
-
-                    const badgeClass = paymentStatus
-                      ? "bg-green-100 text-green-700"
-                      : "bg-red-100 text-red-700";
-
-                    return (
-                      <motion.tr
-                        key={order.id}
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        exit={{ opacity: 0 }}
-                        className="border-b last:border-0 hover:bg-gray-50 transition"
-                      >
-                        <td className="px-6 py-5 font-semibold whitespace-nowrap">
-                          #{order.id}
-                        </td>
-
-                        <td className="px-6 py-5 whitespace-nowrap text-gray-600">
-                          {formatDate(order.date)}
-                        </td>
-
-                        <td className="px-6 py-5">
-                          {order.clientName || (
-                            <span className="text-gray-400">
-                              Not Assigned
-                            </span>
-                          )}
-                        </td>
-
-                        <td className="px-6 py-5">
-                          {order.location}
-                        </td>
-
-                        <td className="px-6 py-5 font-semibold">
-                          ₦{Number(order.total).toLocaleString()}
-                        </td>
-
-                        <td className="px-6 py-5">
-                          <span
-                            className={`px-3 py-1 rounded-full text-xs font-semibold ${badgeClass}`}
-                          >
-                            {paymentStatus ? "PAID" : "UNPAID"}
-                          </span>
-                        </td>
-
-                        <td className="px-6 py-5 text-right">
-                          <button
-                            onClick={() => {
-                              setSelectedOrder(order);
-                              setDrawerOpen(true);
-                            }}
-                            className="p-2 rounded-lg hover:bg-gray-100 transition"
-                          >
-                            <MoreVertical size={18} />
-                          </button>
-                        </td>
-                      </motion.tr>
-                    );
-                  })}
-                </AnimatePresence>
-              </tbody>
-            </table>
-          </div>
-        </div>
       </div>
+
+    </div>
+
+    {/* ================= MOBILE CARDS ================= */}
+
+    <div className="md:hidden mt-6 space-y-4">
 
       <AnimatePresence>
+
+        {processedOrders.map((order) => {
+
+          const paymentStatus = order.paymentStatus === true;
+
+          return (
+
+            <motion.div
+              key={order.id}
+              initial={{ opacity: 0, y: 15 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0 }}
+              className="bg-white rounded-2xl border shadow-sm p-5"
+            >
+
+              <div className="flex justify-between items-start">
+
+                <div>
+
+                  <h2 className="font-bold text-lg">
+                    #{order.id}
+                  </h2>
+
+                  <p className="text-sm text-gray-500">
+                    {formatDate(order.date)}
+                  </p>
+
+                </div>
+
+                <span
+                  className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                    paymentStatus
+                      ? "bg-green-100 text-green-700"
+                      : "bg-red-100 text-red-700"
+                  }`}
+                >
+                  {paymentStatus ? "PAID" : "UNPAID"}
+                </span>
+
+              </div>
+
+              <div className="mt-4 space-y-2 text-sm">
+
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Customer</span>
+                  <span>{order.clientName || "Not Assigned"}</span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Location</span>
+                  <span>{order.location}</span>
+                </div>
+
+                <div className="flex justify-between">
+                  <span className="text-gray-500">Total</span>
+                  <span className="font-semibold">
+                    ₦{Number(order.total).toLocaleString()}
+                  </span>
+                </div>
+
+              </div>
+
+              <button
+                onClick={() => {
+                  setSelectedOrder(order);
+                  setDrawerOpen(true);
+                }}
+                className="mt-5 w-full h-11 rounded-xl bg-[#1C4672] text-white font-semibold hover:bg-[#16395d]"
+              >
+                View Order
+              </button>
+
+            </motion.div>
+
+          );
+
+        })}
+
+      </AnimatePresence>
+
+    </div>
+
+    {/* ================= DESKTOP TABLE ================= */}
+
+    <div className="hidden md:block bg-white rounded-2xl shadow border border-gray-100 mt-6 overflow-hidden">
+
+      <div className="overflow-x-auto">
+
+        <table className="w-full min-w-[900px]">
+
+          <thead className="bg-gray-50 border-b">
+
+            <tr>
+
+              <th className="px-6 py-4 text-left font-semibold">
+                Order ID
+              </th>
+
+              <th className="px-6 py-4 text-left font-semibold">
+                Date
+              </th>
+
+              <th className="px-6 py-4 text-left font-semibold">
+                Customer
+              </th>
+
+              <th className="px-6 py-4 text-left font-semibold">
+                Location
+              </th>
+
+              <th className="px-6 py-4 text-left font-semibold">
+                Total
+              </th>
+
+              <th className="px-6 py-4 text-left font-semibold">
+                Payment
+              </th>
+
+              <th className="px-6 py-4 text-right"></th>
+
+            </tr>
+
+          </thead>
+
+          <tbody>
+
+            <AnimatePresence>
+
+              {processedOrders.map((order) => {
+
+                const paymentStatus = order.paymentStatus === true;
+
+                return (
+
+                  <motion.tr
+                    key={order.id}
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    exit={{ opacity: 0 }}
+                    className="border-b hover:bg-gray-50"
+                  >
+
+                    <td className="px-6 py-5 font-semibold">
+                      #{order.id}
+                    </td>
+
+                    <td className="px-6 py-5">
+                      {formatDate(order.date)}
+                    </td>
+
+                    <td className="px-6 py-5">
+                      {order.clientName || "Not Assigned"}
+                    </td>
+
+                    <td className="px-6 py-5">
+                      {order.location}
+                    </td>
+
+                    <td className="px-6 py-5 font-semibold">
+                      ₦{Number(order.total).toLocaleString()}
+                    </td>
+
+                    <td className="px-6 py-5">
+
+                      <span
+                        className={`px-3 py-1 rounded-full text-xs font-semibold ${
+                          paymentStatus
+                            ? "bg-green-100 text-green-700"
+                            : "bg-red-100 text-red-700"
+                        }`}
+                      >
+                        {paymentStatus ? "PAID" : "UNPAID"}
+                      </span>
+
+                    </td>
+
+                    <td className="px-6 py-5 text-right">
+
+                      <button
+                        onClick={() => {
+                          setSelectedOrder(order);
+                          setDrawerOpen(true);
+                        }}
+                        className="p-2 rounded-lg hover:bg-gray-100"
+                      >
+                        <MoreVertical size={18} />
+                      </button>
+
+                    </td>
+
+                  </motion.tr>
+
+                );
+
+              })}
+
+            </AnimatePresence>
+
+          </tbody>
+
+        </table>
+
+      </div>
+
+    </div>
+
+  </div>
+
+        <AnimatePresence>
           {drawerOpen && selectedOrder && (
             <>
               {/* Overlay */}
@@ -528,6 +646,7 @@ export default function AdminOrdersPage() {
             </>
           )}
         </AnimatePresence>
+
   </div>
   );
 }

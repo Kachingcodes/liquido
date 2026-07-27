@@ -106,6 +106,7 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
                     <Link 
                     href="/admin/configuration"               
                     className="block px-3 py-2 rounded-lg hover:bg-[#4C86C4] transition"
+                    onClick={onSelect}
                     >
                         <div className="flex items-center gap-2">
                             <Settings2 size={18}/> Configuration

@@ -168,7 +168,7 @@ const doughnutOptions = useMemo(() => ({
     <div className={darkMode ? "dark" : ""}>
       <div className="min-h-screen p-0 md:p-2 w-full text-black dark:text-white">
 
-        <header className="sticky top-0 z-50 bg-gray-100 dark:bg-neutral-900 w-full flex items-center justify-between p-2 md:p-4">
+        <header className="sticky top-0 bg-gray-100 dark:bg-neutral-900 w-full flex items-center justify-between p-2 md:p-4">
           <div className="flex flex-col px-4 md:px-0">
             <h1 className="text-xl md:text-2xl font-semibold tracking-tight">Dashboard</h1>
             <p className="text-sm opacity-70 mt-1">Signed in as {adminEmail}</p>
