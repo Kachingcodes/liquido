@@ -4,7 +4,8 @@ import Image from 'next/image';
 import { assets } from '@/public/assets';
 import Link from "next/link";
 import { useRouter, usePathname } from "next/navigation";
-import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon, StoreIcon, TruckIcon, Boxes, Settings2 } from "lucide-react";
+import { LogOut, ShoppingBag, Package, MessageSquare, HomeIcon,
+     StoreIcon, TruckIcon, Boxes, Settings2 } from "lucide-react";
 import { LuLayoutDashboard } from "react-icons/lu";
 import { Quicksand } from 'next/font/google';
 
@@ -39,18 +40,19 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
 
 
     return (
-        <aside className={`w-54 bg-[#1C4672] text-white flex flex-col justify-between overflow-hidden
-      ${!isMobile ? "hidden md:flex" : "flex md:hidden"}`}>
+        <aside className="h-full w-full bg-[#1C4672] flex flex-col">
             <div>
-                <div className="relative w-30 h-auto py-4 ml-6">
+                <div className="relative w-32 h-auto py-6 mx-auto">
                     <Image src={assets.logo} alt="logo" className="object-contain" priority/>
                 </div>
         
-                <div className={`${quick.className} p-4 text-xl font-semibold border-b border-blue-400`}>
+                <div
+                    className={`${quick.className} text-white px-6 py-4 text-xl font-semibold border-b border-blue-400`}
+                >
                     Liquido Admin
                 </div>
                 
-                <nav className="p-2 space-y-2">     
+                <nav className="flex-1 overflow-y-auto px-3 py-4 space-y-2 text-white">     
                     <Link
                     href="/admin/dashboard"
                     className="block px-2 py-2 rounded-lg hover:bg-[#4C86C4] transition"
@@ -140,10 +142,11 @@ const AdminSidebar = ({ isMobile = false, onSelect }) => {
             </div>
 
             <button
-                onClick={handleLogout}
-                className="m-4 flex items-center gap-2 bg-white text-[#1C4672] px-2 py-2 rounded-lg hover:bg-blue-50 transition"
-                >
-                <LogOut size={16}/> Logout
+            onClick={handleLogout}
+            className="mx-4 mb-6 flex items-center justify-center gap-2 bg-white text-[#1C4672] px-4 py-3 rounded-xl hover:bg-blue-50 transition"
+            >
+            <LogOut size={16} />
+            Logout
             </button>
         </aside> 
     );

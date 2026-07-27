@@ -87,7 +87,7 @@ router.push("/admin/dashboard");
 
   return (
     <main className="flex min-h-screen items-center justify-center bg-gradient-to-br from-white via-gray-50 to-primary/5 p-6">
-      <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-gray-700 p-8 shadow-2xl">
+      <div className="w-full max-w-md rounded-3xl border border-gray-200 bg-gray-700 p-4 md:p-8 shadow-2xl">
 
         {/* Logo */}
 

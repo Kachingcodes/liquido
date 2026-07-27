@@ -73,24 +73,22 @@ export default function AdminLayout({ children }) {
 
             {/* Sidebar */}
             <motion.div
-              initial={{ x: "-100%" }}
-              animate={{ x: 0 }}
-              exit={{ x: "-100%" }}
-              transition={{ duration: 0.3 }}
-              id="mobile-sidebar"
-              className="md:hidden fixed top-0 left-0 min-h-screen w-64 z-100 bg-white dark:bg-gray-800 shadow-2xl overflow-y-auto"
+            initial={{ x: "-100%" }}
+            animate={{ x: 0 }}
+            exit={{ x: "-100%" }}
+            transition={{ duration: 0.3 }}
+            className="fixed inset-y-0 left-0 w-64 z-50 shadow-2xl"
             >
+              <AdminSidebar
+                  onSelect={() => setIsOpen(false)}
+              />
+
               <button
-                onClick={() => setIsOpen(false)}
-                className="absolute top-4 right-4 z-50 p-2"
+                  onClick={() => setIsOpen(false)}
+                  className="absolute top-4 right-4 rounded-lg p-2 bg-white/20 hover:bg-white/30"
               >
-                <X size={26} className="text-white"/>
+                  <X className="text-white" size={24} />
               </button>
-                      
-              <div className="flex">
-                <AdminSidebar onSelect={() => setIsOpen(false)} isMobile={true}/>
-              </div>
-              
             </motion.div>
           </>
         )}

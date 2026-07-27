@@ -90,11 +90,11 @@ export default function Configuration() {
                         }
                     `}
                     >
-                    <Icon size={18} />
+                        <Icon size={18} />
 
-                    <span className="text-sm md:text-base">
-                        {item.label}
-                    </span>
+                        <span className="text-sm md:text-base">
+                            {item.label}
+                        </span>
                     </button>
                 );
                 })}
