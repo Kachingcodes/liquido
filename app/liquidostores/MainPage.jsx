@@ -246,13 +246,13 @@ export default function MainPage() {
 
             </div>
 
-            <h2 className="text-xl font-semibold text-center mt-4">
+            <h2 className="text-xl font-semibold text-center mt-2">
 
               {selectedProduct.name}
 
             </h2>
 
-            <div className="mt-6">
+            <div className="mt-4">
               <h4 className="font-medium mb-2">
                 Select Volume
               </h4>
@@ -284,7 +284,7 @@ export default function MainPage() {
               </div>
 
             </div>
-            <div className="mt-6">
+            <div className="mt-4">
               <h4 className="font-medium mb-2">
                 Select Pack Size
               </h4>
@@ -318,7 +318,7 @@ export default function MainPage() {
 
             {selectedVariant && (
 
-              <div className="mt-6 border-t pt-5 space-y-3">
+              <div className="mt-4 border-t pt-5 space-y-3">
 
                 <div className="flex justify-between">
                   <span className="font-medium">
@@ -352,17 +352,6 @@ export default function MainPage() {
                     ).toLocaleString()}
                   </span>
                 </div>
-
-                <div className="flex justify-between">
-                  <span className="font-medium">
-                    Stock
-                  </span>
-
-                  <span>
-                    {selectedVariant.stock} Available
-                  </span>
-                </div>
-
               </div>
 
             )}
@@ -418,7 +407,6 @@ export default function MainPage() {
                       selectedVariant.stock
                     ),
 
-                  quantity: 1,
                 });
 
                 setTimeout(() => {

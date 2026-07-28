@@ -71,6 +71,7 @@ const ProductForm = ({
     option: "",
     image: "",
     variants: [emptyVariant],
+    isVisible: true,
   });
 
   useEffect(() => {

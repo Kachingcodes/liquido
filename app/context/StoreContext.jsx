@@ -25,25 +25,43 @@ export function StoreProvider({ children }) {
   const topCartRef = useRef(null);
 
 
-  const [cart, setCart] = useState(() => {
-  if (typeof window !== "undefined") {
-    const savedCart = localStorage.getItem("cart");
-    return savedCart ? JSON.parse(savedCart) : [];
-  }
-  return [];
-});
+//   const [cart, setCart] = useState(() => {
+//   if (typeof window !== "undefined") {
+//     const savedCart = localStorage.getItem("cart");
+//     return savedCart ? JSON.parse(savedCart) : [];
+//   }
+//   return [];
+// });
+
+// useEffect(() => {
+//   if (typeof window !== "undefined") {
+//     localStorage.setItem("cart", JSON.stringify(cart));
+//   }
+// }, [cart]);
+
+// const clearCart = () => {
+//   setCart([]);
+//   localStorage.removeItem("cart");
+// };
+
+const [cart, setCart] = useState([]);
+const [cartLoaded, setCartLoaded] = useState(false);
 
 useEffect(() => {
-  if (typeof window !== "undefined") {
-    localStorage.setItem("cart", JSON.stringify(cart));
+  const savedCart = localStorage.getItem("cart");
+
+  if (savedCart) {
+    setCart(JSON.parse(savedCart));
   }
-}, [cart]);
 
-const clearCart = () => {
-  setCart([]);
-  localStorage.removeItem("cart");
-};
+  setCartLoaded(true);
+}, []);
 
+useEffect(() => {
+  if (!cartLoaded) return;
+
+  localStorage.setItem("cart", JSON.stringify(cart));
+}, [cart, cartLoaded]);
 
   // --- DETECT MOBILE ---
   useEffect(() => {
@@ -64,17 +82,26 @@ const clearCart = () => {
 
   // --- FETCH PRODUCTS ---
   useEffect(() => {
-    const fetchProducts = async () => {
-      const querySnapshot = await getDocs(collection(db, "products"));
-      const items = querySnapshot.docs.map((doc) => ({
+  const fetchProducts = async () => {
+    const querySnapshot = await getDocs(collection(db, "products"));
+
+    const items = querySnapshot.docs
+      .map((doc) => ({
         id: doc.id,
         ...doc.data(),
-      }));
-      setProducts(items);
-      setFilteredProducts(items);
-    };
-    fetchProducts();
-  }, []);
+      }))
+      .filter((product) => product.isVisible !== false);
+
+    setProducts(items);
+    setFilteredProducts(items);
+  };
+
+  fetchProducts();
+}, []);
+
+useEffect(() => {
+  console.log("StoreProvider mounted");
+}, []);
 
   // --- FAVOURITES ---
   const toggleFavourite = (product) => {
@@ -239,6 +266,11 @@ const toggleSidePanel = () => {
 }, [products, activeCategory, selectedOption]);
 
 
+const clearCart = () => {
+  setCart([]);
+  localStorage.removeItem("cart");
+};
+
   // --- PROVIDER VALUES ---
   return (
     <StoreContext.Provider
@@ -274,6 +306,7 @@ const toggleSidePanel = () => {
         openCart,
         clearCart,
         cartCount,
+        cartLoaded,
 
         //LEFTSIDE MOBILE VIEW
         leftSideOpen,

@@ -1,17 +1,17 @@
 "use client";
 import React, { useEffect, useMemo, useState } from "react";
-import {
-  collection,
-  query,
-  orderBy,
-  onSnapshot,
-  updateDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, query, orderBy,
+  onSnapshot, updateDoc, doc, runTransaction,
+  deleteDoc, } from "firebase/firestore";
 import { db } from "../../../firebase/firebase"; // adjust path if necessary
 import { motion, AnimatePresence } from "framer-motion";
 import { Quicksand } from "next/font/google";
 import { Search, CheckCircle, XCircle, MoreVertical, X } from "lucide-react";
+import DeleteOrderModal from "./DeleteOrderModal";
+import toast, { Toaster } from "react-hot-toast";
+
+
+
 
 const quick = Quicksand({
   subsets: ["latin"],
@@ -36,6 +36,11 @@ export default function AdminOrdersPage() {
   const [expandedId, setExpandedId] = useState(null); // expand order details
   const [selectedOrder, setSelectedOrder] = useState(null);
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const [deleteModalOpen, setDeleteModalOpen] = useState(false);
+  const [orderToDelete, setOrderToDelete] = useState(null);
+  const [deleting, setDeleting] = useState(false);
+
+
 
   // subscribe to firestore orders (real-time)
   useEffect(() => {
@@ -77,19 +82,105 @@ export default function AdminOrdersPage() {
   }
 };
 
+const reduceProductStock = async (order) => {
+  await runTransaction(db, async (transaction) => {
+    for (const item of order.items) {
+      const productRef = doc(db, "products", item.productId);
+
+      const productSnap = await transaction.get(productRef);
+
+      if (!productSnap.exists()) {
+        throw new Error(`Product not found: ${item.productId}`);
+      }
+
+      const product = productSnap.data();
+
+      const updatedVariants = (product.variants || []).map((variant) => {
+        const sameVolume = variant.volume === item.volume;
+        const samePack =
+          (variant.packSize || null) === (item.packSize || null);
+
+        if (sameVolume && samePack) {
+          const currentStock = Number(variant.stock);
+
+          if (currentStock < item.qty) {
+            throw new Error(
+              `${product.name} does not have enough stock.`
+            );
+          }
+
+          return {
+            ...variant,
+            stock: currentStock - item.qty,
+          };
+        }
+
+        return variant;
+      });
+
+      transaction.update(productRef, {
+        variants: updatedVariants,
+      });
+    }
+  });
+};
+
   // change payment status
   const handlePaymentStatusChange = async (firestoreId, isPaid) => {
-    try {
-      await updateDoc(
-        doc(db, "storesorders", firestoreId),
-        {
-          paymentStatus: isPaid,
-        }
-      );
-    } catch (err) {
-      console.error("Failed to update payment status:", err);
+  try {
+    const order = orders.find(
+      (o) => o.firestoreId === firestoreId
+    );
+
+    if (!order) return;
+
+    // Only reduce stock the first time an order becomes paid
+    if (
+      isPaid &&
+      !order.paymentStatus &&
+      !order.inventoryUpdated
+    ) {
+      await reduceProductStock(order);
     }
-  };
+
+    await updateDoc(
+      doc(db, "storesorders", firestoreId),
+      {
+        paymentStatus: isPaid,
+        inventoryUpdated:
+          isPaid || order.inventoryUpdated,
+      }
+    );
+  } catch (err) {
+    console.error(err);
+    toast.error(err.message || "Failed to update order.");
+  }
+};
+
+const handleDeleteOrder = async () => {
+  if (!orderToDelete) return;
+
+  try {
+    setDeleting(true);
+
+    await deleteDoc(
+      doc(db, "storesorders", orderToDelete.firestoreId)
+    );
+
+    toast.success("Order deleted successfully.");
+
+    setDeleteModalOpen(false);
+    setOrderToDelete(null);
+    setSelectedOrder(null);
+    setDrawerOpen(false);
+
+  } catch (err) {
+    console.error(err);
+    toast.error("Failed to delete order.");
+  } finally {
+    setDeleting(false);
+  }
+};
 
 
   // search + filter + sort
@@ -148,7 +239,10 @@ export default function AdminOrdersPage() {
     <div className="min-h-screen bg-gray-50">
 
   {/* ================= HEADER ================= */}
-
+ <Toaster
+        position="top-right"
+        reverseOrder={false}
+      />
   <div className="bg-white border-b sticky top-0 z-20">
     <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-5">
 
@@ -642,10 +736,35 @@ export default function AdminOrdersPage() {
                   </div>
 
                 </div>
+
+                <div className="sticky bottom-0 bg-white border-t p-4 flex justify-center">
+                  <button
+                    onClick={() => {
+                      setOrderToDelete(selectedOrder);
+                      setDeleteModalOpen(true);
+                    }}
+                    className="w-full bg-red-700 hover:bg-red-800 transition py-3 rounded-xl text-white font-medium"
+                  >
+                    Delete Order
+                  </button>
+                </div>
               </motion.div>
             </>
           )}
         </AnimatePresence>
+
+        <DeleteOrderModal
+          open={deleteModalOpen}
+          loading={deleting}
+          orderId={orderToDelete?.id}
+          onClose={() => {
+              if (deleting) return;
+
+              setDeleteModalOpen(false);
+              setOrderToDelete(null);
+          }}
+          onConfirm={handleDeleteOrder}
+        />
 
   </div>
   );

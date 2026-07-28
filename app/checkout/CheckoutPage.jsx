@@ -33,7 +33,7 @@ const StepWrapper = ({ children }) => (
 
 // -------------------- CHECKOUT PAGE --------------------
 export default function CheckoutPage() {
-  const { cart, setCart } = useStore();
+  const { cart, setCart, cartLoaded } = useStore();
   const router = useRouter();
 
   // -------------------- STATES --------------------
@@ -196,6 +196,7 @@ export default function CheckoutPage() {
         payment,
         clientName: "",
         paymentStatus: false,
+        inventoryUpdated: false,
       });
 
       const existingOrders =
@@ -232,40 +233,6 @@ export default function CheckoutPage() {
 
       const whatsappUrl = `whatsapp://send?phone=2347062757706&text=${whatsappMsg}`;
 
-      // -------------------- DEDUCT STOCK --------------------
-      for (const item of cart) {
-        const productRef = doc(db, "products", item.productId);
-
-        const snapshot = await getDoc(productRef);
-
-        if (!snapshot.exists()) continue;
-
-        const product = snapshot.data();
-
-        const updatedVariants = (product.variants || []).map((variant) => {
-          const sameVolume = variant.volume === item.volume;
-
-          const samePack =
-            (variant.packSize || null) === (item.packSize || null);
-
-          if (sameVolume && samePack) {
-            return {
-              ...variant,
-              stock: Math.max(
-                0,
-                Number(variant.stock) - item.qty
-              ),
-            };
-          }
-
-          return variant;
-        });
-
-        await updateDoc(productRef, {
-          variants: updatedVariants,
-        });
-      }
-
       toast.success("Order placed successfully!");
 
       window.location.href = whatsappUrl;
@@ -282,12 +249,9 @@ export default function CheckoutPage() {
     }
   };
 
-  if (!isLoaded) return null;
+  if (!isLoaded || !cartLoaded) return null;
 
-  console.log({
-  loadingDelivery,
-  deliveryFees,
-});
+
 
 return (
   <div className="min-h-screen bg-slate-50">
