@@ -111,11 +111,11 @@ return (
 
         <div>
 
-          <h1 className="text-2xl md:text-3xl font-bold text-[#1C4672]">
+          <h1 className="text-xl md:text-2xl font-bold text-[#1C4672]">
             Delivery Fees
           </h1>
 
-          <p className="text-sm md:text-base text-gray-500 mt-1">
+          <p className="text-sm md:text-md text-gray-500 mt-1">
             Manage delivery locations and their fees.
           </p>
 
@@ -123,13 +123,13 @@ return (
 
         <div className="flex gap-3 w-full lg:w-auto">
 
-          <div className="flex-1 bg-white border rounded-xl px-4 py-3 shadow-sm text-center">
+          <div className="flex-1 bg-white border rounded-xl px-3 py-2 shadow-sm text-center">
 
             <p className="text-xs uppercase text-gray-500">
               Locations
             </p>
 
-            <h2 className="text-xl md:text-2xl font-bold text-[#1C4672]">
+            <h2 className="text-lg md:text-xl font-bold text-[#1C4672]">
               {deliveryFees.length}
             </h2>
 
@@ -137,7 +137,7 @@ return (
 
           <button
             onClick={openAddDrawer}
-            className="flex-1 bg-[#1C4672] hover:bg-[#16395d] text-white rounded-xl font-semibold transition px-4 py-3"
+            className="flex-1 bg-[#1C4672] hover:bg-[#16395d] text-white rounded-xl transition px-3 py-2"
           >
             + Add Location
           </button>
@@ -380,7 +380,7 @@ return (
             </div>
 
             {/* Body */}
-            <div className="p-5 md:p-6 space-y-6 pb-12 md:pb-32">
+            <div className="p-5 md:p-6 space-y-5 pb-12 md:pb-24">
 
             <div>
                 <label className="block mb-2 font-medium">
@@ -395,7 +395,7 @@ return (
                     name: e.target.value,
                     })
                 }
-                className="w-full border rounded-xl px-4 py-3"
+                className="w-full border rounded-xl px-4 py-2"
                 />
             </div>
 
@@ -413,7 +413,7 @@ return (
                     fees: e.target.value,
                     })
                 }
-                className="w-full border rounded-xl px-4 py-3"
+                className="w-full border rounded-xl px-4 py-2"
                 />
             </div>
 
@@ -431,7 +431,7 @@ return (
                         active: true,
                     })
                     }
-                    className={`flex-1 py-3 transition ${
+                    className={`flex-1 py-2 transition ${
                     form.active
                         ? "bg-green-600 text-white"
                         : "bg-white"
@@ -448,7 +448,7 @@ return (
                         active: false,
                     })
                     }
-                    className={`flex-1 py-3 transition ${
+                    className={`flex-1 py-2 transition ${
                     !form.active
                         ? "bg-red-600 text-white"
                         : "bg-white"

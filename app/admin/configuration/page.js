@@ -38,13 +38,6 @@ export default function Configuration() {
 
             <div className="flex items-center gap-3">
 
-                {/* <div className="h-12 w-12 md:h-14 md:w-14 rounded-2xl bg-[#1C4672]/10 flex items-center justify-center flex-shrink-0">
-                <Settings2
-                    size={24}
-                    className="text-[#1C4672] md:w-7 md:h-7"
-                />
-                </div> */}
-
                 <div className="min-w-0">
                 <h1 className="text-2xl md:text-3xl font-bold text-[#1C4672]">
                     Configuration
@@ -76,8 +69,8 @@ export default function Configuration() {
                     onClick={() => setTab(item.id)}
                     className={`
                         flex items-center gap-2
-                        px-4 md:px-5
-                        py-2.5 md:py-3
+                        px-3 md:px-4
+                        py-1.5 md:py-2
                         rounded-xl
                         whitespace-nowrap
                         transition

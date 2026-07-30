@@ -17,28 +17,25 @@ export default function Categories() {
   const [editingOption, setEditingOption] = useState(null);
   const [deleteOptionModal, setDeleteOptionModal] = useState(false);
 
-  const [categoryForm, setCategoryForm] = useState({
-    name: "",
-    active: true,
-  });
+const [categoryForm, setCategoryForm] = useState({
+  name: "",
+  active: true,
+  options: [],
+});
 
-  const [optionForm, setOptionForm] = useState({
-    name: "",
-    active: true,
-  });
+const [optionForm, setOptionForm] = useState({
+  name: "",
+  active: true,
+});
 
-
-  // LOAD OPTIONS
+// LOAD OPTIONS
 
 useEffect(() => {
   const unsubscribe = onSnapshot(
     collection(db, "categories"),
     async (snapshot) => {
-
       const categories = await Promise.all(
-
         snapshot.docs.map(async (categoryDoc) => {
-
           const optionsSnapshot = await getDocs(
             collection(
               db,
@@ -51,14 +48,12 @@ useEffect(() => {
           return {
             id: categoryDoc.id,
             ...categoryDoc.data(),
-
-            options: optionsSnapshot.docs.map(option => ({
+            options: optionsSnapshot.docs.map((option) => ({
               id: option.id,
               ...option.data(),
             })),
           };
         })
-
       );
 
       setCategories(categories);
@@ -68,115 +63,209 @@ useEffect(() => {
   return () => unsubscribe();
 }, []);
 
-  
-  // SEARCH
+// SEARCH
 
-  const filteredCategories = useMemo(() => {
-    return categories.filter((category) =>
-      category.name?.toLowerCase().includes(search.toLowerCase())
-    );
-  }, [categories, search]);
+const filteredCategories = useMemo(() => {
+  return categories.filter((category) =>
+    category.name?.toLowerCase().includes(search.toLowerCase())
+  );
+}, [categories, search]);
 
-  
-  // CATEGORY HELPERS
+// --------------------------------------
+// NEW CATEGORY OPTION HELPERS
+// --------------------------------------
 
-  const openAddCategory = () => {
-    setEditingCategory(null);
+const addOptionField = () => {
+  setCategoryForm((prev) => ({
+    ...prev,
+    options: [
+      ...prev.options,
+      {
+        name: "",
+        active: true,
+      },
+    ],
+  }));
+};
 
-    setCategoryForm({
-      name: "",
-      active: true,
-    });
+const updateOptionField = (index, field, value) => {
+  setCategoryForm((prev) => {
+    const options = [...prev.options];
 
-    setCategoryModalOpen(true);
-  };
+    options[index] = {
+      ...options[index],
+      [field]: value,
+    };
 
-  const openEditCategory = (category) => {
-    setEditingCategory(category);
+    return {
+      ...prev,
+      options,
+    };
+  });
+};
 
-    setCategoryForm({
-      name: category.name ?? "",
-      active: category.active ?? true,
-    });
+const removeOptionField = (index) => {
+  setCategoryForm((prev) => ({
+    ...prev,
+    options: prev.options.filter((_, i) => i !== index),
+  }));
+};
 
-    setCategoryModalOpen(true);
-  };
+// CATEGORY HELPERS
 
-  const saveCategory = async () => {
-    if (!categoryForm.name.trim()) {
-      alert("Category name is required.");
-      return;
-    }
+const openAddCategory = () => {
+  setEditingCategory(null);
 
-    try {
-      if (editingCategory) {
-        await updateDoc(doc(db, "categories", editingCategory.id), {
+  setCategoryForm({
+    name: "",
+    active: true,
+    options: [],
+  });
+
+  setCategoryModalOpen(true);
+};
+
+const openEditCategory = (category) => {
+  setEditingCategory(category);
+
+  setCategoryForm({
+    name: category.name ?? "",
+    active: category.active ?? true,
+    options: [],
+  });
+
+  setCategoryModalOpen(true);
+};
+
+// SAVE DONE: DON'T TOUCH
+const saveCategory = async () => {
+  if (!categoryForm.name.trim()) {
+    alert("Category name is required.");
+    return;
+  }
+
+  // Prevent empty option names when creating a category
+  if (!editingCategory) {
+  if (categoryForm.options.length === 0) {
+    alert("Please add at least one option.");
+    return;
+  }
+
+  const invalidOption = categoryForm.options.find(
+    (option) => !option.name.trim()
+  );
+
+  if (invalidOption) {
+    alert("Every option must have a name.");
+    return;
+  }
+}
+
+  try {
+    if (editingCategory) {
+      // ==========================
+      // UPDATE CATEGORY
+      // ==========================
+      await updateDoc(
+        doc(db, "categories", editingCategory.id),
+        {
           name: categoryForm.name.trim(),
           active: categoryForm.active,
-        });
-      } else {
-        await updateDoc(
-        doc(
-            db,
-            "categories",
-            editingCategory.id,
-            "options",
-            editingOption.id
-        ),
-        {
-            name: optionForm.name.trim(),
-            active: optionForm.active,
         }
+      );
+    } else {
+      // ==========================
+      // CREATE CATEGORY
+      // ==========================
+      const categoryRef = await addDoc(
+        collection(db, "categories"),
+        {
+          name: categoryForm.name.trim(),
+          active: categoryForm.active,
+        }
+      );
+
+      // ==========================
+      // CREATE OPTIONS
+      // ==========================
+      if (categoryForm.options.length > 0) {
+        await Promise.all(
+          categoryForm.options.map((option) =>
+            addDoc(
+              collection(
+                db,
+                "categories",
+                categoryRef.id,
+                "options"
+              ),
+              {
+                name: option.name.trim(),
+                active: option.active,
+              }
+            )
+          )
         );
       }
-
-      setCategoryModalOpen(false);
-    } catch (err) {
-      console.error(err);
     }
-  };
 
-  const deleteCategory = async () => {
-    if (!editingCategory) return;
-
-    try {
-      await deleteDoc(doc(db, "categories", editingCategory.id));
-
-      setDeleteCategoryModal(false);
-      setCategoryModalOpen(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
-
-  
-  // OPTION HELPERS
-
-  const openAddOption = () => {
-    if (!editingCategory) return;
-
-    setEditingOption(null);
-
-    setOptionForm({
+    // Reset form
+    setCategoryForm({
       name: "",
       active: true,
+      options: [],
     });
 
-    setOptionModalOpen(true);
-  };
+    setCategoryModalOpen(false);
+  } catch (err) {
+    console.error(err);
+    alert("Something went wrong while saving the category.");
+  }
+};
 
-  const openEditOption = (option) => {
-    setEditingOption(option);
+// DELETE CATEGORY
 
-    setOptionForm({
-      name: option.name ?? "",
-      active: option.active ?? true,
-    });
+const deleteCategory = async () => {
+  if (!editingCategory) return;
 
-    setOptionModalOpen(true);
-  };
+  try {
+    await deleteDoc(doc(db, "categories", editingCategory.id));
 
-  const saveOption = async () => {
+    setDeleteCategoryModal(false);
+    setCategoryModalOpen(false);
+  } catch (err) {
+    console.error(err);
+  }
+};
+
+// --------------------------------------
+// OPTION HELPERS (FOR EDIT MODE)
+// --------------------------------------
+
+const openAddOption = () => {
+  if (!editingCategory) return;
+
+  setEditingOption(null);
+
+  setOptionForm({
+    name: "",
+    active: true,
+  });
+
+  setOptionModalOpen(true);
+};
+
+const openEditOption = (option) => {
+  setEditingOption(option);
+
+  setOptionForm({
+    name: option.name ?? "",
+    active: option.active ?? true,
+  });
+
+  setOptionModalOpen(true);
+};
+
+const saveOption = async () => {
   if (!optionForm.name.trim()) {
     alert("Option name is required.");
     return;
@@ -218,33 +307,34 @@ useEffect(() => {
   }
 };
 
-  const deleteOption = async () => {
-    if (!editingOption) return;
+const deleteOption = async () => {
+  if (!editingOption) return;
 
-    try {
-      await deleteDoc(
-        doc(
-            db,
-            "categories",
-            editingCategory.id,
-            "options",
-            editingOption.id
-        )
-        )
+  try {
+    await deleteDoc(
+      doc(
+        db,
+        "categories",
+        editingCategory.id,
+        "options",
+        editingOption.id
+      )
+    );
 
-      setDeleteOptionModal(false);
-      setOptionModalOpen(false);
-    } catch (err) {
-      console.error(err);
-    }
-  };
+    setDeleteOptionModal(false);
+    setOptionModalOpen(false);
+  } catch (err) {
+    console.error(err);
+  }
+};
 
-  const currentCategory = categories.find(
+// EXISTING CATEGORY OPTIONS
+
+const currentCategory = categories.find(
   (c) => c.id === editingCategory?.id
 );
 
 const categoryOptions = currentCategory?.options || [];
-
 
   return (
     <div className="relative bg-gray-50">
@@ -518,56 +608,65 @@ const categoryOptions = currentCategory?.options || [];
                           active: !categoryForm.active,
                         })
                       }
-                      className={`w-16 h-9 rounded-full transition relative ${
+                      className={`w-12 h-6 rounded-full transition relative ${
                         categoryForm.active
                           ? "bg-green-500"
                           : "bg-gray-300"
                       }`}
                     >
                       <div
-                        className={`absolute top-1 h-7 w-7 rounded-full bg-white transition ${
-                          categoryForm.active ? "left-8" : "left-1"
+                        className={`absolute top-1 h-4 w-4 rounded-full bg-white transition ${
+                          categoryForm.active ? "left-7" : "left-1"
                         }`}
                       />
                     </button>
                   </div>
                 </div>
 
-                {/* Options Section */}
+                  {/* OPTIONS SECTION */}
 
-                {editingCategory && (
                   <div className="border-t pt-7">
                     <div className="flex items-center justify-between mb-5">
                       <div>
-                        <h3 className="text-xl font-bold">
-                          Options
-                        </h3>
+                        <h3 className="text-xl font-bold">Options</h3>
 
                         <p className="text-sm text-gray-500">
-                          Manage options under this category.
+                          {editingCategory
+                            ? "Manage options under this category."
+                            : "Add the options that belong to this category."}
                         </p>
                       </div>
 
-                      <button
-                        onClick={openAddOption}
-                        className="flex items-center gap-2 bg-[#1C4672] text-white px-4 py-2 rounded-xl"
-                      >
-                        <Plus size={16} />
-                        Add Option
-                      </button>
+                      {editingCategory ? (
+                        <button
+                          onClick={openAddOption}
+                          className="flex items-center gap-2 bg-[#1C4672] text-white px-4 py-2 rounded-xl"
+                        >
+                          <Plus size={16} />
+                          {/* Add Option */}
+                        </button>
+                      ) : (
+                        <button
+                          onClick={addOptionField}
+                          className="flex items-center gap-2 bg-[#1C4672] text-white px-2 py-2 rounded-xl"
+                        >
+                          <Plus size={16} />
+                          {/* Add Option */}
+                        </button>
+                      )}
                     </div>
 
-                    <div className="space-y-3">
-                      {categoryOptions.map((option) => (
-                        <div
-                          key={option.id}
-                          className="flex items-center justify-between rounded-xl border p-4"
-                        >
-                          <div className="flex items-center gap-3">
+                    {/* ---------------- EDIT CATEGORY ---------------- */}
+
+                    {editingCategory ? (
+                      <div className="space-y-3">
+                        {categoryOptions.map((option) => (
+                          <div
+                            key={option.id}
+                            className="flex items-center justify-between rounded-xl border p-4"
+                          >
                             <div>
-                              <h4 className="font-medium">
-                                {option.name}
-                              </h4>
+                              <h4 className="font-medium">{option.name}</h4>
 
                               <span
                                 className={`text-xs font-semibold ${
@@ -579,56 +678,121 @@ const categoryOptions = currentCategory?.options || [];
                                 {option.active ? "Active" : "Inactive"}
                               </span>
                             </div>
+
+                            <div className="flex gap-2">
+                              <button
+                                onClick={() => openEditOption(option)}
+                                className="p-2 rounded-lg hover:bg-gray-100"
+                              >
+                                <Pencil size={16} />
+                              </button>
+
+                              <button
+                                onClick={() => {
+                                  setEditingOption(option);
+                                  setDeleteOptionModal(true);
+                                }}
+                                className="p-2 rounded-lg hover:bg-red-50 text-red-600"
+                              >
+                                <Trash2 size={16} />
+                              </button>
+                            </div>
                           </div>
+                        ))}
 
-                          <div className="flex items-center gap-2">
-                            <button
-                              onClick={() => openEditOption(option)}
-                              className="p-2 rounded-lg hover:bg-gray-100"
-                            >
-                              <Pencil size={16} />
-                            </button>
+                        {categoryOptions.length === 0 && (
+                          <div className="text-center py-8 text-gray-500 rounded-xl border border-dashed">
+                            No options added yet.
+                          </div>
+                        )}
+                      </div>
+                    ) : (
+                      /* ---------------- NEW CATEGORY ---------------- */
+
+                      <div className="space-y-4">
+                        {categoryForm.options.map((option, index) => (
+                          <div
+                            key={index}
+                            className="rounded-xl border p-4 space-y-4"
+                          >
+                            <input
+                              value={option.name}
+                              onChange={(e) =>
+                                updateOptionField(
+                                  index,
+                                  "name",
+                                  e.target.value
+                                )
+                              }
+                              placeholder={`Option ${index + 1}`}
+                              className="w-full rounded-xl border px-4 py-3"
+                            />
+
+                            <div className="flex items-center justify-between">
+                              <span className="font-medium">Active</span>
+
+                              <button
+                                onClick={() =>
+                                  updateOptionField(
+                                    index,
+                                    "active",
+                                    !option.active
+                                  )
+                                }
+                                className={`w-12 h-6 rounded-full transition relative ${
+                                  option.active
+                                    ? "bg-green-500"
+                                    : "bg-gray-300"
+                                }`}
+                              >
+                                <div
+                                  className={`absolute top-1 h-4 w-4 rounded-full bg-white transition ${
+                                    option.active
+                                      ? "left-7"
+                                      : "left-1"
+                                  }`}
+                                />
+                              </button>
+                            </div>
 
                             <button
-                              onClick={() => {
-                                setEditingOption(option);
-                                setDeleteOptionModal(true);
-                              }}
-                              className="p-2 rounded-lg hover:bg-red-50 text-red-600"
+                              onClick={() => removeOptionField(index)}
+                              className="text-red-600 text-sm hover:underline"
                             >
-                              <Trash2 size={16} />
+                              Remove Option
                             </button>
                           </div>
-                        </div>
-                      ))}
+                        ))}
 
-                      {categoryOptions.length === 0 && (
-                        <div className="text-center py-8 text-gray-500 rounded-xl border border-dashed">
-                          No options added yet.
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
+                        {categoryForm.options.length === 0 && (
+                          <div className="text-center py-8 text-gray-500 rounded-xl border border-dashed">
+                            Click "+" to begin.
+                          </div>
+                        )}
+                      </div>
+                    )}
+                  
+                  {/* Footer Buttons */}
 
-                {/* Footer Buttons */}
+                  <div className="flex flex-col-reverse sm:flex-row gap-3 pt-6 border-t mt-8">
 
-                <div className="flex flex-col-reverse sm:flex-row gap-3 pt-4 border-t">
-                  {editingCategory && (
+                    {editingCategory && (
+                      <button
+                        onClick={() => setDeleteCategoryModal(true)}
+                        className="flex-1 h-12 rounded-xl bg-red-600 text-white hover:bg-red-700"
+                      >
+                        Delete Category
+                      </button>
+                    )}
+
                     <button
-                      onClick={() => setDeleteCategoryModal(true)}
-                      className="flex-1 h-12 py-2 rounded-xl bg-red-600 text-white hover:bg-red-700"
+                      onClick={saveCategory}
+                      className="flex-1 h-12 rounded-xl bg-[#1C4672] text-white hover:bg-[#16395d]"
                     >
-                      Delete Category
+                      {editingCategory ? "Save Changes" : "Add Category"}
                     </button>
-                  )}
 
-                  <button
-                    onClick={saveCategory}
-                    className="flex-1 h-12 py-2 rounded-xl bg-[#1C4672] text-white hover:bg-[#16395d]"
-                  >
-                    {editingCategory ? "Save Changes" : "Add Category"}
-                  </button>
+                  </div>
                 </div>
               </div>
             </motion.div>

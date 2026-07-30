@@ -459,7 +459,7 @@ export default function Faqs() {
                         })
                       }
                       placeholder="Enter FAQ Answer"
-                      className="w-full rounded-xl border px-4 py-3 resize-none"
+                      className="w-full rounded-xl border px-4 py-2 resize-none"
                     />
 
                   </div>
@@ -487,7 +487,7 @@ export default function Faqs() {
                           active:!form.active
                         })
                       }
-                      className={`w-16 h-9 rounded-full transition relative ${
+                      className={`w-12 h-6 rounded-full transition relative ${
                         form.active
                           ? "bg-green-500"
                           : "bg-gray-300"
@@ -495,9 +495,9 @@ export default function Faqs() {
                     >
 
                       <div
-                        className={`absolute top-1 h-7 w-7 rounded-full bg-white transition ${
+                        className={`absolute top-1 h-4 w-4 rounded-full bg-white transition ${
                           form.active
-                            ? "left-8"
+                            ? "left-7"
                             : "left-1"
                         }`}
                       />
